@@ -64,7 +64,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>-765</y>
+       <y>0</y>
        <width>688</width>
        <height>1154</height>
       </rect>
@@ -1930,7 +1930,7 @@
              </property>
              <property name="icon">
               <iconset>
-               <normaloff>fluent_gui/explore_file.jpg</normaloff>fluent_gui/explore_file.jpg</iconset>
+               <normaloff>../fluent_gui/icon/explore_file.jpg</normaloff>../fluent_gui/icon/explore_file.jpg</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -2163,7 +2163,7 @@
   <action name="actionexport">
    <property name="icon">
     <iconset>
-     <normaloff>fluent_gui/文件导出.jpg</normaloff>fluent_gui/文件导出.jpg</iconset>
+     <normaloff>../fluent_gui/icon/文件导出.jpg</normaloff>../fluent_gui/icon/文件导出.jpg</iconset>
    </property>
    <property name="text">
     <string>导出模板</string>
@@ -2178,7 +2178,7 @@
   <action name="actionimport">
    <property name="icon">
     <iconset>
-     <normaloff>fluent_gui/import.jpg</normaloff>fluent_gui/import.jpg</iconset>
+     <normaloff>../fluent_gui/icon/import.jpg</normaloff>../fluent_gui/icon/import.jpg</iconset>
    </property>
    <property name="text">
     <string>导入模板</string>
