@@ -13,7 +13,6 @@ from rename_tip import Ui_tip_widget
 from unit_convertor import Ui_unit_converter
 import time
 import os
-sys.path.append(r'../Python-test')
 import fluent_tui
 
 
@@ -88,10 +87,14 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.return_btn.clicked.connect(self.mode_ui)
         self.solver_btn.clicked.connect(self.solver)
 
-        self.show_workflow_btn.clicked.connect(lambda: self.append_text('功能未开放,敬请期待'))
+        self.show_workflow_btn.clicked.connect(self.test)
         self.choose_evap_btn.clicked.connect(lambda: self.append_text('功能未开放,敬请期待'))
         self.actionalter_default_parameter.triggered.connect(lambda: self.append_text('功能未开放,敬请期待'))
 
+
+    def test(self):
+        a = self.findChild(QLineEdit)
+        print(a)
 
     def append_text(self, msg):
         self.interact_edit.append(msg)
@@ -117,6 +120,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         if e.key() == Qt.Key_4:
             if QApplication.keyboardModifiers() == Qt.ControlModifier:
                 self.quick_distriblin_btn.setChecked(True)
+
 
         if e.key() == Qt.Key_Q:
             if QApplication.keyboardModifiers() == Qt.ControlModifier:              # test mod shortcut
@@ -392,37 +396,19 @@ print('script finished')
 
     def import_info(self):
         path = QFileDialog.getOpenFileName(self, '选择要输入的Excel模板',
-                                           r'C:\Users\BZMBN4\Desktop\test\test1\V4-FH.xlsx', 'Excel Files (*.xlsx; *.xls; *.xlsm)')
+                                           r'C:\Users\BZMBN4\Desktop', 'Excel Files (*.xlsx; *.xls; *.xlsm)')
         if path[0] != '':
             excel_path = path[0]
             info, squence = self.excel_import(excel_path)
 
             for i in info:
-                i = i + '_edit'
-                widget = self.findChild(QLineEdit, i)
-                widget.setText(str(info[i]))
+                name = i + '_edit'
+                widget = self.findChild(QLineEdit, name)
+                if widget != None:
+                    widget.setText(str(info[i]))
 
             self.project_name_edit.setText(info['project_name'])
             self.version_name_edit.setText('V')
-            # self.mass_inlet_edit.setText(str(info['mass_inlet']))
-
-            # self.evap_c1_edit.setText(str(info['evap_c1']))
-            # self.evap_c2_edit.setText(str(info['evap_c2']))
-            # self.evap_x1_edit.setText(str(info['evap_dx1']))
-            # self.evap_y1_edit.setText(str(info['evap_dy1']))
-            # self.evap_z1_edit.setText(str(info['evap_dz1']))
-            # self.evap_x2_edit.setText(str(info['evap_dx2']))
-            # self.evap_y2_edit.setText(str(info['evap_dy2']))
-            # self.evap_z2_edit.setText(str(info['evap_dz2']))
-            # if 'hc_c1' in info.keys():
-            #     self.hc_c1_edit.setText(str(info['hc_c1']))
-            #     self.hc_c2_edit.setText(str(info['hc_c2']))
-            #     self.hc_x1_edit.setText(str(info['hc_dx1']))
-            #     self.hc_y1_edit.setText(str(info['hc_dy1']))
-            #     self.hc_z1_edit.setText(str(info['hc_dz1']))
-            #     self.hc_x2_edit.setText(str(info['hc_dx2']))
-            #     self.hc_y2_edit.setText(str(info['hc_dy2']))
-            #     self.hc_z2_edit.setText(str(info['hc_dz2']))
 
             self.append_text('Excel:%s导入成功' % path[0])
 
@@ -494,22 +480,22 @@ print('script finished')
         if 'evap' in self.body_list:
             self.pamt['evap_c1'] = self.evap_c1_edit.text()
             self.pamt['evap_c2'] = self.evap_c2_edit.text()
-            self.pamt['evap_dx1'] = self.evap_x1_edit.text()
-            self.pamt['evap_dy1'] = self.evap_y1_edit.text()
-            self.pamt['evap_dz1'] = self.evap_z1_edit.text()
-            self.pamt['evap_dx2'] = self.evap_x2_edit.text()
-            self.pamt['evap_dy2'] = self.evap_y2_edit.text()
-            self.pamt['evap_dz2'] = self.evap_z2_edit.text()
+            self.pamt['evap_x1'] = self.evap_x1_edit.text()
+            self.pamt['evap_y1'] = self.evap_y1_edit.text()
+            self.pamt['evap_z1'] = self.evap_z1_edit.text()
+            self.pamt['evap_x2'] = self.evap_x2_edit.text()
+            self.pamt['evap_y2'] = self.evap_y2_edit.text()
+            self.pamt['evap_z2'] = self.evap_z2_edit.text()
 
         if 'hc' in self.body_list:
             self.pamt['hc_c1'] = self.hc_c1_edit.text()
             self.pamt['hc_c2'] = self.hc_c2_edit.text()
-            self.pamt['hc_dx1'] = self.hc_x1_edit.text()
-            self.pamt['hc_dy1'] = self.hc_y1_edit.text()
-            self.pamt['hc_dz1'] = self.hc_z1_edit.text()
-            self.pamt['hc_dx2'] = self.hc_x2_edit.text()
-            self.pamt['hc_dy2'] = self.hc_y2_edit.text()
-            self.pamt['hc_dz2'] = self.hc_z2_edit.text()
+            self.pamt['hc_x1'] = self.hc_x1_edit.text()
+            self.pamt['hc_y1'] = self.hc_y1_edit.text()
+            self.pamt['hc_z1'] = self.hc_z1_edit.text()
+            self.pamt['hc_x2'] = self.hc_x2_edit.text()
+            self.pamt['hc_y2'] = self.hc_y2_edit.text()
+            self.pamt['hc_z2'] = self.hc_z2_edit.text()
 
         if 'valve' in self.body_list:
             self.pamt['valve_ox'] = self.valve_ox_edit.text()
@@ -530,7 +516,6 @@ print('script finished')
     def create_tui(self):
         self.pamt_dict()
         d = self.pamt
-        print(d['file_path'])
         self.check_part()
 
         whole_jou = ''
@@ -564,8 +549,8 @@ print('script finished')
         CFD.mesh.general_improve()
         CFD.mesh.fix_slivers()
         CFD.mesh.general_improve()
-        CFD.mesh.compute_volume_region(dead_zone_list)
-        CFD.mesh.volume_mesh_change_type()
+        CFD.mesh.compute_volume_region()
+        CFD.mesh.volume_mesh_change_type(dead_zone_list)
         CFD.mesh.auto_mesh_volume()
         CFD.mesh.auto_node_move(0.7, 10)
         CFD.mesh.rename_cell(zone_list=mesh_zone_list)
@@ -588,8 +573,8 @@ print('script finished')
         print('output journal in:', d['file_path'])
         jou_solve = open(self.jou_solve_path, 'w')
 
-        evap_d1 = [d['evap_dx1'], d['evap_dy1'], d['evap_dz1']]
-        evap_d2 = [d['evap_dx2'], d['evap_dy2'], d['evap_dz2']]
+        evap_d1 = [d['evap_x1'], d['evap_y1'], d['evap_z1']]
+        evap_d2 = [d['evap_x2'], d['evap_y2'], d['evap_z2']]
         mass_flux_list = ['inlet*', 'outlet*']
 
         CFD = fluent_tui.tui(whole_jou, project_title, version_name, case_out, cad_name)
@@ -598,8 +583,8 @@ print('script finished')
         CFD.setup.turb_models()
         CFD.setup.porous_zone('evap', evap_d1, evap_d2, d['evap_c1'], d['evap_c2'])
         if 'hc' in self.body_list:
-            hc_d1 = [d['hc_dx1'], d['hc_dy1'], d['hc_dz1']]
-            hc_d2 = [d['hc_dx2'], d['hc_dy2'], d['hc_dz2']]
+            hc_d1 = [d['hc_x1'], d['hc_y1'], d['hc_z1']]
+            hc_d2 = [d['hc_x2'], d['hc_y2'], d['hc_z2']]
             CFD.setup.porous_zone('hc', hc_d1, hc_d2, d['hc_c1'], d['hc_c2'])
         CFD.setup.BC_type('inlet', 'mass-flow-inlet')
         CFD.setup.BC_type('outlet*()', 'outlet-vent')
@@ -607,12 +592,14 @@ print('script finished')
         CFD.setup.BC_outlet_vent()
         CFD.setup.solution_method()
         if self.energy_checkbox.isChecked() is True:
+            inlet_temp = float(d['temp_inlet']) + 273.15
+            hc_temp = float(d['temp_hc']) + 273.15
             CFD.setup.energy_eqt('yes')
-            CFD.setup.init_temperature('mass-flow-inlet', 'outlet-vent', d['temp_inlet']+273.15)
+            CFD.setup.init_temperature('mass-flow-inlet', 'outlet-vent', inlet_temp)
             CFD.setup.BC_outlet_vent(3.84, 'outlet_foot')
             CFD.setup.BC_outlet_vent(7, 'outlet_vent')
-            CFD.setup.heat_flux('hc_in', d['temp_hc']+273.15)
-            CFD.setup.heat_flux('hc_out', d['temp_hc']+273.15)
+            CFD.setup.heat_flux('hc_in', hc_temp)
+            CFD.setup.heat_flux('hc_out', hc_temp)
             CFD.setup.report_definition('temperature', 'surface-areaavg', ['outlet*'], 'yes', 'temperature')
 
         CFD.setup.report_definition('volume', 'surface-volumeflowrate', ['inlet*'])
@@ -626,24 +613,29 @@ print('script finished')
         volume_face_list = ['inlet*', 'outlet*']
 
         CFD.post.create_result_file()
-        self.txt_surface_integrals('area-weighted-avg', ['outlet*'], 'temperature')
+        if self.energy_checkbox.isChecked() is True:
+            CFD.post.txt_surface_integrals('area-weighted-avg', ['outlet*'], 'temperature')
+            CFD.post.create_streamline('temp_pathline', 'inlet', '', 'temperature')
+            CFD.post.snip_avz(8, 'temp_pathline')
+        else:
+            CFD.post.create_contour('evap_out', 'evap_out')
+            if 'hc' in self.body_list:
+                CFD.post.create_contour('hc_out', 'hc_out')
+
+            CFD.post.create_streamline('whole_pathline', 'inlet')
+            CFD.post.create_streamline('distrib_pathline', 'evap_out', [0, 15])
+            CFD.post.set_background()
+            CFD.post.snip_avz(5, 'whole_pathline')
+            CFD.post.snip_avz(6, 'distrib_pathline')
+            CFD.post.snip_avz(7, 'evap_out')
+            if 'hc' in self.body_list:
+                CFD.post.snip_avz(9, 'hc_out')
+            CFD.post.snip_model(10, 'model')
         CFD.post.txt_surface_integrals('volume-flow-rate', volume_face_list)
         CFD.post.txt_mass_flux()
         CFD.post.txt_surface_integrals('uniformity-index-area-weighted', uni_face_list, 'velocity-magnitude')
         CFD.post.txt_surface_integrals('area-weighted-avg', pressure_face_list, 'total-pressure')
         CFD.post.txt_surface_integrals('area-weighted-avg', pressure_face_list, 'pressure')
-        CFD.post.create_contour('evap_out', 'evap_out')
-        if 'hc' in self.body_list:
-            CFD.post.create_contour('hc_out', 'hc_out')
-        CFD.post.create_streamline('whole_pathline', 'inlet')
-        CFD.post.create_streamline('distrib_pathline', 'evap_out', [0, 15])
-        CFD.post.set_background()
-        CFD.post.snip_avz(5, 'whole_pathline')
-        CFD.post.snip_avz(6, 'distrib_pathline')
-        CFD.post.snip_avz(7, 'evap_out')
-        if 'hc' in self.body_list:
-            CFD.post.snip_avz(9, 'hc_out')
-        CFD.post.snip_model(10, 'model')
         CFD.close_fluent()
 
         jou_solve.write(CFD.whole_jou)
@@ -651,6 +643,7 @@ print('script finished')
 
     def open_tui(self):
         os.system(self.jou_mesh_path)
+        os.system(self.jou_solve_path)
 
     def begin(self):
         self.start_btn.setDisabled(True)
@@ -908,3 +901,4 @@ if __name__ == "__main__":
     except:
         import traceback
         traceback.print_exc()
+
