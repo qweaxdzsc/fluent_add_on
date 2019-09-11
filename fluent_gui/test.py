@@ -311,9 +311,9 @@
 #     w.show()
 #     sys.exit(app.exec_())
 
+a = {}
+a['a'] = 1
+a['b'] = 2
 
-d = {}
-try:
-    a = d['a']
-except Exception as e:
-    pass
+for i in a:
+    print(type(i))

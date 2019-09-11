@@ -3,16 +3,17 @@
 
 import sys
 from PyQt5 import QtCore, QtWidgets
-from PyQt5.QtWidgets import QApplication, QMainWindow, QFileDialog, QMessageBox, QWidget
+from PyQt5.QtWidgets import *
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QBasicTimer
 from PyQt5.QtGui import QTextCursor
+
 
 from easy_test import Ui_MainWindow
 from rename_tip import Ui_tip_widget
 from unit_convertor import Ui_unit_converter
 import time
 import os
-sys.path.append(r'C:/Users/BZMBN4/Desktop/Python-test')
+sys.path.append(r'../Python-test')
 import fluent_tui
 
 
@@ -91,6 +92,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.choose_evap_btn.clicked.connect(lambda: self.append_text('功能未开放,敬请期待'))
         self.actionalter_default_parameter.triggered.connect(lambda: self.append_text('功能未开放,敬请期待'))
 
+
     def append_text(self, msg):
         self.interact_edit.append(msg)
         self.interact_edit.moveCursor(QTextCursor.End)
@@ -119,9 +121,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         if e.key() == Qt.Key_Q:
             if QApplication.keyboardModifiers() == Qt.ControlModifier:              # test mod shortcut
                 self.actionimport.trigger()
-                self.quick_distribfh_btn.click()
-                self.version_name_edit.setText('V4-FH')
-                self.project_address_edit.setText('C:/Users/BZMBN4/Desktop/test/test1')
                 self.check_part()
                 self.pamt_GUI()
                 self.append_text('进入调试模式')
@@ -133,10 +132,10 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 
     def name_rule(self):
         reply = QMessageBox.about(self, '帮助——命名规则', '命名分为体与面的命名：\n'
-                                                    '请选择存在的体部件或使用快捷模板（ctrl+英文首字母），并点击导入模板\n\n'
-                                                    '完成后：\n'
-                                                    '1.对于面：选择面，并在space claim group栏下对相应的名字使用右键-replace\n'
-                                                    '2.对于体：请复制弹出窗口中 体名字 至space claim模型树中 指定体')
+                                    '请选择存在的体部件或使用快捷模板（ctrl+英文首字母），并点击导入模板\n\n'
+                                    '完成后：\n'
+                                    '1.对于面：选择面，并在space claim group栏下对相应的名字使用右键-replace\n'
+                                    '2.对于体：请复制弹出窗口中 体名字 至space claim模型树中 指定体')
 
     def quick_solve(self):
         confirm_info = self.project_info_check()
@@ -184,7 +183,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 
     def project_info_check(self):
         self.pamt_dict()
-        if (self.pamt['project'] == '') | (self.pamt['version'] == '') | (self.pamt['file_path'] == ''):
+        if (self.pamt['project_name'] == '') | (self.pamt['version'] == '') | (self.pamt['file_path'] == ''):
             self.append_text('请大佬将项目信息填写完全')
             return False
 
@@ -203,9 +202,9 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             reply = QMessageBox.warning(self, "警告", "检测到路径下已存在CAD文件%s,是否覆盖？" % (self.pamt['cad_name']),
                                         QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
             if reply == QMessageBox.Yes:
-                result_file = 'result' + self.pamt['project'] + '_' + self.pamt['version']
+                result_file = 'result' + self.pamt['project_name'] + '_' + self.pamt['version']
                 result_path = self.pamt['file_path'] + '\\' + result_file
-                txt_out = result_path + '\\' + self.pamt['project'] + '.txt'
+                txt_out = result_path + '\\' + self.pamt['project_name'] + '.txt'
                 if os.path.exists(txt_out):
                     os.remove(txt_out)
                 return True
@@ -391,7 +390,6 @@ print('script finished')
         cad_progress = '正在打开CAD, 请大佬耐心等待' + ' (⊙_⊙) ' * (msg + 1)
         self.append_text(cad_progress)
 
-
     def import_info(self):
         path = QFileDialog.getOpenFileName(self, '选择要输入的Excel模板',
                                            r'C:\Users\BZMBN4\Desktop\test\test1\V4-FH.xlsx', 'Excel Files (*.xlsx; *.xls; *.xlsm)')
@@ -399,26 +397,32 @@ print('script finished')
             excel_path = path[0]
             info, squence = self.excel_import(excel_path)
 
-            self.project_name_edit.setText(info['project'])
+            for i in info:
+                i = i + '_edit'
+                widget = self.findChild(QLineEdit, i)
+                widget.setText(str(info[i]))
+
+            self.project_name_edit.setText(info['project_name'])
             self.version_name_edit.setText('V')
-            self.mass_inlet_edit.setText(str(info['massflowin']))
-            self.evap_c1_edit.setText(str(info['evap_C1']))
-            self.evap_c2_edit.setText(str(info['evap_C2']))
-            self.evap_x1_edit.setText(str(info['evap_dx1']))
-            self.evap_y1_edit.setText(str(info['evap_dy1']))
-            self.evap_z1_edit.setText(str(info['evap_dz1']))
-            self.evap_x2_edit.setText(str(info['evap_dx2']))
-            self.evap_y2_edit.setText(str(info['evap_dy2']))
-            self.evap_z2_edit.setText(str(info['evap_dz2']))
-            if 'hc_C1' in info.keys():
-                self.hc_c1_edit.setText(str(info['hc_C1']))
-                self.hc_c2_edit.setText(str(info['hc_C2']))
-                self.hc_x1_edit.setText(str(info['hc_dx1']))
-                self.hc_y1_edit.setText(str(info['hc_dy1']))
-                self.hc_z1_edit.setText(str(info['hc_dz1']))
-                self.hc_x2_edit.setText(str(info['hc_dx2']))
-                self.hc_y2_edit.setText(str(info['hc_dy2']))
-                self.hc_z2_edit.setText(str(info['hc_dz2']))
+            # self.mass_inlet_edit.setText(str(info['mass_inlet']))
+
+            # self.evap_c1_edit.setText(str(info['evap_c1']))
+            # self.evap_c2_edit.setText(str(info['evap_c2']))
+            # self.evap_x1_edit.setText(str(info['evap_dx1']))
+            # self.evap_y1_edit.setText(str(info['evap_dy1']))
+            # self.evap_z1_edit.setText(str(info['evap_dz1']))
+            # self.evap_x2_edit.setText(str(info['evap_dx2']))
+            # self.evap_y2_edit.setText(str(info['evap_dy2']))
+            # self.evap_z2_edit.setText(str(info['evap_dz2']))
+            # if 'hc_c1' in info.keys():
+            #     self.hc_c1_edit.setText(str(info['hc_c1']))
+            #     self.hc_c2_edit.setText(str(info['hc_c2']))
+            #     self.hc_x1_edit.setText(str(info['hc_dx1']))
+            #     self.hc_y1_edit.setText(str(info['hc_dy1']))
+            #     self.hc_z1_edit.setText(str(info['hc_dz1']))
+            #     self.hc_x2_edit.setText(str(info['hc_dx2']))
+            #     self.hc_y2_edit.setText(str(info['hc_dy2']))
+            #     self.hc_z2_edit.setText(str(info['hc_dz2']))
 
             self.append_text('Excel:%s导入成功' % path[0])
 
@@ -479,17 +483,17 @@ print('script finished')
         self.mass_inlet_edit.setText(msg)
 
     def pamt_dict(self):
-        self.pamt['project'] = self.project_name_edit.text()
+        self.pamt['project_name'] = self.project_name_edit.text()
         self.pamt['version'] = self.version_name_edit.text()
         self.pamt['file_path'] = self.project_address_edit.text()
         self.pamt['edit_time'] = self.version_date_edit.text()
-        self.pamt['cad_name'] = self.pamt['project'] + '_' + self.pamt['version'] + '_' + self.pamt['edit_time']
+        self.pamt['cad_name'] = self.pamt['project_name'] + '_' + self.pamt['version'] + '_' + self.pamt['edit_time']
         self.pamt['cad_save_path'] = self.pamt['file_path'] + '/' + self.pamt['cad_name'] + '.scdoc'
-        self.pamt['massflowin'] = self.mass_inlet_edit.text()
+        self.pamt['mass_inlet'] = self.mass_inlet_edit.text()
 
         if 'evap' in self.body_list:
-            self.pamt['evap_C1'] = self.evap_c1_edit.text()
-            self.pamt['evap_C2'] = self.evap_c2_edit.text()
+            self.pamt['evap_c1'] = self.evap_c1_edit.text()
+            self.pamt['evap_c2'] = self.evap_c2_edit.text()
             self.pamt['evap_dx1'] = self.evap_x1_edit.text()
             self.pamt['evap_dy1'] = self.evap_y1_edit.text()
             self.pamt['evap_dz1'] = self.evap_z1_edit.text()
@@ -498,8 +502,8 @@ print('script finished')
             self.pamt['evap_dz2'] = self.evap_z2_edit.text()
 
         if 'hc' in self.body_list:
-            self.pamt['hc_C1'] = self.hc_c1_edit.text()
-            self.pamt['hc_C2'] = self.hc_c2_edit.text()
+            self.pamt['hc_c1'] = self.hc_c1_edit.text()
+            self.pamt['hc_c2'] = self.hc_c2_edit.text()
             self.pamt['hc_dx1'] = self.hc_x1_edit.text()
             self.pamt['hc_dy1'] = self.hc_y1_edit.text()
             self.pamt['hc_dz1'] = self.hc_z1_edit.text()
@@ -530,7 +534,7 @@ print('script finished')
         self.check_part()
 
         whole_jou = ''
-        project_title = d['project']
+        project_title = d['project_name']
         version_name = d['version']
         cad_name = d['cad_name']
 
@@ -592,23 +596,23 @@ print('script finished')
         CFD.setup.read_mesh()
         CFD.setup.rescale()
         CFD.setup.turb_models()
-        CFD.setup.porous_zone('evap', evap_d1, evap_d2, d['evap_C1'], d['evap_C2'])
+        CFD.setup.porous_zone('evap', evap_d1, evap_d2, d['evap_c1'], d['evap_c2'])
         if 'hc' in self.body_list:
             hc_d1 = [d['hc_dx1'], d['hc_dy1'], d['hc_dz1']]
             hc_d2 = [d['hc_dx2'], d['hc_dy2'], d['hc_dz2']]
-            CFD.setup.porous_zone('hc', hc_d1, hc_d2, d['hc_C1'], d['hc_C2'])
+            CFD.setup.porous_zone('hc', hc_d1, hc_d2, d['hc_c1'], d['hc_c2'])
         CFD.setup.BC_type('inlet', 'mass-flow-inlet')
         CFD.setup.BC_type('outlet*()', 'outlet-vent')
-        CFD.setup.BC_mass_flow_inlet('inlet', d['massflowin'])
+        CFD.setup.BC_mass_flow_inlet('inlet', d['mass_inlet'])
         CFD.setup.BC_outlet_vent()
         CFD.setup.solution_method()
         if self.energy_checkbox.isChecked() is True:
             CFD.setup.energy_eqt('yes')
-            CFD.setup.init_temperature('mass-flow-inlet', 'outlet-vent', d['temp_inlet'])
+            CFD.setup.init_temperature('mass-flow-inlet', 'outlet-vent', d['temp_inlet']+273.15)
             CFD.setup.BC_outlet_vent(3.84, 'outlet_foot')
             CFD.setup.BC_outlet_vent(7, 'outlet_vent')
-            CFD.setup.heat_flux('hc_in', 348.15)
-            CFD.setup.heat_flux('hc_out', 348.15)
+            CFD.setup.heat_flux('hc_in', d['temp_hc']+273.15)
+            CFD.setup.heat_flux('hc_out', d['temp_hc']+273.15)
             CFD.setup.report_definition('temperature', 'surface-areaavg', ['outlet*'], 'yes', 'temperature')
 
         CFD.setup.report_definition('volume', 'surface-volumeflowrate', ['inlet*'])
