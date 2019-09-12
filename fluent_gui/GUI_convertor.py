@@ -9,8 +9,5 @@ gui_name = 'easy_test.ui'
 py_name = gui_name.replace('.ui', '.py')
 
 
-
-
-
 convert(py_name, gui_name)
-os.system(r'cd C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_gui && %s' %(py_name))
+# os.system(r'cd C:\Users\BZMBN4\Desktop\fluent_add_on && ui' )

@@ -14,6 +14,7 @@ from unit_convertor import Ui_unit_converter
 import time
 import os
 import fluent_tui
+import qdarkstyle
 
 
 class MyMainWindow(QMainWindow, Ui_MainWindow):
@@ -22,6 +23,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, parent=None):
         super(MyMainWindow, self).__init__(parent)
         self.setupUi(self)
+
         self.mode_ui()
         self.account_info()
         self.get_date()
@@ -40,6 +42,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.solver_btn.hide()
         self.valve_c.hide()
         self.temp_c.hide()
+        self.actionstop.setEnabled(False)
 
     def default_part_tree(self):
         self.part_tree.topLevelItem(0).setCheckState(0, QtCore.Qt.Unchecked)
@@ -74,6 +77,8 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.actionimport.triggered.connect(self.import_info)
         self.actionexport.triggered.connect(self.export_pamt)
         self.actionsolve.triggered.connect(self.quick_solve)
+        self.actionstop.triggered.connect(self.force_stop)
+        self.actiondarkstyle.triggered.connect(self.darkstyle)
         self.project_address_explore.clicked.connect(self.case_address)
 
         self.quick_distribfc_btn.toggled.connect(self.quick_distrib_judge)
@@ -91,10 +96,14 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.choose_evap_btn.clicked.connect(lambda: self.append_text('功能未开放,敬请期待'))
         self.actionalter_default_parameter.triggered.connect(lambda: self.append_text('功能未开放,敬请期待'))
 
-
     def test(self):
-        a = self.findChild(QLineEdit)
-        print(a)
+        self.append_text('功能未开放,敬请期待')
+        pass
+
+    def darkstyle(self):
+        app.setStyleSheet(qdarkstyle.load_stylesheet_pyqt5())
+        self.actiondarkstyle.setDisabled(True)
+        self.append_text('进入暗色主题')
 
     def append_text(self, msg):
         self.interact_edit.append(msg)
@@ -150,6 +159,19 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             self.start_btn.setText('网   格')
             self.solver_btn.show()
             self.append_text('警告：进入补算模式，请先确认正确的模型或网格')
+
+    def force_stop(self):
+        try:
+            if self.mesh_thread.isRunning() is True:
+                self.mesh_thread.stop_mesh()
+                self.clock.stop()
+                self.append_text('网格划分已经被终止')
+
+            if self.solver_thread.isRunning() is True:
+                self.solver_thread.stop_solver()
+                self.append_text('计算已经被终止')
+        except Exception as e:
+            print('not yet being running')
 
     def quick_distrib_judge(self):
         if self.quick_distribfc_btn.isChecked() == True:
@@ -367,9 +389,9 @@ for i in range(len(face_list)):
 for i in range(len(face_list)):    
     result = NamedSelection.Rename("Group%%s"%%(i+1), face_list[i])
     
-options = ShareTopologyOptions()
-options.Tolerance = MM(0.01)
-result = ShareTopology.FindAndFix(options)
+# options = ShareTopologyOptions()
+# options.Tolerance = MM(0.01)
+# result = ShareTopology.FindAndFix(options)
 
 # save file
 options = ExportOptions.Create()
@@ -539,10 +561,11 @@ print('script finished')
             internal_list = ['evap*']
             uni_face_list = ['evap_in', 'evap_out']
             pressure_face_list = ['*inlet*', 'evap_in', 'evap_out', '*outlet*']
-        mesh_zone_list = self.body_list
         dead_zone_list = []
         if 'valve' in self.body_list:
             dead_zone_list.append('valve')
+            self.body_list.remove('valve')
+        mesh_zone_list = self.body_list
 
         CFD = fluent_tui.tui(whole_jou, project_title, version_name, case_out, cad_name)
         CFD.mesh.import_distrib()
@@ -551,14 +574,18 @@ print('script finished')
         CFD.mesh.general_improve()
         CFD.mesh.compute_volume_region()
         CFD.mesh.volume_mesh_change_type(dead_zone_list)
-        CFD.mesh.auto_mesh_volume()
+        if self.energy_checkbox.isChecked() is True:
+            CFD.mesh.retype_face(face_list=['hc*'], face_type='radiator')
+            internal_list.remove('hc*')
+            CFD.mesh.auto_mesh_volume(1.25, 'poly')
+        else:
+            CFD.mesh.auto_mesh_volume()
         CFD.mesh.auto_node_move(0.7, 10)
         CFD.mesh.rename_cell(zone_list=mesh_zone_list)
         CFD.mesh.retype_face(face_list=['inlet*'], face_type='pressure-inlet')
         CFD.mesh.retype_face(face_list=internal_list, face_type='internal')
 
-        if self.energy_checkbox.isChecked() is True:
-            CFD.mesh.retype_face(face_list=['hc*'], face_type='radiator')
+
 
         CFD.mesh.retype_face(face_list=['outlet*'], face_type='outlet-vent')
         CFD.mesh.check_quality()
@@ -613,6 +640,7 @@ print('script finished')
         volume_face_list = ['inlet*', 'outlet*']
 
         CFD.post.create_result_file()
+        CFD.post.set_background()
         if self.energy_checkbox.isChecked() is True:
             CFD.post.txt_surface_integrals('area-weighted-avg', ['outlet*'], 'temperature')
             CFD.post.create_streamline('temp_pathline', 'inlet', '', 'temperature')
@@ -624,7 +652,6 @@ print('script finished')
 
             CFD.post.create_streamline('whole_pathline', 'inlet')
             CFD.post.create_streamline('distrib_pathline', 'evap_out', [0, 15])
-            CFD.post.set_background()
             CFD.post.snip_avz(5, 'whole_pathline')
             CFD.post.snip_avz(6, 'distrib_pathline')
             CFD.post.snip_avz(7, 'evap_out')
@@ -659,9 +686,14 @@ print('script finished')
         self.mesh_thread.mesh_timeuse.connect(self.mesh_time_use)
         self.mesh_thread.mesh_finish.connect(self.mesh_finish_msg)
 
+        self.actionstop.setEnabled(True)
+
     def mesh_clock(self):
-        size = self.get_FileSize(self.pamt['cad_save_path'])
-        print("文件路径：%s\n大小：%s MB" % (self.pamt['cad_save_path'], size))
+        try:
+            size = self.get_FileSize(self.pamt['cad_save_path'])
+            print("文件路径：%s\n大小：%s MB" % (self.pamt['cad_save_path'], size))
+        except Exception as e:
+            self.append_text('模型文件未找到，请检查')
         mesh_time = 120
         self.timer(mesh_time)
         self.time_running.connect(self.mesh_clock_show)
@@ -690,12 +722,12 @@ print('script finished')
     def mesh_finish_msg(self, msg):
         self.interact_edit.undo()
         self.append_text(msg)
-
         self.solver_btn.click()
 
     def solver(self):
         self.start_btn.setDisabled(True)
         self.solver_btn.setDisabled(True)
+        self.actionstop.setEnabled(True)
 
         self.solver_condition = '启动fluent...'
         self.append_text(self.solver_condition)
@@ -866,6 +898,9 @@ class fluent_mesh(QThread):
             self.mesh_feedback.emit(report_msg)
             self.mesh_timeuse.emit(timeuse)
             print('%s%s' % (stage_name, stage_time))
+
+    def stop_mesh(self):
+        self.p.terminate()
     
 
 class fluent_solver(QThread):
@@ -890,6 +925,9 @@ class fluent_solver(QThread):
             nl += 1
 
         print('总共有%s行输出语句'%nl)
+
+    def stop_solver(self):
+        self.p.terminate()
 
 
 if __name__ == "__main__":

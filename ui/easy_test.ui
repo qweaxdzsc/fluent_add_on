@@ -21,7 +21,7 @@
   </property>
   <property name="windowIcon">
    <iconset>
-    <normaloff>fluent_gui/title_icon.jpg</normaloff>fluent_gui/title_icon.jpg</iconset>
+    <normaloff>../../../.designer/backup/fluent_gui/title_icon.jpg</normaloff>../../../.designer/backup/fluent_gui/title_icon.jpg</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QScrollArea" name="scrollArea">
@@ -64,7 +64,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>-765</y>
+       <y>0</y>
        <width>688</width>
        <height>1154</height>
       </rect>
@@ -1930,7 +1930,7 @@
              </property>
              <property name="icon">
               <iconset>
-               <normaloff>../fluent_gui/icon/explore_file.jpg</normaloff>../fluent_gui/icon/explore_file.jpg</iconset>
+               <normaloff>../../../.designer/fluent_gui/icon/explore_file.jpg</normaloff>../../../.designer/fluent_gui/icon/explore_file.jpg</iconset>
              </property>
              <property name="iconSize">
               <size>
@@ -2136,6 +2136,8 @@
     </property>
     <addaction name="actionalter_default_parameter"/>
     <addaction name="actionsolve"/>
+    <addaction name="actionstop"/>
+    <addaction name="actiondarkstyle"/>
    </widget>
    <widget class="QMenu" name="menu">
     <property name="title">
@@ -2163,7 +2165,7 @@
   <action name="actionexport">
    <property name="icon">
     <iconset>
-     <normaloff>../fluent_gui/icon/文件导出.jpg</normaloff>../fluent_gui/icon/文件导出.jpg</iconset>
+     <normaloff>../../../.designer/fluent_gui/icon/文件导出.jpg</normaloff>../../../.designer/fluent_gui/icon/文件导出.jpg</iconset>
    </property>
    <property name="text">
     <string>导出模板</string>
@@ -2178,7 +2180,7 @@
   <action name="actionimport">
    <property name="icon">
     <iconset>
-     <normaloff>../fluent_gui/icon/import.jpg</normaloff>../fluent_gui/icon/import.jpg</iconset>
+     <normaloff>../../../.designer/fluent_gui/icon/import.jpg</normaloff>../../../.designer/fluent_gui/icon/import.jpg</iconset>
    </property>
    <property name="text">
     <string>导入模板</string>
@@ -2195,6 +2197,16 @@
   <action name="actionsolve">
    <property name="text">
     <string>补算模式</string>
+   </property>
+  </action>
+  <action name="actionstop">
+   <property name="text">
+    <string>强制停止</string>
+   </property>
+  </action>
+  <action name="actiondarkstyle">
+   <property name="text">
+    <string>暗色主题</string>
    </property>
   </action>
  </widget>
