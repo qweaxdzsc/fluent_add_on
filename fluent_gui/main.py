@@ -157,7 +157,9 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             self.check_part()
             self.pamt_GUI()
             self.start_btn.setText('网   格')
+            self.start_btn.setEnabled(True)
             self.solver_btn.show()
+            self.solver_btn.setEnabled(True)
             self.append_text('警告：进入补算模式，请先确认正确的模型或网格')
 
     def force_stop(self):
@@ -914,7 +916,7 @@ class fluent_solver(QThread):
 
         import subprocess
         self.p = subprocess.Popen(r'cd C:\\Program Files\\ANSYS Inc\\v191\\fluent\\ntbin\\win64 && '
-                           r'fluent 3d -t4 -gu -i %s' % (self.tui), shell=True, stdout=subprocess.PIPE)
+                           r'fluent 3d -t12 -gu -i %s' % (self.tui), shell=True, stdout=subprocess.PIPE)
 
         nl = 0
         finish_count = 0
