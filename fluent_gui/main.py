@@ -582,7 +582,7 @@ print('script finished')
             CFD.mesh.auto_mesh_volume(1.25, 'poly')
         else:
             CFD.mesh.auto_mesh_volume()
-        CFD.mesh.auto_node_move(0.7, 10)
+        CFD.mesh.auto_node_move()
         CFD.mesh.rename_cell(zone_list=mesh_zone_list)
         CFD.mesh.retype_face(face_list=['inlet*'], face_type='pressure-inlet')
         CFD.mesh.retype_face(face_list=internal_list, face_type='internal')

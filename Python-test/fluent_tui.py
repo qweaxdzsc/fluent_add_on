@@ -56,7 +56,7 @@ class mesh(object):
         text = """
 /file/import/cad-options/save-PMDB yes
 /file/import/cad-options/extract-features yes 0
-/file/import/cad-geometry yes %s mm cad-faceting yes
+/file/import/cad-geometry yes %s.scdoc mm cad-faceting yes
 %s %s
 """ % (self.tui.cad_path, tolerance, maxsize)
         self.tui.whole_jou += text
@@ -112,7 +112,7 @@ class mesh(object):
         text = """
 /file/import/cad-options/save-PMDB no
 /file/import/cad-options/extract-features yes 10
-/file/import/cad-geometry yes %s.pmdb no mm cfd-surface-mesh yes %s
+/file/import/cad-geometry yes %s.scdoc.pmdb no mm cfd-surface-mesh yes %s
 """ % (self.tui.cad_path, self.tui.size_field)
 
         self.tui.whole_jou += text
