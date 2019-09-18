@@ -97,6 +97,8 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.actionalter_default_parameter.triggered.connect(lambda: self.append_text('功能未开放,敬请期待'))
 
     def test(self):
+        self.check_part()
+        self.show_msg()
         self.append_text('功能未开放,敬请期待')
         pass
 
@@ -315,18 +317,60 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.dialog_tip.show()
 
     def msg(self):
-        self.dialog_tip.exit_btn.clicked.connect(self.dialog_tip.close)
-        self.dialog_tip.label_tip.setText("面命名模板创建完成\n请复制以下体名字至模型树")
+        self.dialog_tip.rename_btn.clicked.connect(self.dialog_tip.close)
+        inlet_n = self.inlet_number.value()
+        outlet_n = self.outlet_number.value()
 
-        for i in range(len(self.body_list)):
-            self.dialog_tip.lineEdit = QtWidgets.QLineEdit(self.dialog_tip)
-            self.dialog_tip.lineEdit.setObjectName("lineEdit%s" % (i + 1))
-            self.dialog_tip.lineEdit.setAlignment(QtCore.Qt.AlignCenter)
-            self.dialog_tip.lineEdit.setText(self.body_list[i])
+        self.dialog_tip.rename_table.setRowCount(max(inlet_n, outlet_n))
+        self.dialog_tip.rename_table.setFixedHeight(max(inlet_n, outlet_n)*35+35)
 
-            self.dialog_tip.lineEdit.setMinimumSize(100, 20)
-            self.dialog_tip.lineEdit.setMaximumSize(QtCore.QSize(150, 25))
-            self.dialog_tip.verticalLayout.addWidget(self.dialog_tip.lineEdit)
+        for i in range(inlet_n):
+            new_item = QTableWidgetItem("%s" % (self.face_list[i]))
+            self.dialog_tip.rename_table.setItem(i, 0, new_item)
+
+        for i in range(outlet_n):
+            new_item = QTableWidgetItem("%s" % (self.face_list[-i-1]))
+            self.dialog_tip.rename_table.setItem(outlet_n-i-1, 1, new_item)
+
+            new_item = QTableWidgetItem("0")
+            self.dialog_tip.rename_table.setItem(outlet_n - i - 1, 2, new_item)
+        self.dialog_tip.rename_table.customContextMenuRequested.connect(self.generate_cal_menu)
+
+            # cal_K_btn = QPushButton('计算K值')
+            # cal_K_btn.setStyleSheet(''' text-align : center;
+            #                                           background-color : NavajoWhite;
+            #                                           height : 30px;
+            #                                           border-style: outset;
+            #                                           margin : 5px;
+            #                                           font : 13px  ''')
+            # cal_K_btn.clicked.connect(lambda: self.cal_K(i))
+            # self.dialog_tip.rename_table.setCellWidget(i, 3, cal_K_btn)
+
+    def generate_cal_menu(self, pos):
+        column_num = -1
+        for i in self.dialog_tip.rename_table.selectionModel().selection().indexes():
+            column_num = i.column()
+            K_row = i.row()
+
+        if column_num == 2:
+            cal_menu = QMenu()
+            cal_action = cal_menu.addAction(u"计算K值")
+            action = cal_menu.exec_(self.dialog_tip.rename_table.mapToGlobal(pos))
+            if action == cal_action:
+                pass
+
+
+
+
+        # for i in range(len(self.body_list)):
+        #     self.dialog_tip.lineEdit = QtWidgets.QLineEdit(self.dialog_tip)
+        #     self.dialog_tip.lineEdit.setObjectName("lineEdit%s" % (i + 1))
+        #     self.dialog_tip.lineEdit.setAlignment(QtCore.Qt.AlignCenter)
+        #     self.dialog_tip.lineEdit.setText(self.body_list[i])
+        #
+        #     self.dialog_tip.lineEdit.setMinimumSize(100, 20)
+        #     self.dialog_tip.lineEdit.setMaximumSize(QtCore.QSize(150, 25))
+        #     self.dialog_tip.verticalLayout.addWidget(self.dialog_tip.lineEdit)
 
     def show_c(self):
         dic = {}
