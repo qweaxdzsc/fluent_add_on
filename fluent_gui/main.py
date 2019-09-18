@@ -359,6 +359,9 @@ print('start script')
 body_list = %s
 body_number = len(body_list)
 
+selection = Selection.Create(GetRootPart().GetAllBodies())
+result = RenameObject.Execute(selection,"solid")
+
 result = Copy.ToClipboard(Selection.Create(GetRootPart().GetAllBodies()))
 result = Paste.FromClipboard()
 

@@ -1,6 +1,6 @@
 
-project_name = '458-rear'
-version = 'V4-FH'
+project_name = 'GE2-rear2'
+version = 'V3-FC'
 
 
 def get_ppt(project_name, version):
@@ -285,7 +285,7 @@ def get_ppt(project_name, version):
 
     cont_table_head = ['Evap_out Contour', 'Evap_out_0-4 Contour']
     jpg_table_head(cont_table, cont_table_head)
-    jpg_into_table(result_path, cont_slide, 'evap_out.jpg', 'evap_out_0-2.jpg')
+    jpg_into_table(result_path, cont_slide, 'evap_out.jpg', 'evap_out.jpg')
 
     # Pressure Drop slide
 

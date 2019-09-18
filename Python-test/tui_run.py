@@ -5,9 +5,9 @@ jou_out = r'C:\Users\BZMBN4\Desktop'       # txt output root
 # txt name
 whole_jou = ''
 project_title = 'GE2-rear2'
-version_name = 'V1-FC'
-cad_name = 'GE2-rear2-V1-FC'
-case_out = r'G:\GE2_REAR\GE2-rear-round2\GE2-rear-V1-FC-denso'
+version_name = 'V3-FC'
+cad_name = 'GE2-rear2-V3-FC'
+case_out = r'G:\GE2_REAR\GE2-rear-round2\GE2-rear-V3-FC'
 
 jou_title = project_title + '-' + version_name + '-TUI'
 txt_name = jou_out + '\\' + jou_title + '.jou'            # txt final path
@@ -35,7 +35,7 @@ CFD.mesh.prepare_for_solve()
 CFD.mesh.switch_to_solver()
 
 
-fan_origin = [5.27684, 0.7852, 1.09885]
+fan_origin = [5.27084, 0.7852, 1.06885]
 fan_axis = [0, 1, 0]
 rpm = 2850
 evap_d1 = [-0.98769, 0, -0.15643]
@@ -59,12 +59,12 @@ CFD.setup.BC_type('outlet*()', 'outlet-vent')
 # CFD.setup.BC_type('outlet_vr', 'outlet-vent')
 CFD.setup.BC_pressure_inlet('inlet')
 # CFD.setup.BC_mass_flow_inlet('inlet', 0.0735)
-CFD.setup.BC_outlet_vent(3.84, 'outlet_d')
-CFD.setup.BC_outlet_vent(7, 'outlet_p')
+CFD.setup.BC_outlet_vent(8.665, 'outlet_d')
+CFD.setup.BC_outlet_vent(29.72, 'outlet_p')
 CFD.setup.solution_method()
 CFD.setup.report_definition('volume', 'surface-volumeflowrate', ['outlet*'])
 CFD.setup.report_definition('mass-flux', 'surface-massflowrate', mass_flux_list, 'no')
-CFD.setup.report_definition('pressure', 'surface-areaavg', pressure_face_list)
+# CFD.setup.report_definition('pressure', 'surface-areaavg', pressure_face_list)
 CFD.setup.convergence_criterion()
 CFD.setup.hyb_initialize()
 CFD.setup.start_calculate(900)
@@ -74,7 +74,7 @@ CFD.setup.write_case_data()
 
 volume_face_list = ['inlet*', 'outlet*']
 uni_face_list = ['evap_in', 'evap_out', 'hc_out']
-view_path = r'G:\458-rear\458-rear-command\458.vw'
+view_path = r'G:\GE2_REAR\GE2-rear-command\GE2.vw'
 
 
 CFD.post.create_result_file()
