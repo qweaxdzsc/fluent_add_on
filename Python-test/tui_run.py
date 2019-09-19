@@ -5,9 +5,9 @@ jou_out = r'C:\Users\BZMBN4\Desktop'       # txt output root
 # txt name
 whole_jou = ''
 project_title = 'GE2-rear2'
-version_name = 'V7-FC'
-cad_name = 'GE2-rear2-V7-FC'
-case_out = r'G:\GE2_REAR\GE2-rear-round2\GE2-rear-V7-FC'
+version_name = 'V9-FC'
+cad_name = 'GE2-rear2-V9-FC'
+case_out = r'G:\GE2_REAR\GE2-rear-round2\GE2-rear-V9-FC'
 
 jou_title = project_title + '-' + version_name + '-TUI'
 txt_name = jou_out + '\\' + jou_title + '.jou'            # txt final path
@@ -59,7 +59,7 @@ CFD.setup.BC_type('outlet*()', 'outlet-vent')
 # CFD.setup.BC_type('outlet_vr', 'outlet-vent')
 CFD.setup.BC_pressure_inlet('inlet')
 # CFD.setup.BC_mass_flow_inlet('inlet', 0.0735)
-CFD.setup.BC_outlet_vent(11.93, 'outlet_d')
+CFD.setup.BC_outlet_vent(11.07, 'outlet_d')
 CFD.setup.BC_outlet_vent(23.276, 'outlet_p')
 CFD.setup.solution_method()
 CFD.setup.report_definition('volume', 'surface-volumeflowrate', ['outlet*'])

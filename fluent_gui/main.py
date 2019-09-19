@@ -358,11 +358,17 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.K_cal.close()
 
     def update_project_info(self):
+        self.outlet_list, self.K_list = [], []
+
         for i in range(self.inlet_n):
-            self.face_list[i] = self.dialog_tip.rename_table.item(i, 0)
+            self.face_list[i] = self.dialog_tip.rename_table.item(i, 0).text()
 
         for i in range(self.outlet_n):
-            self.face_list[-i - 1] = self.dialog_tip.rename_table.item(self.outlet_n - i - 1, 1)
+            self.face_list[-i - 1] = self.dialog_tip.rename_table.item(self.outlet_n - i - 1, 1).text()
+            self.outlet_list.insert(0, self.face_list[-i - 1])
+            self.K_list.append(self.dialog_tip.rename_table.item(i, 2).text())
+
+        self.K_dict = dict(zip(self.outlet_list, self.K_list))
 
     def show_c(self):
         dic = {}
