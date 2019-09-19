@@ -10,6 +10,7 @@ from PyQt5.QtGui import QTextCursor
 
 from easy_test import Ui_MainWindow
 from rename_tip import Ui_tip_widget
+from K_cal import Ui_K_calculator
 from unit_convertor import Ui_unit_converter
 import time
 import os
@@ -207,9 +208,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         if confirm_info == True:
             self.check_part()
             self.show_msg()
-            self.launchCAD()
-            self.pamt_GUI()
-            self.launch_progress_display(35)
 
     def project_info_check(self):
         self.pamt_dict()
@@ -318,59 +316,53 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 
     def msg(self):
         self.dialog_tip.rename_btn.clicked.connect(self.dialog_tip.close)
-        inlet_n = self.inlet_number.value()
-        outlet_n = self.outlet_number.value()
+        self.dialog_tip.rename_btn.clicked.connect(self.update_project_info)
+        self.dialog_tip.rename_btn.clicked.connect(self.launchCAD)
+        self.inlet_n = self.inlet_number.value()
+        self.outlet_n = self.outlet_number.value()
 
-        self.dialog_tip.rename_table.setRowCount(max(inlet_n, outlet_n))
-        self.dialog_tip.rename_table.setFixedHeight(max(inlet_n, outlet_n)*35+35)
+        self.dialog_tip.rename_table.setRowCount(max(self.inlet_n, self.outlet_n))
+        self.dialog_tip.rename_table.setFixedHeight(max(self.inlet_n, self.outlet_n)*35+35)
 
-        for i in range(inlet_n):
+        for i in range(self.inlet_n):
             new_item = QTableWidgetItem("%s" % (self.face_list[i]))
             self.dialog_tip.rename_table.setItem(i, 0, new_item)
 
-        for i in range(outlet_n):
+        for i in range(self.outlet_n):
             new_item = QTableWidgetItem("%s" % (self.face_list[-i-1]))
-            self.dialog_tip.rename_table.setItem(outlet_n-i-1, 1, new_item)
+            self.dialog_tip.rename_table.setItem(self.outlet_n-i-1, 1, new_item)
 
             new_item = QTableWidgetItem("0")
-            self.dialog_tip.rename_table.setItem(outlet_n - i - 1, 2, new_item)
-        self.dialog_tip.rename_table.customContextMenuRequested.connect(self.generate_cal_menu)
+            self.dialog_tip.rename_table.setItem(self.outlet_n - i - 1, 2, new_item)
 
-            # cal_K_btn = QPushButton('计算K值')
-            # cal_K_btn.setStyleSheet(''' text-align : center;
-            #                                           background-color : NavajoWhite;
-            #                                           height : 30px;
-            #                                           border-style: outset;
-            #                                           margin : 5px;
-            #                                           font : 13px  ''')
-            # cal_K_btn.clicked.connect(lambda: self.cal_K(i))
-            # self.dialog_tip.rename_table.setCellWidget(i, 3, cal_K_btn)
+        self.dialog_tip.rename_table.customContextMenuRequested.connect(self.generate_cal_menu)
 
     def generate_cal_menu(self, pos):
         column_num = -1
         for i in self.dialog_tip.rename_table.selectionModel().selection().indexes():
             column_num = i.column()
-            K_row = i.row()
+            self.K_row = i.row()
 
         if column_num == 2:
             cal_menu = QMenu()
             cal_action = cal_menu.addAction(u"计算K值")
             action = cal_menu.exec_(self.dialog_tip.rename_table.mapToGlobal(pos))
             if action == cal_action:
-                pass
+                self.K_cal = Ui_cal_K()
+                self.K_cal.show()
+                self.K_cal.K_result.connect(self.return_K)
 
+    def return_K(self, K):
+        modify_item = QTableWidgetItem(K)
+        self.dialog_tip.rename_table.setItem(self.K_row, 2, modify_item)
+        self.K_cal.close()
 
+    def update_project_info(self):
+        for i in range(self.inlet_n):
+            self.face_list[i] = self.dialog_tip.rename_table.item(i, 0)
 
-
-        # for i in range(len(self.body_list)):
-        #     self.dialog_tip.lineEdit = QtWidgets.QLineEdit(self.dialog_tip)
-        #     self.dialog_tip.lineEdit.setObjectName("lineEdit%s" % (i + 1))
-        #     self.dialog_tip.lineEdit.setAlignment(QtCore.Qt.AlignCenter)
-        #     self.dialog_tip.lineEdit.setText(self.body_list[i])
-        #
-        #     self.dialog_tip.lineEdit.setMinimumSize(100, 20)
-        #     self.dialog_tip.lineEdit.setMaximumSize(QtCore.QSize(150, 25))
-        #     self.dialog_tip.verticalLayout.addWidget(self.dialog_tip.lineEdit)
+        for i in range(self.outlet_n):
+            self.face_list[-i - 1] = self.dialog_tip.rename_table.item(self.outlet_n - i - 1, 1)
 
     def show_c(self):
         dic = {}
@@ -397,6 +389,8 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.start_btn.show()
 
     def launchCAD(self):
+        self.pamt_GUI()
+        self.launch_progress_display(35)
         self.f = open('%s/project_info.py' % (self.pamt['file_path']), 'w')
         message = """   
 print('start script')
@@ -807,6 +801,53 @@ class Ui_tip(Ui_tip_widget, QWidget):
     def __init__(self):
         super(Ui_tip_widget, self).__init__()
         self.setupUi(self)
+
+
+class Ui_cal_K(Ui_K_calculator, QWidget):
+    K_result = pyqtSignal(str)
+
+    def __init__(self):
+        super(Ui_K_calculator, self).__init__()
+        self.setupUi(self)
+        self.cal_method()
+        self.QP_btn.click()
+
+    def initialize(self):
+        self.R_frame.hide()
+        self.QP_frame.hide()
+
+    def cal_method(self):
+        self.R_btn.clicked.connect(lambda: self.choosen_method(self.R_frame, self.R_method))
+        self.QP_btn.clicked.connect(lambda: self.choosen_method(self.QP_frame, self.QP_method))
+
+    def choosen_method(self, show_frame, method):
+        self.initialize()
+        show_frame.show()
+        self.K_cal_btn.disconnect()
+        self.K_cal_btn.clicked.connect(method)
+
+    def QP_method(self):
+        ls = float(self.volume_edit.text())
+        mm2 = float(self.area_edit.text())
+        p = float(self.pressure_edit.text())
+        rho = 1.225
+
+        m3s = ls / 1000
+        m2 = mm2/1000/1000
+        v = m3s/m2
+
+        K = 2*p/rho/v**2
+        self.K_result.emit("%.3f" % K)
+
+    def R_method(self):
+        r = float(self.R_edit.text())
+        mm2 = float(self.area_edit.text())
+        rho = 1.225
+
+        m2 = mm2 / 1000 / 1000
+
+        K = 1000*2*r*m2**2/rho
+        self.K_result.emit("%.3f" % K)
 
 
 class Ui_unit(Ui_unit_converter, QWidget):

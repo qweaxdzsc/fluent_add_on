@@ -588,7 +588,7 @@ range-option %s
 global-range no
 q
 color-map size 8 format %%0.1f
-q
+q q
 """ % (contour_name, contour_face, field, range)
         self.tui.whole_jou += text
         return self.tui.whole_jou
