@@ -98,6 +98,8 @@ CFD.post.snip_picture(7, 'evap_out')
 CFD.post.snip_picture(9, 'hc_out')
 CFD.post.snip_model(10, 'model')
 # CFD.post.simple_lin_post(47.97)
+CFD.post.snip_mode_off()
+
 
 jou.write(CFD.whole_jou)
 jou.close()

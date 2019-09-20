@@ -633,9 +633,6 @@ print('script finished')
         CFD.mesh.rename_cell(zone_list=mesh_zone_list)
         CFD.mesh.retype_face(face_list=['inlet*'], face_type='pressure-inlet')
         CFD.mesh.retype_face(face_list=internal_list, face_type='internal')
-
-
-
         CFD.mesh.retype_face(face_list=['outlet*'], face_type='outlet-vent')
         CFD.mesh.check_quality()
         CFD.mesh.prepare_for_solve()
@@ -665,19 +662,17 @@ print('script finished')
         CFD.setup.BC_type('inlet', 'mass-flow-inlet')
         CFD.setup.BC_type('outlet*()', 'outlet-vent')
         CFD.setup.BC_mass_flow_inlet('inlet', d['mass_inlet'])
-        CFD.setup.BC_outlet_vent()
+        for i in self.K_dict:
+            CFD.setup.BC_outlet_vent(self.K_dict[i], i)
         CFD.setup.solution_method()
         if self.energy_checkbox.isChecked() is True:
             inlet_temp = float(d['temp_inlet']) + 273.15
             hc_temp = float(d['temp_hc']) + 273.15
             CFD.setup.energy_eqt('yes')
             CFD.setup.init_temperature('mass-flow-inlet', 'outlet-vent', inlet_temp)
-            CFD.setup.BC_outlet_vent(3.84, 'outlet_foot')
-            CFD.setup.BC_outlet_vent(7, 'outlet_vent')
             CFD.setup.heat_flux('hc_in', hc_temp)
             CFD.setup.heat_flux('hc_out', hc_temp)
             CFD.setup.report_definition('temperature', 'surface-areaavg', ['outlet*'], 'yes', 'temperature')
-
         CFD.setup.report_definition('volume', 'surface-volumeflowrate', ['inlet*'])
         CFD.setup.report_definition('mass-flux', 'surface-massflowrate', mass_flux_list, 'no')
         CFD.setup.report_definition('pressure', 'surface-areaavg', ['evap_in'])
@@ -712,6 +707,7 @@ print('script finished')
         CFD.post.txt_surface_integrals('uniformity-index-area-weighted', uni_face_list, 'velocity-magnitude')
         CFD.post.txt_surface_integrals('area-weighted-avg', pressure_face_list, 'total-pressure')
         CFD.post.txt_surface_integrals('area-weighted-avg', pressure_face_list, 'pressure')
+        CFD.post.snip_mode_off()
         CFD.close_fluent()
 
         jou_solve.write(CFD.whole_jou)

@@ -683,3 +683,12 @@ color-map format %0.1f size {line_size} q step {line_step} skip {line_skip} surf
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
+    def snip_mode_off(self):
+        text = """
+/display/set/overlays no
+/display/set/mesh-display-configuration solution
+q
+"""
+        self.tui.whole_jou += text
+        return self.tui.whole_jou
+

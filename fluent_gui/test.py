@@ -311,3 +311,9 @@
 #     w.show()
 #     sys.exit(app.exec_())
 
+a = {}
+a['A'] = 1
+a['B'] = 2
+
+for i in a:
+    print(type(i))
