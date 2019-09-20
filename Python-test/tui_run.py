@@ -5,9 +5,9 @@ jou_out = r'C:\Users\BZMBN4\Desktop'       # txt output root
 # txt name
 whole_jou = ''
 project_title = 'GE2-rear2'
-version_name = 'V9-FC'
-cad_name = 'GE2-rear2-V9-FC'
-case_out = r'G:\GE2_REAR\GE2-rear-round2\GE2-rear-V9-FC'
+version_name = 'V11-FH'
+cad_name = 'GE2-rear2-V11-FH'
+case_out = r'G:\GE2_REAR\GE2-rear-round2\GE2-rear-V11-FH'
 
 jou_title = project_title + '-' + version_name + '-TUI'
 txt_name = jou_out + '\\' + jou_title + '.jou'            # txt final path
@@ -17,7 +17,7 @@ jou = open(txt_name, 'w')
 
 CFD = fluent_tui.tui(whole_jou, project_title, version_name, case_out, cad_name)
 
-CFD.mesh.simple_import('volute', '*evap*')
+CFD.mesh.simple_import('volute', '*evap* *hc*')
 # CFD.mesh.import_distrib()
 CFD.mesh.general_improve()
 CFD.mesh.fix_slivers()
@@ -26,9 +26,9 @@ CFD.mesh.compute_volume_region()
 CFD.mesh.volume_mesh_change_type(dead_zone_list=['fan_blade'])
 CFD.mesh.auto_mesh_volume()
 CFD.mesh.auto_node_move()
-CFD.mesh.rename_cell(zone_list=['ai', 'distrib', 'evap', 'fan', 'volute'])
+CFD.mesh.rename_cell(zone_list=['ai', 'evap', 'hc', 'fan', 'volute'])
 CFD.mesh.retype_face(face_list=['inlet'], face_type='pressure-inlet')
-CFD.mesh.retype_face(face_list=['fan_in', 'fan_out', 'evap*'], face_type='internal')
+CFD.mesh.retype_face(face_list=['fan_in', 'fan_out', 'evap*', 'hc*'], face_type='internal')
 CFD.mesh.retype_face(face_list=['outlet*'], face_type='outlet-vent')
 CFD.mesh.write_case()
 CFD.mesh.prepare_for_solve()
@@ -37,10 +37,10 @@ CFD.mesh.switch_to_solver()
 
 fan_origin = [5.27084, 0.7852, 1.06885]
 fan_axis = [0, 1, 0]
-rpm = 2850
+rpm = 3100
 evap_d1 = [-0.98769, 0, -0.15643]
 evap_d2 = [0, 1, 0]
-hc_d1 = []
+hc_d1 = [-0.82904, 0, -0.55919]
 hc_d2 = [0, 1, 0]
 
 
@@ -52,15 +52,15 @@ CFD.setup.rescale()
 CFD.setup.turb_models()
 CFD.setup.rotation_volume(rpm, fan_origin, fan_axis, 'fan')
 CFD.setup.porous_zone('evap', evap_d1, evap_d2, 2.82e+07, 455.67)
-# CFD.setup.porous_zone('hc', hc_d1, hc_d2, 4.07e+07, 580.66)
+CFD.setup.porous_zone('hc', hc_d1, hc_d2, 6.89e+07, 478.3)
 CFD.setup.BC_type('inlet', 'pressure-inlet')
 # CFD.setup.BC_type('inlet', 'mass-flow-inlet')
 CFD.setup.BC_type('outlet*()', 'outlet-vent')
 # CFD.setup.BC_type('outlet_vr', 'outlet-vent')
 CFD.setup.BC_pressure_inlet('inlet')
 # CFD.setup.BC_mass_flow_inlet('inlet', 0.0735)
-CFD.setup.BC_outlet_vent(11.07, 'outlet_d')
-CFD.setup.BC_outlet_vent(23.276, 'outlet_p')
+CFD.setup.BC_outlet_vent(14.697, 'outlet_d')
+CFD.setup.BC_outlet_vent(28.58, 'outlet_p')
 CFD.setup.solution_method()
 CFD.setup.report_definition('volume', 'surface-volumeflowrate', ['outlet*'])
 CFD.setup.report_definition('mass-flux', 'surface-massflowrate', mass_flux_list, 'no')
@@ -88,7 +88,7 @@ CFD.post.create_contour('evap_out', 'evap_out')
 # CFD.post.create_contour('evap_out_0-2', 'evap_out', [0, 2])
 CFD.post.create_contour('hc_out', 'hc_out')
 CFD.post.create_streamline('whole_pathline', 'inlet')
-CFD.post.create_streamline('distrib_pathline', 'evap_out', [0, 12])
+CFD.post.create_streamline('distrib_pathline', 'evap_out', [0, 10])
 CFD.post.read_view(view_path)
 CFD.post.set_background()
 CFD.post.snip_picture(5, 'whole_pathline', 'yes', 'yes')
