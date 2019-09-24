@@ -12,6 +12,7 @@ from easy_test import Ui_MainWindow
 from rename_tip import Ui_tip_widget
 from K_cal import Ui_K_calculator
 from unit_convertor import Ui_unit_converter
+from porous_model import Ui_porous_model_form
 import time
 import os
 import fluent_tui
@@ -98,8 +99,8 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.actionalter_default_parameter.triggered.connect(lambda: self.append_text('功能未开放,敬请期待'))
 
     def test(self):
-        self.check_part()
-        self.show_msg()
+        self.porous_model = Ui_porous()
+        self.porous_model.show()
         self.append_text('功能未开放,敬请期待')
         pass
 
@@ -138,6 +139,8 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             if QApplication.keyboardModifiers() == Qt.ControlModifier:              # test mod shortcut
                 self.actionimport.trigger()
                 self.check_part()
+                self.pamt_dict()
+                self.show_msg()
                 self.pamt_GUI()
                 self.append_text('进入调试模式')
 
@@ -208,6 +211,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         if confirm_info == True:
             self.check_part()
             self.show_msg()
+            self.launchCAD()
 
     def project_info_check(self):
         self.pamt_dict()
@@ -317,7 +321,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     def msg(self):
         self.dialog_tip.rename_btn.clicked.connect(self.dialog_tip.close)
         self.dialog_tip.rename_btn.clicked.connect(self.update_project_info)
-        self.dialog_tip.rename_btn.clicked.connect(self.launchCAD)
         self.inlet_n = self.inlet_number.value()
         self.outlet_n = self.outlet_number.value()
 
@@ -369,36 +372,8 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             self.K_list.append(self.dialog_tip.rename_table.item(i, 2).text())
 
         self.K_dict = dict(zip(self.outlet_list, self.K_list))
-
-    def show_c(self):
-        dic = {}
-
-        dic['evap'] = self.evap_c
-        dic['hc'] = self.hc_c
-        dic['valve'] = self.valve_c
-
-        for i in self.body_list:
-            try:
-                dic[i].show()
-            except Exception as e:
-                pass
-
-        if self.energy_checkbox.isChecked() is True:
-            self.temp_c.show()
-
-    def pamt_GUI(self):
-        self.mode_info_frame.hide()
-        self.return_btn.show()
-        self.mass_inlet.show()
-        self.show_c()
-
-        self.start_btn.show()
-
-    def launchCAD(self):
-        self.pamt_GUI()
-        self.launch_progress_display(35)
         self.f = open('%s/project_info.py' % (self.pamt['file_path']), 'w')
-        message = """   
+        message = """
 print('start script')
 body_list = %s
 body_number = len(body_list)
@@ -427,7 +402,7 @@ result = ComponentHelper.CreateSeparateComponents(selection, None)
 for i in range(body_number):
     selection = Selection.CreateByNames(body_list[i])
     result = Delete.Execute(selection)
-    
+
 # face rename
 face_list = %s
 for i in range(len(face_list)):
@@ -435,9 +410,9 @@ for i in range(len(face_list)):
     secondarySelection = Selection()
     result = NamedSelection.Create(primarySelection, secondarySelection)
 
-for i in range(len(face_list)):    
+for i in range(len(face_list)):
     result = NamedSelection.Rename("Group%%s"%%(i+1), face_list[i])
-    
+
 # options = ShareTopologyOptions()
 # options.Tolerance = MM(0.01)
 # result = ShareTopology.FindAndFix(options)
@@ -449,6 +424,34 @@ print('script finished')
 """ % (self.body_list, self.face_list, self.pamt['cad_save_path'])
         self.f.write(message)
         self.f.close()
+
+    def show_c(self):
+        dic = {}
+
+        dic['evap'] = self.evap_c
+        dic['hc'] = self.hc_c
+        dic['valve'] = self.valve_c
+
+        for i in self.body_list:
+            try:
+                dic[i].show()
+            except Exception as e:
+                pass
+
+        if self.energy_checkbox.isChecked() is True:
+            self.temp_c.show()
+
+    def pamt_GUI(self):
+        self.mode_info_frame.hide()
+        self.return_btn.show()
+        self.mass_inlet.show()
+        self.show_c()
+
+        self.start_btn.show()
+
+    def launchCAD(self):
+        self.pamt_GUI()
+        self.launch_progress_display(35)
         self.append_text('正在打开CAD, 请大佬耐心等待')
         self.CAD_thread = SCDM()
         self.CAD_thread.start()
@@ -891,6 +894,12 @@ class Ui_unit(Ui_unit_converter, QWidget):
             value = float(self.value_edit.text())
         result = round(value*self.volume_factor/self.time_factor, 5)
         self.unit_convert_result.emit(str(result))
+
+
+class Ui_porous(Ui_porous_model_form, QWidget):
+    def __init__(self):
+        super(Ui_porous_model_form, self).__init__()
+        self.setupUi(self)
 
 
 class SCDM(QThread):

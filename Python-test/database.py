@@ -149,14 +149,14 @@ from fan_efficiency import fan
 import time
 
 # decode result data
-path = r'G:\GE2_REAR\GE2-rear-round2\GE2-rear-V9-FC\result_GE2-rear2_V9-FC'
+path = r'G:\GE2_REAR\GE2-rear-round2\GE2-rear-V14-FC\result_GE2-rear2_V14-FC'
 new_path = path.replace('\\', '\\\\')
 txt_name = path + '\\' + 'GE2-rear2.txt'
 print(path)
 
 data_matrix = process_data(txt_name, path)
 project_name = 'GE2-rear2'
-version = 'V9-FC'
+version = 'V14-FC'
 producer = 'zonghui'
 
 rpm = 2850
