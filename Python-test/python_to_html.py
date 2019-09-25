@@ -43,7 +43,7 @@ def get_html(matrix, title, html_output_path):
 
 
     # get all table's html table
-    volume_table = get_table(matrix[0:3], ['Volume Flow Rate', '(L/S)', 'Percentage%%'])
+    volume_table = get_table(matrix[0:3], ['Volume Flow Rate', '(L/S)', 'Percentage%'])
     sp_table = get_table(matrix[3:5], ['Static Pressure', '(Pa)'])
     tp_table = get_table(matrix[5:7], ['Total Pressure', '(Pa)'])
     uni_table = get_table(matrix[7:9], ['Uniformity', ' '])

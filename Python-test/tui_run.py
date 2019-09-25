@@ -5,9 +5,9 @@ jou_out = r'C:\Users\BZMBN4\Desktop'       # txt output root
 # txt name
 whole_jou = ''
 project_title = 'GE2-rear2'
-version_name = 'V16-FC'
-cad_name = 'GE2-rear2_V16-FC'
-case_out = r'G:\GE2_REAR\GE2-rear-round2\GE2-rear-V16-FC'
+version_name = 'V19-FH'
+cad_name = 'GE2-rear2_V19-FH'
+case_out = r'G:\GE2_REAR\GE2-rear-round2\GE2-rear-V19-FH'
 
 jou_title = project_title + '-' + version_name + '-TUI'
 txt_name = jou_out + '\\' + jou_title + '.jou'            # txt final path

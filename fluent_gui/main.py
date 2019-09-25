@@ -900,6 +900,47 @@ class Ui_porous(Ui_porous_model_form, QWidget):
     def __init__(self):
         super(Ui_porous_model_form, self).__init__()
         self.setupUi(self)
+        self.default_ui()
+        self.model_choose()
+        self.cal_vq()
+
+    def default_ui(self):
+        self.operate_frame.hide()
+        self.resize(220, 135)
+
+    def model_choose(self):
+        self.model_combox.activated.connect(self.operate_ui)
+
+    def operate_ui(self, i):
+        if i == 0:
+            self.operate_frame.show()
+            self.resize(670, 670)
+            self.modify_btn.hide()
+            self.del_btn.hide()
+            self.confirm_btn.clicked.connect(self.add_porous)
+
+    def cal_vq(self):
+        self.QP_table.customContextMenuRequested.connect(self.generate_unit_menu)
+
+    def generate_unit_menu(self, pos):
+        column_num = -1
+        for i in self.QP_table.selectionModel().selection().indexes():
+            column_num = i.column()
+
+        unit_menu = QMenu()
+        unit_ls = unit_menu.addAction(u"l/s")
+        unit_mh = unit_menu.addAction(u"m3/h")
+        unit_kgm = unit_menu.addAction(u"kg/min")
+        unit_kgh = unit_menu.addAction(u"kg/h")
+        action = unit_menu.exec_(self.QP_table.mapToGlobal(pos))
+
+        unit_item = QTableWidgetItem("流量(%s)" % action.text())
+        self.QP_table.setHorizontalHeaderItem(0, unit_item)
+
+
+    def add_porous(self):
+        model_name = self.model_name_edit.text()
+        self.model_combox.addItem(model_name)
 
 
 class SCDM(QThread):

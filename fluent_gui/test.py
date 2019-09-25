@@ -330,7 +330,7 @@ class ComboxDemo(QWidget):
         self.cb.addItem("C++")
         self.cb.addItems(["Java", "C#", "Python"])
 
-        self.cb.activated.connect(self.selectionchange)
+        self.cb.activated(self.selectionchange)
         layout.addWidget(self.cb)
         layout.addWidget(self.lbl)
         self.setLayout(layout)

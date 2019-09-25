@@ -2,7 +2,7 @@ import txt_to_python, python_to_html
 from root_transfer import add_slash
 
 # designate path
-root = r"G:\GE2_REAR\GE2-rear-round2\GE2-rear-V14-FC\result_GE2-rear2_V14-FC"
+root = r"G:\GE2_REAR\GE2-rear-round2\GE2-rear-V19-FH\result_GE2-rear2_V19-FH"
 path = add_slash(root)
 
 # Txt input path
@@ -10,7 +10,7 @@ txt_name = path + 'GE2-rear2.txt'
 
 
 # Excel output
-excel_name = "GE2-rear2-V14-FC"          # Output excel name
+excel_name = "GE2-rear2-V19-FH"          # Output excel name
 sheet_name = excel_name                  # The sheet in excel
 data_name = excel_name                   # get a title for your data
 
