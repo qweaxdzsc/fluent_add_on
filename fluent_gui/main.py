@@ -102,6 +102,8 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.porous_model = Ui_porous()
         self.porous_model.show()
         self.append_text('功能未开放,敬请期待')
+
+
         pass
 
     def darkstyle(self):
@@ -901,44 +903,105 @@ class Ui_porous(Ui_porous_model_form, QWidget):
         super(Ui_porous_model_form, self).__init__()
         self.setupUi(self)
         self.default_ui()
-        self.model_choose()
-        self.cal_vq()
+        self.default_btn()
 
     def default_ui(self):
         self.operate_frame.hide()
         self.resize(220, 135)
 
-    def model_choose(self):
-        self.model_combox.activated.connect(self.operate_ui)
-
-    def operate_ui(self, i):
-        if i == 0:
-            self.operate_frame.show()
-            self.resize(670, 670)
-            self.modify_btn.hide()
-            self.del_btn.hide()
-            self.confirm_btn.clicked.connect(self.add_porous)
-
-    def cal_vq(self):
+    def default_btn(self):
+        self.model_combox.activated.connect(self.choose)
         self.QP_table.customContextMenuRequested.connect(self.generate_unit_menu)
+        self.cal_btn.clicked.connect(self.cal_C1C2)
+        self.unit_choose = 'kg/h'
+
+    def choose(self, i):
+        if i == 0:
+            self.add_mode()
+
+    def add_mode(self):
+        self.operate_frame.show()
+        self.resize(670, 670)
+        self.del_btn.hide()
+
+        self.modify_btn.setText("添加")
+        self.modify_btn.clicked.connect(self.modify_porous)
 
     def generate_unit_menu(self, pos):
         column_num = -1
         for i in self.QP_table.selectionModel().selection().indexes():
             column_num = i.column()
 
-        unit_menu = QMenu()
-        unit_ls = unit_menu.addAction(u"l/s")
-        unit_mh = unit_menu.addAction(u"m3/h")
-        unit_kgm = unit_menu.addAction(u"kg/min")
-        unit_kgh = unit_menu.addAction(u"kg/h")
-        action = unit_menu.exec_(self.QP_table.mapToGlobal(pos))
+        if column_num == 0:
+            unit_menu = QMenu()
+            unit_ls = unit_menu.addAction(u"l/s")
+            unit_mh = unit_menu.addAction(u"m3/h")
+            unit_kgm = unit_menu.addAction(u"kg/min")
+            unit_kgh = unit_menu.addAction(u"kg/h")
+            action = unit_menu.exec_(self.QP_table.mapToGlobal(pos))
+            try:
+                self.unit_choose = action.text()
+                unit_item = QTableWidgetItem("流量(%s)" % action.text())
+                self.QP_table.setHorizontalHeaderItem(0, unit_item)
+            except:
+                pass
 
-        unit_item = QTableWidgetItem("流量(%s)" % action.text())
-        self.QP_table.setHorizontalHeaderItem(0, unit_item)
+    def cal_C1C2(self):
+        l_raw = self.length_edit.text()
+        w_raw = self.width_edit.text()
+        h_raw = self.height_edit.text()
+        rho = 1.225                                 # density
+        mu = 0.000017894                            # dynamic viscosity
+        self.Q_unit = {'l/s': 1000, 'm3/h': 1 / 3600, 'kg/min': 1 / rho / 60, 'kg/h': 1 / rho / 3600}
+
+        if l_raw and w_raw and h_raw != '':
+            l = float(l_raw)/1000
+            w = float(w_raw)/1000
+            h = float(h_raw)/1000
+            eff_area = l*w                          # effective area size
+
+            import numpy as np
+            row_num = self.QP_table.rowCount()
+            Q = np.zeros(row_num + 1)
+            P = np.zeros(row_num + 1)
+            for i in range(row_num):
+                q = self.QP_table.item(i, 0).text()
+                p = self.QP_table.item(i, 1).text()
+                try:
+                    q = float(q)
+                    Q[i + 1] = q
+                except:
+                    continue
+                try:
+                    p = float(p)
+                    P[i + 1] = p
+                except:
+                    continue
+
+            Q = set(Q)
+            Q = np.array(list(Q))
+            Q.sort()
+
+            P = set(P)
+            P = np.array(list(P))
+            P.sort()
+            v = Q*self.Q_unit[self.unit_choose]/eff_area
+
+            print('v:', v)
+            print('P:', P)
+            self.plot_frame.setVisible(True)
+            self.plot_frame.mpl.start_static_plot(v, P)
+            a = self.plot_frame.mpl.a
+            b = self.plot_frame.mpl.b
+            C1 = b/h/mu
+            C2 = 2*a/rho/h
+            self.c1_edit.setText(str('%.2e'%C1))
+            self.c2_edit.setText(str('%.2f'%C2))
+        else:
+            print('please complete all blank edit')
 
 
-    def add_porous(self):
+    def modify_porous(self):
         model_name = self.model_name_edit.text()
         self.model_combox.addItem(model_name)
 

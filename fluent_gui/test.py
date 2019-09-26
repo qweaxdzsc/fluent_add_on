@@ -146,14 +146,15 @@
 #     size = get_FileSize(r"C:\Users\BZMBN4\Desktop\test\458-rear_V4-FH_190830.scdoc")
 #     print("文件大小：%.2f MB" % (size))
 
-#
+
 # import matplotlib.pyplot as plt
 # import numpy as np
 # #潘海东,2014/1/13
 #
-# x = np.arange(1, 17, 1)
-# y = np.array([4.00, 6.40, 8.00, 8.80, 9.22, 9.50, 9.70, 9.86, 10.00, 10.20, 10.32, 10.42, 10.50, 10.55, 10.58, 10.60])
-# z1 = np.polyfit(x, y, 3)#用3次多项式拟合
+# x = np.arange(0, 17, 1)
+# y = np.array([0.0, 4.00, 6.40, 8.00, 8.80, 9.22, 9.50, 9.70, 9.86, 10.00, 10.20, 10.32, 10.42, 10.50, 10.55, 10.58, 10.60])
+# z1 = np.polyfit(x, y, 2)#用3次多项式拟合
+# print(z1)
 # p1 = np.poly1d(z1)
 # print(p1) #在屏幕上打印拟合多项式
 #
@@ -165,7 +166,8 @@
 # plt.legend(loc=4)#指定legend的位置,读者可以自己help它的用法
 # plt.title('polyfitting')
 # plt.show()
-# plt.savefig('p1.png')
+# # plt.savefig('p1.png')
+
 # -*- coding: utf-8 -*-
 
 # import sys
@@ -311,43 +313,43 @@
 #     w.show()
 #     sys.exit(app.exec_())
 
-import sys
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
-from PyQt5.QtWidgets import *
-
-
-class ComboxDemo(QWidget):
-    def __init__(self, parent=None):
-        super(ComboxDemo, self).__init__(parent)
-        self.setWindowTitle("combox 例子")
-        self.resize(300, 90)
-        layout = QVBoxLayout()
-        self.lbl = QLabel("")
-
-        self.cb = QComboBox()
-        self.cb.addItem("C")
-        self.cb.addItem("C++")
-        self.cb.addItems(["Java", "C#", "Python"])
-
-        self.cb.activated(self.selectionchange)
-        layout.addWidget(self.cb)
-        layout.addWidget(self.lbl)
-        self.setLayout(layout)
-
-    def selectionchange(self, i):
-        self.lbl.setText(self.cb.currentText())
-        self.lbl.adjustSize()
-
-        print("Items in the list are :")
-        print("Current index", i, "selection changed ", self.cb.currentText())
-        for count in range(self.cb.count()):
-            print('item' + str(count) + '=' + self.cb.itemText(count))
-
-
-
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    comboxDemo = ComboxDemo()
-    comboxDemo.show()
-    sys.exit(app.exec_())
+# import sys
+# from PyQt5.QtCore import *
+# from PyQt5.QtGui import *
+# from PyQt5.QtWidgets import *
+#
+#
+# class ComboxDemo(QWidget):
+#     def __init__(self, parent=None):
+#         super(ComboxDemo, self).__init__(parent)
+#         self.setWindowTitle("combox 例子")
+#         self.resize(300, 90)
+#         layout = QVBoxLayout()
+#         self.lbl = QLabel("")
+#
+#         self.cb = QComboBox()
+#         self.cb.addItem("C")
+#         self.cb.addItem("C++")
+#         self.cb.addItems(["Java", "C#", "Python"])
+#
+#         self.cb.activated(self.selectionchange)
+#         layout.addWidget(self.cb)
+#         layout.addWidget(self.lbl)
+#         self.setLayout(layout)
+#
+#     def selectionchange(self, i):
+#         self.lbl.setText(self.cb.currentText())
+#         self.lbl.adjustSize()
+#
+#         print("Items in the list are :")
+#         print("Current index", i, "selection changed ", self.cb.currentText())
+#         for count in range(self.cb.count()):
+#             print('item' + str(count) + '=' + self.cb.itemText(count))
+#
+#
+#
+# if __name__ == '__main__':
+#     app = QApplication(sys.argv)
+#     comboxDemo = ComboxDemo()
+#     comboxDemo.show()
+#     sys.exit(app.exec_())
