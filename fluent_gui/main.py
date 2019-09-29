@@ -103,7 +103,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.porous_model.show()
         self.append_text('功能未开放,敬请期待')
 
-
         pass
 
     def darkstyle(self):
@@ -999,7 +998,6 @@ class Ui_porous(Ui_porous_model_form, QWidget):
             self.c2_edit.setText(str('%.2f'%C2))
         else:
             print('please complete all blank edit')
-
 
     def modify_porous(self):
         model_name = self.model_name_edit.text()

@@ -1,6 +1,6 @@
 
-project_name = 'GE2-rear2'
-version = 'V20-FH'
+project_name = '458-rear2'
+version = 'V1-FC'
 
 
 def get_ppt(project_name, version):

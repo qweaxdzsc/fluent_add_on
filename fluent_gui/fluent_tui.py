@@ -593,7 +593,7 @@ q q
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
-    def create_streamline(self, line_name, surface_name, range='', field_type='velocity-magnitude', line_size='10', line_step='2000', skip='10'):
+    def create_streamline(self, line_name, surface_name, range='', field_type='velocity-magnitude', line_size='10', line_step='2000', skip='5'):
         if range == '':
             pass
         else:
