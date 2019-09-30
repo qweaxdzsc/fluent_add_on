@@ -624,7 +624,6 @@ print('script finished')
         CFD.mesh.import_distrib()
         CFD.mesh.general_improve()
         CFD.mesh.fix_slivers()
-        CFD.mesh.general_improve()
         CFD.mesh.compute_volume_region()
         CFD.mesh.volume_mesh_change_type(dead_zone_list)
         if self.energy_checkbox.isChecked() is True:

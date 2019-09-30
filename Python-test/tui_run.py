@@ -4,10 +4,10 @@ jou_out = r'C:\Users\BZMBN4\Desktop'       # txt output root
 
 # txt name
 whole_jou = ''
-project_title = '458-rear2'
+project_title = 'GE2-rear2'
 version_name = 'V1-FC'
-cad_name = '458-rear2-v1-FC'
-case_out = r'G:\458-rear\458-rear-FC\458-rear2-v1'
+cad_name = 'GE2-rear2_v26-FC'
+case_out = r'G:\GE2_REAR\GE2-rear-round2\GE2-rear-V26-FC'
 
 jou_title = project_title + '-' + version_name + '-TUI'
 txt_name = jou_out + '\\' + jou_title + '.jou'            # txt final path
@@ -21,7 +21,7 @@ CFD.mesh.simple_import('volute', '*evap*')
 # CFD.mesh.import_distrib()
 CFD.mesh.general_improve()
 CFD.mesh.fix_slivers()
-CFD.mesh.general_improve()
+
 CFD.mesh.compute_volume_region()
 CFD.mesh.volume_mesh_change_type(dead_zone_list=['fan_blade'])
 CFD.mesh.auto_mesh_volume()
@@ -37,10 +37,10 @@ CFD.mesh.prepare_for_solve()
 CFD.mesh.switch_to_solver()
 
 
-fan_origin = [5.50139, 0.8574, 1.1381]
+fan_origin = [5.27084, 0.7852, 1.06885]
 fan_axis = [0, 1, 0]
 rpm = 2850
-evap_d1 = [-0.99756, 0.00144, -0.06975]
+evap_d1 = [-0.98769, 0, -0.15643]
 evap_d2 = [0, 1, 0]
 hc_d1 = [-0.82904, 0, -0.55919]
 hc_d2 = [0, 1, 0]
