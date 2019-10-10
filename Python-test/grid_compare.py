@@ -1,11 +1,11 @@
 import numpy as np
 
-file_path = r'G:\GE2_REAR\GE2-rear-round2\GE2-rear-V20-FC\result_GE2-rear2_V20-FC'
+file_path = r'G:\GE2_REAR\GE2-rear-round2\GE2-rear-V32-FC\result_GE2-rear_V32-FC-1500RPM'
 file_name = file_path + '\\clip_velocity.txt'
 f = open(file_name, encoding='utf-8')  # open
 txt = f.readlines()
 # read
-ppt_title = 'GE2-Rear2-V20-FC-Grid-Uniformity'
+ppt_title = 'GE2-Rear2-V32-FC-1500RPM-Grid-Uniformity'
 
 for i in range(len(txt)):  # process txt
     txt[i] = txt[i].strip()  # strip blanks before and after

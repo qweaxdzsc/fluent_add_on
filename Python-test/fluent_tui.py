@@ -366,7 +366,7 @@ yes no {Viscous_Resistance} no 1e10 no 1e10 yes no {Inertial_Resistence} no 1e5 
 
     def BC_type(self, face_name, face_type):
         text = """
-/define/boundary-conditions/zone-type %s %s
+/define/boundary-conditions/zone-type %s() %s
 """ % (face_name, face_type)
         self.tui.whole_jou += text
         return self.tui.whole_jou

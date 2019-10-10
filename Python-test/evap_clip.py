@@ -42,8 +42,8 @@ surface/iso-clip/y-coordinate evap_y%sz%s evap_z%s() %s %s
     os.system(txt_name)
 
 
-y_min = 0.6977
-y_max = 0.8477001
+y_min = 0.6852
+y_max = 0.8352001
 z_min = 0.763217
 z_max = 0.9607546
 clip(clip_path, y_min, y_max, z_min, z_max)

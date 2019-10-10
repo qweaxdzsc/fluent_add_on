@@ -2,15 +2,15 @@ import txt_to_python, python_to_html
 from root_transfer import add_slash
 
 # designate path
-root = r"G:\458-rear\458-rear-FC\458-rear2-v1\result_458-rear2_V1-FC"
+root = r"G:\CD539\706-rear-vent\706-rear-V2-FH\result_706-rear_V2-FH"
 path = add_slash(root)
 
 # Txt input path
-txt_name = path + '458-rear2.txt'
+txt_name = path + '706-rear.txt'
 
 
 # Excel output
-excel_name = "458-rear2-V1-FC"          # Output excel name
+excel_name = "706-rear-V2-FH"          # Output excel name
 sheet_name = excel_name                  # The sheet in excel
 data_name = excel_name                   # get a title for your data
 

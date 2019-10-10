@@ -1,2 +1,2 @@
-for i in range(10, 100, 10):
-    print(i)
+import os
+os.system(r"cd C:\Program Files\ANSYS Inc\v191\SCDM && SpaceClaim.exe")
