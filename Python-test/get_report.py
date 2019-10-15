@@ -1,20 +1,20 @@
 import txt_to_python, python_to_html
-from root_transfer import add_slash
+# from root_transfer import add_slash
 
 # designate path
-root = r"G:\CD539\706-rear-vent\706-rear-V2-FH\result_706-rear_V2-FH"
-path = add_slash(root)
+root = r"G:\519(706)\519_vent_150mmfan\706-vent-v7-150mm-pp2\result_706_V7-vent-3400RPM"
+path = root + '\\'
 
 # Txt input path
-txt_name = path + '706-rear.txt'
+txt_name = path + '519-vent.txt'
 
 
-# Excel output
-excel_name = "706-rear-V2-FH"          # Output excel name
+# Excel output info
+excel_name = "706-pp2-v7-vent-3400RPM"          # Output excel name
 sheet_name = excel_name                  # The sheet in excel
 data_name = excel_name                   # get a title for your data
 
-# Html output
+# Html output info
 html_output_path = path
 title = data_name
 

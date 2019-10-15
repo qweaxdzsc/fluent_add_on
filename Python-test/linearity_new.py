@@ -6,9 +6,9 @@ import fluent_tui
 
 whole_jou = ''
 project_title = 'GE2-rear2'
-version_name = 'V32-lin'
-cad_name = 'GE2-rear2_V32-lin'
-project_path = r"G:\GE2_REAR\GE2-rear-round2\GE2-rear-V32-lin"
+version_name = 'V33-lin'
+cad_name = 'GE2-rear2_V33-lin'
+project_path = r"G:\GE2_REAR\GE2-rear-round2\GE2-rear-V33-lin"
 
 # valve_dir = [0, -1, 0]
 # valve_origin = [5407.69, 869.38, 1022.1]

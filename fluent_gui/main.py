@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 
 import sys
-from PyQt5 import QtCore, QtWidgets
+from PyQt5 import QtCore
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QBasicTimer
 from PyQt5.QtGui import QTextCursor
@@ -45,6 +45,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.valve_c.hide()
         self.temp_c.hide()
         self.actionstop.setEnabled(False)
+        self.import_outlet = False
 
     def default_part_tree(self):
         self.part_tree.topLevelItem(0).setCheckState(0, QtCore.Qt.Unchecked)
@@ -102,7 +103,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.porous_model = Ui_porous()
         self.porous_model.show()
         self.append_text('功能未开放,敬请期待')
-
         pass
 
     def darkstyle(self):
@@ -141,6 +141,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
                 self.actionimport.trigger()
                 self.check_part()
                 self.pamt_dict()
+                self.need_launch_CAD = False
                 self.show_msg()
                 self.pamt_GUI()
                 self.append_text('进入调试模式')
@@ -148,7 +149,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         if e.key() == Qt.Key_J:
             if QApplication.keyboardModifiers() == Qt.ControlModifier:              # test mod shortcut
                 self.create_tui()
-                self.open_tui()
 
     def name_rule(self):
         reply = QMessageBox.about(self, '帮助——命名规则', '命名分为体与面的命名：\n'
@@ -183,6 +183,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             print('not yet being running')
 
     def quick_distrib_judge(self):
+
         if self.quick_distribfc_btn.isChecked() == True:
             self.default_part_tree()
 
@@ -208,11 +209,11 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 
     def into_CAD(self):
         confirm_info = self.project_info_check()
+        self.need_launch_CAD = True
 
         if confirm_info == True:
             self.check_part()
             self.show_msg()
-            self.launchCAD()
 
     def project_info_check(self):
         self.pamt_dict()
@@ -249,6 +250,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     def check_part(self):
         body_list = []
         face_list = ['inlet']
+        porous_list =[]
         if self.inlet_number.value() > 1:
             for i in range(self.inlet_number.value()-1):
                 face_list.append('inlet%s' % (i+2))
@@ -264,6 +266,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             else:
                 body_list.append('filter')
                 body_list.append('cone')
+                porous_list.append('filter')
                 face_list.append('filter_in')
                 face_list.append('filter_out')
         if self.part_tree.topLevelItem(4).checkState(0) == QtCore.Qt.Checked:
@@ -282,6 +285,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
                 face_list.append('volute_out')
         if self.part_tree.topLevelItem(7).checkState(0) == QtCore.Qt.Checked:
             body_list.append('evap')
+            porous_list.append('evap')
             face_list.append('evap_in')
             face_list.append('evap_out')
         if self.part_tree.topLevelItem(8).checkState(0) == QtCore.Qt.Checked:
@@ -289,11 +293,13 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 
         if self.part_tree.topLevelItem(9).checkState(0) == QtCore.Qt.Checked:
             body_list.append('hc')
+            porous_list.append('hc')
             face_list.append('hc_in')
             face_list.append('hc_out')
 
         if self.part_tree.topLevelItem(10).checkState(0) == QtCore.Qt.Checked:
             body_list.append('ptc')
+            porous_list.append('ptc')
             face_list.append('ptc_in')
             face_list.append('ptc_out')
         if self.part_tree.topLevelItem(11).checkState(0) == QtCore.Qt.Checked:
@@ -309,10 +315,11 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             for i in range(self.distrib_number.value() - 1):
                 body_list.append('distrib%s' % (i + 2))
 
-        print('body_list:%s\nface_list:%s'%(body_list, face_list))
+        print('body_list:%s\nface_list:%s' % (body_list, face_list))
 
         self.face_list = face_list
         self.body_list = body_list
+        self.porous_list = porous_list
 
     def show_msg(self):
         self.dialog_tip = Ui_tip()
@@ -322,6 +329,9 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     def msg(self):
         self.dialog_tip.rename_btn.clicked.connect(self.dialog_tip.close)
         self.dialog_tip.rename_btn.clicked.connect(self.update_project_info)
+        if self.need_launch_CAD == True:
+            self.dialog_tip.rename_btn.clicked.connect(self.launchCAD)
+
         self.inlet_n = self.inlet_number.value()
         self.outlet_n = self.outlet_number.value()
 
@@ -332,12 +342,21 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             new_item = QTableWidgetItem("%s" % (self.face_list[i]))
             self.dialog_tip.rename_table.setItem(i, 0, new_item)
 
-        for i in range(self.outlet_n):
-            new_item = QTableWidgetItem("%s" % (self.face_list[-i-1]))
-            self.dialog_tip.rename_table.setItem(self.outlet_n-i-1, 1, new_item)
+        if self.import_outlet == True:
 
-            new_item = QTableWidgetItem("0")
-            self.dialog_tip.rename_table.setItem(self.outlet_n - i - 1, 2, new_item)
+            for i in range(len(self.outlet_list)):
+                new_item = QTableWidgetItem("%s" % (self.outlet_list[i]))
+                self.dialog_tip.rename_table.setItem(i, 1, new_item)
+
+                new_item = QTableWidgetItem("%s" % (self.outlet_K[i]))
+                self.dialog_tip.rename_table.setItem(i, 2, new_item)
+        else:
+            for i in range(self.outlet_n):
+                new_item = QTableWidgetItem("%s" % (self.face_list[-i-1]))
+                self.dialog_tip.rename_table.setItem(self.outlet_n-i-1, 1, new_item)
+
+                new_item = QTableWidgetItem("0")
+                self.dialog_tip.rename_table.setItem(self.outlet_n - i - 1, 2, new_item)
 
         self.dialog_tip.rename_table.customContextMenuRequested.connect(self.generate_cal_menu)
 
@@ -368,11 +387,18 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             self.face_list[i] = self.dialog_tip.rename_table.item(i, 0).text()
 
         for i in range(self.outlet_n):
-            self.face_list[-i - 1] = self.dialog_tip.rename_table.item(self.outlet_n - i - 1, 1).text()
-            self.outlet_list.insert(0, self.face_list[-i - 1])
-            self.K_list.append(self.dialog_tip.rename_table.item(i, 2).text())
+            try:
+                self.face_list[-i - 1] = self.dialog_tip.rename_table.item(self.outlet_n - i - 1, 1).text()
+                self.outlet_list.insert(0, self.face_list[-i - 1])
+                self.K_list.insert(0, self.dialog_tip.rename_table.item(self.outlet_n - i - 1, 2).text())
+            except Exception as e:
+                continue
+        print(self.face_list)
+        print(self.outlet_list)
+        print(self.K_list)
 
         self.K_dict = dict(zip(self.outlet_list, self.K_list))
+        print(self.K_dict)
         self.f = open('%s/project_info.py' % (self.pamt['file_path']), 'w')
         message = """
 print('start script')
@@ -475,13 +501,19 @@ print('script finished')
         if path[0] != '':
             excel_path = path[0]
             info, squence = self.excel_import(excel_path)
-
+            self.outlet_list = []
+            self.outlet_K = []
             for i in info:
                 name = i + '_edit'
                 widget = self.findChild(QLineEdit, name)
                 if widget != None:
                     widget.setText(str(info[i]))
+                if 'outlet' in i:
+                    self.import_outlet = True
+                    self.outlet_list.append(i)
+                    self.outlet_K.append(str(info[i]))
 
+            self.outlet_number.setValue(len(self.outlet_list))
             self.project_name_edit.setText(info['project_name'])
             self.version_name_edit.setText('V')
 
@@ -507,6 +539,7 @@ print('script finished')
 
     def export_pamt(self):
         self.pamt_dict()
+        self.pamt.update(self.K_dict)
 
         path = QFileDialog.getSaveFileName(self, directory='%s'%(self.project_address_edit.text()),
                                            filter='Excel, *.xlsx')
@@ -516,6 +549,7 @@ print('script finished')
             self.create_excel(excel_save_path)
             os.system(excel_save_path)
         except Exception as e:
+            print('export error:', e)
             self.append_text('导出地址有错误，请重新选择')
 
     def create_excel(self, excel_name):
@@ -593,132 +627,9 @@ print('script finished')
         d = self.pamt
         self.check_part()
 
-        whole_jou = ''
-        project_title = d['project_name']
-        version_name = d['version']
-        cad_name = d['cad_name']
-
-        case_out = d['file_path']
-
-        self.jou_mesh_path = d['file_path'] + '/' + project_title + '-' + version_name + '-mesh-TUI.jou'  # txt final path
-        print('output journal in:', d['file_path'])
-        jou_mesh = open(self.jou_mesh_path, 'w')
-
-        if 'hc' in self.body_list:
-            internal_list = ['evap*', 'hc*']
-
-            uni_face_list = ['evap_in', 'evap_out', 'hc_out']
-            pressure_face_list = ['*inlet*', 'evap_in', 'evap_out', 'hc_in', 'hc_out', '*outlet*']
-
-        else:
-            internal_list = ['evap*']
-            uni_face_list = ['evap_in', 'evap_out']
-            pressure_face_list = ['*inlet*', 'evap_in', 'evap_out', '*outlet*']
-        dead_zone_list = []
-        if 'valve' in self.body_list:
-            dead_zone_list.append('valve')
-            self.body_list.remove('valve')
-        mesh_zone_list = self.body_list
-
-        CFD = fluent_tui.tui(whole_jou, project_title, version_name, case_out, cad_name)
-        CFD.mesh.import_distrib()
-        CFD.mesh.general_improve()
-        CFD.mesh.fix_slivers()
-        CFD.mesh.compute_volume_region()
-        CFD.mesh.volume_mesh_change_type(dead_zone_list)
-        if self.energy_checkbox.isChecked() is True:
-            CFD.mesh.retype_face(face_list=['hc*'], face_type='radiator')
-            internal_list.remove('hc*')
-            CFD.mesh.auto_mesh_volume(1.25, 'poly')
-        else:
-            CFD.mesh.auto_mesh_volume()
-        CFD.mesh.auto_node_move()
-        CFD.mesh.rename_cell(zone_list=mesh_zone_list)
-        CFD.mesh.retype_face(face_list=['inlet*'], face_type='pressure-inlet')
-        CFD.mesh.retype_face(face_list=internal_list, face_type='internal')
-        CFD.mesh.retype_face(face_list=['outlet*'], face_type='outlet-vent')
-        CFD.mesh.check_quality()
-        CFD.mesh.prepare_for_solve()
-        CFD.mesh.write_mesh()
-        CFD.close_fluent()
-
-        jou_mesh.write(CFD.whole_jou)
-        jou_mesh.close()
-
-        self.jou_solve_path = d['file_path'] + '/' + project_title + '-' + version_name + '-solve-TUI.jou'
-        print('output journal in:', d['file_path'])
-        jou_solve = open(self.jou_solve_path, 'w')
-
-        evap_d1 = [d['evap_x1'], d['evap_y1'], d['evap_z1']]
-        evap_d2 = [d['evap_x2'], d['evap_y2'], d['evap_z2']]
-        mass_flux_list = ['inlet*', 'outlet*']
-
-        CFD = fluent_tui.tui(whole_jou, project_title, version_name, case_out, cad_name)
-        CFD.setup.read_mesh()
-        CFD.setup.rescale()
-        CFD.setup.turb_models()
-        CFD.setup.porous_zone('evap', evap_d1, evap_d2, d['evap_c1'], d['evap_c2'])
-        if 'hc' in self.body_list:
-            hc_d1 = [d['hc_x1'], d['hc_y1'], d['hc_z1']]
-            hc_d2 = [d['hc_x2'], d['hc_y2'], d['hc_z2']]
-            CFD.setup.porous_zone('hc', hc_d1, hc_d2, d['hc_c1'], d['hc_c2'])
-        CFD.setup.BC_type('inlet', 'mass-flow-inlet')
-        CFD.setup.BC_type('outlet*()', 'outlet-vent')
-        CFD.setup.BC_mass_flow_inlet('inlet', d['mass_inlet'])
-        for i in self.K_dict:
-            CFD.setup.BC_outlet_vent(self.K_dict[i], i)
-        CFD.setup.solution_method()
-        if self.energy_checkbox.isChecked() is True:
-            inlet_temp = float(d['temp_inlet']) + 273.15
-            hc_temp = float(d['temp_hc']) + 273.15
-            CFD.setup.energy_eqt('yes')
-            CFD.setup.init_temperature('mass-flow-inlet', 'outlet-vent', inlet_temp)
-            CFD.setup.heat_flux('hc_in', hc_temp)
-            CFD.setup.heat_flux('hc_out', hc_temp)
-            CFD.setup.report_definition('temperature', 'surface-areaavg', ['outlet*'], 'yes', 'temperature')
-        CFD.setup.report_definition('volume', 'surface-volumeflowrate', ['inlet*'])
-        CFD.setup.report_definition('mass-flux', 'surface-massflowrate', mass_flux_list, 'no')
-        CFD.setup.report_definition('pressure', 'surface-areaavg', ['evap_in'])
-        CFD.setup.convergence_criterion()
-        CFD.setup.hyb_initialize()
-        CFD.setup.start_calculate(230)
-        CFD.setup.write_case_data()
-
-        volume_face_list = ['inlet*', 'outlet*']
-
-        CFD.post.create_result_file()
-        CFD.post.set_background()
-        if self.energy_checkbox.isChecked() is True:
-            CFD.post.txt_surface_integrals('area-weighted-avg', ['outlet*'], 'temperature')
-            CFD.post.create_streamline('temp_pathline', 'inlet', '', 'temperature')
-            CFD.post.snip_avz(8, 'temp_pathline')
-        else:
-            CFD.post.create_contour('evap_out', 'evap_out')
-            if 'hc' in self.body_list:
-                CFD.post.create_contour('hc_out', 'hc_out')
-
-            CFD.post.create_streamline('whole_pathline', 'inlet')
-            CFD.post.create_streamline('distrib_pathline', 'evap_out', [0, 15])
-            CFD.post.snip_avz(5, 'whole_pathline')
-            CFD.post.snip_avz(6, 'distrib_pathline')
-            CFD.post.snip_avz(7, 'evap_out')
-            if 'hc' in self.body_list:
-                CFD.post.snip_avz(9, 'hc_out')
-            CFD.post.snip_model(10, 'model')
-        CFD.post.txt_surface_integrals('volume-flow-rate', volume_face_list)
-        CFD.post.txt_mass_flux()
-        CFD.post.txt_surface_integrals('uniformity-index-area-weighted', uni_face_list, 'velocity-magnitude')
-        CFD.post.txt_surface_integrals('area-weighted-avg', pressure_face_list, 'total-pressure')
-        CFD.post.txt_surface_integrals('area-weighted-avg', pressure_face_list, 'pressure')
-        CFD.post.snip_mode_off()
-        CFD.close_fluent()
-
-        jou_solve.write(CFD.whole_jou)
-        jou_solve.close()
-
-    def open_tui(self):
-        os.system(self.jou_mesh_path)
-        os.system(self.jou_solve_path)
+        self.energy_check = self.energy_checkbox.isChecked()
+        from tui_run import get_tui
+        tui = get_tui(self.pamt, self.body_list, self.energy_check, self.K_dict, self.porous_list)
 
     def begin(self):
         self.start_btn.setDisabled(True)

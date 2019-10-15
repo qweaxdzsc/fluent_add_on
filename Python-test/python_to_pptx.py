@@ -1,6 +1,7 @@
 
-project_name = '706-rear'
-version = 'V2-FH'
+project_name = 'GE2-rear2'
+version = 'V33-FC'
+Rotation_speed = 2850
 
 
 def get_ppt(project_name, version):
@@ -30,8 +31,8 @@ def get_ppt(project_name, version):
     # search main table
     cursor = conn.cursor(pymysql.cursors.DictCursor)  # return Dictionary_like key_valve
     serh = """
-    SELECT  * FROM cfd_project where Project = '%s' and Version = '%s'
-    """ % (project_name, version)
+    SELECT  * FROM cfd_project where Project = '%s' and Version = '%s' and RPM = '%s'
+    """ % (project_name, version, Rotation_speed)
     cursor.execute(serh)
     main_data = cursor.fetchone()
     print('main table data:', main_data)

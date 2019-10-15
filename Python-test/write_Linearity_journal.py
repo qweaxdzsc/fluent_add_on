@@ -1,6 +1,5 @@
 
 import numpy as np
-from root_transfer import add_slash
 import os
 
 out_path = 'C:\\Users\\BZMBN4\\Desktop\\'       # txt output root

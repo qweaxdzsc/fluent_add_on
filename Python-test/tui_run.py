@@ -4,10 +4,10 @@ jou_out = r'C:\Users\BZMBN4\Desktop'       # txt output root
 
 # txt name
 whole_jou = ''
-project_title = '706'
-version_name = 'V7-pp2-defrost'
-cad_name = '706-v7-pp2-defrost'
-case_out = r'G:\519(706)\519-defrost\706-defrost-pp2-v7'
+project_title = 'GE2-rear2'
+version_name = 'V33-FH'
+cad_name = 'GE2-rear2_V33-FH'
+case_out = r'G:\GE2_REAR\GE2-rear-round2\GE2-rear-V33-FH'
 
 jou_title = project_title + '-' + version_name + '-TUI'
 txt_name = jou_out + '\\' + jou_title + '.jou'            # txt final path
@@ -17,9 +17,9 @@ jou = open(txt_name, 'w')
 
 CFD = fluent_tui.tui(whole_jou, project_title, version_name, case_out, cad_name)
 
-CFD.mesh.simple_import('volute', '*evap* *hc* *filter*')
+# CFD.mesh.simple_import('volute', '*evap* *hc* *filter*')
 # CFD.mesh.simple_import('volute', '*evap*')
-# CFD.mesh.simple_import('volute', '*evap* *hc*')
+CFD.mesh.simple_import('volute', '*evap* *hc*')
 # CFD.mesh.import_distrib()
 CFD.mesh.general_improve()
 CFD.mesh.fix_slivers()
@@ -28,26 +28,26 @@ CFD.mesh.compute_volume_region()
 CFD.mesh.volume_mesh_change_type(dead_zone_list=['fan_blade'])
 CFD.mesh.auto_mesh_volume()
 CFD.mesh.auto_node_move()
-CFD.mesh.rename_cell(zone_list=['ai', 'evap', 'fan', 'hc', 'volute', 'filter', 'distrib', 'cone'])
+# CFD.mesh.rename_cell(zone_list=['ai', 'evap', 'fan', 'hc', 'volute', 'filter', 'distrib', 'cone'])
 # CFD.mesh.rename_cell(zone_list=['ai', 'evap', 'fan', 'volute'])
-# CFD.mesh.rename_cell(zone_list=['ai', 'evap', 'hc', 'fan', 'volute'])
-CFD.mesh.retype_face(face_list=['inlet', 'inlet2'], face_type='pressure-inlet')
-# CFD.mesh.retype_face(face_list=['inlet'], face_type='pressure-inlet')
-CFD.mesh.retype_face(face_list=['fan_in', 'fan_out', 'evap*', 'hc*', 'filter*'], face_type='internal')
+CFD.mesh.rename_cell(zone_list=['ai', 'evap', 'hc', 'fan', 'volute'])
+# CFD.mesh.retype_face(face_list=['inlet', 'inlet2'], face_type='pressure-inlet')
+CFD.mesh.retype_face(face_list=['inlet'], face_type='pressure-inlet')
+# CFD.mesh.retype_face(face_list=['fan_in', 'fan_out', 'evap*', 'hc*', 'filter*'], face_type='internal')
 # CFD.mesh.retype_face(face_list=['fan_in', 'fan_out', 'evap*'], face_type='internal')
-# CFD.mesh.retype_face(face_list=['fan_in', 'fan_out', 'evap*', 'hc*'], face_type='internal')
+CFD.mesh.retype_face(face_list=['fan_in', 'fan_out', 'evap*', 'hc*'], face_type='internal')
 CFD.mesh.retype_face(face_list=['outlet*'], face_type='outlet-vent')
 CFD.mesh.write_case()
 CFD.mesh.prepare_for_solve()
 CFD.mesh.switch_to_solver()
 
 
-fan_origin = [2.13586, 0.38647, 0.81608]
-fan_axis = [0, 0, 1]
-rpm = 3650
-evap_d1 = [1, 0, 0]
+fan_origin = [5.27084, 0.7852, 1.06885]
+fan_axis = [0, 1, 0]
+rpm = 3100
+evap_d1 = [-0.98769, 0, -0.15643]
 evap_d2 = [0, 1, 0]
-hc_d1 = [1, 0, 0]
+hc_d1 = [-0.87462, 0, -0.48481]
 hc_d2 = [0, 1, 0]
 filter_d1 = [0, 0, 1]
 filter_d2 = [1, 1, 0]
@@ -60,9 +60,9 @@ CFD.setup.rescale()
 # CFD.setup.convert_polymesh()
 CFD.setup.turb_models()
 CFD.setup.rotation_volume(rpm, fan_origin, fan_axis, 'fan')
-CFD.setup.porous_zone('evap', evap_d1, evap_d2, 2.68e+07, 484.96)
-CFD.setup.porous_zone('filter', filter_d1, filter_d2, 6.86e+07, 457.7)
-CFD.setup.porous_zone('hc', hc_d1, hc_d2, 3.49e+07, 623.3)
+CFD.setup.porous_zone('evap', evap_d1, evap_d2, 2.82e+07, 455.67)
+# CFD.setup.porous_zone('filter', filter_d1, filter_d2, 6.86e+07, 457.7)
+CFD.setup.porous_zone('hc', hc_d1, hc_d2, 6.77e+07, 486.1)
 # CFD.setup.BC_type('inlet*()', 'pressure-inlet')
 CFD.setup.BC_type('inlet*', 'pressure-inlet')
 # CFD.setup.BC_type('inlet', 'mass-flow-inlet')
@@ -70,9 +70,9 @@ CFD.setup.BC_type('outlet*', 'outlet-vent')
 # CFD.setup.BC_type('outlet_vr', 'outlet-vent')
 CFD.setup.BC_pressure_inlet('inlet')
 # CFD.setup.BC_mass_flow_inlet('inlet', 0.0735)
-CFD.setup.BC_outlet_vent(4.1, 'outlet_foot')
-# CFD.setup.BC_outlet_vent(23.19, 'outlet_p')
-# CFD.setup.BC_outlet_vent(40.73, 'outlet_d')
+# CFD.setup.BC_outlet_vent(4.1, 'outlet_foot')
+CFD.setup.BC_outlet_vent(23.19, 'outlet_p')
+CFD.setup.BC_outlet_vent(40.73, 'outlet_d')
 CFD.setup.solution_method()
 CFD.setup.report_definition('volume', 'surface-volumeflowrate', ['outlet*'])
 CFD.setup.report_definition('mass-flux', 'surface-massflowrate', mass_flux_list, 'no')
