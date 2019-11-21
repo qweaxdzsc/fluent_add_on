@@ -9,6 +9,23 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
+from PyQt5.QtWidgets import QFrame, QVBoxLayout
+
+
+class MatplotlibWidget(QFrame):
+    def __init__(self, parent=None):
+        super(MatplotlibWidget, self).__init__(parent)
+        self.initUi()
+
+    def initUi(self):
+        self.layout = QVBoxLayout(self)
+        from MatplotlibWidget import MyMplCanvas
+        self.mpl = MyMplCanvas(self, width=4, height=2, dpi=70)
+        # self.mpl_ntb = NavigationToolbar(self.mpl, self)  # 添加完整的 toolbar
+
+        self.layout.addWidget(self.mpl)
+        # self.layout.addWidget(self.mpl_ntb)
+
 
 class Ui_porous_model_form(object):
     def setupUi(self, porous_model_form):
@@ -25,8 +42,6 @@ class Ui_porous_model_form(object):
         self.gridLayout_2.setContentsMargins(20, 20, 20, 20)
         self.gridLayout_2.setSpacing(20)
         self.gridLayout_2.setObjectName("gridLayout_2")
-        spacerItem = QtWidgets.QSpacerItem(68, 460, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
-        self.gridLayout_2.addItem(spacerItem, 2, 0, 1, 1)
         self.model_label = QtWidgets.QLabel(porous_model_form)
         font = QtGui.QFont()
         font.setFamily("Microsoft YaHei UI")
@@ -40,6 +55,8 @@ class Ui_porous_model_form(object):
         self.model_combox.setObjectName("model_combox")
         self.model_combox.addItem("")
         self.gridLayout_2.addWidget(self.model_combox, 1, 0, 1, 1)
+        spacerItem = QtWidgets.QSpacerItem(68, 460, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        self.gridLayout_2.addItem(spacerItem, 2, 0, 1, 1)
         self.operate_frame = QtWidgets.QFrame(porous_model_form)
         self.operate_frame.setFrameShape(QtWidgets.QFrame.Box)
         self.operate_frame.setFrameShadow(QtWidgets.QFrame.Raised)
@@ -87,15 +104,19 @@ class Ui_porous_model_form(object):
         self.modify_btn.setMaximumSize(QtCore.QSize(120, 16777215))
         self.modify_btn.setObjectName("modify_btn")
         self.horizontalLayout_2.addWidget(self.modify_btn)
-        self.complete_btn = QtWidgets.QPushButton(self.operate_frame)
+        self.modify_ui_btn = QtWidgets.QPushButton(self.operate_frame)
+        self.modify_ui_btn.setMaximumSize(QtCore.QSize(120, 16777215))
+        self.modify_ui_btn.setObjectName("modify_ui_btn")
+        self.horizontalLayout_2.addWidget(self.modify_ui_btn)
+        self.add_btn = QtWidgets.QPushButton(self.operate_frame)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.complete_btn.sizePolicy().hasHeightForWidth())
-        self.complete_btn.setSizePolicy(sizePolicy)
-        self.complete_btn.setMaximumSize(QtCore.QSize(120, 16777215))
-        self.complete_btn.setObjectName("complete_btn")
-        self.horizontalLayout_2.addWidget(self.complete_btn)
+        sizePolicy.setHeightForWidth(self.add_btn.sizePolicy().hasHeightForWidth())
+        self.add_btn.setSizePolicy(sizePolicy)
+        self.add_btn.setMaximumSize(QtCore.QSize(120, 16777215))
+        self.add_btn.setObjectName("add_btn")
+        self.horizontalLayout_2.addWidget(self.add_btn)
         self.del_btn = QtWidgets.QPushButton(self.operate_frame)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         sizePolicy.setHorizontalStretch(0)
@@ -186,9 +207,14 @@ class Ui_porous_model_form(object):
         self.plot_frame.setFrameShadow(QtWidgets.QFrame.Plain)
         self.plot_frame.setObjectName("plot_frame")
         self.gridLayout_3.addWidget(self.plot_frame, 2, 0, 1, 2)
-        self.gridLayout_2.addWidget(self.operate_frame, 0, 1, 3, 1)
+        self.gridLayout_2.addWidget(self.operate_frame, 0, 1, 5, 1)
+        self.load_btn = QtWidgets.QPushButton(porous_model_form)
+        self.load_btn.setMaximumSize(QtCore.QSize(140, 16777215))
+        self.load_btn.setObjectName("load_btn")
+        self.gridLayout_2.addWidget(self.load_btn, 3, 0, 1, 1)
 
         self.retranslateUi(porous_model_form)
+        self.add_btn.clicked.connect(self.modify_ui_btn.hide)
         QtCore.QMetaObject.connectSlotsByName(porous_model_form)
 
     def retranslateUi(self, porous_model_form):
@@ -200,7 +226,8 @@ class Ui_porous_model_form(object):
         self.c2_label.setText(_translate("porous_model_form", "粘性阻力系数C2"))
         self.model_name_label.setText(_translate("porous_model_form", "型号名称"))
         self.modify_btn.setText(_translate("porous_model_form", "修改"))
-        self.complete_btn.setText(_translate("porous_model_form", "完成"))
+        self.modify_ui_btn.setText(_translate("porous_model_form", "修改"))
+        self.add_btn.setText(_translate("porous_model_form", "添加"))
         self.del_btn.setText(_translate("porous_model_form", "删除"))
         item = self.QP_table.horizontalHeaderItem(0)
         item.setText(_translate("porous_model_form", "流量(kg/h)"))
@@ -237,4 +264,4 @@ class Ui_porous_model_form(object):
         self.height_label.setText(_translate("porous_model_form", "厚度(mm)"))
         self.length_edit.setText(_translate("porous_model_form", "138"))
         self.width_edit.setText(_translate("porous_model_form", "193"))
-from MatplotlibWidget import MatplotlibWidget
+        self.load_btn.setText(_translate("porous_model_form", "导入"))

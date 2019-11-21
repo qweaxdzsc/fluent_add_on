@@ -9,7 +9,7 @@ def convert(py_name, gui_name):
     os.system(r'cd %s && pyuic5 -o %s %s' %(ui_path, py_name, gui_name))
 
 
-gui_name = 'porous_model.ui'
+gui_name = 'easy_test.ui'
 py_name = gui_name.replace('.ui', '.py')
 
 py_path = '%s\%s'%(py_folder, py_name)

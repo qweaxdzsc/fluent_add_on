@@ -134,7 +134,7 @@ mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
-    def general_improve(self, quality=0.7, feature_angle=30, iterations=10):
+    def general_improve(self, quality=0.75, feature_angle=30, iterations=10):
         text = """
 /diagnostics/quality/general-improve objects *() skewness %s %s %s yes
 """ % (quality, feature_angle, iterations)

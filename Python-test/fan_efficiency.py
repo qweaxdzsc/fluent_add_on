@@ -17,11 +17,12 @@ class fan(object):
             whole_dp = float(self.data_matrix[6][down_dp_index]) - float(self.data_matrix[6][up_dp_index])
         elif self.pressure_type[0] == 's':
             up_dp = 0
-            for i in self.data_matrix[3]:
-                if 'filter' in i:
+            if 'filter_out' in self.data_matrix[3]:
+                if 'fan_in' in self.data_matrix[3]:
                     up_dp_index = self.data_matrix[3].index('fan_in')
-                    up_dp = -float(self.data_matrix[4][up_dp_index])
-                    break
+                else:
+                    up_dp_index = self.data_matrix[3].index('filter_out')
+                up_dp = -float(self.data_matrix[4][up_dp_index])
             down_dp_index = self.data_matrix[3].index('evap_in')
             down_dp = float(self.data_matrix[4][down_dp_index])
             whole_dp = up_dp + down_dp

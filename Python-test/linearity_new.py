@@ -5,10 +5,10 @@ import fluent_tui
 
 
 whole_jou = ''
-project_title = 'GE2-rear2'
-version_name = 'V33-lin'
-cad_name = 'GE2-rear2_V33-lin'
-project_path = r"G:\GE2_REAR\GE2-rear-round2\GE2-rear-V33-lin"
+project_title = 'GE2-rear3'
+version_name = 'V15-lin'
+cad_name = 'GE2-rear3_V15-lin'
+project_path = r"G:\GE2_REAR\GE2-rear-round3\GE2-rear-V15-lin"
 
 # valve_dir = [0, -1, 0]
 # valve_origin = [5407.69, 869.38, 1022.1]
@@ -46,12 +46,12 @@ for i in angle_array:
     # rotate_angle = round(angle_array[j] - angle_array[j - 1], 3)
     j = j + 1
     CFD.mesh.import_distrib(cad_name=cad_lin_name)
-    CFD.mesh.general_improve(0.7)
+    CFD.mesh.general_improve(0.75)
     CFD.mesh.fix_slivers()
-    # CFD.mesh.general_improve(0.6)
     CFD.mesh.compute_volume_region()
     CFD.mesh.volume_mesh_change_type(dead_zone_list=['valve1', 'valve2', 'valve3', 'valve4'])
-    CFD.mesh.auto_mesh_volume(1.25, 'poly')
+    CFD.mesh.auto_mesh_volume(1.25)
+    # CFD.mesh.auto_mesh_volume(1.25, 'poly')
     CFD.mesh.auto_node_move(0.8, 6)
     CFD.mesh.rename_cell(zone_list=['ai', 'distrib', 'evap', 'hc'])
     CFD.mesh.retype_face(face_list=['inlet'], face_type='mass-flow-inlet')
@@ -64,28 +64,30 @@ for i in angle_array:
 
 mass_flux_list = ['inlet*', 'outlet*']
 
-evap_d1 = [-0.98769, 0, -0.15643]
+evap_d1 = [0.84805, 0, 0.52992]
 evap_d2 = [0, 1, 0]
-hc_d1 = [-0.87462, 0, -0.48481]
+hc_d1 = [0.85717, 0, 0.51504]
 hc_d2 = [0, 1, 0]
 
-CFD.setup.read_lin_mesh(start_angle)
+CFD.mesh.switch_to_solver()
+CFD.setup.replace_lin_mesh(start_angle)
+# CFD.setup.read_lin_mesh(start_angle)
 CFD.setup.rescale()
 # CFD.setup.convert_polymesh()
 CFD.setup.turb_models()
 
 CFD.setup.porous_zone('evap', evap_d1, evap_d2, 2.82e+07, 455.67)
-CFD.setup.porous_zone('hc', hc_d1, hc_d2, 6.77e+07, 486.1)
+CFD.setup.porous_zone('hc', hc_d1, hc_d2, 6.62e+07, 505.43)
 # CFD.setup.BC_type('inlet', 'pressure-inlet')
-CFD.setup.BC_type('inlet*', 'mass-flow-inlet')
-CFD.setup.BC_type('outlet*', 'outlet-vent')
+CFD.setup.BC_type('inlet*()', 'mass-flow-inlet')
+CFD.setup.BC_type('outlet*()', 'outlet-vent')
 CFD.setup.solution_method()
 CFD.setup.energy_eqt('yes')
 # CFD.setup.BC_pressure_inlet('inlet')
 CFD.setup.init_temperature('mass-flow-inlet', 'outlet-vent', 273.15)
 CFD.setup.BC_mass_flow_inlet('inlet', 0.055125)
-CFD.setup.BC_outlet_vent(30.696, 'outlet_d')
-CFD.setup.BC_outlet_vent(18.642, 'outlet_p')
+CFD.setup.BC_outlet_vent(13.5, 'outlet_d')
+CFD.setup.BC_outlet_vent(6.7488, 'outlet_p')
 CFD.setup.heat_flux('hc_in', 348.15)
 CFD.setup.heat_flux('hc_out', 348.15)
 CFD.setup.report_definition('temperature', 'surface-areaavg', ['outlet*'], 'yes', 'temperature')
@@ -104,7 +106,7 @@ for i in angle_array[1:]:
     CFD.setup.heat_flux('hc_in', 348.15)
     CFD.setup.heat_flux('hc_out', 348.15)
     CFD.setup.hyb_initialize()
-    CFD.setup.start_calculate(260)
+    CFD.setup.start_calculate(270)
     CFD.setup.write_lin_case_data(i)
     CFD.post.simple_lin_post(i)
 

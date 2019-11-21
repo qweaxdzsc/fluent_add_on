@@ -1,28 +1,24 @@
-import matplotlib
 
-matplotlib.use("Qt5Agg")
-from PyQt5.QtWidgets import QVBoxLayout, QSizePolicy, QFrame
+from PyQt5.QtWidgets import QSizePolicy
+# from PyQt5.QtWidgets import QVBoxLayout, QFrame
 
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
-from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
-from matplotlib.figure import Figure
-import matplotlib.pyplot as plt
+# from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
 
 
 class MyMplCanvas(FigureCanvas):
     """FigureCanvas的最终的父类其实是QWidget。"""
 
     def __init__(self, parent=None, width=5, height=4, dpi=100):
-
-        # 配置中文显示
+        from matplotlib.figure import Figure
+        import matplotlib.pyplot as plt
         plt.rcParams['font.family'] = ['SimHei']  # 用来正常显示中文标签
         plt.rcParams['axes.unicode_minus'] = False  # 用来正常显示负号
-
         self.fig = Figure(figsize=(width, height), dpi=dpi)  # 新建一个figure
+
         self.axes = self.fig.add_subplot(111)  # 建立一个子图，如果要建立复合图，可以在这里修改
 
-        # self.axes.hold(False)  # 每次绘图的时候不保留上一次绘图的结果
-
+        # 配置中文显示
         FigureCanvas.__init__(self, self.fig)
         self.setParent(parent)
 
@@ -32,9 +28,12 @@ class MyMplCanvas(FigureCanvas):
                                    QSizePolicy.Expanding)
         FigureCanvas.updateGeometry(self)
 
+
     '''绘制静态图，可以在这里定义自己的绘图逻辑'''
 
     def start_static_plot(self, x, y):
+
+
         from scipy.optimize import curve_fit
 
         self.fig.suptitle('V-P拟合图')
@@ -46,13 +45,11 @@ class MyMplCanvas(FigureCanvas):
         a = popt[0]
         b = popt[1]
         yvals = func(x, a, b)  # 拟合y值
-        print('系数a:', a)
-        print('系数b:', b)
         self.a = a
         self.b = b
         # print('系数pcov:', pcov)
         # print('系数yvals:', yvals)
-
+        self.axes.cla()
         self.axes.plot(x, y, 's', label='原值')
         self.axes.plot(x, yvals, 'r', label='拟合曲线')
         for a, b in zip(x, y):
@@ -64,16 +61,18 @@ class MyMplCanvas(FigureCanvas):
         self.draw()
 
 
-class MatplotlibWidget(QFrame):
-    def __init__(self, parent=None):
-        super(MatplotlibWidget, self).__init__(parent)
-        self.initUi()
+# class MatplotlibWidget(QFrame):
+#     def __init__(self, parent=None):
+#         super(MatplotlibWidget, self).__init__(parent)
+#
+#
+#     def initUi(self):
+#         self.layout = QVBoxLayout(self)
+#         # from MatplotlibWidget import MyMplCanvas
+#         self.mpl = MyMplCanvas(self, width=4, height=2, dpi=70)
+#         # self.mpl_ntb = NavigationToolbar(self.mpl, self)  # 添加完整的 toolbar
+#
+#         self.layout.addWidget(self.mpl)
+#         # self.layout.addWidget(self.mpl_ntb)
 
-    def initUi(self):
-        self.layout = QVBoxLayout(self)
-        self.mpl = MyMplCanvas(self, width=4, height=2, dpi=70)
-        self.mpl_ntb = NavigationToolbar(self.mpl, self)  # 添加完整的 toolbar
-
-        self.layout.addWidget(self.mpl)
-        self.layout.addWidget(self.mpl_ntb)
 

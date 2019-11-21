@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 
 import sys
+import csv
 from PyQt5 import QtCore
-from PyQt5.QtWidgets import *
+from PyQt5.QtWidgets import QMainWindow, QWidget, QApplication, QMessageBox, QTableWidgetItem, QFileDialog, QMenu, QLineEdit
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QBasicTimer
 from PyQt5.QtGui import QTextCursor
 
@@ -15,7 +16,6 @@ from unit_convertor import Ui_unit_converter
 from porous_model import Ui_porous_model_form
 import time
 import os
-import fluent_tui
 import qdarkstyle
 
 
@@ -44,6 +44,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.solver_btn.hide()
         self.valve_c.hide()
         self.temp_c.hide()
+        self.fan_c.hide()
         self.actionstop.setEnabled(False)
         self.import_outlet = False
 
@@ -115,7 +116,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.interact_edit.moveCursor(QTextCursor.End)
 
     def keyPressEvent(self, e):
-
         if e.key() == Qt.Key_F1:
             self.name_rule()
 
@@ -134,7 +134,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         if e.key() == Qt.Key_4:
             if QApplication.keyboardModifiers() == Qt.ControlModifier:
                 self.quick_distriblin_btn.setChecked(True)
-
 
         if e.key() == Qt.Key_Q:
             if QApplication.keyboardModifiers() == Qt.ControlModifier:              # test mod shortcut
@@ -305,10 +304,10 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         if self.part_tree.topLevelItem(11).checkState(0) == QtCore.Qt.Checked:
             body_list.append('valve')
 
-        face_list.append('outlet')
-        if self.outlet_number.value() > 1:
-            for i in range(self.outlet_number.value()-1):
-                face_list.append('outlet%s'%(i+2))
+        # face_list.append('outlet')
+        # if self.outlet_number.value() > 1:
+        #     for i in range(self.outlet_number.value()-1):
+        #         face_list.append('outlet%s'%(i+2))
         if self.distrib_number.value() > 1:
             distrib_index = body_list.index('distrib')
             body_list[distrib_index] = 'distrib1'
@@ -322,18 +321,30 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.porous_list = porous_list
 
     def show_msg(self):
+        if self.import_outlet == True:
+            self.outlet_name_and_K()
+        else:
+            from outlet_rename import outlet_rename_ui
+            self.outlet_rename = outlet_rename_ui()
+            self.outlet_rename.show()
+            self.outlet_rename.chosed_btn.clicked.connect(self.receive_outlet_name)
+            self.outlet_rename.chosed_btn.clicked.connect(self.outlet_name_and_K)
+
+    def receive_outlet_name(self):
+        self.outlet_list = self.outlet_rename.outlet_list
+        self.outlet_K = [0 for i in self.outlet_list]
+
+    def outlet_name_and_K(self):
         self.dialog_tip = Ui_tip()
-        self.msg()
         self.dialog_tip.show()
 
-    def msg(self):
         self.dialog_tip.rename_btn.clicked.connect(self.dialog_tip.close)
         self.dialog_tip.rename_btn.clicked.connect(self.update_project_info)
         if self.need_launch_CAD == True:
             self.dialog_tip.rename_btn.clicked.connect(self.launchCAD)
 
         self.inlet_n = self.inlet_number.value()
-        self.outlet_n = self.outlet_number.value()
+        self.outlet_n = len(self.outlet_list)
 
         self.dialog_tip.rename_table.setRowCount(max(self.inlet_n, self.outlet_n))
         self.dialog_tip.rename_table.setFixedHeight(max(self.inlet_n, self.outlet_n)*35+35)
@@ -342,21 +353,12 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             new_item = QTableWidgetItem("%s" % (self.face_list[i]))
             self.dialog_tip.rename_table.setItem(i, 0, new_item)
 
-        if self.import_outlet == True:
+        for i in range(len(self.outlet_list)):
+            new_item = QTableWidgetItem("%s" % (self.outlet_list[i]))
+            self.dialog_tip.rename_table.setItem(i, 1, new_item)
 
-            for i in range(len(self.outlet_list)):
-                new_item = QTableWidgetItem("%s" % (self.outlet_list[i]))
-                self.dialog_tip.rename_table.setItem(i, 1, new_item)
-
-                new_item = QTableWidgetItem("%s" % (self.outlet_K[i]))
-                self.dialog_tip.rename_table.setItem(i, 2, new_item)
-        else:
-            for i in range(self.outlet_n):
-                new_item = QTableWidgetItem("%s" % (self.face_list[-i-1]))
-                self.dialog_tip.rename_table.setItem(self.outlet_n-i-1, 1, new_item)
-
-                new_item = QTableWidgetItem("0")
-                self.dialog_tip.rename_table.setItem(self.outlet_n - i - 1, 2, new_item)
+            new_item = QTableWidgetItem("%s" % (self.outlet_K[i]))
+            self.dialog_tip.rename_table.setItem(i, 2, new_item)
 
         self.dialog_tip.rename_table.customContextMenuRequested.connect(self.generate_cal_menu)
 
@@ -373,9 +375,9 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             if action == cal_action:
                 self.K_cal = Ui_cal_K()
                 self.K_cal.show()
-                self.K_cal.K_result.connect(self.return_K)
+                self.K_cal.K_result.connect(self.K_result)
 
-    def return_K(self, K):
+    def K_result(self, K):
         modify_item = QTableWidgetItem(K)
         self.dialog_tip.rename_table.setItem(self.K_row, 2, modify_item)
         self.K_cal.close()
@@ -388,17 +390,13 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 
         for i in range(self.outlet_n):
             try:
-                self.face_list[-i - 1] = self.dialog_tip.rename_table.item(self.outlet_n - i - 1, 1).text()
-                self.outlet_list.insert(0, self.face_list[-i - 1])
-                self.K_list.insert(0, self.dialog_tip.rename_table.item(self.outlet_n - i - 1, 2).text())
+                self.outlet_list.append(self.dialog_tip.rename_table.item(i, 1).text())
+                self.K_list.append(self.dialog_tip.rename_table.item(i, 2).text())
             except Exception as e:
                 continue
-        print(self.face_list)
-        print(self.outlet_list)
-        print(self.K_list)
-
+        self.face_list.extend(self.outlet_list)
         self.K_dict = dict(zip(self.outlet_list, self.K_list))
-        print(self.K_dict)
+
         self.f = open('%s/project_info.py' % (self.pamt['file_path']), 'w')
         message = """
 print('start script')
@@ -423,7 +421,7 @@ for i in range(body_number):
     selection = Selection.Create(GetRootPart().Bodies[-1-i])
     result = RenameObject.Execute(selection, body_list[i])
 
-selection = Selection.Create(GetRootPart().Bodies[:])
+selection = Selection.Create(GetRootPart().Bodies[-body_number:])
 result = ComponentHelper.CreateSeparateComponents(selection, None)
 
 for i in range(body_number):
@@ -458,6 +456,7 @@ print('script finished')
         dic['evap'] = self.evap_c
         dic['hc'] = self.hc_c
         dic['valve'] = self.valve_c
+        dic['fan'] = self.fan_c
 
         for i in self.body_list:
             try:
@@ -496,11 +495,11 @@ print('script finished')
         self.append_text(cad_progress)
 
     def import_info(self):
-        path = QFileDialog.getOpenFileName(self, '选择要输入的Excel模板',
-                                           r'C:\Users\BZMBN4\Desktop', 'Excel Files (*.xlsx; *.xls; *.xlsm)')
+        path = QFileDialog.getOpenFileName(self, '选择要输入的参数模板',
+                                           r'C:\Users\BZMBN4\Desktop', 'CSV Files (*.csv)')
         if path[0] != '':
-            excel_path = path[0]
-            info, squence = self.excel_import(excel_path)
+            csv_path = path[0]
+            info = self.csv_import(csv_path)
             self.outlet_list = []
             self.outlet_K = []
             for i in info:
@@ -517,20 +516,16 @@ print('script finished')
             self.project_name_edit.setText(info['project_name'])
             self.version_name_edit.setText('V')
 
-            self.append_text('Excel:%s导入成功' % path[0])
+            self.append_text('参数模板:%s导入成功' % path[0])
 
-    def excel_import(self, excel_path):
-        import xlrd
-        wb = xlrd.open_workbook(excel_path)
-        sheet = wb.sheet_by_name('info')
+    def csv_import(self, excel_path):
+        with open(excel_path, 'r', newline='') as csvfile:
+            reader = csv.reader(csvfile)
+            info = {}
+            for row in reader:
+                info[row[0]] = row[1]
 
-        nrows = sheet.nrows
-        row_squence = list(range(1, nrows + 1))
-
-        info = dict(zip(sheet.col_values(0), sheet.col_values(1)))
-        squence = dict(zip(sheet.col_values(0), row_squence))
-
-        return info, squence
+        return info
 
     def case_address(self):
         case_out = QFileDialog.getExistingDirectory(self, '选择项目路径', 'C:/Users/BZMBN4/Desktop/')
@@ -539,34 +534,28 @@ print('script finished')
 
     def export_pamt(self):
         self.pamt_dict()
-        self.pamt.update(self.K_dict)
+        try:
+            self.pamt.update(self.K_dict)
+        except Exception as e:
+            print(e)
 
         path = QFileDialog.getSaveFileName(self, directory='%s'%(self.project_address_edit.text()),
-                                           filter='Excel, *.xlsx')
+                                           filter='CSV, *.csv')
         try:
-            excel_save_path = path[0]
-            print(excel_save_path)
-            self.create_excel(excel_save_path)
-            os.system(excel_save_path)
+            csv_save_path = path[0]
+            self.write_CSV(csv_save_path)
+            os.system(csv_save_path)
         except Exception as e:
             print('export error:', e)
             self.append_text('导出地址有错误，请重新选择')
 
-    def create_excel(self, excel_name):
-        import openpyxl
-        workbook = openpyxl.Workbook()
-        worksheet = workbook.create_sheet(title='info', index=0)
-        excel_info = list(self.pamt.keys())
-        excel_pamt = list(self.pamt.values())
-        for i in range(len(excel_info)):
-            worksheet.cell(i+1, 1, excel_info[i])
-            worksheet.cell(i+1, 2, excel_pamt[i])
+    def write_CSV(self, csv_path):
+        with open(csv_path, 'w', newline='') as f:
+            writer = csv.writer(f)
+            for i in self.pamt.keys():
+                writer.writerow([i, self.pamt[i]])
 
-        worksheet.column_dimensions['A'].width = 15
-        worksheet.column_dimensions['B'].width = 40
-
-        workbook.save(filename=excel_name)
-        self.append_text('已创建新Excel:%s 新表名: info' % (excel_name))
+        self.append_text('已创建新参数表:%s ' % (csv_path))
         self.interact_edit.moveCursor(QTextCursor.End)
 
     def unit_convert(self):
@@ -624,12 +613,11 @@ print('script finished')
 
     def create_tui(self):
         self.pamt_dict()
-        d = self.pamt
         self.check_part()
 
         self.energy_check = self.energy_checkbox.isChecked()
         from tui_run import get_tui
-        tui = get_tui(self.pamt, self.body_list, self.energy_check, self.K_dict, self.porous_list)
+        get_tui(self.pamt, self.body_list, self.energy_check, self.K_dict, self.porous_list)
 
     def begin(self):
         self.start_btn.setDisabled(True)
@@ -809,32 +797,126 @@ class Ui_unit(Ui_unit_converter, QWidget):
 
 class Ui_porous(Ui_porous_model_form, QWidget):
     def __init__(self):
+
         super(Ui_porous_model_form, self).__init__()
         self.setupUi(self)
         self.default_ui()
         self.default_btn()
+        self.init_db()
+        print(self.db_dict)
+        print(self.db_header)
 
     def default_ui(self):
+        self.load_btn.hide()
         self.operate_frame.hide()
         self.resize(220, 135)
+        self.unit_choose = 'kg/h'
+        self.db_dict = {}
+        self.db_path = r'C:\Users\BZMBN4\Desktop\test.csv'
+        self.porous_info_dict()
 
     def default_btn(self):
         self.model_combox.activated.connect(self.choose)
         self.QP_table.customContextMenuRequested.connect(self.generate_unit_menu)
         self.cal_btn.clicked.connect(self.cal_C1C2)
-        self.unit_choose = 'kg/h'
+        self.del_btn.clicked.connect(self.delete_warning)
+        self.modify_ui_btn.clicked.connect(self.modify_mode)
+        self.modify_btn.clicked.connect(self.modify)
+        self.add_btn.clicked.connect(self.add)
+
+    def init_db(self):
+        self.db_header = self.pd.keys()
+        try:
+            with open(self.db_path, 'r', newline='') as f:
+                self.init_read = csv.DictReader(f)
+                for row in self.init_read:
+                    self.db_dict[row['model_name']] = row
+            self.model_combox.addItems(self.db_dict.keys())
+        except Exception as e:
+            print(e)
 
     def choose(self, i):
         if i == 0:
             self.add_mode()
+        else:
+            self.read_mode(i)
 
-    def add_mode(self):
+    def default_show(self):
         self.operate_frame.show()
         self.resize(670, 670)
+        self.load_btn.show()
+        self.modify_ui_btn.hide()
+        self.modify_btn.hide()
+        self.add_btn.hide()
         self.del_btn.hide()
 
-        self.modify_btn.setText("添加")
-        self.modify_btn.clicked.connect(self.modify_porous)
+        self.model_name_edit.setEnabled(True)
+        self.cal_btn.setEnabled(True)
+        self.QP_table.setEnabled(True)
+        self.effective_dimension_box.setEnabled(True)
+        self.c1_edit.setEnabled(True)
+        self.c2_edit.setEnabled(True)
+
+    def add_mode(self):
+        self.default_show()
+        self.add_btn.show()
+
+    def read_mode(self, combox_index):
+        self.default_show()
+        print(self.model_combox.currentIndex())
+
+        self.model_name_edit.setEnabled(False)
+        self.cal_btn.setEnabled(False)
+        self.QP_table.setEnabled(False)
+        self.effective_dimension_box.setEnabled(False)
+        self.c1_edit.setEnabled(False)
+        self.c2_edit.setEnabled(False)
+
+        self.modify_ui_btn.show()
+        self.del_btn.show()
+
+        choose_model = self.model_combox.itemText(combox_index)
+        model_info = self.db_dict[choose_model]
+
+        for i in model_info:
+            name = i + '_edit'
+            widget = self.findChild(QLineEdit, name)
+            if widget != None:
+                widget.setText(str(model_info[i]))
+            if "volume" in i:
+                self.QP_table.item(int(i[-1]), 0).setText(model_info[i])
+            if "pressure" in i:
+                self.QP_table.item(int(i[-1]), 1).setText(model_info[i])
+
+    def modify_mode(self):
+        self.default_show()
+        self.modify_btn.show()
+
+    def modify(self):
+        choosed_model_index = self.model_combox.currentIndex()
+        modify_model_name = self.model_combox.itemText(choosed_model_index)
+        self.db_dict.pop(modify_model_name)
+
+        self.porous_info_dict()
+        self.db_dict[self.pd['model_name']] = self.pd
+        self.model_combox.removeItem(choosed_model_index)
+        self.model_combox.addItem(self.pd['model_name'])
+        self.write_db()
+
+    def delete_warning(self):
+        reply = QMessageBox.warning(self, "删除警告", "删除模型后无法恢复，确认要删除吗?", QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            reply2 = QMessageBox.warning(self, "删除再次警告", "真的要删除吗???", QMessageBox.Yes | QMessageBox.No,
+                                        QMessageBox.No)
+            if reply2 == QMessageBox.Yes:
+                self.delete_model()
+
+    def delete_model(self):
+        choosed_model_index = self.model_combox.currentIndex()
+        delete_model_name = self.model_combox.itemText(choosed_model_index)
+        self.db_dict.pop(delete_model_name)
+        self.model_combox.removeItem(choosed_model_index)
+        self.write_db()
 
     def generate_unit_menu(self, pos):
         column_num = -1
@@ -896,22 +978,53 @@ class Ui_porous(Ui_porous_model_form, QWidget):
             P.sort()
             v = Q*self.Q_unit[self.unit_choose]/eff_area
 
-            print('v:', v)
-            print('P:', P)
             self.plot_frame.setVisible(True)
             self.plot_frame.mpl.start_static_plot(v, P)
+
             a = self.plot_frame.mpl.a
             b = self.plot_frame.mpl.b
             C1 = b/h/mu
             C2 = 2*a/rho/h
+
             self.c1_edit.setText(str('%.2e'%C1))
             self.c2_edit.setText(str('%.2f'%C2))
         else:
             print('please complete all blank edit')
 
-    def modify_porous(self):
-        model_name = self.model_name_edit.text()
-        self.model_combox.addItem(model_name)
+    def porous_info_dict(self):
+        self.pd = {}
+
+        self.pd['model_name'] = self.model_name_edit.text()
+        self.pd['c1'] = self.c1_edit.text()
+        self.pd['c2'] = self.c2_edit.text()
+        self.pd['length'] = self.length_edit.text()
+        self.pd['width'] = self.width_edit.text()
+        self.pd['height'] = self.height_edit.text()
+        self.pd['unit_choose'] = self.unit_choose
+        for i in range(5):
+            self.pd['volume%s' % i] = self.QP_table.item(i, 0).text()
+            self.pd['pressure%s' % i] = self.QP_table.item(i, 1).text()
+
+    def add(self):
+        self.porous_info_dict()
+
+        if self.pd['model_name'] in self.db_dict.keys():
+            print(self.pd['model_name'], self.db_dict.keys())
+            reply = QMessageBox.warning(self, "警告", "数据库中已拥有此模型，请重新核对", QMessageBox.Yes, QMessageBox.Yes)
+            if reply == QMessageBox.Yes:
+                pass
+        else:
+            print('start add')
+            self.db_dict[self.pd['model_name']] = self.pd
+            self.model_combox.addItem(self.pd['model_name'])
+            self.write_db()
+
+    def write_db(self):
+        with open(self.db_path, 'w', newline='') as f:
+            dwriter = csv.DictWriter(f, fieldnames=self.db_header)
+            dwriter.writeheader()
+            for i in self.db_dict:
+                dwriter.writerow(self.db_dict[i])
 
 
 class SCDM(QThread):
@@ -922,10 +1035,11 @@ class SCDM(QThread):
 
     def run(self):
         import subprocess
-        p = subprocess.Popen(r'C:\Program Files\ANSYS Inc\v191\scdm\SpaceClaim.exe', shell=True,
-                             stdout=subprocess.PIPE)
+        p = subprocess.Popen(r'C:\Program Files\ANSYS Inc\v191\scdm\SpaceClaim.exe', shell=True, stdout=subprocess.PIPE)
+        print(p.pid)
         out, err = p.communicate()
         out = out.decode()
+
         self.finishCAD.emit('CAD软件已关闭')
 
 

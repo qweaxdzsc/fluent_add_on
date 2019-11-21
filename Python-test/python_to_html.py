@@ -1,6 +1,6 @@
 # Python_to_Html
 def get_html(matrix, title, html_output_path):
-    import webbrowser
+
     import os
 
     # html_output_path = "C:\\Users\\zonghui\\Desktop\\python\\"
@@ -43,11 +43,13 @@ def get_html(matrix, title, html_output_path):
 
 
     # get all table's html table
+
     volume_table = get_table(matrix[0:3], ['Volume Flow Rate', '(L/S)', 'Percentage%'])
     sp_table = get_table(matrix[3:5], ['Static Pressure', '(Pa)'])
     tp_table = get_table(matrix[5:7], ['Total Pressure', '(Pa)'])
     uni_table = get_table(matrix[7:9], ['Uniformity', ' '])
     moment_table = get_table(matrix[9:10], ['Torque(N/M)'])
+
 
     # output to HTML
 
@@ -156,7 +158,11 @@ def get_html(matrix, title, html_output_path):
     </body>
     </html>""" % (title, mydir, volume_table, sp_table, tp_table, uni_table, moment_table)
 
+
+
+
     report.write(message)  # write to html
     report.close()  # close edit
-    webbrowser.open(ResultHtml, 1)  # open web
 
+
+    os.system(r'"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" %s' % ResultHtml)

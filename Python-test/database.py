@@ -143,23 +143,23 @@ def create_uni_table(conn):
 # create_tp_table(conn)
 # create_uni_table(conn)
 
-import numpy as np
+# import numpy as np
 from txt_to_python import process_data
 from fan_efficiency import fan
 import time
 
 # decode result data
-path = r'G:\GE2_REAR\GE2-rear-round2\GE2-rear-V33-FC\result_GE2-rear2_V33-FC'
+path = r'G:\GE2_REAR\GE2-rear-round3\GE2-rear-V13-FH\result_GE2-rear3_V13'
 new_path = path.replace('\\', '\\\\')
-txt_name = path + '\\' + 'GE2-rear2.txt'
+txt_name = path + '\\' + 'GE2-rear3.txt'
 print(path)
 
 data_matrix = process_data(txt_name, path)
-project_name = 'GE2-rear2'
-version = 'V33-FC'
+project_name = 'GE2-rear3'
+version = 'V13-FH'
 producer = 'zonghui'
 
-rpm = 2850
+rpm = 3000
 
 print(data_matrix)
 

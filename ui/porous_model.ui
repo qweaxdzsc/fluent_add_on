@@ -47,19 +47,6 @@
    <property name="spacing">
     <number>20</number>
    </property>
-   <item row="2" column="0">
-    <spacer name="stretch_spacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>68</width>
-       <height>460</height>
-      </size>
-     </property>
-    </spacer>
-   </item>
    <item row="0" column="0">
     <widget class="QLabel" name="model_label">
      <property name="font">
@@ -94,7 +81,20 @@
      </item>
     </widget>
    </item>
-   <item row="0" column="1" rowspan="3">
+   <item row="2" column="0">
+    <spacer name="stretch_spacer">
+     <property name="orientation">
+      <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeHint" stdset="0">
+      <size>
+       <width>68</width>
+       <height>460</height>
+      </size>
+     </property>
+    </spacer>
+   </item>
+   <item row="0" column="1" rowspan="5">
     <widget class="QFrame" name="operate_frame">
      <property name="frameShape">
       <enum>QFrame::Box</enum>
@@ -197,7 +197,20 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="complete_btn">
+         <widget class="QPushButton" name="modify_ui_btn">
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>修改</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="add_btn">
           <property name="sizePolicy">
            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
             <horstretch>0</horstretch>
@@ -211,7 +224,7 @@
            </size>
           </property>
           <property name="text">
-           <string>完成</string>
+           <string>添加</string>
           </property>
          </widget>
         </item>
@@ -455,6 +468,19 @@
      </layout>
     </widget>
    </item>
+   <item row="3" column="0">
+    <widget class="QPushButton" name="load_btn">
+     <property name="maximumSize">
+      <size>
+       <width>140</width>
+       <height>16777215</height>
+      </size>
+     </property>
+     <property name="text">
+      <string>导入</string>
+     </property>
+    </widget>
+   </item>
   </layout>
  </widget>
  <customwidgets>
@@ -466,5 +492,22 @@
   </customwidget>
  </customwidgets>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>add_btn</sender>
+   <signal>clicked()</signal>
+   <receiver>modify_ui_btn</receiver>
+   <slot>hide()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>479</x>
+     <y>617</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>360</x>
+     <y>617</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>

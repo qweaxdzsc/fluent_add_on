@@ -20,13 +20,12 @@ class tui(object):
         text = """
 /file/read-journal %s yes""" % (jou_path)
         self.whole_jou += text
-        return self.whole_jou
+
 
     def close_fluent(self):
         text = """
 /exit yes"""
         self.whole_jou += text
-        return self.whole_jou
 
 
 class mesh(object):
@@ -41,13 +40,14 @@ class mesh(object):
         self.size_scope_prox('distrib_prox', 'distrib', 0.8, 5.5, 1.2, 2)
         self.size_scope_curv('fan_blade_curv', 'fan_blade', 0.4, 4, 1.2, 16)
         self.size_scope_prox('fan_blade_prox', 'fan_blade', 0.8, 4, 1.2, 2)
-        self.size_scope_curv('up_curv', up_zone, 0.8, 5.2, 1.2, 16)
-        self.size_scope_prox('up_prox', up_zone, 0.8, 5.2, 1.2, 2)
+        for i in up_zone:
+            self.size_scope_curv(i+'_curv', i, 0.8, 5.2, 1.2, 16)
+            self.size_scope_prox(i+'_prox', i, 0.8, 5.2, 1.2, 2)
         self.size_scope_curv('fan_out_curv', 'fan_out', 1, 4.5, 1.2, 18)
         self.size_scope_prox('global_prox', '', 0.8, 5.5, 1.2, 1)
         self.size_scope_soft('inlet', '*inlet*', 14)
         self.size_scope_soft('porous', porous_list, 4)
-        self.size_scope_curv('refine', 'fan_in', 1, 2.5, 1.2, 18)
+        # self.size_scope_curv('refine', 'fan_in', 1, 2.5, 1.2, 18)
         self.compute_size_field()
         self.write_size_field()
         self.import_surface_mesh()
@@ -60,14 +60,12 @@ class mesh(object):
 %s %s
 """ % (self.tui.cad_path, tolerance, maxsize)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def size_scope_global(self):
         text = """
 /size-functions/set-global-controls 0.3 14 1.2
 """
         self.tui.whole_jou+=text
-        return self.tui.whole_jou
 
     def size_scope_curv(self, scope_name, scope_zone, min_size, max_size, grow_rate, normal_angle):
         text = """
@@ -75,7 +73,6 @@ class mesh(object):
 """.format(scope_name=scope_name, scope_zone=scope_zone, min_size=min_size, max_size=max_size,
            grow_rate=grow_rate, normal_angle=normal_angle)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def size_scope_prox(self, scope_name, scope_zone, min_size, max_size, grow_rate, gap_cells):
         text = """
@@ -83,7 +80,6 @@ class mesh(object):
 """.format(scope_name=scope_name, scope_zone=scope_zone, min_size=min_size, max_size=max_size,
            grow_rate=grow_rate, gap_cells=gap_cells)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def size_scope_soft(self, scope_name, scope_zone, max_size, grow_rate=1.2):
         text = """
@@ -91,22 +87,18 @@ class mesh(object):
 """.format(scope_name=scope_name, scope_zone=scope_zone, max_size=max_size,
            grow_rate=grow_rate)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def compute_size_field(self):
         text = """
 /scoped-sizing/compute
 """
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def write_size_field(self):
         text = """
 /file/write-size-field %s
 """ % (self.tui.size_field)
         self.tui.whole_jou += text
-
-        return self.tui.whole_jou
 
     def import_surface_mesh(self):
         text = """
@@ -116,7 +108,6 @@ class mesh(object):
 """ % (self.tui.cad_path, self.tui.size_field)
 
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def import_distrib(self, cad_name='', min_size=0.8, max_size=5, grow_rate=1.2, normal_angle=16, gap_cell=2):
         if cad_name == '':
@@ -132,15 +123,13 @@ mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes
            normal_angle=normal_angle, gap_cell=gap_cell)
 
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
-    def general_improve(self, quality=0.7, feature_angle=30, iterations=10):
+    def general_improve(self, quality=0.75, feature_angle=30, iterations=10):
         text = """
 /diagnostics/quality/general-improve objects *() skewness %s %s %s yes
 """ % (quality, feature_angle, iterations)
         self.tui.whole_jou += text
 
-        return self.tui.whole_jou
 
     def fix_slivers(self, skewness=0.8):
         text = """
@@ -150,7 +139,6 @@ mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes
 /diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness} q
 """.format(skewness=skewness)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def valve_rotate(self, rotate_angle, valve_dir, valve_origin):
         text = """
@@ -159,14 +147,12 @@ boundary/manage/rotate valve*()
 """.format(rotate_angle=rotate_angle, valve_dx=valve_dir[0], valve_dy=valve_dir[1], valve_dz=valve_dir[2],
            valve_origin_x=valve_origin[0], valve_origin_y=valve_origin[1], valve_origin_z=valve_origin[2])
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def compute_volume_region(self):
         text = """
 /objects/volumetric-regions/compute * no
 """
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def volume_mesh_change_type(self, dead_zone_list=[]):
         text = """
@@ -179,7 +165,6 @@ boundary/manage/rotate valve*()
             for i in dead_zone_list:
                 dead_zone = '/objects/volumetric-regions/change-type * *%s*() dead\n' % (i)
                 self.tui.whole_jou += dead_zone
-        return self.tui.whole_jou
 
     def auto_mesh_volume(self, grow_rate=1.25, mesh_type='tet'):
         text = """
@@ -187,14 +172,13 @@ boundary/manage/rotate valve*()
 /mesh/auto-mesh * yes pyramids {mesh_type} no
 """.format(rate=grow_rate, mesh_type=mesh_type)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def auto_node_move(self, skewness=0.8, iterations=5):
         text = """
 /mesh/modify/auto-node-move *() *() %s 50 120 yes %s
 """ % (skewness, iterations)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
+
 
     def rename_cell(self, zone_list):
         for i in range(len(zone_list)):
@@ -202,7 +186,6 @@ boundary/manage/rotate valve*()
 /mesh/manage/name *{zone}* {zone}
 """.format(zone=zone_list[i])
             self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def retype_face(self, face_list, face_type):
         text1 = """
@@ -212,34 +195,29 @@ boundary/manage/rotate valve*()
         text2="""() %s
         """ % (face_type)
         self.tui.whole_jou += text1 + text2
-        return self.tui.whole_jou
 
     def delete_cell(self):
         text = """
 /objects/volumetric-regions/delete-cells * *() q
 """
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def check_quality(self):
         text = """
 /mesh/check-quality"""
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def write_case(self):
         text = """
 /file/write-case %s\\%s-%s-mesh yes
 """ % (self.tui.case_out_path, self.tui.project_title, self.tui.version_name)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def write_mesh(self):
         text = """
 /file/write-mesh %s\\%s-%s-mesh yes
 """ % (self.tui.case_out_path, self.tui.project_title, self.tui.version_name)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def write_lin_mesh(self, valve_angle):
         mesh_path = self.tui.case_out_path + '\\lin_mesh'
@@ -253,21 +231,18 @@ boundary/manage/rotate valve*()
 """.format(mesh_path=mesh_path, project_name=self.tui.project_title, version=self.tui.version_name,
            valve_angle=valve_angle)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def prepare_for_solve(self):
         text = """
 /mesh/prepare-for-solve yes
 """
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def switch_to_solver(self):
         text = """
 /switch-to-solution-mode yes
 """
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
 
 class setup(object):
@@ -280,7 +255,6 @@ class setup(object):
 /file/read %s\\%s-%s-mesh.msh yes
 """ % (self.tui.case_out_path, self.tui.project_title, self.tui.version_name)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def read_lin_mesh(self, valve_angle):
         mesh_path = self.tui.case_out_path + '\\lin_mesh'
@@ -290,7 +264,6 @@ class setup(object):
            valve_angle=valve_angle)
 
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def replace_lin_mesh(self, valve_angle):
         mesh_path = self.tui.case_out_path + '\\lin_mesh'
@@ -299,42 +272,36 @@ class setup(object):
 """.format(mesh_path=mesh_path, project_name=self.tui.project_title, version=self.tui.version_name,
            valve_angle=valve_angle)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def rescale(self, scale_factor=0.001):
         text = """
 /mesh/scale {0} {0} {0}
 """.format(scale_factor)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def convert_polymesh(self):
         text = """
 /mesh/polyhedra/convert q
 """
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def turb_models(self, model='ke-standard'):
         text = """
 /define/models/viscous/%s yes q
 """ % (model)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def energy_eqt(self, switch):
         text = """
 /define/models/energy %s no no no yes q
 """ % (switch)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def wall_treatment(self, treatment):
         text = """
 /define/models/viscous/near-wall-treatment %s yes
 """ % (treatment)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def rotation_volume(self, rpm, origin_xyz, axis_xyz, rotating_part='fan'):
         text = """
@@ -348,7 +315,6 @@ none no no no no no
 """.format(fan_speed=rpm, origin_x=origin_xyz[0], origin_y=origin_xyz[1], origin_z=origin_xyz[2],
             axis_x=axis_xyz[0], axis_y=axis_xyz[1], axis_z=axis_xyz[2], part_name=rotating_part)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def porous_zone(self, porous_name, Direction1, Direction2, C1, C2):
         text = """
@@ -362,14 +328,12 @@ yes no {Viscous_Resistance} no 1e10 no 1e10 yes no {Inertial_Resistence} no 1e5 
            D2_x=Direction2[0], D2_y=Direction2[1], D2_z=Direction2[2], Viscous_Resistance=C1,
            Inertial_Resistence=C2)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def BC_type(self, face_name, face_type):
         text = """
 /define/boundary-conditions/zone-type %s %s
 """ % (face_name, face_type)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def BC_pressure_inlet(self, face_name, initial_pressure=0, turb_intensity=5, turb_length_scale=0.005):
         text = """
@@ -378,7 +342,6 @@ p0 no %s
 ke-spec no yes turb-intensity %s turb-length-scale %s q
 """ % (face_name, initial_pressure, turb_intensity, turb_length_scale)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def BC_mass_flow_inlet(self, face_name, mass_flow, turb_intensity=5, turb_length_scale=0.005):
         text = """
@@ -388,7 +351,6 @@ direction-spec no yes
 ke-spec no yes turb-intensity %s turb-length-scale %s q
 """ % (face_name, mass_flow, turb_intensity, turb_length_scale)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def BC_pressure_outlet(self, face_list, pressure=0, turb_intensity=5, turb_length_scale=0.005):
         face_name = ''
@@ -400,7 +362,6 @@ gauge-pressure no %s
 ke-spec no yes turb-intensity %s turb-length-scale %s q
 """ % (face_name, pressure, turb_intensity, turb_length_scale)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def BC_inlet_vent(self, face_name, loss_coefficient=0, initial_pressure=0, turb_intensity=5,
                       turb_length_scale=0.005):
@@ -411,7 +372,6 @@ p0 no %s
 ke-spec no yes turb-intensity %s turb-length-scale %s q
 """ % (face_name, loss_coefficient, initial_pressure, turb_intensity, turb_length_scale)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def BC_outlet_vent(self, loss_coefficient=0.0, outlet_name='outlet*', initial_pressure=0, turb_intensity=5,
                        turb_length_scale=0.005):
@@ -422,7 +382,6 @@ p0 no %s
 ke-spec no yes turb-intensity %s turb-length-scale %s q
 """ % (outlet_name, loss_coefficient, initial_pressure, turb_intensity, turb_length_scale)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def init_temperature(self, inlet_type, outlet_type, init_temperature):
         text = """
@@ -430,14 +389,12 @@ ke-spec no yes turb-intensity %s turb-length-scale %s q
 /define/boundary-conditions/set/{outlet_type} outlet*() t0 no {init_temp} q
 """.format(inlet_type=inlet_type, outlet_type=outlet_type, init_temp=init_temperature)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def heat_flux(self, face_name, temperature, heat_transfer_coefficient=1000000, heat_flux=0):
         text = """
 /define/boundary-conditions/set/radiator %s() temperature %s hc constant %s heat-flux %s q
 """ % (face_name, temperature, heat_transfer_coefficient, heat_flux)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def solution_method(self):
         text = """
@@ -448,7 +405,6 @@ ke-spec no yes turb-intensity %s turb-length-scale %s q
 /solve/set/warped-face-gradient-correction/enable yes no q
 """
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def report_definition(self, report_name, report_type, surface_list, per_surface='yes', field='pressure'):
         surface_name = ''
@@ -474,35 +430,30 @@ q
 """.format(report_name=report_name, report_type=report_type, surface_name=surface_name,
            per_surface=per_surface, field=field)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def convergence_criterion(self, switch=3):
         text = """
 solve/monitors/residual/criterion-type %s
 """ % (switch)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def hyb_initialize(self):
         text = """
 /solve/initialize/hyb-initialization yes
 """
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def start_calculate(self, iterations=1000):
         text = """
 /solve/iterate/%s yes
 """ % (iterations)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def write_case_data(self):
         text = """
 /file/write-case-data/ %s\\%s-%s yes
 """ % (self.tui.case_out_path, self.tui.project_title, self.tui.version_name)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def write_lin_case_data(self, valve_angle):
         text = """
@@ -510,7 +461,6 @@ solve/monitors/residual/criterion-type %s
 """.format(case_path=self.tui.case_out_path, project_name=self.tui.project_title, version=self.tui.version_name,
            valve_angle=valve_angle)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
 
 class post(object):
@@ -554,7 +504,6 @@ class post(object):
 /report/surface-integrals/%s%s() %syes %s yes q
 """ % (report_type, face_name, field, self.tui.txt_out)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def txt_mass_flux(self):
         text = """
@@ -562,7 +511,6 @@ class post(object):
 yes %s yes q
 """ % (self.tui.txt_out)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def txt_moment(self, origin_xyz, axis_xyz, fan_name='fan_blade'):
 
@@ -572,7 +520,6 @@ yes %s yes q
 """.format(fan_name=fan_name, origin_x=origin_xyz[0], origin_y=origin_xyz[1], origin_z=origin_xyz[2],
             axis_x=axis_xyz[0], axis_y=axis_xyz[1], axis_z=axis_xyz[2],out_path=self.tui.txt_out)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def create_contour(self, contour_name, contour_face, range='auto-range-on', field='velocity-magnitude'):
         if range == 'auto-range-on':
@@ -591,7 +538,6 @@ color-map size 8 format %%0.1f
 q q
 """ % (contour_name, contour_face, field, range)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def create_streamline(self, line_name, surface_name, range='', field_type='velocity-magnitude', line_size='10', line_step='2000', skip='5'):
         if range == '':
@@ -604,14 +550,12 @@ color-map format %0.1f size {line_size} q step {line_step} skip {line_skip} surf
 """.format(line_name=line_name, field_type=field_type, range=range, line_size=line_size, line_step=line_step,
             line_skip=skip, surface_name=surface_name)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def read_view(self, view_path):
         text = """
 /views/read-views %s OK
 """ % (view_path)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def set_background(self):
         text = """
@@ -625,7 +569,6 @@ color-map format %0.1f size {line_size} q step {line_step} skip {line_skip} surf
 /display/set/colors/outlet-faces "foreground" q
 """
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def snip_picture(self, window_number, graphic_name, mesh_outline='', avz_file=''):
         if mesh_outline == '':
@@ -652,7 +595,6 @@ color-map format %0.1f size {line_size} q step {line_step} skip {line_skip} surf
 """.format(window_number=window_number, graphic_name=graphic_name, mesh_outline=mesh_outline,
            out_path=self.tui.result_path, avz_file=avz_file, view_name=view_name)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def snip_avz(self, window_number, graphic_name):
         text = """
@@ -666,7 +608,6 @@ color-map format %0.1f size {line_size} q step {line_step} skip {line_skip} surf
 """.format(window_number=window_number, graphic_name=graphic_name,
            out_path=self.tui.result_path)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def snip_model(self, window_number, picture_name):
         text = """
@@ -681,7 +622,6 @@ color-map format %0.1f size {line_size} q step {line_step} skip {line_skip} surf
 /display/save-picture %s\\%s.avz yes
 """ % (window_number, self.tui.result_path, picture_name)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def snip_mode_off(self):
         text = """
@@ -690,5 +630,5 @@ color-map format %0.1f size {line_size} q step {line_step} skip {line_skip} surf
 q
 """
         self.tui.whole_jou += text
-        return self.tui.whole_jou
+
 

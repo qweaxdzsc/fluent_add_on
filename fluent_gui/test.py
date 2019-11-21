@@ -353,7 +353,46 @@
 #     comboxDemo = ComboxDemo()
 #     comboxDemo.show()
 #     sys.exit(app.exec_())
+
+
+# import timeit
 #
-a = ['evp', 'hc']
-b = ['hi']
+#
+# # 待测试的函数
+# def add():
+#     import webbrowser
+# # stmt 需要测试的函数或语句，字符串形式
+# # setup 运行的环境，本例子中表示 if __name__ == '__main__':
+# # number 被测试的函数或语句，执行的次数，本例表示执行100000次add()。省缺则默认是10000次
+# # repeat 测试做100次
+# # 综上：此函数表示 测试 在if __name__ == '__main__'的条件下，执行100000次add()消耗的时间，并把这个测试做100次,并求出平均值
+#
+# t = timeit.repeat(stmt="add()", setup="from __main__ import add", number=1, repeat=1)
+# print(t)
+# print(sum(t) / len(t))
+
+#
+# import win32con, win32api
+# win32api.SetFileAttributes(r'C:\Users\BZMBN4\Desktop\test.csv', win32con.FILE_ATTRIBUTE_HIDDEN)
+
+#
+# def porous_d2(x, y, z):
+#
+#     x = float(x)
+#     y = float(y)
+#     z = float(z)
+#     d1 = [x, y, z]
+#     d2 = [0, 0, 0]
+#
+#     for i in d1:
+#         if i == 0:
+#             d2[d1.index(i)] = 1
+#             return d2
+#     d2[1] = -z/y
+#     d2[2] = 1
+#     return d2
+#
+#
+# x, y, z = porous_d2(0, 1, 2)
+# print(x, y, z)
 
