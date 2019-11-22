@@ -41,12 +41,14 @@ class mesh(object):
         self.size_scope_prox('distrib_prox', 'distrib', 0.8, 5.5, 1.2, 2)
         self.size_scope_curv('fan_blade_curv', 'fan_blade', 0.4, 4, 1.2, 16)
         self.size_scope_prox('fan_blade_prox', 'fan_blade', 0.8, 4, 1.2, 2)
-        self.size_scope_curv('up_curv', up_zone, 0.8, 5.2, 1.2, 16)
-        self.size_scope_prox('up_prox', up_zone, 0.8, 5.2, 1.2, 2)
+        for i in up_zone:
+            self.size_scope_curv(i + '_curv', i, 0.8, 5.2, 1.2, 16)
+            self.size_scope_prox(i + '_prox', i, 0.8, 5.2, 1.2, 2)
         self.size_scope_curv('fan_out_curv', 'fan_out', 1, 4.5, 1.2, 18)
         self.size_scope_prox('global_prox', '', 0.8, 5.5, 1.2, 1)
         self.size_scope_soft('inlet', '*inlet*', 14)
-        self.size_scope_soft('porous', porous_list, 4)
+        for i in porous_list:
+            self.size_scope_soft(i, '*'+i+'*', 4)
         self.size_scope_curv('refine', 'fan_in', 1, 2.5, 1.2, 18)
         self.compute_size_field()
         self.write_size_field()
@@ -173,7 +175,7 @@ boundary/manage/rotate valve*()
 /objects/volumetric-regions/change-type * *() fluid
 """
         self.tui.whole_jou += text
-        if dead_zone_list == []:
+        if not dead_zone_list:
             pass
         else:
             for i in dead_zone_list:

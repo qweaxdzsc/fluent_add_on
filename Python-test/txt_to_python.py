@@ -2,15 +2,6 @@
 # TXT to XLS
 def process_data(txt_name, path):
     import numpy as np
-    # # test path
-    # txt_name = 'C:\\Users\\zonghui\\Desktop\\python\\519-vent.txt'
-    # excel_name = "706-vent-v10-pp1-150mmfan"                  # Output excel name
-    # sheet_name = "706-vent-v10-pp1-150mmfan"                  # The sheet in excel
-    # Excel_output_path = "C:\\Users\\zonghui\\Desktop\\python\\%s.xlsx"%excel_name
-    # data_name = '706-vent-v10-pp1-150mmfan'                  # get a title for your data
-
-    # Process txt function
-
 
     def txt_in(filename):
         f = open(filename, encoding='utf-8')    # open
@@ -23,12 +14,9 @@ def process_data(txt_name, path):
 
         return txt
 
-
     txt = txt_in(txt_name)
 
-
     # Partitioning txt function
-
     def partitioning(txt, part_name):
         exist_factor = 0
         divide_sign = []
@@ -60,20 +48,16 @@ def process_data(txt_name, path):
 
         return title_line, txt_taget_string, txt_taget_data, exist_factor
 
-
     # Partitioning volume flow rate
 
     title_line, volume_string, volume_data, volume_exist = partitioning(txt, 'Volumetric')
 
     # volume data process
-
-
     def unit_transform(data):
         data = np.array(data)
         data_liter_per_second = data*1000
 
         return data_liter_per_second
-
 
     def total_volume(data):
         """volume data, make it all nagetive value equal to zero"""
@@ -81,33 +65,24 @@ def process_data(txt_name, path):
         return total_volume
 
     # decimal function
-
-
     def decimal(raw_data, number):
-        def str_1(raw_data):
-            str_1 = '%.1f'%raw_data      # preserve one decimal
-
-            return str_1
-        def str_2(raw_data):
-            str_2 = '%.2f'%raw_data      # preserve two decimals
-
-            return str_2
-
+        decimaled_list = [0 for i in raw_data]
         if number == 1:
-            string = list(map(str_1, raw_data))
-
+            for i in range(len(raw_data)):
+                decimaled_list[i] = '%.1f' % raw_data[i]
         elif number == 2:
-            string = list(map(str_2, raw_data))       # map
+            for i in range(len(raw_data)):
+                decimaled_list[i] = '%.2f' % raw_data[i]
+        elif number == 3:
+            for i in range(len(raw_data)):
+                decimaled_list[i] = '%.3f' % raw_data[i]
 
-
-        return string
-
+        return decimaled_list
 
     def add_symbol(string_ratio):
         percentaging_data = string_ratio + '%'         # add'%' to percentage value
 
         return percentaging_data
-
 
     def percentaging(raw_data, total_volume):          # whole percentaging process
         raw_percent = abs(raw_data/total_volume)*100
@@ -138,21 +113,16 @@ def process_data(txt_name, path):
         # if not exist
         volume_string, Liter_per_second_de, percentage_array = ['not-exist'], ['not-exist'], ['not-exist']
 
-
     # Partitioning static pressure
-
     sp_title, sp_string, sp_data, sp_exist = partitioning(txt, 'Static')
 
     # static pressure data process
-
     if sp_exist == 1:
         sp_data_de = decimal(sp_data, 1)
     else:
         sp_data_de = ['not-exist']
 
-
     # Partitioning total pressure
-
     tp_title, tp_string, tp_data, tp_exist = partitioning(txt, 'Total')
 
     if tp_exist == 1:
@@ -160,16 +130,13 @@ def process_data(txt_name, path):
     else:
         tp_data_de = ['not-exist']
 
-
     # Partitioning uniformity
-
     uni_title, uni_string, uni_data, uni_exist = partitioning(txt, 'Uniformity')
 
     if uni_exist == 1:
-        uni_data_de = decimal(uni_data, 2)
+        uni_data_de = decimal(uni_data, 3)
     else:
         uni_data_de = ['not-exist']
-
 
     # Partitioning Fan Moment
     def find_moment(txt):

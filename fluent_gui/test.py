@@ -396,3 +396,12 @@
 # x, y, z = porous_d2(0, 1, 2)
 # print(x, y, z)
 
+
+face_list = ['inlet', 'fan_out', 'fan_blade', 'evap_in', 'evap_out']
+internal_face = face_list.copy()
+for i in face_list:
+    if ('inlet' or 'outlet' or 'fan_blade') in i:
+        print(1)
+        internal_face.remove(i)
+
+print(face_list)

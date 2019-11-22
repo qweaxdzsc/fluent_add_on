@@ -1,7 +1,7 @@
 
 project_name = 'GE2-rear3'
-version = 'V13-FH'
-Rotation_speed = 3000
+version = 'ppb-FC'
+Rotation_speed = 2850
 
 
 def get_ppt(project_name, version):

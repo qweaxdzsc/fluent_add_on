@@ -3,19 +3,22 @@ import os
 
 
 class get_tui():
-    def __init__(self, pamt, body_list, energy_check, K_dict, porous_list):
+    def __init__(self, pamt, body_list, energy_check, K_dict, porous_list, up_list, dead_zone_list, internal_list):
         self.d = pamt
         self.body_list = body_list
         self.energy_check = energy_check
         self.K_dict = K_dict
         self.porous_list = porous_list
+        self.up_list = up_list
+        self.dead_zone_list = dead_zone_list
+        self.internal_list = internal_list
 
-        self.pre_info()
-        self.get_mesh()
-        self.get_solver()
+        self.prepare_info()
+        self.meshing()
+        self.solver()
         self.open_tui()
 
-    def pre_info(self):
+    def prepare_info(self):
         whole_jou = ''
         project_title = self.d['project_name']
         version_name = self.d['version']
@@ -26,32 +29,30 @@ class get_tui():
         self.CFD = fluent_tui.tui(whole_jou, project_title, version_name, case_out, cad_name)
         self.jou_mesh_path = case_out + '/' + whole_name + '-mesh-TUI.jou'
         self.jou_solve_path = case_out + '/' + whole_name + '-solve-TUI.jou'
-        self.internal_list = self.porous_list.copy()
+        self.uni_face_list = self.porous_list.copy()
 
         for i in self.porous_list:
-            self.internal_list[self.porous_list.index(i)] = i + '*'
+            self.uni_face_list[self.porous_list.index(i)] = i + '*'
 
-        self.uni_face_list = self.internal_list
-        self.pressure_face_list = (['inlet*', 'outlet*'] + self.internal_list).copy()
+        self.pressure_face_list = ['inlet*', 'outlet*'] + self.internal_list.copy()
 
-        print('pre info', self.jou_mesh_path)
-
-    def get_mesh(self):
+    def meshing(self):
         mesh = self.CFD.mesh
         print('output journal in:', self.d['file_path'])
         jou_mesh = open(self.jou_mesh_path, 'w')
 
-        dead_zone_list = []
-        if 'valve' in self.body_list:
-            dead_zone_list.append('valve')
-            self.body_list.remove('valve')
-        mesh_zone_list = self.body_list
+        mesh_zone_list = self.body_list.copy()
+        for i in self.dead_zone_list:
+            mesh_zone_list.remove(i)
+        if 'fan' in self.body_list:
+            mesh.simple_import(self.up_list, self.porous_list)
+        else:
+            mesh.import_distrib()
 
-        mesh.import_distrib()
         mesh.general_improve()
         mesh.fix_slivers()
         mesh.compute_volume_region()
-        mesh.volume_mesh_change_type(dead_zone_list)
+        mesh.volume_mesh_change_type(self.dead_zone_list)
         if self.energy_check is True:
             mesh.retype_face(face_list=['hc*'], face_type='radiator')
             self.internal_list.remove('hc*')
@@ -70,9 +71,8 @@ class get_tui():
 
         jou_mesh.write(self.CFD.whole_jou)
         jou_mesh.close()
-        print('mesh_jou success')
 
-    def get_solver(self):
+    def solver(self):
         d = self.d
         self.CFD.whole_jou = ''
         setup = self.CFD.setup
@@ -90,9 +90,15 @@ class get_tui():
             d2 = [d[i+'_x2'], d[i+'_y2'], d[i+'_z2']]
             setup.porous_zone(i, d1, d2, d[i+'_c1'], d[i+'_c2'])
 
-        setup.BC_type('inlet', 'mass-flow-inlet')
+        if 'fan' in self.body_list:
+            setup.BC_pressure_inlet('inlet')
+            origin_xyz = [d['fan_ox'], d['fan_oy'], d['fan_oz']]
+            axis_xyz = [d['fan_dx'], d['fan_dy'], d['fan_dz']]
+            setup.rotation_volume(d['RPM'], origin_xyz, axis_xyz)
+        else:
+            setup.BC_type('inlet', 'mass-flow-inlet')
+            setup.BC_mass_flow_inlet('inlet', d['mass_inlet'])
         setup.BC_type('outlet*()', 'outlet-vent')
-        setup.BC_mass_flow_inlet('inlet', d['mass_inlet'])
         for i in self.K_dict:
             setup.BC_outlet_vent(self.K_dict[i], i)
         setup.solution_method()
@@ -109,7 +115,10 @@ class get_tui():
         setup.report_definition('pressure', 'surface-areaavg', ['evap_in'])
         setup.convergence_criterion()
         setup.hyb_initialize()
-        setup.start_calculate(260)
+        if 'fan' in self.body_list:
+            setup.start_calculate(800)
+        else:
+            setup.start_calculate(260)
         setup.write_case_data()
 
         volume_face_list = ['inlet*', 'outlet*']
@@ -125,7 +134,7 @@ class get_tui():
                 post.create_contour(i+'_out', i+'_out')
                 post.snip_avz(7, i +'_out')
             post.create_streamline('whole_pathline', 'inlet')
-            post.create_streamline('distrib_pathline', 'evap_out', [0, 15])
+            post.create_streamline('distrib_pathline', 'evap_in', [0, 15])
             post.snip_avz(5, 'whole_pathline')
             post.snip_avz(6, 'distrib_pathline')
             post.snip_model(10, 'model')
@@ -135,6 +144,9 @@ class get_tui():
         post.txt_surface_integrals('uniformity-index-area-weighted', self.uni_face_list, 'velocity-magnitude')
         post.txt_surface_integrals('area-weighted-avg', self.pressure_face_list, 'total-pressure')
         post.txt_surface_integrals('area-weighted-avg', self.pressure_face_list, 'pressure')
+        if 'fan' in self.body_list:
+            pass
+            # post.txt_moment()
         post.snip_mode_off()
         self.CFD.close_fluent()
 

@@ -122,9 +122,9 @@ class LinReport(object):
         self.sheet.add_chart(chart, "A15")
 
 
-project_address = r"G:\GE2_REAR\GE2-rear-round3\GE2-rear-V14-lin"
+project_address = r"G:\GE2_REAR\GE2-rear-round3\GE2-rear-ppc-lin"
 project_name = 'GE2-rear3'
-version_name = 'V14-lin'
+version_name = 'ppc-lin'
 
 whole_name = project_name + '-' + version_name
 Linearity_report = LinReport(project_address, project_name, version_name)

@@ -6,9 +6,9 @@ import fluent_tui
 
 whole_jou = ''
 project_title = 'GE2-rear3'
-version_name = 'V15-lin'
-cad_name = 'GE2-rear3_V15-lin'
-project_path = r"G:\GE2_REAR\GE2-rear-round3\GE2-rear-V15-lin"
+version_name = 'ppb-lin'
+cad_name = 'GE2-rear3_ppb-lin'
+project_path = r"G:\GE2_REAR\GE2-rear-round3\GE2-rear-ppb-lin"
 
 # valve_dir = [0, -1, 0]
 # valve_origin = [5407.69, 869.38, 1022.1]
@@ -86,15 +86,15 @@ CFD.setup.energy_eqt('yes')
 # CFD.setup.BC_pressure_inlet('inlet')
 CFD.setup.init_temperature('mass-flow-inlet', 'outlet-vent', 273.15)
 CFD.setup.BC_mass_flow_inlet('inlet', 0.055125)
-CFD.setup.BC_outlet_vent(13.5, 'outlet_d')
-CFD.setup.BC_outlet_vent(6.7488, 'outlet_p')
+CFD.setup.BC_outlet_vent(11.2, 'outlet_d')
+CFD.setup.BC_outlet_vent(8.037, 'outlet_p')
 CFD.setup.heat_flux('hc_in', 348.15)
 CFD.setup.heat_flux('hc_out', 348.15)
 CFD.setup.report_definition('temperature', 'surface-areaavg', ['outlet*'], 'yes', 'temperature')
 CFD.setup.report_definition('mass-flux', 'surface-massflowrate', mass_flux_list, 'no')
 CFD.setup.convergence_criterion()
 CFD.setup.hyb_initialize()
-CFD.setup.start_calculate(260)
+CFD.setup.start_calculate(270)
 CFD.setup.write_lin_case_data(start_angle)
 CFD.post.simple_lin_post(start_angle)
 
@@ -106,7 +106,7 @@ for i in angle_array[1:]:
     CFD.setup.heat_flux('hc_in', 348.15)
     CFD.setup.heat_flux('hc_out', 348.15)
     CFD.setup.hyb_initialize()
-    CFD.setup.start_calculate(270)
+    CFD.setup.start_calculate(260)
     CFD.setup.write_lin_case_data(i)
     CFD.post.simple_lin_post(i)
 

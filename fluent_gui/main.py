@@ -2,21 +2,20 @@
 # -*- coding: utf-8 -*-
 
 import sys
+import os
+import time
 import csv
-from PyQt5 import QtCore
+
 from PyQt5.QtWidgets import QMainWindow, QWidget, QApplication, QMessageBox, QTableWidgetItem, QFileDialog, QMenu, QLineEdit
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QBasicTimer
 from PyQt5.QtGui import QTextCursor
-
+import qdarkstyle
 
 from easy_test import Ui_MainWindow
 from rename_tip import Ui_tip_widget
 from K_cal import Ui_K_calculator
 from unit_convertor import Ui_unit_converter
 from porous_model import Ui_porous_model_form
-import time
-import os
-import qdarkstyle
 
 
 class MyMainWindow(QMainWindow, Ui_MainWindow):
@@ -26,15 +25,16 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         super(MyMainWindow, self).__init__(parent)
         self.setupUi(self)
 
-        self.mode_ui()
+        self.mode_ui_default()
         self.account_info()
         self.get_date()
 
         self.pamt = {}
+        self.K_dict = {}
         self.body_list = []
         self.btn()
 
-    def mode_ui(self):
+    def mode_ui_default(self):
         self.mode_info_frame.show()
         self.start_btn.hide()
         self.mass_inlet.hide()
@@ -48,22 +48,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.actionstop.setEnabled(False)
         self.import_outlet = False
 
-    def default_part_tree(self):
-        self.part_tree.topLevelItem(0).setCheckState(0, QtCore.Qt.Unchecked)
-        self.part_tree.topLevelItem(1).setCheckState(0, QtCore.Qt.Checked)
-        self.part_tree.topLevelItem(2).setCheckState(0, QtCore.Qt.Unchecked)
-        self.part_tree.topLevelItem(3).setCheckState(0, QtCore.Qt.Unchecked)
-        self.part_tree.topLevelItem(4).setCheckState(0, QtCore.Qt.Unchecked)
-        self.part_tree.topLevelItem(5).setCheckState(0, QtCore.Qt.Unchecked)
-        self.part_tree.topLevelItem(6).setCheckState(0, QtCore.Qt.Unchecked)
-        self.part_tree.topLevelItem(7).setCheckState(0, QtCore.Qt.Checked)
-        self.part_tree.topLevelItem(8).setCheckState(0, QtCore.Qt.Checked)
-        self.part_tree.topLevelItem(9).setCheckState(0, QtCore.Qt.Unchecked)
-        self.part_tree.topLevelItem(10).setCheckState(0, QtCore.Qt.Unchecked)
-        self.part_tree.topLevelItem(11).setCheckState(0, QtCore.Qt.Unchecked)
-        self.distrib_number.setValue(1)
-        self.outlet_number.setValue(1)
-
     def account_info(self):
         user = os.environ.get("USERNAME")
         self.username_label.setText('欢迎大佬%s' % (user))
@@ -73,7 +57,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.interact_edit.append(welcome_word)
 
     def get_date(self):
-        import time
         today = time.strftime('%y%m%d', time.localtime(time.time()))
         self.version_date_edit.setText(today)
 
@@ -93,12 +76,28 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 
         self.unit_btn.clicked.connect(self.unit_convert)
         self.start_btn.clicked.connect(self.begin)
-        self.return_btn.clicked.connect(self.mode_ui)
+        self.return_btn.clicked.connect(self.mode_ui_default)
         self.solver_btn.clicked.connect(self.solver)
 
         self.show_workflow_btn.clicked.connect(self.test)
         self.choose_evap_btn.clicked.connect(lambda: self.append_text('功能未开放,敬请期待'))
         self.actionalter_default_parameter.triggered.connect(lambda: self.append_text('功能未开放,敬请期待'))
+
+    def default_part_tree(self):
+        self.part_tree.topLevelItem(0).setCheckState(0, 0)   # 0 means unchecked, 2 means checked
+        self.part_tree.topLevelItem(1).setCheckState(0, 2)
+        self.part_tree.topLevelItem(2).setCheckState(0, 0)
+        self.part_tree.topLevelItem(3).setCheckState(0, 0)
+        self.part_tree.topLevelItem(4).setCheckState(0, 0)
+        self.part_tree.topLevelItem(5).setCheckState(0, 0)
+        self.part_tree.topLevelItem(6).setCheckState(0, 0)
+        self.part_tree.topLevelItem(7).setCheckState(0, 2)
+        self.part_tree.topLevelItem(8).setCheckState(0, 2)
+        self.part_tree.topLevelItem(9).setCheckState(0, 0)
+        self.part_tree.topLevelItem(10).setCheckState(0, 0)
+        self.part_tree.topLevelItem(11).setCheckState(0, 0)
+        self.distrib_number.setValue(1)
+        self.outlet_number.setValue(1)
 
     def test(self):
         self.porous_model = Ui_porous()
@@ -141,7 +140,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
                 self.check_part()
                 self.pamt_dict()
                 self.need_launch_CAD = False
-                self.show_msg()
+                self.show_outlet_name()
                 self.pamt_GUI()
                 self.append_text('进入调试模式')
 
@@ -159,7 +158,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     def quick_solve(self):
         confirm_info = self.project_info_check()
 
-        if confirm_info == True:
+        if confirm_info:
             self.check_part()
             self.pamt_GUI()
             self.start_btn.setText('网   格')
@@ -170,38 +169,37 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 
     def force_stop(self):
         try:
-            if self.mesh_thread.isRunning() is True:
+            if self.mesh_thread.isRunning():
                 self.mesh_thread.stop_mesh()
                 self.clock.stop()
                 self.append_text('网格划分已经被终止')
 
-            if self.solver_thread.isRunning() is True:
+            if self.solver_thread.isRunning():
                 self.solver_thread.stop_solver()
                 self.append_text('计算已经被终止')
         except Exception as e:
             print('not yet being running')
 
     def quick_distrib_judge(self):
-
-        if self.quick_distribfc_btn.isChecked() == True:
+        if self.quick_distribfc_btn.isChecked():
             self.default_part_tree()
 
-        if self.quick_distribfh_btn.isChecked() == True:
+        if self.quick_distribfh_btn.isChecked():
             self.default_part_tree()
-            self.part_tree.topLevelItem(9).setCheckState(0, QtCore.Qt.Checked)
+            self.part_tree.topLevelItem(9).setCheckState(0, 2)
             self.distrib_number.setValue(2)
             self.outlet_number.setValue(1)
 
-        if self.quick_distribbil_btn.isChecked() == True:
+        if self.quick_distribbil_btn.isChecked():
             self.default_part_tree()
-            self.part_tree.topLevelItem(9).setCheckState(0, QtCore.Qt.Checked)
+            self.part_tree.topLevelItem(9).setCheckState(0, 2)
             self.distrib_number.setValue(1)
             self.outlet_number.setValue(2)
 
-        if self.quick_distriblin_btn.isChecked() == True:
+        if self.quick_distriblin_btn.isChecked():
             self.default_part_tree()
-            self.part_tree.topLevelItem(9).setCheckState(0, QtCore.Qt.Checked)
-            self.part_tree.topLevelItem(11).setCheckState(0, QtCore.Qt.Checked)
+            self.part_tree.topLevelItem(9).setCheckState(0, 2)
+            self.part_tree.topLevelItem(11).setCheckState(0, 2)
             self.energy_checkbox.setChecked(True)
             self.outlet_number.setValue(1)
             self.distrib_number.setValue(1)
@@ -210,9 +208,9 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         confirm_info = self.project_info_check()
         self.need_launch_CAD = True
 
-        if confirm_info == True:
+        if confirm_info:
             self.check_part()
-            self.show_msg()
+            self.show_outlet_name()
 
     def project_info_check(self):
         self.pamt_dict()
@@ -220,18 +218,14 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             self.append_text('请大佬将项目信息填写完全')
             return False
 
-        if self.pamt['version'][0] != 'V':
-            self.append_text('大佬，版本号首字母必须为大写V')
-            return False
-
-        if os.path.exists('%s' % (self.pamt['file_path'])) is False:
+        if not os.path.exists('%s' % (self.pamt['file_path'])):
             self.append_text('项目路径不存在，请大佬检查路径信息')
             return False
         else:
-            if os.path.exists('%s/project_info.py' % (self.pamt['file_path'])) is True:
+            if os.path.exists('%s/project_info.py' % (self.pamt['file_path'])):
                 os.remove('%s/project_info.py' % (self.pamt['file_path']))
 
-        if os.path.exists(self.pamt['cad_save_path']) == True:
+        if os.path.exists(self.pamt['cad_save_path']):
             reply = QMessageBox.warning(self, "警告", "检测到路径下已存在CAD文件%s,是否覆盖？" % (self.pamt['cad_name']),
                                         QMessageBox.Yes | QMessageBox.No, QMessageBox.Yes)
             if reply == QMessageBox.Yes:
@@ -250,64 +244,67 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         body_list = []
         face_list = ['inlet']
         porous_list =[]
+        up_list = []
+        dead_zone_list = []
+
         if self.inlet_number.value() > 1:
             for i in range(self.inlet_number.value()-1):
                 face_list.append('inlet%s' % (i+2))
-        if self.part_tree.topLevelItem(0).checkState(0) == QtCore.Qt.Checked:
+        if self.part_tree.topLevelItem(0).checkState(0) == 2:
             body_list.append('inlet_sphere')
-        if self.part_tree.topLevelItem(1).checkState(0) == QtCore.Qt.Checked:
+        if self.part_tree.topLevelItem(1).checkState(0) == 2:
             body_list.append('ai')
-            if self.part_tree.topLevelItem(0).checkState(0) == QtCore.Qt.Checked:
+            if self.part_tree.topLevelItem(0).checkState(0) == 2:
                 face_list.append('ai_in')
-        if self.part_tree.topLevelItem(2).checkState(0) == QtCore.Qt.Checked:
-            if self.part_tree.topLevelItem(3).checkState(0) == QtCore.Qt.Unchecked:
+        if self.part_tree.topLevelItem(2).checkState(0) == 2:
+            if self.part_tree.topLevelItem(3).checkState(0) == 0:
                 print('filter and cone should be all checked')
             else:
                 body_list.append('filter')
                 body_list.append('cone')
                 porous_list.append('filter')
+                up_list.append('ai')
                 face_list.append('filter_in')
                 face_list.append('filter_out')
-        if self.part_tree.topLevelItem(4).checkState(0) == QtCore.Qt.Checked:
-            if self.part_tree.topLevelItem(5).checkState(0) == QtCore.Qt.Unchecked:
+        if self.part_tree.topLevelItem(4).checkState(0) == 2:
+            if self.part_tree.topLevelItem(5).checkState(0) == 0:
                 print('volute and fan should be all checked')
             else:
                 body_list.append('volute')
+                up_list.append('volute')
                 body_list.append('fan')
-                if self.part_tree.topLevelItem(0).checkState(0) == QtCore.Qt.Checked:
+                dead_zone_list.append('fan_blade')
+                if self.part_tree.topLevelItem(0).checkState(0) == 2:
                     face_list.append('fan_in')
                 face_list.append('fan_out')
                 face_list.append('fan_blade')
-        if self.part_tree.topLevelItem(6).checkState(0) == QtCore.Qt.Checked:
+        if self.part_tree.topLevelItem(6).checkState(0) == 2:
             body_list.append('diffuser')
-            if self.part_tree.topLevelItem(4).checkState(0) == QtCore.Qt.Checked:
+            if self.part_tree.topLevelItem(4).checkState(0) == 2:
                 face_list.append('volute_out')
-        if self.part_tree.topLevelItem(7).checkState(0) == QtCore.Qt.Checked:
+        if self.part_tree.topLevelItem(7).checkState(0) == 2:
             body_list.append('evap')
             porous_list.append('evap')
             face_list.append('evap_in')
             face_list.append('evap_out')
-        if self.part_tree.topLevelItem(8).checkState(0) == QtCore.Qt.Checked:
+        if self.part_tree.topLevelItem(8).checkState(0) == 2:
             body_list.append('distrib')
 
-        if self.part_tree.topLevelItem(9).checkState(0) == QtCore.Qt.Checked:
+        if self.part_tree.topLevelItem(9).checkState(0) == 2:
             body_list.append('hc')
             porous_list.append('hc')
             face_list.append('hc_in')
             face_list.append('hc_out')
 
-        if self.part_tree.topLevelItem(10).checkState(0) == QtCore.Qt.Checked:
+        if self.part_tree.topLevelItem(10).checkState(0) == 2:
             body_list.append('ptc')
             porous_list.append('ptc')
             face_list.append('ptc_in')
             face_list.append('ptc_out')
-        if self.part_tree.topLevelItem(11).checkState(0) == QtCore.Qt.Checked:
+        if self.part_tree.topLevelItem(11).checkState(0) == 2:
             body_list.append('valve')
+            dead_zone_list.append('valve')
 
-        # face_list.append('outlet')
-        # if self.outlet_number.value() > 1:
-        #     for i in range(self.outlet_number.value()-1):
-        #         face_list.append('outlet%s'%(i+2))
         if self.distrib_number.value() > 1:
             distrib_index = body_list.index('distrib')
             body_list[distrib_index] = 'distrib1'
@@ -316,12 +313,20 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 
         print('body_list:%s\nface_list:%s' % (body_list, face_list))
 
+        internal_face = face_list.copy()
+        for i in face_list:
+            if ('inlet' or 'outlet' or 'fan_blade') in i:
+                internal_face.remove(i)
+
         self.face_list = face_list
         self.body_list = body_list
         self.porous_list = porous_list
+        self.up_list = up_list
+        self.dead_zone_list = dead_zone_list
+        self.internal_face = internal_face
 
-    def show_msg(self):
-        if self.import_outlet == True:
+    def show_outlet_name(self):
+        if self.import_outlet:
             self.outlet_name_and_K()
         else:
             from outlet_rename import outlet_rename_ui
@@ -340,7 +345,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 
         self.dialog_tip.rename_btn.clicked.connect(self.dialog_tip.close)
         self.dialog_tip.rename_btn.clicked.connect(self.update_project_info)
-        if self.need_launch_CAD == True:
+        if self.need_launch_CAD:
             self.dialog_tip.rename_btn.clicked.connect(self.launchCAD)
 
         self.inlet_n = self.inlet_number.value()
@@ -463,8 +468,9 @@ print('script finished')
                 dic[i].show()
             except Exception as e:
                 pass
-
-        if self.energy_checkbox.isChecked() is True:
+        if 'fan' in self.body_list:
+            self.mass_inlet.hide()
+        if self.energy_checkbox.isChecked():
             self.temp_c.show()
 
     def pamt_GUI(self):
@@ -511,6 +517,7 @@ print('script finished')
                     self.import_outlet = True
                     self.outlet_list.append(i)
                     self.outlet_K.append(str(info[i]))
+                    self.K_dict[i] = str(info[i])
 
             self.outlet_number.setValue(len(self.outlet_list))
             self.project_name_edit.setText(info['project_name'])
@@ -607,17 +614,29 @@ print('script finished')
             self.pamt['valve_sa'] = self.valve_sa_edit.text()
             self.pamt['valve_fa'] = self.valve_fa_edit.text()
 
-        if self.energy_checkbox.isChecked() is True:
+        if 'fan' in self.body_list:
+            self.pamt['fan_ox'] = self.fan_ox_edit.text()
+            self.pamt['fan_oy'] = self.fan_oy_edit.text()
+            self.pamt['fan_oz'] = self.fan_oz_edit.text()
+            self.pamt['fan_dx'] = self.fan_dx_edit.text()
+            self.pamt['fan_dy'] = self.fan_dy_edit.text()
+            self.pamt['fan_dz'] = self.fan_dz_edit.text()
+            self.pamt['RPM'] = self.RPM_edit.text()
+
+        if self.energy_checkbox.isChecked():
             self.pamt['temp_inlet'] = self.temp_inlet_edit.text()
             self.pamt['temp_hc'] = self.temp_hc_edit.text()
 
     def create_tui(self):
-        self.pamt_dict()
         self.check_part()
-
+        self.pamt_dict()
         self.energy_check = self.energy_checkbox.isChecked()
         from tui_run import get_tui
-        get_tui(self.pamt, self.body_list, self.energy_check, self.K_dict, self.porous_list)
+        try:
+            get_tui(self.pamt, self.body_list, self.energy_check, self.K_dict,
+                self.porous_list, self.up_list, self.dead_zone_list, self.internal_face)
+        except Exception as e:
+            print(e)
 
     def begin(self):
         self.start_btn.setDisabled(True)

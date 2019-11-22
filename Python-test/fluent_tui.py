@@ -46,7 +46,8 @@ class mesh(object):
         self.size_scope_curv('fan_out_curv', 'fan_out', 1, 4.5, 1.2, 18)
         self.size_scope_prox('global_prox', '', 0.8, 5.5, 1.2, 1)
         self.size_scope_soft('inlet', '*inlet*', 14)
-        self.size_scope_soft('porous', porous_list, 4)
+        for i in porous_list:
+            self.size_scope_soft(i, '*'+i+'*', 4)
         # self.size_scope_curv('refine', 'fan_in', 1, 2.5, 1.2, 18)
         self.compute_size_field()
         self.write_size_field()
