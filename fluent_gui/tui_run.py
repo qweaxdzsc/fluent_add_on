@@ -3,7 +3,7 @@ import os
 
 
 class get_tui():
-    def __init__(self, pamt, body_list, energy_check, K_dict, porous_list, up_list, dead_zone_list, internal_list):
+    def __init__(self, pamt, body_list, energy_check, K_dict, porous_list, up_list, dead_zone_list, internal_list, view_path):
         self.d = pamt
         self.body_list = body_list
         self.energy_check = energy_check
@@ -12,11 +12,20 @@ class get_tui():
         self.up_list = up_list
         self.dead_zone_list = dead_zone_list
         self.internal_list = internal_list
+        self.view_path = view_path
 
-        self.prepare_info()
-        self.meshing()
-        self.solver()
+        self.assemble_tui()
         self.open_tui()
+
+    def assemble_tui(self):
+        if 'valve' in self.body_list:
+            self.angle_array()
+            self.pre_info_array()
+            self.lin_mesh()
+        else:
+            self.prepare_info()
+            self.meshing()
+            self.solver()
 
     def prepare_info(self):
         whole_jou = ''
@@ -38,12 +47,9 @@ class get_tui():
 
     def meshing(self):
         mesh = self.CFD.mesh
-        print('output journal in:', self.d['file_path'])
         jou_mesh = open(self.jou_mesh_path, 'w')
 
         mesh_zone_list = self.body_list.copy()
-        for i in self.dead_zone_list:
-            mesh_zone_list.remove(i)
         if 'fan' in self.body_list:
             mesh.simple_import(self.up_list, self.porous_list)
         else:
@@ -122,22 +128,23 @@ class get_tui():
         setup.write_case_data()
 
         volume_face_list = ['inlet*', 'outlet*']
-
         post.create_result_file()
         post.set_background()
         if self.energy_check is True:
             post.txt_surface_integrals('area-weighted-avg', ['outlet*'], 'temperature')
             post.create_streamline('temp_pathline', 'inlet', '', 'temperature')
-            post.snip_avz(8, 'temp_pathline')
+            post.snip_avz('temp_pathline')
         else:
+            post.read_view(self.view_path)
             for i in self.porous_list:
                 post.create_contour(i+'_out', i+'_out')
-                post.snip_avz(7, i +'_out')
-            post.create_streamline('whole_pathline', 'inlet')
-            post.create_streamline('distrib_pathline', 'evap_in', [0, 15])
-            post.snip_avz(5, 'whole_pathline')
-            post.snip_avz(6, 'distrib_pathline')
-            post.snip_model(10, 'model')
+                post.snip_avz(i +'_out')
+            # post.create_streamline('whole_pathline', 'inlet')
+            post.create_streamline('distrib_pathline', 'evap_in', [0, 12])
+            # post.snip_avz(5, 'whole_pathline')
+            post.snip_picture('distrib_pathline', 'yes')
+            post.snip_avz('distrib_pathline')
+            post.snip_model('model')
 
         post.txt_surface_integrals('volume-flow-rate', volume_face_list)
         post.txt_mass_flux()
@@ -145,13 +152,65 @@ class get_tui():
         post.txt_surface_integrals('area-weighted-avg', self.pressure_face_list, 'total-pressure')
         post.txt_surface_integrals('area-weighted-avg', self.pressure_face_list, 'pressure')
         if 'fan' in self.body_list:
-            pass
-            # post.txt_moment()
+            post.txt_moment(origin_xyz, axis_xyz)
         post.snip_mode_off()
         self.CFD.close_fluent()
 
         jou_solve.write(self.CFD.whole_jou)
         jou_solve.close()
+
+    def angle_array(self):
+        d = self.d
+        total_angle = float(d['valve_td'])
+        rotate_percente = float(d['valve_rp'])
+
+        start_percente = total_angle*rotate_percente
+        end_percente = total_angle-start_percente
+        points = int(100/rotate_percente) - 1
+
+        import numpy as np
+        angle_array = np.linspace(start_percente, end_percente, points, endpoint=True)  # define your angle range and points
+        self.lin_array = [int(i) for i in angle_array]
+        print(self.lin_array)
+
+    def pre_info_array(self):
+        whole_jou = ''
+        project_title = self.d['project_name']
+        version_name = self.d['version']
+        whole_name = project_title + '-' + version_name
+        cad_name = self.d['cad_name']
+        case_out = self.d['file_path'] + '\\lin_case'
+        mesh_out_path = self.d['file_path'] + '\\lin_mesh'
+
+        self.CFD = fluent_tui.tui(whole_jou, project_title, version_name, case_out, cad_name)
+        self.jou_mesh_path = case_out + '/' + whole_name + '-mesh-TUI.jou'
+        self.jou_solve_path = case_out + '/' + whole_name + '-solve-TUI.jou'
+
+    def lin_mesh(self):
+        d = self.d
+        mesh = self.CFD.mesh
+        jou_mesh = open(self.jou_mesh_path, 'w')
+        j = 0
+        for i in self.lin_array:
+            cad_lin_name = '%s_%s' % (self.d['cad_name'], i)
+            j = j + 1
+            mesh.import_distrib(cad_name=cad_lin_name)
+            mesh.general_improve(0.75)
+            mesh.fix_slivers()
+            mesh.compute_volume_region()
+            mesh.volume_mesh_change_type(dead_zone_list=['valve1', 'valve2', 'valve3', 'valve4'])
+            mesh.auto_mesh_volume(1.25)
+            mesh.auto_node_move(0.8, 6)
+            mesh.rename_cell(zone_list=['ai', 'distrib', 'evap', 'hc'])
+            mesh.retype_face(face_list=['inlet'], face_type='mass-flow-inlet')
+            mesh.retype_face(face_list=['evap*'], face_type='internal')
+            mesh.retype_face(face_list=['hc*'], face_type='radiator')
+            mesh.retype_face(face_list=['outlet*'], face_type='outlet-vent')
+            mesh.prepare_for_solve()
+            mesh.write_lin_mesh(i)
+
+        jou_mesh.write(self.CFD.whole_jou)
+        jou_mesh.close()
 
     def open_tui(self):
         os.system(self.jou_mesh_path)

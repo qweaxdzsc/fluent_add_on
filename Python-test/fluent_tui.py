@@ -21,7 +21,6 @@ class tui(object):
 /file/read-journal %s yes""" % (jou_path)
         self.whole_jou += text
 
-
     def close_fluent(self):
         text = """
 /exit yes"""
@@ -571,7 +570,7 @@ color-map format %0.1f size {line_size} q step {line_step} skip {line_skip} surf
 """
         self.tui.whole_jou += text
 
-    def snip_picture(self, window_number, graphic_name, mesh_outline='', avz_file=''):
+    def snip_picture(self, graphic_name, mesh_outline='', avz_file='', window_number=9):
         if mesh_outline == '':
             pass
         else:
@@ -597,7 +596,7 @@ color-map format %0.1f size {line_size} q step {line_step} skip {line_skip} surf
            out_path=self.tui.result_path, avz_file=avz_file, view_name=view_name)
         self.tui.whole_jou += text
 
-    def snip_avz(self, window_number, graphic_name):
+    def snip_avz(self, graphic_name, window_number=10):
         text = """
 /display/open-window {window_number}
 /display/set/overlays yes
@@ -610,7 +609,7 @@ color-map format %0.1f size {line_size} q step {line_step} skip {line_skip} surf
            out_path=self.tui.result_path)
         self.tui.whole_jou += text
 
-    def snip_model(self, window_number, picture_name):
+    def snip_model(self, picture_name, window_number=11):
         text = """
 ;model view
 /display/open-window %s

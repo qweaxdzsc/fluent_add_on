@@ -1,6 +1,6 @@
 
 project_name = 'GE2-rear3'
-version = 'ppb-FC'
+version = 'V18-FC'
 Rotation_speed = 2850
 
 

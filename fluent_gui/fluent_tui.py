@@ -49,7 +49,7 @@ class mesh(object):
         self.size_scope_soft('inlet', '*inlet*', 14)
         for i in porous_list:
             self.size_scope_soft(i, '*'+i+'*', 4)
-        self.size_scope_curv('refine', 'fan_in', 1, 2.5, 1.2, 18)
+        # self.size_scope_curv('refine', 'fan_in', 1, 2.5, 1.2, 18)
         self.compute_size_field()
         self.write_size_field()
         self.import_surface_mesh()
@@ -629,7 +629,7 @@ color-map format %0.1f size {line_size} q step {line_step} skip {line_skip} surf
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
-    def snip_picture(self, window_number, graphic_name, mesh_outline='', avz_file=''):
+    def snip_picture(self, graphic_name, mesh_outline='', avz_file='', window_number=9):
         if mesh_outline == '':
             pass
         else:
@@ -656,7 +656,7 @@ color-map format %0.1f size {line_size} q step {line_step} skip {line_skip} surf
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
-    def snip_avz(self, window_number, graphic_name):
+    def snip_avz(self, graphic_name, window_number=10):
         text = """
 /display/open-window {window_number}
 /display/set/overlays yes
@@ -670,7 +670,7 @@ color-map format %0.1f size {line_size} q step {line_step} skip {line_skip} surf
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
-    def snip_model(self, window_number, picture_name):
+    def snip_model(self, picture_name, window_number=11):
         text = """
 ;model view
 /display/open-window %s

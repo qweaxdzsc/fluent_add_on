@@ -8,7 +8,7 @@ whole_jou = ''
 project_title = 'GE2-rear3'
 version_name = 'ppb-lin'
 cad_name = 'GE2-rear3_ppb-lin'
-project_path = r"G:\GE2_REAR\GE2-rear-round3\GE2-rear-ppb-lin"
+project_path = r"G:\GE2_REAR\GE2-rear-round3\GE2-test-lin"
 
 # valve_dir = [0, -1, 0]
 # valve_origin = [5407.69, 869.38, 1022.1]
@@ -29,7 +29,7 @@ jou_out = project_path
 cad_path = project_path + '\\' + cad_name
 case_out = project_path + '\\lin_case'
 mesh_out_path = project_path + '\\lin_mesh'
-result_path = case_out
+# result_path = case_out
 
 jou_title = project_title + '-' + version_name + '-TUI'
 txt_name = jou_out + '\\' + jou_title + '.jou'            # txt final path

@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>933</width>
-    <height>759</height>
+    <width>955</width>
+    <height>756</height>
    </rect>
   </property>
   <property name="maximumSize">
@@ -30,7 +30,7 @@
       <x>10</x>
       <y>100</y>
       <width>711</width>
-      <height>391</height>
+      <height>381</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -64,9 +64,9 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>0</y>
+       <y>-888</y>
        <width>688</width>
-       <height>1349</height>
+       <height>1298</height>
       </rect>
      </property>
      <property name="minimumSize">
@@ -375,7 +375,7 @@
        </widget>
       </item>
       <item>
-       <widget class="QGroupBox" name="mass_inlet">
+       <widget class="QGroupBox" name="mass_inlet_c">
         <property name="maximumSize">
          <size>
           <width>700</width>
@@ -1540,234 +1540,6 @@
           <number>10</number>
          </property>
          <item row="0" column="0">
-          <widget class="QLabel" name="valve_ox_label">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>轴原点X</string>
-           </property>
-           <property name="buddy">
-            <cstring>valve_ox_edit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="valve_ox_edit">
-           <property name="minimumSize">
-            <size>
-             <width>132</width>
-             <height>22</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>132</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2">
-          <widget class="QLabel" name="valve_dx_label">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>轴方向X</string>
-           </property>
-           <property name="buddy">
-            <cstring>valve_dx_edit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="3">
-          <widget class="QLineEdit" name="valve_dx_edit">
-           <property name="minimumSize">
-            <size>
-             <width>132</width>
-             <height>22</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>132</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLabel" name="valve_oy_label">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>轴原点Y</string>
-           </property>
-           <property name="buddy">
-            <cstring>valve_oy_edit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="1">
-          <widget class="QLineEdit" name="valve_oy_edit">
-           <property name="minimumSize">
-            <size>
-             <width>132</width>
-             <height>22</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>132</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="2">
-          <widget class="QLabel" name="valve_dy_label">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>轴方向Y</string>
-           </property>
-           <property name="buddy">
-            <cstring>valve_dy_edit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="3">
-          <widget class="QLineEdit" name="valve_dy_edit">
-           <property name="minimumSize">
-            <size>
-             <width>132</width>
-             <height>22</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>132</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="0">
-          <widget class="QLabel" name="valve_oz_label">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>轴原点Z</string>
-           </property>
-           <property name="buddy">
-            <cstring>valve_oz_edit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="1">
-          <widget class="QLineEdit" name="valve_oz_edit">
-           <property name="minimumSize">
-            <size>
-             <width>132</width>
-             <height>22</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>132</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="2">
-          <widget class="QLabel" name="valve_dz_label">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>轴方向Z</string>
-           </property>
-           <property name="buddy">
-            <cstring>valve_dz_edit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="2" column="3">
-          <widget class="QLineEdit" name="valve_dz_edit">
-           <property name="minimumSize">
-            <size>
-             <width>132</width>
-             <height>22</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>132</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
           <widget class="QLabel" name="valve_td_label">
            <property name="minimumSize">
             <size>
@@ -1789,7 +1561,7 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="1">
+         <item row="0" column="1">
           <widget class="QLineEdit" name="valve_td_edit">
            <property name="minimumSize">
             <size>
@@ -1805,7 +1577,7 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="2">
+         <item row="0" column="2">
           <widget class="QLabel" name="valve_rp_label">
            <property name="minimumSize">
             <size>
@@ -1827,84 +1599,8 @@
            </property>
           </widget>
          </item>
-         <item row="3" column="3">
+         <item row="0" column="3">
           <widget class="QLineEdit" name="valve_rp_edit">
-           <property name="minimumSize">
-            <size>
-             <width>132</width>
-             <height>22</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>132</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="0">
-          <widget class="QLabel" name="valve_sa_label">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>起始(°)</string>
-           </property>
-           <property name="buddy">
-            <cstring>valve_sa_edit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="1">
-          <widget class="QLineEdit" name="valve_sa_edit">
-           <property name="minimumSize">
-            <size>
-             <width>132</width>
-             <height>22</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>132</width>
-             <height>24</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="2">
-          <widget class="QLabel" name="valve_fa_label">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>结束(°)</string>
-           </property>
-           <property name="buddy">
-            <cstring>valve_fa_edit</cstring>
-           </property>
-          </widget>
-         </item>
-         <item row="4" column="3">
-          <widget class="QLineEdit" name="valve_fa_edit">
            <property name="minimumSize">
             <size>
              <width>132</width>
@@ -2015,6 +1711,76 @@
          </item>
         </layout>
        </widget>
+      </item>
+      <item>
+       <layout class="QHBoxLayout" name="horizontalLayout_5">
+        <item>
+         <widget class="QGroupBox" name="snip_c">
+          <property name="minimumSize">
+           <size>
+            <width>0</width>
+            <height>60</height>
+           </size>
+          </property>
+          <property name="title">
+           <string>截图设置</string>
+          </property>
+          <layout class="QHBoxLayout" name="horizontalLayout_6">
+           <property name="spacing">
+            <number>40</number>
+           </property>
+           <property name="leftMargin">
+            <number>40</number>
+           </property>
+           <property name="topMargin">
+            <number>10</number>
+           </property>
+           <property name="rightMargin">
+            <number>30</number>
+           </property>
+           <property name="bottomMargin">
+            <number>10</number>
+           </property>
+           <item>
+            <widget class="QLabel" name="view_path_label">
+             <property name="minimumSize">
+              <size>
+               <width>100</width>
+               <height>0</height>
+              </size>
+             </property>
+             <property name="text">
+              <string>视角文件路径</string>
+             </property>
+            </widget>
+           </item>
+           <item>
+            <widget class="QComboBox" name="view_path_combox">
+             <property name="minimumSize">
+              <size>
+               <width>132</width>
+               <height>0</height>
+              </size>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer_5">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>118</width>
+            <height>38</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
       </item>
      </layout>
     </widget>
@@ -2427,7 +2193,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>933</width>
+     <width>955</width>
      <height>26</height>
     </rect>
    </property>
@@ -2446,6 +2212,7 @@
     <addaction name="actionsolve"/>
     <addaction name="actionstop"/>
     <addaction name="actiondarkstyle"/>
+    <addaction name="actionsnip"/>
    </widget>
    <widget class="QMenu" name="menu">
     <property name="title">
@@ -2517,6 +2284,23 @@
     <string>暗色主题</string>
    </property>
   </action>
+  <action name="actionsnip">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>显示截图设置</string>
+   </property>
+   <property name="iconText">
+    <string> </string>
+   </property>
+   <property name="toolTip">
+    <string> </string>
+   </property>
+  </action>
  </widget>
  <tabstops>
   <tabstop>project_name_edit</tabstop>
@@ -2561,21 +2345,13 @@
   <tabstop>hc_y2_edit</tabstop>
   <tabstop>hc_z2_edit</tabstop>
   <tabstop>choose_hc_btn</tabstop>
-  <tabstop>valve_ox_edit</tabstop>
-  <tabstop>valve_oy_edit</tabstop>
-  <tabstop>valve_oz_edit</tabstop>
-  <tabstop>valve_dx_edit</tabstop>
-  <tabstop>valve_dy_edit</tabstop>
-  <tabstop>valve_dz_edit</tabstop>
   <tabstop>valve_td_edit</tabstop>
   <tabstop>valve_rp_edit</tabstop>
-  <tabstop>valve_sa_edit</tabstop>
-  <tabstop>valve_fa_edit</tabstop>
   <tabstop>temp_inlet_edit</tabstop>
   <tabstop>temp_hc_edit</tabstop>
-  <tabstop>start_btn</tabstop>
   <tabstop>solver_btn</tabstop>
   <tabstop>interact_edit</tabstop>
+  <tabstop>start_btn</tabstop>
   <tabstop>show_workflow_btn</tabstop>
   <tabstop>return_btn</tabstop>
   <tabstop>scrollArea</tabstop>

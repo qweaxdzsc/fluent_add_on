@@ -32,12 +32,14 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.pamt = {}
         self.K_dict = {}
         self.body_list = []
+        self.show_c_on = False
+        self.snip_on = True
         self.btn()
 
     def mode_ui_default(self):
         self.mode_info_frame.show()
         self.start_btn.hide()
-        self.mass_inlet.hide()
+        self.mass_inlet_c.hide()
         self.return_btn.hide()
         self.evap_c.hide()
         self.hc_c.hide()
@@ -45,6 +47,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.valve_c.hide()
         self.temp_c.hide()
         self.fan_c.hide()
+        self.snip_c.hide()
         self.actionstop.setEnabled(False)
         self.import_outlet = False
 
@@ -66,6 +69,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.actionsolve.triggered.connect(self.quick_solve)
         self.actionstop.triggered.connect(self.force_stop)
         self.actiondarkstyle.triggered.connect(self.darkstyle)
+        self.actionsnip.triggered.connect(self.show_snip_setting)
         self.project_address_explore.clicked.connect(self.case_address)
 
         self.quick_distribfc_btn.toggled.connect(self.quick_distrib_judge)
@@ -204,6 +208,20 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             self.outlet_number.setValue(1)
             self.distrib_number.setValue(1)
 
+    def show_snip_setting(self):
+        if self.actionsnip.isChecked():
+            self.snip_on = True
+        else:
+            self.snip_on = False
+
+        self.snip_switch()
+
+    def snip_switch(self):
+        if self.snip_on and self.show_c_on:
+            self.snip_c.show()
+        else:
+            self.snip_c.hide()
+
     def into_CAD(self):
         confirm_info = self.project_info_check()
         self.need_launch_CAD = True
@@ -315,7 +333,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 
         internal_face = face_list.copy()
         for i in face_list:
-            if ('inlet' or 'outlet' or 'fan_blade') in i:
+            if ('fan_blade') or ('inlet') in i:
                 internal_face.remove(i)
 
         self.face_list = face_list
@@ -324,6 +342,8 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.up_list = up_list
         self.dead_zone_list = dead_zone_list
         self.internal_face = internal_face
+        print(self.internal_face)
+        print(face_list)
 
     def show_outlet_name(self):
         if self.import_outlet:
@@ -457,7 +477,6 @@ print('script finished')
 
     def show_c(self):
         dic = {}
-
         dic['evap'] = self.evap_c
         dic['hc'] = self.hc_c
         dic['valve'] = self.valve_c
@@ -468,18 +487,21 @@ print('script finished')
                 dic[i].show()
             except Exception as e:
                 pass
-        if 'fan' in self.body_list:
-            self.mass_inlet.hide()
+        if 'fan' not in self.body_list:
+            self.mass_inlet_c.show()
         if self.energy_checkbox.isChecked():
             self.temp_c.show()
+
+        self.show_c_on = True
+        self.snip_switch()
 
     def pamt_GUI(self):
         self.mode_info_frame.hide()
         self.return_btn.show()
-        self.mass_inlet.show()
+        self.start_btn.show()
         self.show_c()
 
-        self.start_btn.show()
+        self.view_path_init()
 
     def launchCAD(self):
         self.pamt_GUI()
@@ -603,16 +625,8 @@ print('script finished')
             self.pamt['hc_z2'] = self.hc_z2_edit.text()
 
         if 'valve' in self.body_list:
-            self.pamt['valve_ox'] = self.valve_ox_edit.text()
-            self.pamt['valve_oy'] = self.valve_oy_edit.text()
-            self.pamt['valve_oz'] = self.valve_oz_edit.text()
-            self.pamt['valve_dx'] = self.valve_dx_edit.text()
-            self.pamt['valve_dy'] = self.valve_dy_edit.text()
-            self.pamt['valve_dz'] = self.valve_dz_edit.text()
             self.pamt['valve_td'] = self.valve_td_edit.text()
             self.pamt['valve_rp'] = self.valve_rp_edit.text()
-            self.pamt['valve_sa'] = self.valve_sa_edit.text()
-            self.pamt['valve_fa'] = self.valve_fa_edit.text()
 
         if 'fan' in self.body_list:
             self.pamt['fan_ox'] = self.fan_ox_edit.text()
@@ -627,6 +641,24 @@ print('script finished')
             self.pamt['temp_inlet'] = self.temp_inlet_edit.text()
             self.pamt['temp_hc'] = self.temp_hc_edit.text()
 
+    def view_path_init(self):
+        self.view_path_db = {}
+        view_path_file = r'C:\Users\BZMBN4\Desktop\fluent-command\view_path.csv'
+
+        with open(view_path_file, 'r', newline='') as f:
+            view_path_csv = csv.DictReader(f)
+            for row in view_path_csv:
+                self.view_path_db[row['project_name']] = row['view_path']
+            self.view_path_combox.clear()
+            self.view_path_combox.addItems(self.view_path_db.keys())
+
+        self.view_path_choose()
+        self.view_path_combox.activated.connect(self.view_path_choose)
+
+    def view_path_choose(self):
+        view_file_name = self.view_path_combox.currentText()
+        self.view_path = self.view_path_db[view_file_name]
+
     def create_tui(self):
         self.check_part()
         self.pamt_dict()
@@ -634,7 +666,7 @@ print('script finished')
         from tui_run import get_tui
         try:
             get_tui(self.pamt, self.body_list, self.energy_check, self.K_dict,
-                self.porous_list, self.up_list, self.dead_zone_list, self.internal_face)
+                self.porous_list, self.up_list, self.dead_zone_list, self.internal_face, self.view_path)
         except Exception as e:
             print(e)
 
@@ -816,7 +848,6 @@ class Ui_unit(Ui_unit_converter, QWidget):
 
 class Ui_porous(Ui_porous_model_form, QWidget):
     def __init__(self):
-
         super(Ui_porous_model_form, self).__init__()
         self.setupUi(self)
         self.default_ui()
@@ -1055,9 +1086,8 @@ class SCDM(QThread):
     def run(self):
         import subprocess
         p = subprocess.Popen(r'C:\Program Files\ANSYS Inc\v191\scdm\SpaceClaim.exe', shell=True, stdout=subprocess.PIPE)
-        print(p.pid)
         out, err = p.communicate()
-        out = out.decode()
+        # out = out.decode()
 
         self.finishCAD.emit('CAD软件已关闭')
 
@@ -1157,7 +1187,6 @@ class fluent_solver(QThread):
         self.tui = tui
 
     def run(self):
-
         import subprocess
         self.p = subprocess.Popen(r'cd C:\\Program Files\\ANSYS Inc\\v191\\fluent\\ntbin\\win64 && '
                            r'fluent 3d -t12 -gu -i %s' % (self.tui), shell=True, stdout=subprocess.PIPE)

@@ -21,16 +21,4 @@
 #
 # print(t)
 # print(sum(t) / len(t))
-b = 2.25335
-number = 1
-factor = 10**(number+1)
-#
-# b = int(b*factor)/factor
-
-# a = '%.1f' % (b)
-
-
-
-print(a)
-
 

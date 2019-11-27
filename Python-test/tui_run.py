@@ -5,9 +5,9 @@ jou_out = r'C:\Users\BZMBN4\Desktop'       # txt output root
 # txt name
 whole_jou = ''
 project_title = 'GE2-rear3'
-version_name = 'ppb-FH'
-cad_name = 'GE2-rear3-ppb-FH'
-case_out = r'G:\GE2_REAR\GE2-rear-round3\GE2-rear-ppb-FH'
+version_name = 'V20-FC'
+cad_name = 'GE2-rear3_V20-FC'
+case_out = r'G:\GE2_REAR\GE2-rear-round3\GE2-rear-V20'
 
 jou_title = project_title + '-' + version_name + '-TUI'
 txt_name = jou_out + '\\' + jou_title + '.jou'            # txt final path
@@ -19,8 +19,8 @@ CFD = fluent_tui.tui(whole_jou, project_title, version_name, case_out, cad_name)
 
 # CFD.mesh.simple_import(['volute'], ['evap', 'filter'])
 # CFD.mesh.simple_import(['ai', 'volute'], ['evap', 'filter', 'hc'])
-# CFD.mesh.simple_import(['volute'], ['evap'])
-CFD.mesh.simple_import(['volute'], ['evap', 'hc'])
+CFD.mesh.simple_import(['volute'], ['evap'])
+# CFD.mesh.simple_import(['volute'], ['evap', 'hc'])
 # CFD.mesh.import_distrib()
 CFD.mesh.general_improve()
 CFD.mesh.fix_slivers()
@@ -31,8 +31,8 @@ CFD.mesh.auto_mesh_volume()
 CFD.mesh.auto_node_move()
 # CFD.mesh.rename_cell(zone_list=['ai', 'evap', 'fan', 'volute', 'filter', 'hc', 'distrib1', 'distrib2', 'cone'])
 # CFD.mesh.rename_cell(zone_list=['ai', 'evap', 'fan', 'hc', 'volute', 'filter', 'distrib'])
-# CFD.mesh.rename_cell(zone_list=['ai', 'evap', 'fan', 'volute', 'distrib'])
-CFD.mesh.rename_cell(zone_list=['ai', 'evap', 'hc', 'fan', 'volute'])
+CFD.mesh.rename_cell(zone_list=['ai', 'evap', 'fan', 'volute', 'distrib'])
+# CFD.mesh.rename_cell(zone_list=['ai', 'evap', 'hc', 'fan', 'volute'])
 # CFD.mesh.retype_face(face_list=['inlet', 'inlet2'], face_type='pressure-inlet')
 CFD.mesh.retype_face(face_list=['inlet'], face_type='pressure-inlet')
 # CFD.mesh.retype_face(face_list=['fan_out', 'evap*', 'filter*'], face_type='internal')
@@ -47,7 +47,7 @@ CFD.mesh.switch_to_solver()
 
 fan_origin = [5.02818, 0.7852, 1.0300]
 fan_axis = [0, -1, 0]
-rpm = 3000
+rpm = 2850
 evap_d1 = [-0.84805, 0, -0.52992]
 evap_d2 = [0, 1, 0]
 hc_d1 = [0.85717, 0, 0.51504]
@@ -65,7 +65,7 @@ CFD.setup.turb_models()
 CFD.setup.rotation_volume(rpm, fan_origin, fan_axis, 'fan')
 CFD.setup.porous_zone('evap', evap_d1, evap_d2, 2.82e+07, 455.67)
 # CFD.setup.porous_zone('filter', filter_d1, filter_d2, 4.7e+07, 319.5)
-CFD.setup.porous_zone('hc', hc_d1, hc_d2, 6.62e+07, 505.43)
+# CFD.setup.porous_zone('hc', hc_d1, hc_d2, 6.62e+07, 505.43)
 # CFD.setup.BC_type('inlet*()', 'pressure-inlet')
 # CFD.setup.BC_type('inlet', 'mass-flow-inlet')
 # CFD.setup.BC_type('outlet*()', 'outlet-vent')
@@ -107,12 +107,12 @@ CFD.post.create_streamline('whole_pathline', 'inlet')
 CFD.post.create_streamline('distrib_pathline', 'evap_out', [0, 10])
 CFD.post.read_view(view_path)
 CFD.post.set_background()
-CFD.post.snip_picture(5, 'whole_pathline', 'yes', 'yes')
-CFD.post.snip_picture(6,  'distrib_pathline', 'yes')
-CFD.post.snip_picture(7, 'evap_out')
+CFD.post.snip_picture('whole_pathline', 'yes', 'yes')
+CFD.post.snip_picture('distrib_pathline', 'yes')
+CFD.post.snip_picture('evap_out')
 # CFD.post.snip_picture(8, 'evap_out_0-2')
-CFD.post.snip_picture(9, 'hc_out')
-CFD.post.snip_model(10, 'model')
+CFD.post.snip_picture('hc_out')
+CFD.post.snip_model('model')
 # CFD.post.simple_lin_post(47.97)
 CFD.post.snip_mode_off()
 
