@@ -542,7 +542,7 @@ class post(object):
 
         self.create_streamline('whole_pathline', 'inlet', field_type='temperature')
         self.set_background()
-        self.snip_avz(5, 'whole_pathline')
+        self.snip_avz('whole_pathline')
 
     def txt_surface_integrals(self, report_type, face_list, field=''):
         if field == '':

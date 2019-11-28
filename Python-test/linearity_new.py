@@ -8,7 +8,7 @@ whole_jou = ''
 project_title = 'GE2-rear3'
 version_name = 'ppb-lin'
 cad_name = 'GE2-rear3_ppb-lin'
-project_path = r"G:\GE2_REAR\GE2-rear-round3\GE2-test-lin"
+project_path = r"G:\GE2_REAR\GE2-rear-round3\GE2-rear-ppb-lin"
 
 # valve_dir = [0, -1, 0]
 # valve_origin = [5407.69, 869.38, 1022.1]
@@ -26,30 +26,25 @@ angle_array = [int(i) for i in angle_array]
 print('angle array:', angle_array)
 
 jou_out = project_path
-cad_path = project_path + '\\' + cad_name
-case_out = project_path + '\\lin_case'
-mesh_out_path = project_path + '\\lin_mesh'
-# result_path = case_out
-
 jou_title = project_title + '-' + version_name + '-TUI'
 txt_name = jou_out + '\\' + jou_title + '.jou'            # txt final path
 print('output journal in:', txt_name)
 jou = open(txt_name, 'w')
 
 CFD = fluent_tui.tui(whole_jou, project_title, version_name, project_path, cad_name)
-j = 0
+# j = 0
 
 
 for i in angle_array:
     cad_lin_name = '%s_%s' % (cad_name, i)
 
     # rotate_angle = round(angle_array[j] - angle_array[j - 1], 3)
-    j = j + 1
+    # j = j + 1
     CFD.mesh.import_distrib(cad_name=cad_lin_name)
     CFD.mesh.general_improve(0.75)
     CFD.mesh.fix_slivers()
     CFD.mesh.compute_volume_region()
-    CFD.mesh.volume_mesh_change_type(dead_zone_list=['valve1', 'valve2', 'valve3', 'valve4'])
+    CFD.mesh.volume_mesh_change_type(dead_zone_list=['valve'])
     CFD.mesh.auto_mesh_volume(1.25)
     # CFD.mesh.auto_mesh_volume(1.25, 'poly')
     CFD.mesh.auto_node_move(0.8, 6)

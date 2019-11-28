@@ -79,6 +79,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.finish_mode_info_btn.clicked.connect(self.into_CAD)
 
         self.unit_btn.clicked.connect(self.unit_convert)
+        self.choose_evap_btn.clicked.connect(self.porous_choose)
         self.start_btn.clicked.connect(self.begin)
         self.return_btn.clicked.connect(self.mode_ui_default)
         self.solver_btn.clicked.connect(self.solver)
@@ -104,8 +105,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.outlet_number.setValue(1)
 
     def test(self):
-        self.porous_model = Ui_porous()
-        self.porous_model.show()
+
         self.append_text('功能未开放,敬请期待')
         pass
 
@@ -342,8 +342,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.up_list = up_list
         self.dead_zone_list = dead_zone_list
         self.internal_face = internal_face
-        print(self.internal_face)
-        print(face_list)
 
     def show_outlet_name(self):
         if self.import_outlet:
@@ -591,6 +589,10 @@ print('script finished')
         self.volume_unit = Ui_unit()
         self.volume_unit.show()
         self.volume_unit.unit_convert_result.connect(self.volume_input)
+
+    def porous_choose(self):
+        self.porous_model = Ui_porous()
+        self.porous_model.show()
 
     def volume_input(self, msg):
         self.mass_inlet_edit.setText(msg)
@@ -862,7 +864,7 @@ class Ui_porous(Ui_porous_model_form, QWidget):
         self.resize(220, 135)
         self.unit_choose = 'kg/h'
         self.db_dict = {}
-        self.db_path = r'C:\Users\BZMBN4\Desktop\test.csv'
+        self.db_path = r'C:\Users\BZMBN4\Desktop\fluent-command\porous_db.csv'
         self.porous_info_dict()
 
     def default_btn(self):
