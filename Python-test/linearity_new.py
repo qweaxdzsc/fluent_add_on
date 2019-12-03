@@ -5,10 +5,10 @@ import fluent_tui
 
 
 whole_jou = ''
-project_title = 'GE2-rear3'
-version_name = 'ppb-lin'
-cad_name = 'GE2-rear3_ppb-lin'
-project_path = r"G:\GE2_REAR\GE2-rear-round3\GE2-rear-ppb-lin"
+project_title = '458-rear'
+version_name = 'lin3'
+cad_name = '458-rear-lin3'
+project_path = r"G:\458-rear\458-rear-lin3"
 
 # valve_dir = [0, -1, 0]
 # valve_origin = [5407.69, 869.38, 1022.1]
@@ -59,9 +59,9 @@ for i in angle_array:
 
 mass_flux_list = ['inlet*', 'outlet*']
 
-evap_d1 = [0.84805, 0, 0.52992]
+evap_d1 = [0.99756, 0, 0.06975]
 evap_d2 = [0, 1, 0]
-hc_d1 = [0.85717, 0, 0.51504]
+hc_d1 = [-0.71643, 0, -0.69765]
 hc_d2 = [0, 1, 0]
 
 CFD.mesh.switch_to_solver()
@@ -72,7 +72,7 @@ CFD.setup.rescale()
 CFD.setup.turb_models()
 
 CFD.setup.porous_zone('evap', evap_d1, evap_d2, 2.82e+07, 455.67)
-CFD.setup.porous_zone('hc', hc_d1, hc_d2, 6.62e+07, 505.43)
+CFD.setup.porous_zone('hc', hc_d1, hc_d2, 4.07e+07, 580.6589)
 # CFD.setup.BC_type('inlet', 'pressure-inlet')
 CFD.setup.BC_type('inlet*()', 'mass-flow-inlet')
 CFD.setup.BC_type('outlet*()', 'outlet-vent')
@@ -80,9 +80,8 @@ CFD.setup.solution_method()
 CFD.setup.energy_eqt('yes')
 # CFD.setup.BC_pressure_inlet('inlet')
 CFD.setup.init_temperature('mass-flow-inlet', 'outlet-vent', 273.15)
-CFD.setup.BC_mass_flow_inlet('inlet', 0.055125)
-CFD.setup.BC_outlet_vent(11.2, 'outlet_d')
-CFD.setup.BC_outlet_vent(8.037, 'outlet_p')
+CFD.setup.BC_mass_flow_inlet('inlet', 0.0459375)
+CFD.setup.BC_outlet_vent(7, 'outlet')
 CFD.setup.heat_flux('hc_in', 348.15)
 CFD.setup.heat_flux('hc_out', 348.15)
 CFD.setup.report_definition('temperature', 'surface-areaavg', ['outlet*'], 'yes', 'temperature')
@@ -98,8 +97,8 @@ for i in angle_array[1:]:
     CFD.setup.rescale()
     CFD.setup.init_temperature('mass-flow-inlet', 'outlet-vent', 273.15)
     CFD.setup.BC_mass_flow_inlet('inlet', 0.055125)
-    CFD.setup.heat_flux('hc_in', 348.15)
-    CFD.setup.heat_flux('hc_out', 348.15)
+    # CFD.setup.heat_flux('hc_in', 348.15)
+    # CFD.setup.heat_flux('hc_out', 348.15)
     CFD.setup.hyb_initialize()
     CFD.setup.start_calculate(260)
     CFD.setup.write_lin_case_data(i)

@@ -333,7 +333,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 
         internal_face = face_list.copy()
         for i in face_list:
-            if ('fan_blade') or ('inlet') in i:
+            if 'fan_blade' is i or 'inlet' is i:
                 internal_face.remove(i)
 
         self.face_list = face_list
@@ -342,6 +342,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.up_list = up_list
         self.dead_zone_list = dead_zone_list
         self.internal_face = internal_face
+        print(self.internal_face)
 
     def show_outlet_name(self):
         if self.import_outlet:
@@ -574,6 +575,8 @@ print('script finished')
             os.system(csv_save_path)
         except Exception as e:
             print('export error:', e)
+            print('Error in file:', e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
+            print('Error in line:', e.__traceback__.tb_lineno)  # 发生异常所在的行数
             self.append_text('导出地址有错误，请重新选择')
 
     def write_CSV(self, csv_path):
@@ -612,9 +615,8 @@ print('script finished')
             self.pamt['evap_x1'] = self.evap_x1_edit.text()
             self.pamt['evap_y1'] = self.evap_y1_edit.text()
             self.pamt['evap_z1'] = self.evap_z1_edit.text()
-            self.pamt['evap_x2'] = self.evap_x2_edit.text()
-            self.pamt['evap_y2'] = self.evap_y2_edit.text()
-            self.pamt['evap_z2'] = self.evap_z2_edit.text()
+            self.pamt['evap_x2'], self.pamt['evap_y2'], self.pamt['evap_z2'] = \
+                self.porous_d2(self.pamt['evap_x1'], self.pamt['evap_y1'], self.pamt['evap_z1'])
 
         if 'hc' in self.body_list:
             self.pamt['hc_c1'] = self.hc_c1_edit.text()
@@ -622,9 +624,8 @@ print('script finished')
             self.pamt['hc_x1'] = self.hc_x1_edit.text()
             self.pamt['hc_y1'] = self.hc_y1_edit.text()
             self.pamt['hc_z1'] = self.hc_z1_edit.text()
-            self.pamt['hc_x2'] = self.hc_x2_edit.text()
-            self.pamt['hc_y2'] = self.hc_y2_edit.text()
-            self.pamt['hc_z2'] = self.hc_z2_edit.text()
+            self.pamt['hc_x2'], self.pamt['hc_y2'], self.pamt['hc_z2'] = \
+                self.porous_d2(self.pamt['hc_x1'], self.pamt['hc_y1'], self.pamt['hc_z1'])
 
         if 'valve' in self.body_list:
             self.pamt['valve_td'] = self.valve_td_edit.text()
@@ -642,6 +643,25 @@ print('script finished')
         if self.energy_checkbox.isChecked():
             self.pamt['temp_inlet'] = self.temp_inlet_edit.text()
             self.pamt['temp_hc'] = self.temp_hc_edit.text()
+
+    def porous_d2(self, x, y, z):
+        try:
+            x = float(x)
+            y = float(y)
+            z = float(z)
+            d1 = [x, y, z]
+            d2 = [0, 0, 0]
+
+            for i in d1:
+                if i == 0:
+                    d2[d1.index(i)] = 1
+                    return d2
+            d2[1] = -z / y
+            d2[2] = 1
+            return d2
+        except Exception as e:
+            print('porous_c contains zero')
+            return [None, None, None]
 
     def view_path_init(self):
         self.view_path_db = {}
@@ -671,6 +691,8 @@ print('script finished')
                 self.porous_list, self.up_list, self.dead_zone_list, self.internal_face, self.view_path)
         except Exception as e:
             print(e)
+            print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
+            print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
 
     def begin(self):
         self.start_btn.setDisabled(True)
@@ -1213,7 +1235,9 @@ if __name__ == "__main__":
         myWin = MyMainWindow()
         myWin.show()
         sys.exit(app.exec_())
-    except:
+    except Exception as e:
         import traceback
         traceback.print_exc()
+        print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
+        print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
 

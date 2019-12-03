@@ -1,5 +1,4 @@
 import os
-clip_path = r'C:\Users\BZMBN4\Desktop'
 
 
 def clip(file_path, y_min, y_max, z_min, z_max, cl_y=5, cl_z=5):
@@ -42,50 +41,61 @@ surface/iso-clip/y-coordinate evap_y%sz%s evap_z%s() %s %s
     os.system(txt_name)
 
 
-y_min = 0.6852
-y_max = 0.8352001
-z_min = 0.7771059
-z_max = 0.9467155
+# y_min = 0.6852
+# y_max = 0.8352001
+# z_min = 0.7771059
+# z_max = 0.9467155
+print('4X4 Grid velocity\nPlease follow instruction enter y_min, y_max, z_min, z_max'
+      '(you could use fluent iso-clip to read these parametr)'
+      '\nIt will generate a script, which you could copy to fluent console to run\n'
+      'After done, fluent will create a velocity file under same output address')
+y_min = input('Please enter y_min of Evaporater:')
+y_max = input('Please enter y_max of Evaporater:')
+z_min = input('Please enter z_min of Evaporater:')
+z_max = input('Please enter z_max of Evaporater:')
+# clip_path = r'C:\Users\BZMBN4\Desktop'
+clip_path = input('Please give file output address:')
 clip(clip_path, y_min, y_max, z_min, z_max)
+print('Output file in:%s\n Please copy whole file to fluent console to run' % clip_path)
 
 
-def evap_range(file_path, evap_average):
-
-    grid = open(file_path +'\\uni_range.jou', 'w')
-    evap_amax = evap_average * 1.2
-    evap_amin = evap_average * 0.8
-    print(evap_amin, evap_amax)
-    message = """display/set/overlays no
-/views/read-views G:\GE2_REAR\GE2-rear-command\GE2.vw ok
-display/objects/delete evap_v20p 
-surface/iso-clip/velocity-magnitude evap_v20p evap_out %s %s
-display/objects/delete evap_v20p 
-display/objects/create contour evap_v20p filled yes range-option auto-range-on global-range no q 
-color-map format %%0.8f size 10 q surfaces-list evap_v20p() field velocity q
-display/objects/display evap_v20p
-display/views/restore-view evap_out q
-display/views/auto-scale
-display/set/picture/driver/jpeg
-display/save-picture %s/evap_v20p.jpg ok
-report/surface-integrals/area evap_out evap_v20p() yes %s\evap_range.txt yes
-""" % (evap_amin, evap_amax, file_path, file_path)
-    grid.write(message)
-    grid.close()
+# def evap_range(file_path, evap_average):
 #
-# file_path = r'C:\Users\BZMBN4\Desktop'
-# evap_range(file_path, 2.7908)
-
-
-def get_surface_name():
-
-    surface_name = open(r'C:\Users\BZMBN4\Desktop\surface_name.jou', 'w')
-    message = """"""
-    for i in range(4):
-        for j in range(4):
-            message += """evap_y%sz%s """ % (i, j)
-    surface_name.write(message)
-    print('write success')
-    surface_name.close()
+#     grid = open(file_path +'\\uni_range.jou', 'w')
+#     evap_amax = evap_average * 1.2
+#     evap_amin = evap_average * 0.8
+#     print(evap_amin, evap_amax)
+#     message = """display/set/overlays no
+# /views/read-views G:\GE2_REAR\GE2-rear-command\GE2.vw ok
+# display/objects/delete evap_v20p
+# surface/iso-clip/velocity-magnitude evap_v20p evap_out %s %s
+# display/objects/delete evap_v20p
+# display/objects/create contour evap_v20p filled yes range-option auto-range-on global-range no q
+# color-map format %%0.8f size 10 q surfaces-list evap_v20p() field velocity q
+# display/objects/display evap_v20p
+# display/views/restore-view evap_out q
+# display/views/auto-scale
+# display/set/picture/driver/jpeg
+# display/save-picture %s/evap_v20p.jpg ok
+# report/surface-integrals/area evap_out evap_v20p() yes %s\evap_range.txt yes
+# """ % (evap_amin, evap_amax, file_path, file_path)
+#     grid.write(message)
+#     grid.close()
+# #
+# # file_path = r'C:\Users\BZMBN4\Desktop'
+# # evap_range(file_path, 2.7908)
+#
+#
+# def get_surface_name():
+#
+#     surface_name = open(r'C:\Users\BZMBN4\Desktop\surface_name.jou', 'w')
+#     message = """"""
+#     for i in range(4):
+#         for j in range(4):
+#             message += """evap_y%sz%s """ % (i, j)
+#     surface_name.write(message)
+#     print('write success')
+#     surface_name.close()
 
 #
 # get_surface_name()

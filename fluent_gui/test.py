@@ -374,34 +374,11 @@
 #
 # import win32con, win32api
 # win32api.SetFileAttributes(r'C:\Users\BZMBN4\Desktop\test.csv', win32con.FILE_ATTRIBUTE_HIDDEN)
-
-#
-# def porous_d2(x, y, z):
-#
-#     x = float(x)
-#     y = float(y)
-#     z = float(z)
-#     d1 = [x, y, z]
-#     d2 = [0, 0, 0]
-#
-#     for i in d1:
-#         if i == 0:
-#             d2[d1.index(i)] = 1
-#             return d2
-#     d2[1] = -z/y
-#     d2[2] = 1
-#     return d2
-#
-#
-# x, y, z = porous_d2(0, 1, 2)
-# print(x, y, z)
-
-
-face_list = ['inlet', 'fan_out', 'fan_blade', 'evap_in', 'evap_out']
+face_list=['inlet', 'fan_out', 'fan_blade', 'evap_in', 'evap_out']
 internal_face = face_list.copy()
 for i in face_list:
-    if ('inlet' or 'outlet' or 'fan_blade') in i:
-        print(1)
+    if 'fan_blade' is i or 'inlet' is i:
+        print(i)
         internal_face.remove(i)
 
-print(face_list)
+print(internal_face)
