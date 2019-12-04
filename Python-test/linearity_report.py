@@ -54,8 +54,9 @@ class LinReport(object):
 
             while '-----' not in lines[line_number]:                # last temperature row
                 lines[line_number] = lines[line_number].strip()
+                if not lines[line_number]:
+                    break
                 line_number += 1
-
             last_row_number = line_number
 
             temp_angle = {}
@@ -123,9 +124,9 @@ class LinReport(object):
 
 
 if __name__ == "__main__":
-    project_address = r"G:\GE2_REAR\GE2-rear-round3\GE2-rear-ppb-lin"
-    project_name = 'GE2-rear3'
-    version_name = 'ppb-lin'
+    project_address = r"G:\458-rear\458-rear-lin2"
+    project_name = '458-rear'
+    version_name = 'lin2'
 
     whole_name = project_name + '-' + version_name
     Linearity_report = LinReport(project_address, project_name, version_name)

@@ -6,9 +6,9 @@ import fluent_tui
 
 whole_jou = ''
 project_title = '458-rear'
-version_name = 'lin3'
-cad_name = '458-rear-lin3'
-project_path = r"G:\458-rear\458-rear-lin3"
+version_name = 'lin2'
+cad_name = '458-rear-lin2'
+project_path = r"G:\458-rear\458-rear-lin2"
 
 # valve_dir = [0, -1, 0]
 # valve_origin = [5407.69, 869.38, 1022.1]
@@ -86,7 +86,7 @@ CFD.setup.heat_flux('hc_in', 348.15)
 CFD.setup.heat_flux('hc_out', 348.15)
 CFD.setup.report_definition('temperature', 'surface-areaavg', ['outlet*'], 'yes', 'temperature')
 CFD.setup.report_definition('mass-flux', 'surface-massflowrate', mass_flux_list, 'no')
-CFD.setup.convergence_criterion()
+CFD.setup.convergence_criterion('temperature')
 CFD.setup.hyb_initialize()
 CFD.setup.start_calculate(270)
 CFD.setup.write_lin_case_data(start_angle)
@@ -96,9 +96,6 @@ for i in angle_array[1:]:
     CFD.setup.replace_lin_mesh(i)
     CFD.setup.rescale()
     CFD.setup.init_temperature('mass-flow-inlet', 'outlet-vent', 273.15)
-    CFD.setup.BC_mass_flow_inlet('inlet', 0.055125)
-    # CFD.setup.heat_flux('hc_in', 348.15)
-    # CFD.setup.heat_flux('hc_out', 348.15)
     CFD.setup.hyb_initialize()
     CFD.setup.start_calculate(260)
     CFD.setup.write_lin_case_data(i)

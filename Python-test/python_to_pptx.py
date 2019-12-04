@@ -1,6 +1,6 @@
 
 project_name = 'GE2-rear3'
-version = 'V20-FH'
+version = 'ppd-V1-FH'
 Rotation_speed = 3000
 
 

@@ -21,4 +21,3 @@
 #
 # print(t)
 # print(sum(t) / len(t))
-

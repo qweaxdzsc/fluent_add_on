@@ -431,11 +431,30 @@ q
            per_surface=per_surface, field=field)
         self.tui.whole_jou += text
 
-    def convergence_criterion(self, switch=3):
-        text = """
+    def convergence_criterion(self, type=None, switch=3):
+        if type == 'pressure' or type == 'temperature':
+            text = """
+solve/monitors/residual/criterion-type %s
+/solve/convergence-conditions/conv-reports add %s-stable
+report-defs %s initial-values-to-ignore 100 previous-values-to-consider 4 
+stop-criterion 0.0002 print yes active yes
+q q q
+""" % (switch, type, type)
+        elif type == 'volume':
+            text = """
+/solve/monitors/residual/criterion-type %s
+/solve/convergence-conditions/conv-reports add %s-stable
+report-defs volume initial-values-to-ignore 400 previous-values-to-consider 4 
+stop-criterion 0.0001 print yes active yes
+q q q
+""" % (switch, type)
+        else:
+            text = """
 solve/monitors/residual/criterion-type %s
 """ % (switch)
+
         self.tui.whole_jou += text
+        return self.tui.whole_jou
 
     def hyb_initialize(self):
         text = """
@@ -490,7 +509,7 @@ class post(object):
 
         self.create_streamline('whole_pathline', 'inlet', field_type='temperature')
         self.set_background()
-        self.snip_avz(5, 'whole_pathline')
+        self.snip_avz('whole_pathline')
 
     def txt_surface_integrals(self, report_type, face_list, field=''):
         if field == '':
