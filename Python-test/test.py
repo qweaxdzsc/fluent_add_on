@@ -1,23 +1,34 @@
-# import timeit
-# import numpy as np
-#
-# # 待测试的函数
-# def add():
-#     import openpyxl
-#     wb = openpyxl.Workbook()
-#     worksheet = wb['Sheet']
-#
-#     worksheet.cell(1, 1, 2)
-#
-#     wb.save(filename=r'C:\Users\BZMBN4\Desktop\test.xlsx')
-#
-# # stmt 需要测试的函数或语句，字符串形式
-# # setup 运行的环境，本例子中表示 if __name__ == '__main__':
-# # number 被测试的函数或语句，执行的次数，本例表示执行100000次add()。省缺则默认是10000次
-# # repeat 测试做100次
-# # 综上：此函数表示 测试 在if __name__ == '__main__'的条件下，执行100000次add()消耗的时间，并把这个测试做100次,并求出平均值
-#
-# t = timeit.repeat(stmt="add()", setup="from __main__ import add", number=1, repeat=1)
-#
-# print(t)
-# print(sum(t) / len(t))
+import numpy as np
+
+ab = ['outlet_rfr', 'outlet_rfl', 'outlet_ffr', 'outlet_ffl', 'outlet_vc', 'outlet_vr', 'outlet_vl']
+side_vent = []
+center_vent = []
+foot = []
+rear_foot = []
+side_defrost = []
+clasif_outlet_dict = {'side_vent': side_vent, 'center_vent':center_vent, 'foot': foot, 'rear_foot': rear_foot,
+                       'side_defrost': side_defrost}
+
+for i in ab:
+    if i[-1] is 'r' or i[-1] is 'l':
+        if 'v' in i:
+            if i[-3] is 'c':
+                center_vent.append(ab.index(i))
+            else:
+                side_vent.append(ab.index(i))
+        elif 'f' in i:
+            if i[-3] is 'f':
+                foot.append(ab.index(i))
+            elif i[-3] is 'r':
+                rear_foot.append(ab.index(i))
+        elif 'd' in i:
+            side_defrost.append(ab.index(i))
+
+for i in list(clasif_outlet_dict.keys()):
+    if not clasif_outlet_dict[i]:
+        clasif_outlet_dict.pop(i)
+
+print(clasif_outlet_dict)
+
+
+

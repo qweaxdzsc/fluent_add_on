@@ -5,10 +5,10 @@ import fluent_tui
 
 
 whole_jou = ''
-project_title = '458-rear'
-version_name = 'lin2'
-cad_name = '458-rear-lin2'
-project_path = r"G:\458-rear\458-rear-lin2"
+project_title = '458-front'
+version_name = 'lin-defog'
+cad_name = '458-lin-defog'
+project_path = r"G:\458-front\458-lin\458-lin-defog"
 
 # valve_dir = [0, -1, 0]
 # valve_origin = [5407.69, 869.38, 1022.1]
@@ -59,9 +59,9 @@ for i in angle_array:
 
 mass_flux_list = ['inlet*', 'outlet*']
 
-evap_d1 = [0.99756, 0, 0.06975]
+evap_d1 = [-0.99756, 0, 0.06976]
 evap_d2 = [0, 1, 0]
-hc_d1 = [-0.71643, 0, -0.69765]
+hc_d1 = [0.71934, 0, 0.69466]
 hc_d2 = [0, 1, 0]
 
 CFD.mesh.switch_to_solver()
@@ -71,8 +71,8 @@ CFD.setup.rescale()
 # CFD.setup.convert_polymesh()
 CFD.setup.turb_models()
 
-CFD.setup.porous_zone('evap', evap_d1, evap_d2, 2.82e+07, 455.67)
-CFD.setup.porous_zone('hc', hc_d1, hc_d2, 4.07e+07, 580.6589)
+CFD.setup.porous_zone('evap', evap_d1, evap_d2, 7.39e+07, 0)
+CFD.setup.porous_zone('hc', hc_d1, hc_d2, 1.34e+08, 0)
 # CFD.setup.BC_type('inlet', 'pressure-inlet')
 CFD.setup.BC_type('inlet*()', 'mass-flow-inlet')
 CFD.setup.BC_type('outlet*()', 'outlet-vent')
@@ -80,15 +80,17 @@ CFD.setup.solution_method()
 CFD.setup.energy_eqt('yes')
 # CFD.setup.BC_pressure_inlet('inlet')
 CFD.setup.init_temperature('mass-flow-inlet', 'outlet-vent', 273.15)
-CFD.setup.BC_mass_flow_inlet('inlet', 0.0459375)
-CFD.setup.BC_outlet_vent(7, 'outlet')
+CFD.setup.BC_mass_flow_inlet('inlet', 0.0735)
+CFD.setup.BC_outlet_vent(0, 'outlet_vc')
+CFD.setup.BC_outlet_vent(0, 'outlet_vl')
+CFD.setup.BC_outlet_vent(0, 'outlet_vr')
 CFD.setup.heat_flux('hc_in', 348.15)
 CFD.setup.heat_flux('hc_out', 348.15)
 CFD.setup.report_definition('temperature', 'surface-areaavg', ['outlet*'], 'yes', 'temperature')
 CFD.setup.report_definition('mass-flux', 'surface-massflowrate', mass_flux_list, 'no')
 CFD.setup.convergence_criterion('temperature')
 CFD.setup.hyb_initialize()
-CFD.setup.start_calculate(270)
+CFD.setup.start_calculate(350)
 CFD.setup.write_lin_case_data(start_angle)
 CFD.post.simple_lin_post(start_angle)
 
@@ -97,7 +99,7 @@ for i in angle_array[1:]:
     CFD.setup.rescale()
     CFD.setup.init_temperature('mass-flow-inlet', 'outlet-vent', 273.15)
     CFD.setup.hyb_initialize()
-    CFD.setup.start_calculate(260)
+    CFD.setup.start_calculate(300)
     CFD.setup.write_lin_case_data(i)
     CFD.post.simple_lin_post(i)
 

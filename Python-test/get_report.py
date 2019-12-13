@@ -3,15 +3,15 @@ import txt_to_python, python_to_html
 import time
 time_start = time.time()
 # designate path
-root = r"G:\GE2_REAR\GE2-rear-round3\GE2-rear-ppd\GE2-rear3d-V1-FH\result_GE2-rear3_V1-FH"
+root = r"G:\458-front\458-foot\458-v2-foot\result_458-front_v2-foot-outletR"
 path = root + '\\'
 
 # Txt input path
-txt_name = path + 'GE2-rear3.txt'
+txt_name = path + '458-front.txt'
 
 
 # Excel output info
-excel_name = 'GE2-rear3-ppd-V1-FH'          # Output excel name
+excel_name = '458-front-v2-foot'          # Output excel name
 sheet_name = excel_name                  # The sheet in excel
 data_name = excel_name                   # get a title for your data
 

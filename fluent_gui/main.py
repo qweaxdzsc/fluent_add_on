@@ -294,6 +294,8 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
                 dead_zone_list.append('fan_blade')
                 if self.part_tree.topLevelItem(0).checkState(0) == 2:
                     face_list.append('fan_in')
+                if self.part_tree.topLevelItem(1).checkState(0) == 2:
+                    face_list.append('fan_in')
                 face_list.append('fan_out')
                 face_list.append('fan_blade')
         if self.part_tree.topLevelItem(6).checkState(0) == 2:
@@ -342,7 +344,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.up_list = up_list
         self.dead_zone_list = dead_zone_list
         self.internal_face = internal_face
-        print(self.internal_face)
 
     def show_outlet_name(self):
         if self.import_outlet:
@@ -690,9 +691,9 @@ print('script finished')
             get_tui(self.pamt, self.body_list, self.energy_check, self.K_dict,
                 self.porous_list, self.up_list, self.dead_zone_list, self.internal_face, self.view_path)
         except Exception as e:
-            print(e)
-            print(e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
-            print(e.__traceback__.tb_lineno)  # 发生异常所在的行数
+            print('error:', e)
+            print('error in file:', e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
+            print('error in line:', e.__traceback__.tb_lineno)  # 发生异常所在的行数
 
     def begin(self):
         self.start_btn.setDisabled(True)

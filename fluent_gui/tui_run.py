@@ -59,17 +59,16 @@ class get_tui():
         mesh.fix_slivers()
         mesh.compute_volume_region()
         mesh.volume_mesh_change_type(self.dead_zone_list)
+        mesh.retype_face(face_list=['inlet*'], face_type='pressure-inlet')
+        mesh.retype_face(face_list=self.internal_list, face_type='internal')
+        mesh.retype_face(face_list=['outlet*'], face_type='outlet-vent')
         if self.energy_check is True:
             mesh.retype_face(face_list=['hc*'], face_type='radiator')
-            self.internal_list.remove('hc*')
             mesh.auto_mesh_volume(1.25, 'poly')
         else:
             mesh.auto_mesh_volume()
         mesh.auto_node_move()
         mesh.rename_cell(zone_list=mesh_zone_list)
-        mesh.retype_face(face_list=['inlet*'], face_type='pressure-inlet')
-        mesh.retype_face(face_list=self.internal_list, face_type='internal')
-        mesh.retype_face(face_list=['outlet*'], face_type='outlet-vent')
         mesh.check_quality()
         mesh.prepare_for_solve()
         mesh.write_mesh()
@@ -108,6 +107,11 @@ class get_tui():
         for i in self.K_dict:
             setup.BC_outlet_vent(self.K_dict[i], i)
         setup.solution_method()
+
+        setup.report_definition('volume', 'surface-volumeflowrate', ['inlet*'])
+        setup.report_definition('mass-flux', 'surface-massflowrate', mass_flux_list, 'no')
+        setup.report_definition('pressure', 'surface-areaavg', ['evap_in'])
+
         if self.energy_check is True:
             inlet_temp = float(d['temp_inlet']) + 273.15
             hc_temp = float(d['temp_hc']) + 273.15
@@ -116,10 +120,9 @@ class get_tui():
             setup.heat_flux('hc_in', hc_temp)
             setup.heat_flux('hc_out', hc_temp)
             setup.report_definition('temperature', 'surface-areaavg', ['outlet*'], 'yes', 'temperature')
-        setup.report_definition('volume', 'surface-volumeflowrate', ['inlet*'])
-        setup.report_definition('mass-flux', 'surface-massflowrate', mass_flux_list, 'no')
-        setup.report_definition('pressure', 'surface-areaavg', ['evap_in'])
-        setup.convergence_criterion()
+            setup.convergence_criterion('temperature')
+        else:
+            setup.convergence_criterion('volume')
         setup.hyb_initialize()
         if 'fan' in self.body_list:
             setup.start_calculate(800)
@@ -138,7 +141,7 @@ class get_tui():
             post.read_view(self.view_path)
             for i in self.porous_list:
                 post.create_contour(i+'_out', i+'_out')
-                post.snip_picture(i+'_out', 'yes')
+                post.snip_picture(i+'_out')
                 # post.snip_avz(i + '_out')
             # post.create_streamline('whole_pathline', 'inlet')
             post.create_streamline('distrib_pathline', 'evap_in', [0, 12])
@@ -162,29 +165,12 @@ class get_tui():
 
     def angle_array(self):
         d = self.d
-        total_angle = float(d['valve_td'])
         rotate_percente = float(d['valve_rp'])
-
-        start_percente = total_angle*rotate_percente/100
-        end_percente = total_angle-start_percente
         points = int(100/rotate_percente) - 1
-
         import numpy as np
-        angle_array = np.linspace(start_percente, end_percente, points, endpoint=True)  # define your angle range and points
+        angle_array = np.linspace(rotate_percente, 100-rotate_percente, points, endpoint=True)  # define your angle range and points
         self.lin_array = [int(i) for i in angle_array]
         print(self.lin_array)
-
-    # def pre_info_array(self):
-    #     whole_jou = ''
-    #     project_title = self.d['project_name']
-    #     version_name = self.d['version']
-    #     whole_name = project_title + '-' + version_name
-    #     cad_name = self.d['cad_name']
-    #     case_out = self.d['file_path']
-    #
-    #     self.CFD = fluent_tui.tui(whole_jou, project_title, version_name, case_out, cad_name)
-    #     self.jou_mesh_path = case_out + '/' + whole_name + '-mesh-TUI.jou'
-    #     self.jou_solve_path = case_out + '/' + whole_name + '-solve-TUI.jou'
 
     def lin_mesh(self):
         mesh = self.CFD.mesh
@@ -224,7 +210,8 @@ class get_tui():
         print('output journal in:', d['file_path'])
 
         mass_flux_list = ['inlet*', 'outlet*']
-        inlet_temp = d['temp_inlet']+273.15
+        inlet_temp = float(d['temp_inlet'])+273.15
+        hc_temp = float(d['temp_hc']) + 273.15
 
         jou_solve = open(self.jou_solve_path, 'w')
 
@@ -252,31 +239,31 @@ class get_tui():
         setup.energy_eqt('yes')
         # setup.BC_pressure_inlet('inlet')
         if 'fan' in self.body_list:
-            setup.init_temperature('pressure-inlet', 'outlet-vent', d['temp_inlet']+273.15)
+            setup.init_temperature('pressure-inlet', 'outlet-vent', inlet_temp)
         else:
-            setup.init_temperature('mass-flow-inlet', 'outlet-vent', d['temp_inlet']+273.15)
+            setup.init_temperature('mass-flow-inlet', 'outlet-vent', inlet_temp)
 
         for i in self.K_dict:
             setup.BC_outlet_vent(self.K_dict[i], i)
-        setup.heat_flux('hc_in', d['temp_hc']+273.15)
-        setup.heat_flux('hc_out', d['temp_hc']+273.15)
+        setup.heat_flux('hc_in', hc_temp)
+        setup.heat_flux('hc_out', hc_temp)
         setup.report_definition('temperature', 'surface-areaavg', ['outlet*'], 'yes', 'temperature')
         setup.report_definition('mass-flux', 'surface-massflowrate', mass_flux_list, 'no')
-        setup.convergence_criterion()
+        setup.convergence_criterion('temperature')
         setup.hyb_initialize()
-        setup.start_calculate(270)
+        setup.start_calculate(350)
         setup.write_lin_case_data(self.lin_array[0])
         post.simple_lin_post(self.lin_array[0])
 
         for i in self.lin_array[1:]:
             setup.replace_lin_mesh(i)
             setup.rescale()
-            setup.init_temperature('mass-flow-inlet', 'outlet-vent', d['temp_inlet']+273.15)
+            setup.init_temperature('mass-flow-inlet', 'outlet-vent', inlet_temp)
             setup.BC_mass_flow_inlet('inlet', d['mass_inlet'])
-            setup.heat_flux('hc_in', d['temp_hc']+273.15)
-            setup.heat_flux('hc_out', d['temp_hc']+273.15)
+            setup.heat_flux('hc_in', hc_temp)
+            setup.heat_flux('hc_out', hc_temp)
             setup.hyb_initialize()
-            setup.start_calculate(260)
+            setup.start_calculate(350)
             setup.write_lin_case_data(i)
             post.simple_lin_post(i)
 

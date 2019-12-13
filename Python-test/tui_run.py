@@ -4,10 +4,10 @@ jou_out = r'C:\Users\BZMBN4\Desktop'       # txt output root
 
 # txt name
 whole_jou = ''
-project_title = 'GE2-rear3'
-version_name = 'V1-FH'
-cad_name = 'GE2-rear3_V1-FH'
-case_out = r'G:\GE2_REAR\GE2-rear-round3\GE2-rear-ppd\GE2-rear3d-V1-FH'
+project_title = '458-front'
+version_name = 'v2-foot'
+cad_name = '458-v2-foot'
+case_out = r'G:\458-front\458-foot\458-v2-foot'
 
 jou_title = project_title + '-' + version_name + '-TUI'
 txt_name = jou_out + '\\' + jou_title + '.jou'            # txt final path
@@ -17,10 +17,10 @@ jou = open(txt_name, 'w')
 
 CFD = fluent_tui.tui(whole_jou, project_title, version_name, case_out, cad_name)
 
-# CFD.mesh.simple_import(['volute'], ['evap', 'filter'])
+CFD.mesh.simple_import(['ai', 'volute'], ['evap', 'filter'])
 # CFD.mesh.simple_import(['ai', 'volute'], ['evap', 'filter', 'hc'])
 # CFD.mesh.simple_import(['volute'], ['evap'])
-CFD.mesh.simple_import(['volute'], ['evap', 'hc'])
+# CFD.mesh.simple_import(['volute'], ['evap', 'hc'])
 # CFD.mesh.import_distrib()
 CFD.mesh.general_improve()
 CFD.mesh.fix_slivers()
@@ -30,25 +30,25 @@ CFD.mesh.volume_mesh_change_type(dead_zone_list=['fan_blade'])
 CFD.mesh.auto_mesh_volume()
 CFD.mesh.auto_node_move()
 # CFD.mesh.rename_cell(zone_list=['ai', 'evap', 'fan', 'volute', 'filter', 'hc', 'distrib1', 'distrib2', 'cone'])
-# CFD.mesh.rename_cell(zone_list=['ai', 'evap', 'fan', 'hc', 'volute', 'filter', 'distrib'])
-CFD.mesh.rename_cell(zone_list=['ai', 'evap', 'fan', 'volute', 'distrib'])
+CFD.mesh.rename_cell(zone_list=['ai', 'evap', 'fan', 'hc', 'volute', 'filter', 'distrib'])
+# CFD.mesh.rename_cell(zone_list=['ai', 'evap', 'fan', 'volute', 'distrib'])
 # CFD.mesh.rename_cell(zone_list=['ai', 'evap', 'hc', 'fan', 'volute'])
 # CFD.mesh.retype_face(face_list=['inlet', 'inlet2'], face_type='pressure-inlet')
 CFD.mesh.retype_face(face_list=['inlet'], face_type='pressure-inlet')
 # CFD.mesh.retype_face(face_list=['fan_out', 'evap*', 'filter*'], face_type='internal')
-# CFD.mesh.retype_face(face_list=['fan_in', 'fan_out', 'evap*', 'hc*', 'filter*'], face_type='internal')
+CFD.mesh.retype_face(face_list=['fan_in', 'fan_out', 'evap*', 'hc*', 'filter*'], face_type='internal')
 # CFD.mesh.retype_face(face_list=['fan_in', 'fan_out', 'evap*'], face_type='internal')
-CFD.mesh.retype_face(face_list=['fan_in', 'fan_out', 'evap*', 'hc*'], face_type='internal')
+# CFD.mesh.retype_face(face_list=['fan_in', 'fan_out', 'evap*', 'hc*'], face_type='internal')
 CFD.mesh.retype_face(face_list=['outlet*'], face_type='outlet-vent')
 CFD.mesh.write_case()
 CFD.mesh.prepare_for_solve()
 CFD.mesh.switch_to_solver()
 
 
-fan_origin = [5.02818, 0.7852, 1.0300]
-fan_axis = [0, -1, 0]
-rpm = 2850
-evap_d1 = [-0.84805, 0, -0.52992]
+fan_origin = [2.18137, 0.355, 1.25187]
+fan_axis = [0, 0, 1]
+rpm = 4100
+evap_d1 = [0.99756, 0, -0.06976]
 evap_d2 = [0, 1, 0]
 hc_d1 = [0.85717, 0, 0.51504]
 hc_d2 = [0, 1, 0]
@@ -63,17 +63,17 @@ CFD.setup.rescale()
 # CFD.setup.convert_polymesh()
 CFD.setup.turb_models()
 CFD.setup.rotation_volume(rpm, fan_origin, fan_axis, 'fan')
-CFD.setup.porous_zone('evap', evap_d1, evap_d2, 2.82e+07, 455.67)
-# CFD.setup.porous_zone('filter', filter_d1, filter_d2, 4.7e+07, 319.5)
-# CFD.setup.porous_zone('hc', hc_d1, hc_d2, 6.62e+07, 505.43)
+CFD.setup.porous_zone('evap', evap_d1, evap_d2, 7.39e+07, 0)
+CFD.setup.porous_zone('filter', filter_d1, filter_d2, 4.7e+07, 319.5)
+CFD.setup.porous_zone('hc', hc_d1, hc_d2, 1.34e+08, 0)
 CFD.setup.BC_type('inlet*()', 'pressure-inlet')
 # CFD.setup.BC_type('inlet', 'mass-flow-inlet')
 # CFD.setup.BC_type('outlet*()', 'outlet-vent')
 # CFD.setup.BC_type('outlet_vr', 'outlet-vent')
 CFD.setup.BC_pressure_inlet('inlet')
 # CFD.setup.BC_mass_flow_inlet('inlet', 0.0735)
-CFD.setup.BC_outlet_vent(10.276, 'outlet_d')
-CFD.setup.BC_outlet_vent(7.816, 'outlet_p')
+# CFD.setup.BC_outlet_vent(10.276, 'outlet_d')
+# CFD.setup.BC_outlet_vent(7.816, 'outlet_p')
 # CFD.setup.BC_outlet_vent(3.84, 'outlet_foot')
 CFD.setup.solution_method()
 CFD.setup.report_definition('volume', 'surface-volumeflowrate', ['outlet*'])
