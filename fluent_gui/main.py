@@ -79,13 +79,13 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.finish_mode_info_btn.clicked.connect(self.into_CAD)
 
         self.unit_btn.clicked.connect(self.unit_convert)
-        self.choose_evap_btn.clicked.connect(self.porous_choose)
+        self.choose_evap_btn.clicked.connect(lambda: self.porous_choose('evap'))
+        self.choose_hc_btn.clicked.connect(lambda: self.porous_choose('hc'))
         self.start_btn.clicked.connect(self.begin)
         self.return_btn.clicked.connect(self.mode_ui_default)
         self.solver_btn.clicked.connect(self.solver)
 
         self.show_workflow_btn.clicked.connect(self.test)
-        self.choose_evap_btn.clicked.connect(lambda: self.append_text('功能未开放,敬请期待'))
         self.actionalter_default_parameter.triggered.connect(lambda: self.append_text('功能未开放,敬请期待'))
 
     def default_part_tree(self):
@@ -594,9 +594,21 @@ print('script finished')
         self.volume_unit.show()
         self.volume_unit.unit_convert_result.connect(self.volume_input)
 
-    def porous_choose(self):
+    def porous_choose(self, btn_name):
         self.porous_model = Ui_porous()
         self.porous_model.show()
+        self.porous_model.load_btn.clicked.connect(lambda: self.porous_import(btn_name))
+
+    def porous_import(self, btn_name):
+        C1 = self.porous_model.c1_edit.text()
+        C2 = self.porous_model.c2_edit.text()
+        c1_edit = btn_name + '_c1_edit'
+        c2_edit = btn_name + '_c2_edit'
+        widget1 = self.findChild(QLineEdit, c1_edit)
+        widget2 = self.findChild(QLineEdit, c2_edit)
+        widget1.setText(str(C1))
+        widget2.setText(str(C2))
+        self.porous_model.close()
 
     def volume_input(self, msg):
         self.mass_inlet_edit.setText(msg)
@@ -878,8 +890,6 @@ class Ui_porous(Ui_porous_model_form, QWidget):
         self.default_ui()
         self.default_btn()
         self.init_db()
-        print(self.db_dict)
-        print(self.db_header)
 
     def default_ui(self):
         self.load_btn.hide()
@@ -888,7 +898,7 @@ class Ui_porous(Ui_porous_model_form, QWidget):
         self.unit_choose = 'kg/h'
         self.db_dict = {}
         self.db_path = r'C:\Users\BZMBN4\Desktop\fluent-command\porous_db.csv'
-        self.porous_info_dict()
+
 
     def default_btn(self):
         self.model_combox.activated.connect(self.choose)
@@ -900,6 +910,7 @@ class Ui_porous(Ui_porous_model_form, QWidget):
         self.add_btn.clicked.connect(self.add)
 
     def init_db(self):
+        self.porous_info_dict()
         self.db_header = self.pd.keys()
         try:
             with open(self.db_path, 'r', newline='') as f:
@@ -935,10 +946,10 @@ class Ui_porous(Ui_porous_model_form, QWidget):
     def add_mode(self):
         self.default_show()
         self.add_btn.show()
+        self.load_btn.hide()
 
     def read_mode(self, combox_index):
         self.default_show()
-        print(self.model_combox.currentIndex())
 
         self.model_name_edit.setEnabled(False)
         self.cal_btn.setEnabled(False)

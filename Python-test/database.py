@@ -143,7 +143,7 @@ def create_uni_table(conn):
 # create_tp_table(conn)
 # create_uni_table(conn)
 
-# import numpy as np
+import numpy as np
 from txt_to_python import process_data
 from fan_efficiency import fan
 import time
@@ -177,8 +177,8 @@ def insert_data(conn, data_matrix, project_name, version, file_path, producer, r
     # start insert data into database
     cursor = conn.cursor()
     insert = """
-    INSERT INTO cfd_project(`Project`, `Version`, `File_address`, `Producer`, `Date`, `RPM`, `Torque`, `Fan_efficiency`, 
-    `Total_volume`, `Total_pressure_loss`) 
+    INSERT INTO cfd_project(`Project`, `Version`, `File_address`, `Producer`, `Date`, `RPM`, `Torque`, `Fan_efficiency`,
+    `Total_volume`, `Total_pressure_loss`)
     VALUES ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s');
     """ % (project_name, version, file_path, producer, date, rpm, torque, fan_ef_raw, total_volume, whole_dp)
     cursor.execute(insert)
@@ -191,7 +191,7 @@ def insert_data(conn, data_matrix, project_name, version, file_path, producer, r
     volume = [float(x) for x in data_matrix[1]]
     cursor = conn.cursor()
     for i in range(len(data_matrix[0])):
-        volume_table = """INSERT INTO cfd_volume(`Project_id`, `Face_name`, `Volume(L/S)`, `Percentage`) 
+        volume_table = """INSERT INTO cfd_volume(`Project_id`, `Face_name`, `Volume(L/S)`, `Percentage`)
         VALUES ('%s', '%s', '%s', '%s');""" % (last_id, data_matrix[0][i], volume[i], percentage[i])
         cursor.execute(volume_table)
     conn.commit()
@@ -201,7 +201,7 @@ def insert_data(conn, data_matrix, project_name, version, file_path, producer, r
     sp = [float(x) for x in data_matrix[4]]
     cursor = conn.cursor()
     for i in range(len(data_matrix[3])):
-        sp_table = """INSERT INTO cfd_sp(`Project_id`, `Face_name`, `Static_pressure`) 
+        sp_table = """INSERT INTO cfd_sp(`Project_id`, `Face_name`, `Static_pressure`)
             VALUES ('%s', '%s', '%s');""" % (last_id, data_matrix[3][i], sp[i])
         cursor.execute(sp_table)
     conn.commit()
@@ -211,7 +211,7 @@ def insert_data(conn, data_matrix, project_name, version, file_path, producer, r
     tp = [float(x) for x in data_matrix[6]]
     cursor = conn.cursor()
     for i in range(len(data_matrix[5])):
-        tp_table = """INSERT INTO cfd_tp(`Project_id`, `Face_name`, `Total_pressure`) 
+        tp_table = """INSERT INTO cfd_tp(`Project_id`, `Face_name`, `Total_pressure`)
                VALUES ('%s', '%s', '%s');""" % (last_id, data_matrix[5][i], tp[i])
         cursor.execute(tp_table)
     conn.commit()
@@ -221,7 +221,7 @@ def insert_data(conn, data_matrix, project_name, version, file_path, producer, r
     uni = [float(x) for x in data_matrix[8]]
     cursor = conn.cursor()
     for i in range(len(data_matrix[7])):
-        tp_table = """INSERT INTO cfd_uni(`Project_id`, `Face_name`, `Uniformity`) 
+        tp_table = """INSERT INTO cfd_uni(`Project_id`, `Face_name`, `Uniformity`)
                    VALUES ('%s', '%s', '%s');""" % (last_id, data_matrix[7][i], uni[i])
         cursor.execute(tp_table)
     conn.commit()
@@ -230,61 +230,61 @@ def insert_data(conn, data_matrix, project_name, version, file_path, producer, r
 
 insert_data(conn, data_matrix, project_name, version, new_path, producer, rpm)
 
-
-def extract_data(conn, project_name, version):
-    # search main table
-    cursor = conn.cursor(pymysql.cursors.DictCursor)   # return Dictionary_like key_valve
-    serh = """
-    SELECT  * FROM cfd_project where Project = '%s' and Version = '%s'
-    """ % (project_name, version)
-    cursor.execute(serh)
-    data = cursor.fetchone()
-    print('main table data:', data)
-    cursor.close()
-
-    # search volume table
-    ID = data['ID']
-    cursor = conn.cursor()
-    s_volume = """
-    SELECT `Face_name`, `Volume(L/S)`, `Percentage` FROM cfd_volume where Project_id = '%s'
-    """ % (ID)
-    cursor.execute(s_volume)
-    volume_data = cursor.fetchall()
-    print(volume_data)
-    cursor.close()
-
-    # search sp table
-    cursor = conn.cursor()
-    s_sp = """
-        SELECT `Face_name`, `Static_pressure` FROM cfd_sp where Project_id = '%s'
-        """ % (ID)
-    cursor.execute(s_sp)
-    sp_data = cursor.fetchall()
-    print(sp_data)
-    cursor.close()
-
-    # search tp table
-    cursor = conn.cursor()
-    s_tp = """
-        SELECT `Face_name`, `Total_pressure` FROM cfd_tp where Project_id = '%s'
-        """ % (ID)
-    cursor.execute(s_tp)
-    tp_data = cursor.fetchall()
-    print(tp_data)
-    cursor.close()
-
-    # search uni table
-    cursor = conn.cursor()
-    s_uni = """
-            SELECT `Face_name`, `Uniformity` FROM cfd_uni where Project_id = '%s'
-            """ % (ID)
-    cursor.execute(s_uni)
-    uni_data = cursor.fetchall()
-    print('This is uni data:', uni_data)
-    cursor.close()
-
-    return data
+#
+# def extract_data(conn, project_name, version):
+#     # search main table
+#     cursor = conn.cursor(pymysql.cursors.DictCursor)   # return Dictionary_like key_valve
+#     serh = """
+#     SELECT  * FROM cfd_project where Project = '%s' and Version = '%s'
+#     """ % (project_name, version)
+#     cursor.execute(serh)
+#     data = cursor.fetchone()
+#     print('main table data:', data)
+#     cursor.close()
+#
+#     # search volume table
+#     ID = data['ID']
+#     cursor = conn.cursor()
+#     s_volume = """
+#     SELECT `Face_name`, `Volume(L/S)`, `Percentage` FROM cfd_volume where Project_id = '%s'
+#     """ % (ID)
+#     cursor.execute(s_volume)
+#     volume_data = cursor.fetchall()
+#     print(volume_data)
+#     cursor.close()
+#
+#     # search sp table
+#     cursor = conn.cursor()
+#     s_sp = """
+#         SELECT `Face_name`, `Static_pressure` FROM cfd_sp where Project_id = '%s'
+#         """ % (ID)
+#     cursor.execute(s_sp)
+#     sp_data = cursor.fetchall()
+#     print(sp_data)
+#     cursor.close()
+#
+#     # search tp table
+#     cursor = conn.cursor()
+#     s_tp = """
+#         SELECT `Face_name`, `Total_pressure` FROM cfd_tp where Project_id = '%s'
+#         """ % (ID)
+#     cursor.execute(s_tp)
+#     tp_data = cursor.fetchall()
+#     print(tp_data)
+#     cursor.close()
+#
+#     # search uni table
+#     cursor = conn.cursor()
+#     s_uni = """
+#             SELECT `Face_name`, `Uniformity` FROM cfd_uni where Project_id = '%s'
+#             """ % (ID)
+#     cursor.execute(s_uni)
+#     uni_data = cursor.fetchall()
+#     print('This is uni data:', uni_data)
+#     cursor.close()
+#
+#     return data
 
 
 # data = extract_data(conn, project_name, version)
-conn.close()
+# conn.close()

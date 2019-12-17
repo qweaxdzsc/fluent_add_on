@@ -83,7 +83,7 @@ class LinReport(object):
         rear_foot = []
         defrost = []
         clasif_outlet_dict = {'vent': vent, 'rear_vent': rear_vent, 'foot': foot, 'rear_foot': rear_foot,
-                               'defrost': defrost}
+                              'defrost': defrost}
         for i in self.outlet_list:
             if 'v' in i:
                 if 'r' is i[-3]:
