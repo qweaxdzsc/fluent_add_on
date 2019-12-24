@@ -6,7 +6,7 @@ from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtCore import Qt
 
 from nameselection import Ui_Form
-from rename_tip import Ui_tip_widget
+from ui_rename_outlet import Ui_tip_widget
 
 
 class MyMainWindow(QWidget, Ui_Form):
