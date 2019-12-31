@@ -5,10 +5,10 @@ import fluent_tui
 
 
 whole_jou = ''
-project_title = '458-front'
-version_name = 'lin-defog'
-cad_name = '458-lin-defog'
-project_path = r"G:\458-front\458-lin\458-lin-defog"
+project_title = '458-rear'
+version_name = 'lin11'
+cad_name = '458-rear-lin11'
+project_path = r"G:\458-rear\458-rear-lin11"
 
 # valve_dir = [0, -1, 0]
 # valve_origin = [5407.69, 869.38, 1022.1]
@@ -45,8 +45,8 @@ for i in angle_array:
     CFD.mesh.fix_slivers()
     CFD.mesh.compute_volume_region()
     CFD.mesh.volume_mesh_change_type(dead_zone_list=['valve'])
-    CFD.mesh.auto_mesh_volume(1.25)
-    # CFD.mesh.auto_mesh_volume(1.25, 'poly')
+    # CFD.mesh.auto_mesh_volume(1.25)
+    CFD.mesh.auto_mesh_volume(1.25, 'poly')
     CFD.mesh.auto_node_move(0.8, 6)
     CFD.mesh.rename_cell(zone_list=['ai', 'distrib', 'evap', 'hc'])
     CFD.mesh.retype_face(face_list=['inlet'], face_type='mass-flow-inlet')
@@ -61,7 +61,7 @@ mass_flux_list = ['inlet*', 'outlet*']
 
 evap_d1 = [-0.99756, 0, 0.06976]
 evap_d2 = [0, 1, 0]
-hc_d1 = [0.71934, 0, 0.69466]
+hc_d1 = [0.71634, 0, 0.69765]
 hc_d2 = [0, 1, 0]
 
 CFD.mesh.switch_to_solver()
@@ -71,8 +71,8 @@ CFD.setup.rescale()
 # CFD.setup.convert_polymesh()
 CFD.setup.turb_models()
 
-CFD.setup.porous_zone('evap', evap_d1, evap_d2, 7.39e+07, 0)
-CFD.setup.porous_zone('hc', hc_d1, hc_d2, 1.34e+08, 0)
+CFD.setup.porous_zone('evap', evap_d1, evap_d2, 2.82e+07, 455.67)
+CFD.setup.porous_zone('hc', hc_d1, hc_d2, 4.07e+07, 580)
 # CFD.setup.BC_type('inlet', 'pressure-inlet')
 CFD.setup.BC_type('inlet*()', 'mass-flow-inlet')
 CFD.setup.BC_type('outlet*()', 'outlet-vent')
@@ -80,10 +80,10 @@ CFD.setup.solution_method()
 CFD.setup.energy_eqt('yes')
 # CFD.setup.BC_pressure_inlet('inlet')
 CFD.setup.init_temperature('mass-flow-inlet', 'outlet-vent', 273.15)
-CFD.setup.BC_mass_flow_inlet('inlet', 0.0735)
-CFD.setup.BC_outlet_vent(0, 'outlet_vc')
-CFD.setup.BC_outlet_vent(0, 'outlet_vl')
-CFD.setup.BC_outlet_vent(0, 'outlet_vr')
+CFD.setup.BC_mass_flow_inlet('inlet', 0.055125)
+CFD.setup.BC_outlet_vent(6.854, 'outlet_vent')
+# CFD.setup.BC_outlet_vent(0, 'outlet_vl')
+# CFD.setup.BC_outlet_vent(0, 'outlet_vr')
 CFD.setup.heat_flux('hc_in', 348.15)
 CFD.setup.heat_flux('hc_out', 348.15)
 CFD.setup.report_definition('temperature', 'surface-areaavg', ['outlet*'], 'yes', 'temperature')

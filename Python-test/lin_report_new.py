@@ -259,13 +259,13 @@ class LinReport(object):
 
 if __name__ == "__main__":
 
-    project_address = r"G:\458-front\458-lin\458-lin-foot"
-    project_name = '458-front'
-    version_name = 'lin-foot'
+    project_address = r"G:\458-rear\458-rear-lin11"
+    project_name = '458-rear'
+    version_name = 'lin11'
 
     whole_name = project_name + '-' + version_name
     Linearity_report = LinReport(project_address, project_name, version_name)
     Linearity_report.plot_temp()
     Linearity_report.plot_temp_diff(2, 15)
     Linearity_report.plot_avg_temp_diff(4, 12)
-    Linearity_report.plot_side_temp_diff(-2, 2)
+    # Linearity_report.plot_side_temp_diff(-2, 2)

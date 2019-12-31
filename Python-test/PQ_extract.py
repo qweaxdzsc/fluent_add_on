@@ -1,14 +1,14 @@
+from matplotlib import pyplot as plt
+import numpy as np
 
-def txt_file_list(version_name, RPM_start, RPM_end, RPM_add, K_start, K_end, K_add):
+
+def list_RPM_K(RPM_start, RPM_end, RPM_add, K_number):
     RPM_list = [RPM for RPM in range(RPM_start, RPM_end+RPM_add, RPM_add)]
-    K_list = [K for K in range(K_start, K_end+K_add, K_add)]
-    result_file_list = []
 
-    for RPM in RPM_list:
-        for K in K_list:
-            result_file_list.append('%s_%srpm_K%s_totalresult.txt' % (version_name, RPM, K))
+    K_formal = np.linspace(1, 6, K_number)
+    K_list = [round(i ** 3, 2) for i in K_formal]
 
-    return result_file_list
+    return RPM_list, K_list
 
 
 def extract_data(extract_class, txt_path):
@@ -59,35 +59,73 @@ def extract_data_moment(measure_zone, txt_path):
         for i in lines[first_row_number:last_row_number]:       # form dict
             if measure_zone in i:
                 i = i.split()
-                data_dict['moment'] = i[3]
+                data_dict['moment'] = i[3]                      # form list
 
         return data_dict
 
 
+def temp_chart_setting(title_plus, ylabel_name, y_major, y_low_limit, y_up_limit):
+    plt.figure(figsize=(16, 10))
+    plt.title("Volute-PQ-%s" % (title_plus), fontsize=20)
+    plt.xlabel("volume")
+    plt.ylabel("%s"%(ylabel_name))
+    ax = plt.gca()
+    x_major_locator = plt.MultipleLocator(5)
+    y_major_locator = plt.MultipleLocator(y_major)
+    ax.xaxis.set_major_locator(x_major_locator)
+    ax.yaxis.set_major_locator(y_major_locator)
+
+    plt.xlim(0, 180)
+    plt.ylim(y_low_limit, y_up_limit)
+
+    plt.grid()
+
+
+def plot_pq(project_name, plot_dict):
+    temp_chart_setting(project_name, 'pressure', 10, 0, 600)
+    for RPM in plot_dict.keys():
+        x = plot_dict[RPM][0]
+        y = plot_dict[RPM][1]
+        plt.plot(x, y, 'o-', markersize=6, label=RPM)
+
+    plt.legend()
+    plt.show()
+
+
 if __name__ == '__main__':
+    project_name = '137DGR'
+    version_name = 'V1'
+    result_folder = r'G:\volute_PQ\137DGR\result_137DGR_V1'
 
-    # Project_name = 'D2UX_PQ'
-    version_name = 'D2UX_PQ'
-    result_folder = r'\\192.168.1.101\works\motor'
-
-    RPM_start = 2000
-    RPM_end = 2600
+    RPM_start = 1400
+    RPM_end = 2800
     RPM_add = 200
-    K_start = 1
-    K_end = 9
-    K_add = 2
+    K_number = 20
 
-    result_file_list = txt_file_list(version_name, RPM_start, RPM_end, RPM_add, K_start, K_end, K_add)    # form result file list
+    RPM_list, K_list = list_RPM_K(RPM_start, RPM_end, RPM_add, K_number)    # form result file list
+    print(RPM_list)
+    print(K_list)
+    plot_dict = {}
+    for RPM in RPM_list:
+        volume_list = []
+        pressure_list = []
+        moment_list = []
+        for K in K_list:
+            txt_path = result_folder + '\\' + '%s-%s.txt' % (RPM, K)
+            volume_dict = extract_data('Volumetric Flow Rate', txt_path)
+            sp_dict = extract_data('Static Pressure', txt_path)
+            moment = extract_data_moment('fan_blade', txt_path)
+            volume = float(volume_dict['inlet'])*1000
+            sp = float(sp_dict['outlet'])
+            moment = float(moment['moment'])
+            volume_list.append(volume)
+            pressure_list.append(sp)
+            moment_list.append(moment)
 
-    result_dict = {}                                                                                        # form result dict
-    for i in result_file_list:
-        txt_path = result_folder + '\\' + i
-        volume_dict = extract_data('Volumetric Flow Rate', txt_path)
-        sp_dict = extract_data('Static Pressure', txt_path)
-        moment = extract_data_moment('asmo_fan', txt_path)
+            # result_dict[i[:-4]] = {'volume': volume_dict['inlet'], 'static pressure': sp_dict['outlet'], 'moment': moment['moment']}
+        plot_dict[RPM] = [volume_list, pressure_list, moment_list]
 
-        result_dict[i[:-4]] = {'volume': volume_dict['inlet_asmo'], 'static pressure': sp_dict['outlet_asmo'], 'moment': moment['moment']}
-
-    print(result_dict)
+    plot_pq(project_name, plot_dict)
+    print(plot_dict)
 
 

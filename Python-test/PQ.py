@@ -1,15 +1,18 @@
 import os
 import fluent_tui
-
+import numpy as np
 
 project_title = '137DGR'
 version_name = 'V1'
 cad_name = '137DGR'
 project_path = r"G:\volute_PQ\137DGR"
 
-RPM_list = [2000+i*100 for i in range(21)]
+RPM_list = [2400+i*200 for i in range(10)]
 print('used RPM list', RPM_list)
-K_list = [5 + i*5 for i in range(4)]
+
+K_formal = np.linspace(1, 1.02, 20)
+K_list = [round(i**500, 2) for i in K_formal]
+
 print('used K_list', K_list)
 
 whole_jou = ''
@@ -20,7 +23,6 @@ print('output journal in:', txt_name)
 jou = open(txt_name, 'w')
 
 CFD = fluent_tui.tui(whole_jou, project_title, version_name, project_path, cad_name)
-
 
 CFD.mesh.import_CAD()
 CFD.mesh.size_scope_global()
@@ -60,7 +62,7 @@ CFD.setup.BC_outlet_vent(K_list[0], 'outlet')
 CFD.setup.solution_method()
 CFD.setup.report_definition('volume', 'surface-volumeflowrate', ['outlet*'])
 CFD.setup.report_definition('mass-flux', 'surface-massflowrate', ['inlet*', 'outlet*'], 'no')
-CFD.setup.convergence_criterion()
+CFD.setup.convergence_criterion('volume')
 CFD.setup.hyb_initialize()
 CFD.setup.start_calculate(600)
 CFD.setup.write_case_data()
@@ -71,19 +73,31 @@ CFD.post.txt_mass_flux()
 CFD.post.txt_surface_integrals('area-weighted-avg', ['inlet*', 'outlet*'], 'pressure')
 CFD.post.txt_moment(fan_origin, fan_axis)
 
+
+K_reverse_list = K_list[::-1]
+combox_list = []
+
 for RPM in RPM_list:
-    for K in K_list[1:]:
-        CFD.setup.BC_outlet_vent(K, 'outlet')
-        CFD.setup.start_calculate(400)
+    if RPM_list.index(RPM) % 2 == 0:
+        for K in K_list:
+            combox_list.append([RPM, K])
+    else:
+        for K in K_reverse_list:
+            combox_list.append([RPM, K])
 
-        CFD.version_name = version_name + '-%s-%s' % (RPM, K)
-        CFD.setup.write_case_data()
+for i in combox_list[1:]:
+    CFD.setup.rotation_volume(i[0], fan_origin, fan_axis, 'fan')
+    CFD.setup.BC_outlet_vent(i[1], 'outlet')
+    CFD.setup.start_calculate(400)
 
-        CFD.txt_out = CFD.result_path + '\\' + CFD.version_name + '.txt'
-        CFD.post.txt_surface_integrals('volume-flow-rate', ['inlet'])
-        CFD.post.txt_mass_flux()
-        CFD.post.txt_surface_integrals('area-weighted-avg', ['inlet*', 'outlet*'], 'pressure')
-        CFD.post.txt_moment(fan_origin, fan_axis)
+    CFD.version_name = '%s-%s' % (i[0], i[1])
+    CFD.setup.write_case_data()
+
+    CFD.txt_out = CFD.result_path + '\\' + CFD.version_name + '.txt'
+    CFD.post.txt_surface_integrals('volume-flow-rate', ['inlet'])
+    CFD.post.txt_mass_flux()
+    CFD.post.txt_surface_integrals('area-weighted-avg', ['inlet*', 'outlet*'], 'pressure')
+    CFD.post.txt_moment(fan_origin, fan_axis)
 
 
 jou.write(CFD.whole_jou)

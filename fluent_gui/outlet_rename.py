@@ -4,9 +4,9 @@ from PyQt5.QtWidgets import QWidget, QApplication
 import sys
 
 
-class outlet_rename_ui(QWidget, Ui_outlet_form):
+class ui_outlet_rename(QWidget, Ui_outlet_form):
     def __init__(self, parent=None):
-        super(outlet_rename_ui, self).__init__(parent)
+        super(ui_outlet_rename, self).__init__(parent)
         self.setupUi(self)
         self.init_set()
         self.item_check()
@@ -33,6 +33,6 @@ class outlet_rename_ui(QWidget, Ui_outlet_form):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    myWin = outlet_rename_ui()
+    myWin = ui_outlet_rename()
     myWin.show()
     sys.exit(app.exec_())

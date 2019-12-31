@@ -1,9 +1,12 @@
 from ui_porous_model import Ui_porous_model_form
 from PyQt5.QtWidgets import QWidget, QLineEdit, QMenu, QMessageBox, QTableWidgetItem
+from PyQt5.QtCore import pyqtSignal
 import csv
 
 
 class Ui_porous(Ui_porous_model_form, QWidget):
+    db_change = pyqtSignal()
+
     def __init__(self):
         super(Ui_porous_model_form, self).__init__()
         self.setupUi(self)
@@ -66,6 +69,13 @@ class Ui_porous(Ui_porous_model_form, QWidget):
         self.default_show()
         self.add_btn.show()
         self.load_btn.hide()
+        self.clear_edit_data(self.operate_frame,
+                             'model_name', 'length', 'width', 'height', 'c1', 'c2')
+
+    def clear_edit_data(self, container, *args):
+        for edit in args:
+            wigdet = container.findChild(QLineEdit, edit+'_edit')
+            wigdet.setText('')
 
     def read_mode(self, combox_index):
         self.default_show()
@@ -230,3 +240,5 @@ class Ui_porous(Ui_porous_model_form, QWidget):
             dwriter.writeheader()
             for i in self.db_dict:
                 dwriter.writerow(self.db_dict[i])
+
+            self.db_change.emit()

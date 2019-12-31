@@ -66,6 +66,13 @@ class Ui_porous(Ui_porous_model_form, QWidget):
         self.default_show()
         self.add_btn.show()
         self.load_btn.hide()
+        self.clear_edit_data(self.operate_frame,
+                             'model_name', 'length', 'width', 'height', 'c1', 'c2')
+
+    def clear_edit_data(self, container, *args):
+        for edit in args:
+            wigdet = container.findChild(QLineEdit, edit + '_edit')
+            wigdet.setText('')
 
     def read_mode(self, combox_index):
         self.default_show()

@@ -16,6 +16,7 @@ from ui_rename_outlet import Ui_tip_widget
 from ui_k_cal import Ui_K_calculator
 from ui_unit_convertor import Ui_unit_converter
 from porous_model import Ui_porous
+from outlet_rename import ui_outlet_rename
 
 
 class MyMainWindow(QMainWindow, Ui_MainWindow):
@@ -348,8 +349,8 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         if self.import_outlet:
             self.outlet_name_and_K()
         else:
-            from outlet_rename import outlet_rename_ui
-            self.outlet_rename = outlet_rename_ui()
+
+            self.outlet_rename = ui_outlet_rename()
             self.outlet_rename.show()
             self.outlet_rename.chosed_btn.clicked.connect(self.receive_outlet_name)
             self.outlet_rename.chosed_btn.clicked.connect(self.outlet_name_and_K)
@@ -663,7 +664,6 @@ print('script finished')
             z = float(z)
             d1 = [x, y, z]
             d2 = [0, 0, 0]
-
             for i in d1:
                 if i == 0:
                     d2[d1.index(i)] = 1
@@ -834,9 +834,7 @@ class Ui_cal_K(Ui_K_calculator, QWidget):
         r = float(self.R_edit.text())
         mm2 = float(self.area_edit.text())
         rho = 1.225
-
         m2 = mm2 / 1000 / 1000
-
         K = 1000*2*r*m2**2/rho
         self.K_result.emit("%.3f" % K)
 
