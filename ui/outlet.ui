@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>outlet_form</class>
+ <widget class="QWidget" name="outlet_form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>439</width>
+    <height>549</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>出口命名</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <property name="leftMargin">
+    <number>20</number>
+   </property>
+   <property name="topMargin">
+    <number>20</number>
+   </property>
+   <property name="rightMargin">
+    <number>20</number>
+   </property>
+   <property name="bottomMargin">
+    <number>20</number>
+   </property>
+   <property name="horizontalSpacing">
+    <number>30</number>
+   </property>
+   <property name="verticalSpacing">
+    <number>20</number>
+   </property>
+   <item row="0" column="0" rowspan="3">
+    <widget class="QTreeWidget" name="outlet_tree">
+     <column>
+      <property name="text">
+       <string>出口</string>
+      </property>
+     </column>
+     <item>
+      <property name="text">
+       <string>vent</string>
+      </property>
+      <property name="flags">
+       <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsEnabled</set>
+      </property>
+      <item>
+       <property name="text">
+        <string>outlet_vent</string>
+       </property>
+       <property name="checkState">
+        <enum>Unchecked</enum>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>outlet_vc</string>
+       </property>
+       <property name="checkState">
+        <enum>Unchecked</enum>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>outlet_vl</string>
+       </property>
+       <property name="checkState">
+        <enum>Unchecked</enum>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>outlet_vr</string>
+       </property>
+       <property name="checkState">
+        <enum>Unchecked</enum>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>outlet_d</string>
+       </property>
+       <property name="checkState">
+        <enum>Unchecked</enum>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>outlet_p</string>
+       </property>
+       <property name="checkState">
+        <enum>Unchecked</enum>
+       </property>
+      </item>
+     </item>
+     <item>
+      <property name="text">
+       <string>foot</string>
+      </property>
+      <item>
+       <property name="text">
+        <string>outlet_foot</string>
+       </property>
+       <property name="checkState">
+        <enum>Unchecked</enum>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>outlet_ffl</string>
+       </property>
+       <property name="checkState">
+        <enum>Unchecked</enum>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>outlet_ffr</string>
+       </property>
+       <property name="checkState">
+        <enum>Unchecked</enum>
+       </property>
+      </item>
+     </item>
+     <item>
+      <property name="text">
+       <string>defrost</string>
+      </property>
+      <item>
+       <property name="text">
+        <string>outlet_defrost</string>
+       </property>
+       <property name="checkState">
+        <enum>Unchecked</enum>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>outlet_dc</string>
+       </property>
+       <property name="checkState">
+        <enum>Unchecked</enum>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>outlet_dl</string>
+       </property>
+       <property name="checkState">
+        <enum>Unchecked</enum>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>outlet_dr</string>
+       </property>
+       <property name="checkState">
+        <enum>Unchecked</enum>
+       </property>
+      </item>
+     </item>
+     <item>
+      <property name="text">
+       <string>rear-vent</string>
+      </property>
+      <item>
+       <property name="text">
+        <string>outlet_rv</string>
+       </property>
+       <property name="checkState">
+        <enum>Unchecked</enum>
+       </property>
+      </item>
+     </item>
+     <item>
+      <property name="text">
+       <string>rear-foot</string>
+      </property>
+      <item>
+       <property name="text">
+        <string>outlet_rfl</string>
+       </property>
+       <property name="checkState">
+        <enum>Unchecked</enum>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>outlet_rfr</string>
+       </property>
+       <property name="checkState">
+        <enum>Unchecked</enum>
+       </property>
+      </item>
+     </item>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QLabel" name="chosed_label">
+     <property name="text">
+      <string>已选择出口</string>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QListView" name="chosed_list">
+     <property name="editTriggers">
+      <set>QAbstractItemView::NoEditTriggers</set>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QPushButton" name="chosed_btn">
+     <property name="text">
+      <string>确    定</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
