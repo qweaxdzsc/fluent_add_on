@@ -5,10 +5,10 @@ from PyQt5.QtCore import QRegExp
 from ui_input import Ui_MainWindow
 from porous_model import Ui_porous
 from k_cal import Ui_k_cal
+from project_name import Ui_project_name
 import cgitb
 import sys
 import csv
-import re
 
 
 class MyMainWindow(QMainWindow, Ui_MainWindow):
@@ -18,6 +18,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.signal_slot()
         self.porous_db_init()
         self.porous_item_update()
+        self.project_name = ''
         self.input_d = {}
         self.outlet_k_dict = {}
 
@@ -195,8 +196,11 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 if __name__ == "__main__":
     cgitb.enable(format='text')
     app = QApplication(sys.argv)
-    myWin = MyMainWindow()
-    myWin.show()
+
+    intro_window = Ui_project_name(MyMainWindow)
+    intro_window.show()
+    # myMain = MyMainWindow()
+    # myMain.show()
     sys.exit(app.exec_())
 
 

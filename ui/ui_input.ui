@@ -30,7 +30,7 @@
    <string notr="true">QToorBar::handle{height:40px; spacing: 10px;}</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTabWidget" name="tabwidget">
+   <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
       <x>-5</x>
@@ -73,7 +73,7 @@ QTabWidget::tab-bar { alignment: left; }</string>
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>3</number>
+     <number>4</number>
     </property>
     <property name="iconSize">
      <size>
@@ -898,6 +898,34 @@ QWidget{
       </property>
       <property name="tickInterval">
        <number>1</number>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="comment_tab">
+     <attribute name="title">
+      <string>备注</string>
+     </attribute>
+     <widget class="QTextEdit" name="comment_edit">
+      <property name="geometry">
+       <rect>
+        <x>50</x>
+        <y>80</y>
+        <width>301</width>
+        <height>311</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QLabel" name="label_8">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>30</y>
+        <width>381</width>
+        <height>20</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>*请留下重要的备注信息，必须要写</string>
       </property>
      </widget>
     </widget>
