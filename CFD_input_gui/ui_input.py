@@ -10,8 +10,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from HorizontalBar import HorizontalTabBar
 
-
-
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName("MainWindow")
@@ -253,7 +251,7 @@ class Ui_MainWindow(object):
         self.tab_4 = QtWidgets.QWidget()
         self.tab_4.setObjectName("tab_4")
         self.outlet_scrollarea = QtWidgets.QScrollArea(self.tab_4)
-        self.outlet_scrollarea.setGeometry(QtCore.QRect(50, 80, 291, 321))
+        self.outlet_scrollarea.setGeometry(QtCore.QRect(50, 80, 291, 341))
         self.outlet_scrollarea.setStyleSheet("QAbstractScrollArea {\n"
 "    background-color: white;\n"
 "    border:none\n"
@@ -266,14 +264,19 @@ class Ui_MainWindow(object):
         self.outlet_scrollarea.setWidgetResizable(True)
         self.outlet_scrollarea.setObjectName("outlet_scrollarea")
         self.scrollAreaWidgetContents = QtWidgets.QWidget()
-        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 291, 321))
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 291, 341))
         self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        self.formLayout = QtWidgets.QFormLayout(self.scrollAreaWidgetContents)
+        self.formLayout.setContentsMargins(20, 10, 20, 20)
+        self.formLayout.setHorizontalSpacing(60)
+        self.formLayout.setVerticalSpacing(20)
+        self.formLayout.setObjectName("formLayout")
         self.outlet_scrollarea.setWidget(self.scrollAreaWidgetContents)
         self.outlet_btn = QtWidgets.QPushButton(self.tab_4)
         self.outlet_btn.setGeometry(QtCore.QRect(230, 25, 111, 31))
         self.outlet_btn.setObjectName("outlet_btn")
         self.label_3 = QtWidgets.QLabel(self.tab_4)
-        self.label_3.setGeometry(QtCore.QRect(20, 30, 280, 20))
+        self.label_3.setGeometry(QtCore.QRect(20, 30, 201, 21))
         self.label_3.setObjectName("label_3")
         self.tabWidget.addTab(self.tab_4, "")
         self.tab_3 = QtWidgets.QWidget()

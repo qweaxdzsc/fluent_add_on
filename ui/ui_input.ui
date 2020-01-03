@@ -30,7 +30,7 @@
    <string notr="true">QToorBar::handle{height:40px; spacing: 10px;}</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTabWidget" name="tabWidget">
+   <widget class="QTabWidget" name="tabwidget">
     <property name="geometry">
      <rect>
       <x>-5</x>
@@ -73,7 +73,7 @@ QTabWidget::tab-bar { alignment: left; }</string>
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>3</number>
     </property>
     <property name="iconSize">
      <size>
@@ -589,7 +589,7 @@ QTabWidget::tab-bar { alignment: left; }</string>
       </layout>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab_2">
+    <widget class="QWidget" name="porous_tab">
      <attribute name="title">
       <string>芯体参数        </string>
      </attribute>
@@ -715,7 +715,7 @@ QTabWidget::tab-bar { alignment: left; }</string>
       </layout>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab_4">
+    <widget class="QWidget" name="outlet_tab">
      <attribute name="title">
       <string>出口阻值        </string>
      </attribute>
@@ -725,7 +725,7 @@ QTabWidget::tab-bar { alignment: left; }</string>
         <x>50</x>
         <y>80</y>
         <width>291</width>
-        <height>321</height>
+        <height>341</height>
        </rect>
       </property>
       <property name="styleSheet">
@@ -750,9 +750,29 @@ QWidget{
          <x>0</x>
          <y>0</y>
          <width>291</width>
-         <height>321</height>
+         <height>341</height>
         </rect>
        </property>
+       <layout class="QFormLayout" name="formLayout">
+        <property name="horizontalSpacing">
+         <number>60</number>
+        </property>
+        <property name="verticalSpacing">
+         <number>20</number>
+        </property>
+        <property name="leftMargin">
+         <number>20</number>
+        </property>
+        <property name="topMargin">
+         <number>10</number>
+        </property>
+        <property name="rightMargin">
+         <number>20</number>
+        </property>
+        <property name="bottomMargin">
+         <number>20</number>
+        </property>
+       </layout>
       </widget>
      </widget>
      <widget class="QPushButton" name="outlet_btn">
@@ -773,8 +793,8 @@ QWidget{
        <rect>
         <x>20</x>
         <y>30</y>
-        <width>280</width>
-        <height>20</height>
+        <width>201</width>
+        <height>21</height>
        </rect>
       </property>
       <property name="text">
@@ -782,7 +802,7 @@ QWidget{
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab_3">
+    <widget class="QWidget" name="valve_tab">
      <attribute name="title">
       <string>风门参数        </string>
      </attribute>

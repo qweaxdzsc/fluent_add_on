@@ -3,12 +3,11 @@ import os
 import fluent_tui
 
 
-
 whole_jou = ''
 project_title = '458-rear'
-version_name = 'lin11'
-cad_name = '458-rear-lin11'
-project_path = r"G:\458-rear\458-rear-lin11"
+version_name = 'lin13'
+cad_name = '458-rear-lin13'
+project_path = r"G:\458-rear\458-rear-lin13"
 
 # valve_dir = [0, -1, 0]
 # valve_origin = [5407.69, 869.38, 1022.1]
@@ -59,7 +58,7 @@ for i in angle_array:
 
 mass_flux_list = ['inlet*', 'outlet*']
 
-evap_d1 = [-0.99756, 0, 0.06976]
+evap_d1 = [0.99756, 0, 0.06975]
 evap_d2 = [0, 1, 0]
 hc_d1 = [0.71634, 0, 0.69765]
 hc_d2 = [0, 1, 0]

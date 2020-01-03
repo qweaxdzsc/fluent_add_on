@@ -1,11 +1,14 @@
 from PyQt5.QtWidgets import (
-    QMainWindow, QApplication, QLabel, QSlider, QLineEdit, QTableWidgetItem
+    QMainWindow, QApplication, QLabel, QSlider, QLineEdit, QTableWidgetItem, QFileDialog
 )
+from PyQt5.QtCore import QRegExp
 from ui_input import Ui_MainWindow
 from porous_model import Ui_porous
+from k_cal import Ui_k_cal
 import cgitb
 import sys
 import csv
+import re
 
 
 class MyMainWindow(QMainWindow, Ui_MainWindow):
@@ -15,8 +18,12 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.signal_slot()
         self.porous_db_init()
         self.porous_item_update()
+        self.input_d = {}
+        self.outlet_k_dict = {}
 
     def signal_slot(self):
+        self.actionexport.triggered.connect(self.export_csv)
+        self.actionimport.triggered.connect(self.import_csv)
         self.mode_slider.valueChanged.connect(self.mode_choose)
         self.valve_slider.valueChanged.connect(self.valve_number)
         self.RPM_slider_signal()
@@ -61,7 +68,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 
     def mode_choose(self):
         value = self.mode_slider.value()
-        mode_dict = {
+        self.mode_dict = {
             2: ['foot_label', 'foot_slider', 'foot_edit'],
             3: ['bil_label', 'bil_slider', 'bil_edit'],
             4: ['defrost_label', 'defrost_slider', 'defrost_edit'],
@@ -69,10 +76,10 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             6: ['trl_label', 'trl_slider', 'trl_edit'],
             7: ['hil_label', 'hil_slider', 'hil_edit']
                      }
-        for key in mode_dict.keys():
-            label = self.RPM_tab.findChild(QLabel, mode_dict[key][0])
-            slider = self.RPM_tab.findChild(QSlider, mode_dict[key][1])
-            edit = self.RPM_tab.findChild(QLineEdit, mode_dict[key][2])
+        for key in self.mode_dict.keys():
+            label = self.RPM_tab.findChild(QLabel, self.mode_dict[key][0])
+            slider = self.RPM_tab.findChild(QSlider, self.mode_dict[key][1])
+            edit = self.RPM_tab.findChild(QLineEdit, self.mode_dict[key][2])
             if key > value:
                 label.setDisabled(True)
                 slider.setDisabled(True)
@@ -96,9 +103,9 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             self.porous_index_dict[porous_type] = i
 
     def outlet_ui_show(self):
-        pass
-
-
+        self.outlet_ui = Ui_k_cal()
+        self.outlet_ui.show()
+        self.outlet_ui.outlet_K_signal.connect(self.outlet_k_show)
 
     def valve_number(self):
         value = self.valve_slider.value()
@@ -107,6 +114,82 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             table_item = QTableWidgetItem('温度风门%s' % (i+1))
             self.valve_table.setItem(i, 0, table_item)
 
+    def outlet_k_show(self, dict):
+        self.outlet_k_dict = dict
+        row_count = self.formLayout.rowCount()
+        for i in range(row_count):
+            self.formLayout.removeRow(0)
+
+        for outlet in dict.keys():
+            outlet_label = QLabel(outlet)
+            k_edit = QLineEdit()
+            k_edit.setMaximumWidth(100)
+            k_edit.setText(str(dict[outlet]))
+            k_edit.setObjectName(outlet+'_edit')
+            self.formLayout.addRow(outlet_label, k_edit)
+
+    def data_dict(self):
+        self.input_d = {}
+        mode_value = self.mode_slider.value()
+        modes = ['vent', 'foot', 'bil', 'defrost', 'defog', 'trl', 'hil']
+        for i in range(mode_value):
+            edit = self.RPM_tab.findChild(QLineEdit, modes[i] + '_edit')
+            self.input_d[modes[i]] = edit.text()
+
+        self.porous_coefficient(self.evap_combox)
+        self.porous_coefficient(self.hc_combox)
+        self.porous_coefficient(self.filter_combox)
+
+        for outlet in self.outlet_k_dict.keys():
+            k = self.outlet_scrollarea.findChild(QLineEdit, outlet+'_edit').text()
+            self.input_d[outlet] = k
+
+        valve_count = self.valve_slider.value()
+        for i in range(valve_count):
+            if not self.valve_table.item(i, 1):
+                pass
+            else:
+                valve_name = self.valve_table.item(i, 0).text()
+                valve_travel = self.valve_table.item(i, 1).text()
+                self.input_d[valve_name] = valve_travel
+
+    def porous_coefficient(self, combox):
+        model = combox.currentText()
+        model_c1 = combox.objectName()[:-7] + '_c1'
+        model_c2 = combox.objectName()[:-7] + '_c2'
+        if model == '无':
+            pass
+        elif model == '添加':
+            pass
+        else:
+            self.input_d[model_c1] = self.porous_model.db_dict[model]['c1']
+            self.input_d[model_c2] = self.porous_model.db_dict[model]['c2']
+
+    def export_csv(self):
+        self.data_dict()
+        path = QFileDialog.getSaveFileName(self, filter='CSV, *.csv')
+        try:
+            csv_save_path = path[0]
+            with open(csv_save_path, 'w', newline='') as f:
+                writer = csv.writer(f)
+                for i in self.input_d.keys():
+                    writer.writerow([i, self.input_d[i]])
+
+        except Exception as e:
+            print(e)
+
+    def import_csv(self):
+        edit = self.RPM_tab.findChildren(QLineEdit, QRegExp('.*_edit'))
+        for i in edit:
+            print(i.objectName())
+        # path = QFileDialog.getOpenFileName(self, '选择要输入的参数模板', filter='CSV Files (*.csv)')
+        # if path[0] != '':
+        #     csv_path = path[0]
+        #     self.input_d = {}
+        #     with open(csv_path, 'r', newline='') as csvfile:
+        #         reader = csv.reader(csvfile)
+        #         for row in reader:
+        #             self.input_d[row[0]] = row[1]
 
 
 if __name__ == "__main__":

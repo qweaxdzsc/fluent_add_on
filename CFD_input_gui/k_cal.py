@@ -1,10 +1,14 @@
 from ui_k_cal2 import Ui_k_form
 from PyQt5.QtWidgets import QWidget, QApplication, QTableWidgetItem
+from PyQt5.QtCore import QThread, pyqtSignal, Qt
 import sys
 import cgitb
+import time
 
 
-class Ui_porous(Ui_k_form, QWidget):
+class Ui_k_cal(Ui_k_form, QWidget):
+    outlet_K_signal = pyqtSignal(dict)
+
     def __init__(self):
         super(Ui_k_form, self).__init__()
         self.setupUi(self)
@@ -12,6 +16,7 @@ class Ui_porous(Ui_k_form, QWidget):
         self.btn()
         self.R_btn.click()
         self.outlet_list_create()
+        self.auto_calculate()
 
     def btn(self):
         self.outlet_tree.itemChanged['QTreeWidgetItem*', 'int'].connect(self.check_change)
@@ -23,6 +28,11 @@ class Ui_porous(Ui_k_form, QWidget):
         self.foot_list = []
         self.defrost_list = []
         self.mode_list_dict = {'vent': self.vent_list, 'foot': self.foot_list, 'defrost': self.defrost_list}
+
+    def auto_calculate(self):
+        self.auto_cal_thread = Auto_cal(self)
+        self.auto_cal_thread.start()
+        self.auto_cal_thread.k_list_signal.connect(self.set_K)
 
     def check_change(self, item):
         father_node = ['vent', 'foot', 'defrost']
@@ -51,7 +61,7 @@ class Ui_porous(Ui_k_form, QWidget):
                        'foot': foot_number + vent_number,
                        'defrost': vent_number + foot_number + defrost_number
                        }
-        print(number_dict)
+
         if item.checkState(0) == 2:
             self.k_table.insertRow(number_dict[parent.text(0)]-1)
             new_item = QTableWidgetItem(item.text(0))
@@ -86,11 +96,81 @@ class Ui_porous(Ui_k_form, QWidget):
             self.k_table.showColumn(2)
             self.k_table.showColumn(3)
 
+    def set_K(self, k_list):
+        self.k_list = k_list
+        if k_list:
+            for i in range(len(k_list)):
+                new_item = QTableWidgetItem(str(k_list[i]))
+                new_item.setFlags(Qt.ItemIsEditable)
+                self.k_table.setItem(i, 4, new_item)
+
+    def closeEvent(self, event):
+        outlet_k_dict = dict(zip(self.outlet_list, self.k_list))
+        self.outlet_K_signal.emit(outlet_k_dict)
+
+
+class Auto_cal(QThread):
+    k_list_signal = pyqtSignal(list)
+
+    def __init__(self, main_content, parent=None):
+        super(Auto_cal, self).__init__(parent)
+        self.main = main_content
+
+    def run(self):
+        while True:
+            if self.main.R_btn.isChecked():
+                self.R_method()
+            else:
+                self.QP_method()
+
+            self.k_list_signal.emit(self.K)
+            time.sleep(0.2)
+
+    def QP_method(self):
+        k_table = self.main.k_table
+        row_count = k_table.rowCount()
+        K = [0 for i in range(row_count)]
+
+        for i in range(row_count):
+            try:
+                ls = float(k_table.item(i, 3).text())
+                mm2 = float(k_table.item(i, 0).text())
+                p = float(k_table.item(i, 2).text())
+            except Exception as e:
+                pass
+            else:
+                rho = 1.225
+                m3s = ls / 1000
+                m2 = mm2/1000/1000
+                v = m3s/m2
+
+                K[i] = round(2*p/rho/v**2, 4)
+
+        self.K = K
+
+    def R_method(self):
+        k_table = self.main.k_table
+        row_count = k_table.rowCount()
+        K = [0 for i in range(row_count)]
+
+        for i in range(row_count):
+            try:
+                r = float(k_table.item(i, 1).text())
+                mm2 = float(k_table.item(i, 0).text())
+            except Exception as e:
+                pass
+            else:
+                rho = 1.225
+                m2 = mm2 / 1000 / 1000
+                K[i] = round(1000*2*r*m2**2/rho, 4)
+
+        self.K = K
+
 
 if __name__ == "__main__":
     cgitb.enable(format='text')
     app = QApplication(sys.argv)
-    myWin = Ui_porous()
+    myWin = Ui_k_cal()
     myWin.show()
     sys.exit(app.exec_())
 
