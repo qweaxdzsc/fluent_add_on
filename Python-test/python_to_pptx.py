@@ -5,6 +5,11 @@ Rotation_speed = 3000
 
 
 def get_ppt(project_name, version):
+    """organize data from database to pptx
+    how is works:
+    1. find corresponding data from mysql
+    2. create ppt style for each page
+    """
 
     from pptx import Presentation
     from pptx.util import Inches, Pt
@@ -80,7 +85,7 @@ def get_ppt(project_name, version):
     cursor.close()
     conn.close()
 
-    # info process
+    # info pre-process
     result_path = main_data['File_address']
     RPM = str(main_data['RPM'])
     total_volume = str(main_data['Total_volume'])
@@ -227,9 +232,6 @@ def get_ppt(project_name, version):
             dis_table.cell(i+1, j).text = str(volume_data[i][j])
 
     # modify font in table
-
-
-
     table_font(dis_table, Pt(12), Pt(11))
     aligning_table(dis_table)
 
@@ -240,6 +242,7 @@ def get_ppt(project_name, version):
         top = Inches(1.3)
         width = Inches(6)
         slide.shapes.add_picture(file_path + picture, left, top, width)
+
     # streamline slide
     wstrm_slide = ppt.slides[3]
     title_set(wstrm_slide, 'Whole_Streamline')
@@ -256,8 +259,6 @@ def get_ppt(project_name, version):
     set_picture(result_path, cont_slide, 'evap_out.jpg')
 
     # contour slide
-
-
     # cont_table = cont_slide.shapes[2].table
 
     # cont_table_head = ['Evap_out Contour', 'Evap_out_0-4 Contour']
@@ -265,7 +266,6 @@ def get_ppt(project_name, version):
     # jpg_into_table(result_path, cont_slide, 'evap_out.jpg', 'evap_out.jpg')
 
     # Pressure Drop slide
-
     def dp_table_create(table, head, dp_data):
         for j in range(col):
             table.cell(0, j).text = head[j]
@@ -280,7 +280,8 @@ def get_ppt(project_name, version):
     dp_slide = ppt.slides[6]
     title_set(dp_slide, whole_title + '-Pressure-Drop')
 
-    col = 2                                             # create table
+    # create table
+    col = 2
     row = len(sp_data) + 1
     left = Inches(0.8)
     top = Inches(1.2)
@@ -295,10 +296,10 @@ def get_ppt(project_name, version):
     tp_table_head = ['Total Pressure', version]
     dp_table_create(tp_table, tp_table_head, tp_data)
 
-
     # save ppt and open it
-    ppt.save(result_path +'\\' +whole_title+ '.pptx')          # save
-    os.system(result_path +'\\'+ whole_title + '.pptx')         # open
+    ppt.save(result_path + '\\' + whole_title + '.pptx')
+    os.system(result_path + '\\' + whole_title + '.pptx')
 
 
-get_ppt(project_name, version)
+if __name__ == "__main__":
+    get_ppt(project_name, version)

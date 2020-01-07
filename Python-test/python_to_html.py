@@ -1,22 +1,15 @@
-# Python_to_Html
 def get_html(matrix, title, html_output_path):
+    """ data matrix to html"""
+    # import os
 
-    import os
-
-    # html_output_path = "C:\\Users\\zonghui\\Desktop\\python\\"
-    # title = "519-vent-v10-pp1-150mmfan-3800RPM"
-
-    print(matrix)
-
-
-    # write html tag for volume data table
     def get_table(table_matrix, head):
+        """form html table tag"""
         # table head line
         th_txt = ''
         for i in range(len(head)):
-            th_txt = th_txt + '<th scope="col">%s</th>\n' % head[i]
-
-        table = """
+            th_txt += '<th scope="col">%s</th>\n' % head[i]
+        # table tag base
+        table = """                                                 
         <table class="hor-zebra">
             <thead>
                 <tr>
@@ -25,42 +18,32 @@ def get_html(matrix, title, html_output_path):
             </thead>
             <tbody>""" % th_txt
 
-        for i in range(len(table_matrix[0])):  # get how many lines
-            if i%2 == 0:
+        for i in range(len(table_matrix[0])):                       # get how many lines
+            if i % 2 == 0:                                          # add color for odd line
                 color_bar = 'class="odd"'
             else:
                 color_bar = ''
-
-            table += '\n<tr %s>' % color_bar
-            for j in range(len(table_matrix)):
+            table += '\n<tr %s>' % color_bar                        # <tr> is line, <td> is data item
+            for j in range(len(table_matrix)):                      # insert data
                 table += '\n<td>' + table_matrix[j][i] + '</td>'
+            table += '\n</tr>'
 
-            table = table + '\n</tr>'
-
-        table = table + '\n</tbody>'+'\n</table>'  # <tr> for line, </td> for cell, finish table
+        table += '\n</tbody>'+'\n</table>'                          # finish table
 
         return table
 
-
-    # get all table's html table
-
+    # create all table in html1
     volume_table = get_table(matrix[0:3], ['Volume Flow Rate', '(L/S)', 'Percentage%'])
     sp_table = get_table(matrix[3:5], ['Static Pressure', '(Pa)'])
     tp_table = get_table(matrix[5:7], ['Total Pressure', '(Pa)'])
     uni_table = get_table(matrix[7:9], ['Uniformity', ' '])
     moment_table = get_table(matrix[9:10], ['Torque(N/M)'])
 
-
     # output to HTML
-
-    os.getcwd()
-    os.chdir(html_output_path)
-    mydir = os.getcwd()  # get directory
     ResultHtml = html_output_path + title + ".html"
-    report = open(ResultHtml, 'w')  # create html
+    report = open(ResultHtml, 'w')                                  # create html
 
     # main frame for html
-
     message = """
     <html>
     <head>
@@ -156,13 +139,8 @@ def get_html(matrix, title, html_output_path):
         <img src="hc_out.jpg" width = 900px/>      
         
     </body>
-    </html>""" % (title, mydir, volume_table, sp_table, tp_table, uni_table, moment_table)
+    </html>""" % (title, html_output_path, volume_table, sp_table, tp_table, uni_table, moment_table)
 
-
-
-
-    report.write(message)  # write to html
-    report.close()  # close edit
-
-
-    os.system(r'"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" %s' % ResultHtml)
+    report.write(message)
+    report.close()
+    # os.system(r'"C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" %s' % ResultHtml)

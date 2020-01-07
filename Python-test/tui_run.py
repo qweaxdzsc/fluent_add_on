@@ -17,8 +17,8 @@ jou = open(txt_name, 'w')
 
 CFD = fluent_tui.tui(whole_jou, project_title, version_name, case_out, cad_name)
 
-CFD.mesh.simple_import(['ai', 'volute'], ['evap', 'filter'])
-# CFD.mesh.simple_import(['ai', 'volute'], ['evap', 'filter', 'hc'])
+# CFD.mesh.simple_import(['ai', 'volute'], ['evap', 'filter'])
+CFD.mesh.simple_import(['ai', 'volute'], ['evap', 'filter', 'hc'])
 # CFD.mesh.simple_import(['volute'], ['evap'])
 # CFD.mesh.simple_import(['volute'], ['evap', 'hc'])
 # CFD.mesh.import_distrib()
