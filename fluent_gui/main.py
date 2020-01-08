@@ -149,7 +149,9 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
                 self.append_text('进入调试模式')
 
         if e.key() == Qt.Key_J:
-            if QApplication.keyboardModifiers() == Qt.ControlModifier:              # test mod shortcut
+            if QApplication.keyboardModifiers() == Qt.ControlModifier:    # test mod shortcut
+            # if QApplication.keyboardModifiers() == Qt.ShiftModifier:
+            # test
                 self.create_tui()
 
     def name_rule(self):

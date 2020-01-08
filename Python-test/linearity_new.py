@@ -5,9 +5,9 @@ import fluent_tui
 
 whole_jou = ''
 project_title = '458-rear'
-version_name = 'lin13'
-cad_name = '458-rear-lin13'
-project_path = r"G:\458-rear\458-rear-lin13"
+version_name = 'lin14-foot'
+cad_name = '458-rear-lin14-foot'
+project_path = r"G:\458-rear\458-rear-lin14-foot"
 
 # valve_dir = [0, -1, 0]
 # valve_origin = [5407.69, 869.38, 1022.1]

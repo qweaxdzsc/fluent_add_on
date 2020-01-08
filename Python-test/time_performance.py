@@ -2,11 +2,7 @@ import timeit
 
 
 def time_test():
-    from python_to_pptx import get_ppt
-    project_name = 'GE2-rear3'
-    version = 'ppd-V1-FH'
-    Rotation_speed = 3000
-    get_ppt(project_name, version)
+    from bs4 import BeautifulSoup
 
 
 
