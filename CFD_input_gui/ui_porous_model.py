@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Form implementation generated from reading ui file 'porous_model.ui'
+# Form implementation generated from reading ui file 'ui_porous_model.ui'
 #
 # Created by: PyQt5 UI code generator 5.13.0
 #
@@ -29,14 +29,14 @@ class MatplotlibWidget(QFrame):
 class Ui_porous_model_form(object):
     def setupUi(self, porous_model_form):
         porous_model_form.setObjectName("porous_model_form")
-        porous_model_form.resize(670, 670)
+        porous_model_form.resize(727, 670)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Minimum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
         sizePolicy.setHeightForWidth(porous_model_form.sizePolicy().hasHeightForWidth())
         porous_model_form.setSizePolicy(sizePolicy)
         porous_model_form.setMinimumSize(QtCore.QSize(200, 125))
-        porous_model_form.setMaximumSize(QtCore.QSize(670, 670))
+        porous_model_form.setMaximumSize(QtCore.QSize(768, 683))
         self.gridLayout_2 = QtWidgets.QGridLayout(porous_model_form)
         self.gridLayout_2.setContentsMargins(20, 20, 20, 20)
         self.gridLayout_2.setSpacing(20)
@@ -66,14 +66,17 @@ class Ui_porous_model_form(object):
         self.gridLayout_3.setVerticalSpacing(15)
         self.gridLayout_3.setObjectName("gridLayout_3")
         self.horizontalLayout = QtWidgets.QHBoxLayout()
+        self.horizontalLayout.setSpacing(15)
         self.horizontalLayout.setObjectName("horizontalLayout")
         self.c1_label = QtWidgets.QLabel(self.operate_frame)
+        self.c1_label.setMinimumSize(QtCore.QSize(120, 0))
         self.c1_label.setObjectName("c1_label")
         self.horizontalLayout.addWidget(self.c1_label)
         self.c1_edit = QtWidgets.QLineEdit(self.operate_frame)
         self.c1_edit.setObjectName("c1_edit")
         self.horizontalLayout.addWidget(self.c1_edit)
         self.c2_label = QtWidgets.QLabel(self.operate_frame)
+        self.c2_label.setMinimumSize(QtCore.QSize(120, 0))
         self.c2_label.setObjectName("c2_label")
         self.horizontalLayout.addWidget(self.c2_label)
         self.c2_edit = QtWidgets.QLineEdit(self.operate_frame)
@@ -127,7 +130,8 @@ class Ui_porous_model_form(object):
         self.horizontalLayout_2.addWidget(self.del_btn)
         self.gridLayout_3.addLayout(self.horizontalLayout_2, 4, 0, 1, 2)
         self.QP_table = QtWidgets.QTableWidget(self.operate_frame)
-        self.QP_table.setMinimumSize(QtCore.QSize(250, 185))
+        self.QP_table.setMinimumSize(QtCore.QSize(245, 185))
+        self.QP_table.setMaximumWidth(245)
         self.QP_table.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.QP_table.setAutoScrollMargin(16)
         self.QP_table.setGridStyle(QtCore.Qt.SolidLine)
@@ -176,6 +180,7 @@ class Ui_porous_model_form(object):
         self.gridLayout_3.addLayout(self.horizontalLayout_4, 0, 1, 1, 1)
         self.effective_dimension_box = QtWidgets.QGroupBox(self.operate_frame)
         self.effective_dimension_box.setObjectName("effective_dimension_box")
+        self.effective_dimension_box.setMaximumWidth(170)
         self.gridLayout = QtWidgets.QGridLayout(self.effective_dimension_box)
         self.gridLayout.setObjectName("gridLayout")
         self.width_label = QtWidgets.QLabel(self.effective_dimension_box)
@@ -264,3 +269,4 @@ class Ui_porous_model_form(object):
         self.length_edit.setText(_translate("porous_model_form", "138"))
         self.width_edit.setText(_translate("porous_model_form", "193"))
         self.load_btn.setText(_translate("porous_model_form", "导入"))
+

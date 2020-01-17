@@ -154,7 +154,7 @@ new_path = path.replace('\\', '\\\\')
 txt_name = path + '\\' + 'GE2-rear3.txt'
 print(path)
 
-data_matrix = process_data(txt_name, path)
+data_matrix = process_data(txt_name)
 project_name = 'GE2-rear3'
 version = 'ppd-V1-FH'
 producer = 'zonghui'

@@ -112,9 +112,9 @@ class LinReport(object):
         chart.height = 10
         chart.width = 18
         chart.title = title
-        chart.style = 10                            # 线条的style
-        chart.y_axis.title = 'Temperature'          # y坐标的标
-        chart.x_axis.title = "Open percentage"      # x坐标的标题
+        chart.style = 10                                                             # 线条的style
+        chart.y_axis.title = 'Temperature'
+        chart.x_axis.title = "Open percentage"
         data = Reference(self.sheet, min_col=min_col, min_row=min_row,
                          max_col=self.sheet.max_column, max_row=self.sheet.max_row)  # 图像的数据 起始行、起始列、终止行、终止列
         chart.add_data(data, titles_from_data= True)
@@ -124,9 +124,9 @@ class LinReport(object):
 
 
 if __name__ == "__main__":
-    project_address = r"G:\458-rear\458-rear-lin14-foot"
+    project_address = r"G:\_HAVC_Project\458-rear\458-rear-lin23"
     project_name = '458-rear'
-    version_name = 'lin14-foot'
+    version_name = 'lin23'
 
     whole_name = project_name + '-' + version_name
     Linearity_report = LinReport(project_address, project_name, version_name)

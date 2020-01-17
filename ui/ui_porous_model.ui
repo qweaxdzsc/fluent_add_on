@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>670</width>
+    <width>727</width>
     <height>670</height>
    </rect>
   </property>
@@ -24,8 +24,8 @@
   </property>
   <property name="maximumSize">
    <size>
-    <width>670</width>
-    <height>670</height>
+    <width>768</width>
+    <height>683</height>
    </size>
   </property>
   <property name="windowTitle">
@@ -123,8 +123,17 @@
       </property>
       <item row="3" column="0" colspan="2">
        <layout class="QHBoxLayout" name="horizontalLayout">
+        <property name="spacing">
+         <number>15</number>
+        </property>
         <item>
          <widget class="QLabel" name="c1_label">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="text">
            <string>惯性阻力系数C1</string>
           </property>
@@ -135,6 +144,12 @@
         </item>
         <item>
          <widget class="QLabel" name="c2_label">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>0</height>
+           </size>
+          </property>
           <property name="text">
            <string>粘性阻力系数C2</string>
           </property>
@@ -255,6 +270,12 @@
          <size>
           <width>250</width>
           <height>185</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>280</width>
+          <height>16777215</height>
          </size>
         </property>
         <property name="contextMenuPolicy">
@@ -382,6 +403,12 @@
       </item>
       <item row="1" column="1">
        <widget class="QGroupBox" name="effective_dimension_box">
+        <property name="maximumSize">
+         <size>
+          <width>220</width>
+          <height>16777215</height>
+         </size>
+        </property>
         <property name="title">
          <string>有效尺寸</string>
         </property>

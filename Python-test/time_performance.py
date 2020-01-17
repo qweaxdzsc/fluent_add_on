@@ -5,7 +5,6 @@ def time_test():
     from bs4 import BeautifulSoup
 
 
-
 repeats = 1
 test_number = 1
 

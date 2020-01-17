@@ -6,8 +6,8 @@ def get_html(matrix, title, html_output_path):
         """form html table tag"""
         # table head line
         th_txt = ''
-        for i in range(len(head)):
-            th_txt += '<th scope="col">%s</th>\n' % head[i]
+        for i in head:
+            th_txt += '<th scope="col">%s</th>\n' % i
         # table tag base
         table = """                                                 
         <table class="hor-zebra">

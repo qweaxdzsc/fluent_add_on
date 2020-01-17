@@ -1,6 +1,6 @@
 from ui_porous_model import Ui_porous_model_form
-from PyQt5.QtWidgets import QWidget, QLineEdit, QMenu, QMessageBox, QTableWidgetItem
-from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtWidgets import QWidget, QLineEdit, QMenu, QMessageBox, QTableWidgetItem, QApplication
+from PyQt5.QtCore import pyqtSignal, QTranslator
 import csv
 
 
@@ -20,7 +20,7 @@ class Ui_porous(Ui_porous_model_form, QWidget):
         self.resize(220, 135)
         self.unit_choose = 'kg/h'
         self.db_dict = {}
-        self.db_path = r'S:\PE\Engineering database\CFD\porous_database\porous_db.csv'
+        self.db_path = r'S:\PE\Engineering database\CFD\03_Tools\porous_database\porous_db.csv'
 
     def default_btn(self):
         self.model_combox.activated.connect(self.choose)
@@ -49,10 +49,16 @@ class Ui_porous(Ui_porous_model_form, QWidget):
         else:
             self.read_mode(i)
 
+    def translate(self, language):
+        self.trans = QTranslator()
+        self.trans.load("ui_porous_model_%s" % language)
+        _app = QApplication.instance()
+        _app.installTranslator(self.trans)
+        self.retranslateUi(self)
+
     def default_show(self):
         self.operate_frame.show()
         self.resize(670, 670)
-        self.load_btn.show()
         self.modify_ui_btn.hide()
         self.modify_btn.hide()
         self.add_btn.hide()
@@ -106,6 +112,7 @@ class Ui_porous(Ui_porous_model_form, QWidget):
     def modify_mode(self):
         self.default_show()
         self.modify_btn.show()
+        self.add_btn.show()
 
     def modify(self):
         choosed_model_index = self.model_combox.currentIndex()

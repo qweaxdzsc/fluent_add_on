@@ -6,8 +6,8 @@ def process_data(txt_name):
         """process txt file into readable list"""
         f = open(filename, encoding='utf-8')    # open
         txt = f.readlines()                     # read
-        row_number = len(txt)
-        for i in range(row_number):
+        row_count = len(txt)
+        for i in range(row_count):
             txt[i] = txt[i].strip()             # strip blanks before and after
             txt[i] = txt[i].split()             # form lines into list
 

@@ -13,7 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_project_name_widget(object):
     def setupUi(self, project_name_widget):
         project_name_widget.setObjectName("project_name_widget")
-        project_name_widget.resize(278, 94)
+        project_name_widget.resize(340, 104)
         self.gridLayout = QtWidgets.QGridLayout(project_name_widget)
         self.gridLayout.setContentsMargins(20, 20, 20, 20)
         self.gridLayout.setHorizontalSpacing(25)
@@ -31,6 +31,13 @@ class Ui_project_name_widget(object):
         self.confirm_btn.setMaximumSize(QtCore.QSize(80, 16777215))
         self.confirm_btn.setObjectName("confirm_btn")
         self.gridLayout.addWidget(self.confirm_btn, 1, 1, 1, 1)
+        self.language_combox = QtWidgets.QComboBox(project_name_widget)
+        self.language_combox.setMinimumSize(QtCore.QSize(70, 25))
+        self.language_combox.setMaximumSize(QtCore.QSize(80, 16777215))
+        self.language_combox.setObjectName("language_combox")
+        self.language_combox.addItem("")
+        self.language_combox.addItem("")
+        self.gridLayout.addWidget(self.language_combox, 0, 1, 1, 1)
 
         self.retranslateUi(project_name_widget)
         QtCore.QMetaObject.connectSlotsByName(project_name_widget)
@@ -39,4 +46,7 @@ class Ui_project_name_widget(object):
         _translate = QtCore.QCoreApplication.translate
         project_name_widget.setWindowTitle(_translate("project_name_widget", "请输入项目名称"))
         self.label.setText(_translate("project_name_widget", "项目名："))
+        self.project_name_edit.setPlaceholderText(_translate("project_name_widget", "字母，数字，下划线"))
         self.confirm_btn.setText(_translate("project_name_widget", "确   认"))
+        self.language_combox.setItemText(0, _translate("project_name_widget", " Chinese"))
+        self.language_combox.setItemText(1, _translate("project_name_widget", " English"))

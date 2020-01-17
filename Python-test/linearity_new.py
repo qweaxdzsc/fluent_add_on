@@ -5,9 +5,9 @@ import fluent_tui
 
 whole_jou = ''
 project_title = '458-rear'
-version_name = 'lin14-foot'
-cad_name = '458-rear-lin14-foot'
-project_path = r"G:\458-rear\458-rear-lin14-foot"
+version_name = 'lin23'
+cad_name = '458-rear-lin23'
+project_path = r"G:\_HAVC_Project\458-rear\458-rear-lin23"
 
 # valve_dir = [0, -1, 0]
 # valve_origin = [5407.69, 869.38, 1022.1]
@@ -80,7 +80,7 @@ CFD.setup.energy_eqt('yes')
 # CFD.setup.BC_pressure_inlet('inlet')
 CFD.setup.init_temperature('mass-flow-inlet', 'outlet-vent', 273.15)
 CFD.setup.BC_mass_flow_inlet('inlet', 0.055125)
-CFD.setup.BC_outlet_vent(6.854, 'outlet_vent')
+CFD.setup.BC_outlet_vent(3.1472, 'outlet_foot')
 # CFD.setup.BC_outlet_vent(0, 'outlet_vl')
 # CFD.setup.BC_outlet_vent(0, 'outlet_vr')
 CFD.setup.heat_flux('hc_in', 348.15)

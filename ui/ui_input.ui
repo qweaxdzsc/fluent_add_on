@@ -73,7 +73,7 @@ QTabWidget::tab-bar { alignment: left; }</string>
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>4</number>
+     <number>0</number>
     </property>
     <property name="iconSize">
      <size>
@@ -132,9 +132,9 @@ QTabWidget::tab-bar { alignment: left; }</string>
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>30</y>
-        <width>381</width>
-        <height>20</height>
+        <y>19</y>
+        <width>321</width>
+        <height>41</height>
        </rect>
       </property>
       <property name="text">
@@ -650,16 +650,16 @@ QTabWidget::tab-bar { alignment: left; }</string>
        <item row="0" column="1">
         <widget class="QComboBox" name="evap_combox">
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <item>
           <property name="text">
-           <string>添加</string>
+           <string>add</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>无</string>
+           <string>none</string>
           </property>
          </item>
         </widget>
@@ -674,16 +674,16 @@ QTabWidget::tab-bar { alignment: left; }</string>
        <item row="1" column="1">
         <widget class="QComboBox" name="hc_combox">
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <item>
           <property name="text">
-           <string>添加</string>
+           <string>add</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>无</string>
+           <string>none</string>
           </property>
          </item>
         </widget>
@@ -698,16 +698,16 @@ QTabWidget::tab-bar { alignment: left; }</string>
        <item row="2" column="1">
         <widget class="QComboBox" name="filter_combox">
          <property name="currentIndex">
-          <number>1</number>
+          <number>0</number>
          </property>
          <item>
           <property name="text">
-           <string>添加</string>
+           <string>add</string>
           </property>
          </item>
          <item>
           <property name="text">
-           <string>无</string>
+           <string>none</string>
           </property>
          </item>
         </widget>
@@ -862,7 +862,12 @@ QWidget{
       </column>
       <item row="0" column="0">
        <property name="text">
-        <string>温度风门1</string>
+        <string>temp_valve1</string>
+       </property>
+      </item>
+      <item row="0" column="1">
+       <property name="text">
+        <string>0</string>
        </property>
       </item>
      </widget>
@@ -914,6 +919,9 @@ QWidget{
         <height>311</height>
        </rect>
       </property>
+      <property name="placeholderText">
+       <string>请对不够明确的信息或未填写进行说明                     或对时间节点，目标进行说明</string>
+      </property>
      </widget>
      <widget class="QLabel" name="label_8">
       <property name="geometry">
@@ -925,7 +933,7 @@ QWidget{
        </rect>
       </property>
       <property name="text">
-       <string>*请留下重要的备注信息，必须要写</string>
+       <string>*请留下重要的备注信息</string>
       </property>
      </widget>
     </widget>
