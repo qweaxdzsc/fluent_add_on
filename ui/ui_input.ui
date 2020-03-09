@@ -73,7 +73,7 @@ QTabWidget::tab-bar { alignment: left; }</string>
      <enum>QTabWidget::Rounded</enum>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <property name="iconSize">
      <size>
@@ -650,18 +650,8 @@ QTabWidget::tab-bar { alignment: left; }</string>
        <item row="0" column="1">
         <widget class="QComboBox" name="evap_combox">
          <property name="currentIndex">
-          <number>0</number>
+          <number>-1</number>
          </property>
-         <item>
-          <property name="text">
-           <string>add</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>none</string>
-          </property>
-         </item>
         </widget>
        </item>
        <item row="1" column="0">
@@ -674,18 +664,8 @@ QTabWidget::tab-bar { alignment: left; }</string>
        <item row="1" column="1">
         <widget class="QComboBox" name="hc_combox">
          <property name="currentIndex">
-          <number>0</number>
+          <number>-1</number>
          </property>
-         <item>
-          <property name="text">
-           <string>add</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>none</string>
-          </property>
-         </item>
         </widget>
        </item>
        <item row="2" column="0">
@@ -698,18 +678,8 @@ QTabWidget::tab-bar { alignment: left; }</string>
        <item row="2" column="1">
         <widget class="QComboBox" name="filter_combox">
          <property name="currentIndex">
-          <number>0</number>
+          <number>-1</number>
          </property>
-         <item>
-          <property name="text">
-           <string>add</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>none</string>
-          </property>
-         </item>
         </widget>
        </item>
       </layout>

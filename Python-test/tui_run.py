@@ -4,8 +4,8 @@ jou_out = r'C:\Users\BZMBN4\Desktop'       # txt output root
 
 # txt name
 whole_jou = ''
-project_title = '458-front'
-version_name = 'v2-foot'
+project_title = 'BYD'
+version_name = 'lin_test'
 cad_name = '123'
 case_out = r'C:\Users\BZMBN4\Desktop'
 

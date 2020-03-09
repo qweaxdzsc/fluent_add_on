@@ -34,7 +34,7 @@ class LinReport(object):
         self.create_excel()
         self.write_sheet()
         self.auto_width_sheet()                                                 # auto adjust width for excel
-        self.add_line_chart(whole_name + 'earity')                              # create line chart for temp data
+        self.add_line_chart(whole_name + '_linearity')                          # create line chart for temp data
         self.save_open_excel(project_address + '\\' + whole_name + '.xlsx')
 
     def form_angle_array(self):
@@ -84,7 +84,7 @@ class LinReport(object):
             self.sheet.cell(2, i + 1, second_row[i])
 
         for i in range(len(self.angle_array)):
-            self.sheet.cell(i+3, 1, '%s%%'%self.angle_array[i])
+            self.sheet.cell(i+3, 1, '%s%%' % self.angle_array[i])
 
         for i in range(len(self.angle_array)):
             for j in range(len(outlet_list)):
@@ -117,16 +117,16 @@ class LinReport(object):
         chart.x_axis.title = "Open percentage"
         data = Reference(self.sheet, min_col=min_col, min_row=min_row,
                          max_col=self.sheet.max_column, max_row=self.sheet.max_row)  # 图像的数据 起始行、起始列、终止行、终止列
-        chart.add_data(data, titles_from_data= True)
+        chart.add_data(data, titles_from_data=True)
         angles = Reference(self.sheet, min_col=1, min_row=2, max_row=self.sheet.max_row)
         chart.set_categories(angles)
         self.sheet.add_chart(chart, "A15")
 
 
 if __name__ == "__main__":
-    project_address = r"G:\_HAVC_Project\458-rear\458-rear-lin23"
-    project_name = '458-rear'
-    version_name = 'lin23'
+    project_address = r"G:\_HAVC_Project\BYD\BYD_linearity\BYD_lin_vent\BYD_lin_vent_V8"
+    project_name = 'BYD'
+    version_name = 'lin_vent_V8'
 
     whole_name = project_name + '-' + version_name
-    Linearity_report = LinReport(project_address, project_name, version_name)
+    Linearity_report = LinReport(project_address, project_name, version_name, 10, 90, 9)

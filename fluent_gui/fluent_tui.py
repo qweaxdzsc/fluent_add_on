@@ -284,6 +284,12 @@ class setup(object):
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
+    def read_case_data(self, plus=''):
+        text = """
+/file/read-case-data %s\\%s-%s-%s.cas yes
+""" % (self.tui.case_out_path, self.tui.project_title, self.tui.version_name, plus)
+        self.tui.whole_jou += text
+
     def read_lin_mesh(self, valve_angle):
         mesh_path = self.tui.case_out_path + '\\lin_mesh'
         text = """
