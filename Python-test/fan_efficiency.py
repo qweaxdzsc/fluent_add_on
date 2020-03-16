@@ -1,15 +1,13 @@
 # root = r"G:\GE2_REAR\GE2-rear-vent\GE2-rear-v9.2-FC\result"
 # path = root + '\\'
+from txt_to_python import process_data
 
 
 class fan(object):
-    def __init__(self, path, fan_speed, pressure_type='s'):
-        import numpy as np
-        self.path = path
+    def __init__(self, txt_name, fan_speed, pressure_type='s'):
         self.fan_speed = fan_speed
         self.pressure_type = pressure_type
-        data_matrix = np.load(path + 'data_matrix.npy', allow_pickle=True)
-        self.data_matrix = data_matrix
+        self.data_matrix = process_data(txt_name)
         if self.pressure_type[0] == 't':
             up_dp_index = self.data_matrix[5].index('fan_in')
             down_dp_index = self.data_matrix[5].index('evap_in')

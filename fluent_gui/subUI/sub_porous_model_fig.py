@@ -1,14 +1,12 @@
-
 from PyQt5.QtWidgets import QSizePolicy
-# from PyQt5.QtWidgets import QVBoxLayout, QFrame
-
 from matplotlib.backends.backend_qt5agg import FigureCanvasQTAgg as FigureCanvas
+from scipy.optimize import curve_fit
 # from matplotlib.backends.backend_qt5agg import NavigationToolbar2QT as NavigationToolbar
+# from PyQt5.QtWidgets import QVBoxLayout, QFrame
 
 
 class MyMplCanvas(FigureCanvas):
     """FigureCanvas的最终的父类其实是QWidget。"""
-
     def __init__(self, parent=None, width=5, height=4, dpi=100):
         from matplotlib.figure import Figure
         import matplotlib.pyplot as plt
@@ -28,15 +26,9 @@ class MyMplCanvas(FigureCanvas):
                                    QSizePolicy.Expanding)
         FigureCanvas.updateGeometry(self)
 
-
-    '''绘制静态图，可以在这里定义自己的绘图逻辑'''
-
     def start_static_plot(self, x, y):
-
-
-        from scipy.optimize import curve_fit
-
         self.fig.suptitle('V-P拟合图')
+
         def func(x, a, b):
             return a * x ** 2 + b * x
 

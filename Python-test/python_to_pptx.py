@@ -1,10 +1,10 @@
 
-project_name = 'GE2-rear3'
-version = 'ppd-V1-FH'
-Rotation_speed = 3000
+project_name = 'D2UX'
+version = 'vent_ainew_R250'
+Rotation_speed = 3750
 
 
-def get_ppt(project_name, version):
+def get_ppt(project_name, version, RPM):
     """organize data from database to pptx
     how is works:
     1. find corresponding data from mysql
@@ -37,7 +37,7 @@ def get_ppt(project_name, version):
     cursor = conn.cursor(pymysql.cursors.DictCursor)  # return Dictionary_like key_valve
     serh = """
     SELECT  * FROM cfd_project where Project = '%s' and Version = '%s' and RPM = '%s'
-    """ % (project_name, version, Rotation_speed)
+    """ % (project_name, version, RPM)
     cursor.execute(serh)
     main_data = cursor.fetchone()
     print('main table data:', main_data)
@@ -302,4 +302,4 @@ def get_ppt(project_name, version):
 
 
 if __name__ == "__main__":
-    get_ppt(project_name, version)
+    get_ppt(project_name, version, Rotation_speed)

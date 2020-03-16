@@ -1,9 +1,11 @@
-import fluent_tui
+from fluent_command import tui_func
 import os
+import cgitb
 
 
 class get_tui():
     def __init__(self, pamt, body_list, energy_check, K_dict, porous_list, up_list, dead_zone_list, internal_list, view_path):
+        print(pamt, body_list, energy_check, K_dict, porous_list, up_list, dead_zone_list, internal_list, view_path)
         self.d = pamt
         self.body_list = body_list
         self.energy_check = energy_check
@@ -35,7 +37,7 @@ class get_tui():
         cad_name = self.d['cad_name']
         case_out = self.d['file_path']
 
-        self.CFD = fluent_tui.tui(whole_jou, project_title, version_name, case_out, cad_name)
+        self.CFD = tui_func.tui(whole_jou, project_title, version_name, case_out, cad_name)
         self.jou_mesh_path = case_out + '/' + whole_name + '-mesh-TUI.jou'
         self.jou_solve_path = case_out + '/' + whole_name + '-solve-TUI.jou'
         self.uni_face_list = self.porous_list.copy()
@@ -67,7 +69,7 @@ class get_tui():
             mesh.auto_mesh_volume(1.25, 'poly')
         else:
             mesh.auto_mesh_volume()
-        mesh.auto_node_move()
+        mesh.auto_node_move(0.85)
         mesh.rename_cell(zone_list=mesh_zone_list)
         mesh.check_quality()
         mesh.prepare_for_solve()
@@ -138,16 +140,21 @@ class get_tui():
             post.create_streamline('temp_pathline', 'inlet', '', 'temperature')
             post.snip_avz('temp_pathline')
         else:
-            post.read_view(self.view_path)
+            porous_dir = {}
+            for i in self.porous_list:
+                d1 = [d[i + '_x1'], d[i + '_y1'], d[i + '_z1']]
+                porous_dir[i] = d1
+            post.create_view(porous_dir)
+            post.read_view()
             for i in self.porous_list:
                 post.create_contour(i+'_out', i+'_out')
                 post.snip_picture(i+'_out')
                 # post.snip_avz(i + '_out')
-            # post.create_streamline('whole_pathline', 'inlet')
-            post.create_streamline('distrib_pathline', 'evap_in', [0, 12])
-            # post.snip_avz(5, 'whole_pathline')
-            post.snip_picture('distrib_pathline', 'yes')
-            post.snip_avz('distrib_pathline')
+            post.create_streamline('whole_pathline', 'inlet')
+            # post.create_streamline('distrib_pathline', 'evap_in', [0, 12])
+            post.snip_avz(5, 'whole_pathline')
+            # post.snip_picture('distrib_pathline', 'yes')
+            # post.snip_avz('distrib_pathline')
             post.snip_model('model')
 
         post.txt_surface_integrals('volume-flow-rate', volume_face_list)
@@ -273,3 +280,7 @@ class get_tui():
     def open_tui(self):
         os.system(self.jou_mesh_path)
         os.system(self.jou_solve_path)
+
+
+if __name__ == "__main__":
+    cgitb.enable(format='text')

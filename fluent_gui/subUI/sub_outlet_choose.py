@@ -1,12 +1,12 @@
 from PyQt5.QtCore import QStringListModel
-from outlet import Ui_outlet_form
+from ui_py.ui_outlet_choose import Ui_outlet_form
 from PyQt5.QtWidgets import QWidget, QApplication
 import sys
 
 
-class ui_outlet_rename(QWidget, Ui_outlet_form):
+class subUI_outlet_choose(QWidget, Ui_outlet_form):
     def __init__(self, parent=None):
-        super(ui_outlet_rename, self).__init__(parent)
+        super(subUI_outlet_choose, self).__init__(parent)
         self.setupUi(self)
         self.init_set()
         self.item_check()
@@ -33,6 +33,6 @@ class ui_outlet_rename(QWidget, Ui_outlet_form):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    myWin = ui_outlet_rename()
+    myWin = subUI_outlet_choose()
     myWin.show()
     sys.exit(app.exec_())

@@ -73,7 +73,7 @@ def process_data(txt_name):
         return percent_array
 
     def find_moment(txt):
-        exist = True
+        exist = False
         for line in txt:                                    # find moment
             if 'Moment' and 'Axis' in line:                 # get that line
                 part_index = txt.index(line)

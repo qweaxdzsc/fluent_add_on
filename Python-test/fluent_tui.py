@@ -576,10 +576,33 @@ color-map format %0.1f size {line_size} q step {line_step} skip {line_skip} surf
             line_skip=skip, surface_name=surface_name)
         self.tui.whole_jou += text
 
-    def read_view(self, view_path):
+    def create_view(self, *dir):
+        view_list = ['evap', 'hc', 'filter']
+        # naming
+        view_file = self.tui.case_out_path + '\\' + self.tui.version_name + '.vw'
+        # create txt, for loop to include all views
+        view_setting = '(whole ((0 -1 0) (0 0 0) (0 0 1) 0.5 0.5 "orthographic") #(1. 0. 0. 0. 0. 1. 0. 0. 0. 0. 1. 0. 0. 0. 0. 1.))' \
+                       '(distrib ((0 -1 0) (0 0 0) (0 0 1) 0.5 0.5 "orthographic") #(1. 0. 0. 0. 0. 1. 0. 0. 0. 0. 1. 0. 0. 0. 0. 1.))'
+        for view in dir:
+            position = '(%s %s %s)' % (view[0], view[1], view[2])
+            if view[0] < 0:
+                position = '(%s %s %s)' % (-view[0], -view[1], -view[2])
+            view_setting += """(%s (%s (0 0 0) (0 0 1) 0.5 0.5 "orthographic") #(1. 0. 0. 0. 0. 1. 0. 0. 0. 0. 1. 0. 0. 0. 0. 1.))""" \
+            % (view_list[dir.index(view)], position)
+        code = """
+(38 ((
+(view-list (
+%s
+)))))
+""" % view_setting
+        with open(view_file, 'w') as f:
+            f.write(code)
+
+    def read_view(self):
+        view_file = self.tui.case_out_path + '\\' + self.tui.version_name + '.vw'
         text = """
 /views/read-views %s OK
-""" % (view_path)
+""" % view_file
         self.tui.whole_jou += text
 
     def set_background(self):
@@ -613,6 +636,7 @@ color-map format %0.1f size {line_size} q step {line_step} skip {line_skip} surf
 /display/objects/display/{graphic_name}
 {mesh_outline}
 /views/restore-view {view_name}
+/views/auto-scale
 /display/set/picture/driver/jpeg
 /display/save-picture {out_path}\\{graphic_name}.jpg yes
 {avz_file} yes

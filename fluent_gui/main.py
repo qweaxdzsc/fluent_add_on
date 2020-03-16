@@ -5,18 +5,22 @@ import os
 import time
 import csv
 import cgitb
+import random
 
-from PyQt5.QtWidgets import QMainWindow, QWidget, QApplication, QMessageBox, QTableWidgetItem, QFileDialog, QMenu, QLineEdit
+
+from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox, QTableWidgetItem, QFileDialog, QMenu, QLineEdit
 from PyQt5.QtCore import Qt, QThread, pyqtSignal, QBasicTimer
 from PyQt5.QtGui import QTextCursor
 import qdarkstyle
 
-from ui_main import Ui_MainWindow
-from ui_rename_outlet import Ui_tip_widget
-from ui_k_cal import Ui_K_calculator
-from ui_unit_convertor import Ui_unit_converter
-from porous_model import Ui_porous
-from outlet_rename import ui_outlet_rename
+from ui_py.ui_main import Ui_MainWindow
+from subUI.sub_unit_converter import subUI_unit_converter
+from subUI.sub_porous_model import subUI_porous
+from subUI.sub_outlet_choose import subUI_outlet_choose
+from subUI.sub_outlet_assign import subUI_outlet_assign
+from subUI.sub_K_calculator import subUI_cal_K
+from fluent_command.tui_run import get_tui
+from call_api.call_func import SCDM, fluent_mesh, fluent_solver
 
 
 class MyMainWindow(QMainWindow, Ui_MainWindow):
@@ -43,6 +47,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.return_btn.hide()
         self.evap_c.hide()
         self.hc_c.hide()
+        self.filter_c.hide()
         self.solver_btn.hide()
         self.valve_c.hide()
         self.temp_c.hide()
@@ -55,7 +60,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         user = os.environ.get("USERNAME")
         self.username_label.setText('欢迎大佬%s' % (user))
         welcome_list = ['Hi,大佬%s，我们又见面了' % (user), 'Hello,欢迎大佬%s' % (user)]
-        import random
+
         welcome_word = random.choice(welcome_list)
         self.interact_edit.append(welcome_word)
 
@@ -81,6 +86,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.unit_btn.clicked.connect(self.unit_convert)
         self.choose_evap_btn.clicked.connect(lambda: self.porous_choose('evap'))
         self.choose_hc_btn.clicked.connect(lambda: self.porous_choose('hc'))
+        self.choose_filter_btn.clicked.connect(lambda: self.porous_choose('filter'))
         self.start_btn.clicked.connect(self.begin)
         self.return_btn.clicked.connect(self.mode_ui_default)
         self.solver_btn.clicked.connect(self.solver)
@@ -105,7 +111,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.outlet_number.setValue(1)
 
     def test(self):
-
         self.append_text('功能未开放,敬请期待')
         pass
 
@@ -351,8 +356,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         if self.import_outlet:
             self.outlet_name_and_K()
         else:
-
-            self.outlet_rename = ui_outlet_rename()
+            self.outlet_rename = subUI_outlet_choose()
             self.outlet_rename.show()
             self.outlet_rename.chosed_btn.clicked.connect(self.receive_outlet_name)
             self.outlet_rename.chosed_btn.clicked.connect(self.outlet_name_and_K)
@@ -362,7 +366,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.outlet_K = [0 for i in self.outlet_list]
 
     def outlet_name_and_K(self):
-        self.dialog_tip = Ui_tip()
+        self.dialog_tip = subUI_outlet_assign()
         self.dialog_tip.show()
 
         self.dialog_tip.rename_btn.clicked.connect(self.dialog_tip.close)
@@ -400,7 +404,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             cal_action = cal_menu.addAction(u"计算K值")
             action = cal_menu.exec_(self.dialog_tip.rename_table.mapToGlobal(pos))
             if action == cal_action:
-                self.K_cal = Ui_cal_K()
+                self.K_cal = subUI_cal_K()
                 self.K_cal.show()
                 self.K_cal.K_result.connect(self.K_result)
 
@@ -415,7 +419,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         for i in range(self.inlet_n):
             self.face_list[i] = self.dialog_tip.rename_table.item(i, 0).text()
 
-        for i in range(self.outlet_n):
+        for i in range(self.dialog_tip.rename_table.rowCount()):
             try:
                 self.outlet_list.append(self.dialog_tip.rename_table.item(i, 1).text())
                 self.K_list.append(self.dialog_tip.rename_table.item(i, 2).text())
@@ -423,7 +427,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
                 continue
         self.face_list.extend(self.outlet_list)
         self.K_dict = dict(zip(self.outlet_list, self.K_list))
-
         self.f = open('%s/project_info.py' % (self.pamt['file_path']), 'w')
         message = """
 print('start script')
@@ -481,6 +484,7 @@ print('script finished')
         dic = {}
         dic['evap'] = self.evap_c
         dic['hc'] = self.hc_c
+        dic['filter'] = self.filter_c
         dic['valve'] = self.valve_c
         dic['fan'] = self.fan_c
 
@@ -592,12 +596,12 @@ print('script finished')
         self.interact_edit.moveCursor(QTextCursor.End)
 
     def unit_convert(self):
-        self.volume_unit = Ui_unit()
+        self.volume_unit = subUI_unit_converter()
         self.volume_unit.show()
         self.volume_unit.unit_convert_result.connect(self.volume_input)
 
     def porous_choose(self, btn_name):
-        self.porous_model = Ui_porous()
+        self.porous_model = subUI_porous()
         self.porous_model.show()
         self.porous_model.load_btn.clicked.connect(lambda: self.porous_import(btn_name))
 
@@ -641,6 +645,15 @@ print('script finished')
             self.pamt['hc_z1'] = self.hc_z1_edit.text()
             self.pamt['hc_x2'], self.pamt['hc_y2'], self.pamt['hc_z2'] = \
                 self.porous_d2(self.pamt['hc_x1'], self.pamt['hc_y1'], self.pamt['hc_z1'])
+
+        if 'filter' in self.body_list:
+            self.pamt['filter_c1'] = self.filter_c1_edit.text()
+            self.pamt['filter_c2'] = self.filter_c2_edit.text()
+            self.pamt['filter_x1'] = self.filter_x1_edit.text()
+            self.pamt['filter_y1'] = self.filter_y1_edit.text()
+            self.pamt['filter_z1'] = self.filter_z1_edit.text()
+            self.pamt['filter_x2'], self.pamt['filter_y2'], self.pamt['filter_z2'] = \
+                self.porous_d2(self.pamt['filter_x1'], self.pamt['filter_y1'], self.pamt['filter_z1'])
 
         if 'valve' in self.body_list:
             self.pamt['valve_td'] = self.valve_td_edit.text()
@@ -699,7 +712,7 @@ print('script finished')
         self.check_part()
         self.pamt_dict()
         self.energy_check = self.energy_checkbox.isChecked()
-        from tui_run import get_tui
+
         try:
             get_tui(self.pamt, self.body_list, self.energy_check, self.K_dict,
                 self.porous_list, self.up_list, self.dead_zone_list, self.internal_face, self.view_path)
@@ -790,113 +803,6 @@ print('script finished')
         self.time_running.emit(self.step)
 
 
-class Ui_tip(Ui_tip_widget, QWidget):
-    def __init__(self):
-        super(Ui_tip_widget, self).__init__()
-        self.setupUi(self)
-
-
-class Ui_cal_K(Ui_K_calculator, QWidget):
-    K_result = pyqtSignal(str)
-
-    def __init__(self):
-        super(Ui_K_calculator, self).__init__()
-        self.setupUi(self)
-        self.cal_method()
-        self.QP_btn.click()
-
-    def initialize(self):
-        self.R_frame.hide()
-        self.QP_frame.hide()
-
-    def cal_method(self):
-        self.R_btn.clicked.connect(lambda: self.choosen_method(self.R_frame, self.R_method))
-        self.QP_btn.clicked.connect(lambda: self.choosen_method(self.QP_frame, self.QP_method))
-
-    def choosen_method(self, show_frame, method):
-        self.initialize()
-        show_frame.show()
-        self.K_cal_btn.disconnect()
-        self.K_cal_btn.clicked.connect(method)
-
-    def QP_method(self):
-        ls = float(self.volume_edit.text())
-        mm2 = float(self.area_edit.text())
-        p = float(self.pressure_edit.text())
-        rho = 1.225
-
-        m3s = ls / 1000
-        m2 = mm2/1000/1000
-        v = m3s/m2
-
-        K = 2*p/rho/v**2
-        self.K_result.emit("%.3f" % K)
-
-    def R_method(self):
-        r = float(self.R_edit.text())
-        mm2 = float(self.area_edit.text())
-        rho = 1.225
-        m2 = mm2 / 1000 / 1000
-        K = 1000*2*r*m2**2/rho
-        self.K_result.emit("%.3f" % K)
-
-
-class Ui_unit(Ui_unit_converter, QWidget):
-    unit_convert_result = pyqtSignal(str)
-
-    def __init__(self):
-        super(Ui_unit, self).__init__()
-        self.setupUi(self)
-        self.unit_btn()
-        self.default_state()
-
-    def default_state(self):
-        self.l_btn.click()
-        self.s_btn.click()
-
-    def unit_btn(self):
-        self.kg_btn.clicked.connect(lambda: self.volume_label_show('Kg', 1))
-        self.m3_btn.clicked.connect(lambda: self.volume_label_show('M3', 1.225))
-        self.l_btn.clicked.connect(lambda: self.volume_label_show('L', 0.001225))
-
-        self.h_btn.clicked.connect(lambda: self.time_label_show('H', 3600))
-        self.min_btn.clicked.connect(lambda: self.time_label_show('Min', 60))
-        self.s_btn.clicked.connect(lambda: self.time_label_show('S', 1))
-
-        self.confirm_btn.clicked.connect(self.calculate)
-
-    def volume_label_show(self, text, factor):
-        self.volume_label.setText(text)
-        self.volume_factor = factor
-
-    def time_label_show(self, text, factor):
-        self.time_label.setText(text)
-        self.time_factor = factor
-
-    def calculate(self):
-        if self.value_edit.text() == '':
-            value = 0
-        else:
-            value = float(self.value_edit.text())
-        result = round(value*self.volume_factor/self.time_factor, 5)
-        self.unit_convert_result.emit(str(result))
-
-
-class SCDM(QThread):
-    finishCAD = pyqtSignal(str)
-
-    def __init__(self, parent=None):
-        super(SCDM, self).__init__(parent)
-
-    def run(self):
-        import subprocess
-        p = subprocess.Popen(r'C:\Program Files\ANSYS Inc\v191\scdm\SpaceClaim.exe', shell=True, stdout=subprocess.PIPE)
-        out, err = p.communicate()
-        # out = out.decode()
-
-        self.finishCAD.emit('CAD软件已关闭')
-
-
 class timer(QThread):
     time_count = pyqtSignal(int)
 
@@ -917,96 +823,6 @@ class timer(QThread):
 
         self.step = self.step + 1
         self.time_count.emit(self.step)
-
-
-class fluent_mesh(QThread):
-    mesh_feedback = pyqtSignal(str)
-    mesh_timeuse = pyqtSignal(int)
-    mesh_finish = pyqtSignal(str)
-
-    def __init__(self, tui):
-        super(fluent_mesh, self).__init__()
-        self.tui = tui
-
-    def run(self):
-        start_time = time.strftime('%M:%S', time.localtime(time.time()))
-        import subprocess
-        self.p = subprocess.Popen(r'cd C:\\Program Files\\ANSYS Inc\\v191\\fluent\\ntbin\\win64 && '
-                           r'fluent 3d -meshing -t4 -gu -i %s' % (self.tui),
-                                  shell=True, stdout=subprocess.PIPE)
-
-        nl = 0
-        finish_count = 0
-        while self.p.poll() == None:
-            nl += 1
-            line = self.p.stdout.readline()
-            self.msg = line.decode()
-            print(nl, self.msg)
-
-            if (nl > 30) & (nl <= 50):
-                self.stage_report('Cleanup script file is', 'load_time_begin', '载入模型', 29)
-            elif (nl > 50) & (nl <= 130):
-                self.stage_report('They will be imported in whatever units they were created', 'face_mesh_time_start',
-                '处理面网格', 80)
-            elif (nl > 130) & (nl <= 200):
-                if 'the previous max quality' in self.msg:
-                    msg_strip = self.msg.strip()
-                    face_mesh_quality = msg_strip[-8:]
-                self.stage_report('/objects/volumetric-regions/compute', 'volume_mesh_time_start',
-                                  '处理体网格', 83)
-            elif (nl > 200) & (nl <= 420):
-                self.stage_report('/mesh/check-quality', 'mesh_finish_time', '网格生成完毕', 113)
-                if 'Minimum Orthogonal Quality' in self.msg:
-                    msg_strip = self.msg.strip()
-                    volume_mesh_quality = float(msg_strip[-11:-7])/10.0
-            elif (nl > 420) & (finish_count < 2):
-                if 'Writing "' in self.msg:
-                    finish_count = 1
-                if finish_count == 1:
-                    if 'Done.' in self.msg:
-                        finish_count = 2
-                        end_time = time.strftime('%M:%S', time.localtime(time.time()))
-                        print(end_time)
-                        print('总共有%s行输出语句' % nl)
-        else:
-            self.mesh_timeuse.emit(120)
-            self.mesh_finish.emit('网格生成完毕')
-
-    def stage_report(self, stage_marker, stage_name, report_msg, timeuse):
-        if stage_marker in self.msg:
-            stage_time = time.strftime('%M:%S', time.localtime(time.time()))
-            self.mesh_feedback.emit(report_msg)
-            self.mesh_timeuse.emit(timeuse)
-            print('%s%s' % (stage_name, stage_time))
-
-    def stop_mesh(self):
-        self.p.terminate()
-    
-
-class fluent_solver(QThread):
-    solver_feedback = pyqtSignal(str)
-
-    def __init__(self, tui):
-        super(fluent_solver, self).__init__()
-        self.tui = tui
-
-    def run(self):
-        import subprocess
-        self.p = subprocess.Popen(r'cd C:\\Program Files\\ANSYS Inc\\v191\\fluent\\ntbin\\win64 && '
-                           r'fluent 3d -t12 -gu -i %s' % (self.tui), shell=True, stdout=subprocess.PIPE)
-
-        nl = 0
-        finish_count = 0
-        while self.p.poll() == None:
-            line = self.p.stdout.readline()
-            self.msg = line.decode()
-            print(nl, self.msg)
-            nl += 1
-
-        print('总共有%s行输出语句'%nl)
-
-    def stop_solver(self):
-        self.p.terminate()
 
 
 if __name__ == "__main__":

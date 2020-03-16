@@ -5,9 +5,9 @@ import fluent_tui
 
 whole_jou = ''
 project_title = 'BYD'
-version_name = 'lin_vent_V8'
-cad_name = 'BYD_lin_vent_V8'
-project_path = r"G:\_HAVC_Project\BYD\BYD_linearity\BYD_lin_vent\BYD_lin_vent_V8"
+version_name = 'lin_foot_V10'
+cad_name = 'BYD_lin_foot_V10'
+project_path = r"G:\_HAVC_Project\BYD\BYD_linearity\BYD_lin_foot\lin_foot_V10"
 
 # valve_dir = [0, -1, 0]
 # valve_origin = [5407.69, 869.38, 1022.1]
@@ -46,7 +46,7 @@ for i in angle_array:
     CFD.mesh.volume_mesh_change_type(dead_zone_list=['valve'])
     # CFD.mesh.auto_mesh_volume(1.25)
     CFD.mesh.auto_mesh_volume(1.25, 'poly')
-    CFD.mesh.auto_node_move(0.8, 6)
+    CFD.mesh.auto_node_move(0.85, 6)
     CFD.mesh.rename_cell(zone_list=['ai', 'distrib', 'evap', 'hc'])
     CFD.mesh.retype_face(face_list=['inlet'], face_type='mass-flow-inlet')
     CFD.mesh.retype_face(face_list=['evap*', 'dct*'], face_type='internal')

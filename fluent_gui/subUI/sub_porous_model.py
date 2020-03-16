@@ -1,9 +1,9 @@
-from ui_porous_model import Ui_porous_model_form
+from ui_py.ui_porous_model import Ui_porous_model_form
 from PyQt5.QtWidgets import QWidget, QLineEdit, QMenu, QMessageBox, QTableWidgetItem
 import csv
 
 
-class Ui_porous(Ui_porous_model_form, QWidget):
+class subUI_porous(Ui_porous_model_form, QWidget):
     def __init__(self):
         super(Ui_porous_model_form, self).__init__()
         self.setupUi(self)
@@ -17,7 +17,7 @@ class Ui_porous(Ui_porous_model_form, QWidget):
         self.resize(220, 135)
         self.unit_choose = 'kg/h'
         self.db_dict = {}
-        self.db_path = r'S:\PE\Engineering database\CFD\porous_database\porous_db.csv'
+        self.db_path = r'S:\PE\Engineering database\CFD\03_Tools\porous_database\porous_db.csv'
 
     def default_btn(self):
         self.model_combox.activated.connect(self.choose)

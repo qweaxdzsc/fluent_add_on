@@ -97,7 +97,7 @@ CONTOUR: %s
   Colour Variable = Temperature
   Colour Variable Boundary Values = Conservative
   Constant Contour Colour = Off
-  Contour Range = Local
+  Contour Range = Global
   Culling Mode = No Culling
   Domain List = /DOMAIN GROUP:All Domains
   Draw Contours = On
@@ -165,12 +165,14 @@ def bat_contour(paraller_plane, size_min, size_max):
         index = np.where(plane_array == i)[0][0]+1
         text += create_plane('plane%s%s' % (paraller_plane, index), paraller_plane, X, Y, Z)
         text += create_contour('contour%s%s' % (paraller_plane, index), 'plane%s%s' % (paraller_plane, index))
-        text += show_hide('CONTOUR', 'contour%s%s' % (paraller_plane, index))
+        # text += show_hide('CONTOUR', 'contour%s%s' % (paraller_plane, index))
 
     return text
 
 
 content = bat_contour('XY', 0.37, 0.6)
+content += bat_contour('YZ', 0.37, 0.62)
+content += bat_contour('ZX', -0.14, 0.14)
 
 with open(file_path, 'w') as txt:
     txt.write(content)

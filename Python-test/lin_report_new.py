@@ -449,7 +449,7 @@ if __name__ == "__main__":
     whole_name = project_name + '-' + version_name
     Linearity_report = LinReport(project_address, project_name, version_name, 10, 90, 9)
     # Linearity_report.plot_temp()
-    # Linearity_report.plot_effective_area('foot', (np.where(Linearity_report.avg_dict['foot'] > 25))[0][0]*10, 100)
+    Linearity_report.plot_effective_area('foot', (np.where(Linearity_report.avg_dict['foot'] > 25))[0][0]*10, 100)
     # Linearity_report.plot_temp_diff(-10, 10)
     # Linearity_report.plot_avg_temp_diff(0, 5)
     # Linearity_report.plot_side_temp_diff(-5, 5)

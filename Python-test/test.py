@@ -65,4 +65,94 @@
 # jou.close()
 # os.system(txt_name)
 
-
+# import os
+# import fluent_tui
+# jou_out = r'C:\Users\BZMBN4\Desktop'       # txt output root
+#
+# # txt name
+# whole_jou = ''
+# project_title = 'D2UX'
+# version_name = 'AI_V5'
+# cad_name = 'D2UX_AI_V5'
+# case_out = r'G:\_HAVC_Project\D2UX\D2UX_ai\D2UX_AI_V5'
+#
+# jou_title = project_title + '-' + version_name + '-TUI'
+# txt_name = jou_out + '\\' + jou_title + '.jou'            # txt final path
+# print('output journal in:', txt_name)
+# jou = open(txt_name, 'w')
+#
+#
+# CFD = fluent_tui.tui(whole_jou, project_title, version_name, case_out, cad_name)
+#
+#
+# CFD.mesh.import_distrib(min_size=0.6)
+# CFD.mesh.general_improve()
+# CFD.mesh.fix_slivers()
+#
+# CFD.mesh.compute_volume_region()
+# CFD.mesh.volume_mesh_change_type()
+# CFD.mesh.auto_mesh_volume()
+# CFD.mesh.auto_node_move()
+# CFD.mesh.rename_cell(zone_list=['ai_duct', 'ai', 'filter', 'cone'])
+# CFD.mesh.retype_face(face_list=['inlet'], face_type='inlet-vent')
+# CFD.mesh.retype_face(face_list=['ai_in', 'filter*'], face_type='internal')
+# # CFD.mesh.retype_face(face_list=['fan_in', 'fan_out', 'evap*'], face_type='internal')
+# # CFD.mesh.retype_face(face_list=['fan_in', 'fan_out', 'evap*', 'hc*'], face_type='internal')
+# CFD.mesh.retype_face(face_list=['outlet*'], face_type='mass-flow-outlet')
+# CFD.mesh.write_mesh()
+# CFD.mesh.prepare_for_solve()
+# CFD.mesh.switch_to_solver()
+#
+#
+# fan_origin = [2.15225, 0.35303, 0.89591]
+# fan_axis = [0, 0, 1]
+# rpm = 3750
+# evap_d1 = [1, 0, 0]
+# evap_d2 = [0, 1, 0]
+# hc_d1 = [0.96593, 0.25882, 0]
+# hc_d2 = [0, 0, 1]
+# filter_d1 = [0, 0, 1]
+# filter_d2 = [1, 1, 0]
+#
+#
+# mass_flux_list = ['inlet*', 'outlet*']
+# pressure_face_list = ['inlet*', 'ai_in', 'filter*', 'outlet*']
+#
+# CFD.setup.rescale()
+# # CFD.setup.convert_polymesh()
+# CFD.setup.turb_models()
+# CFD.setup.porous_zone('filter', filter_d1, filter_d2, 4.01e+07, 206)
+# CFD.setup.solution_method()
+# CFD.setup.report_definition('volume', 'surface-volumeflowrate', ['outlet*'])
+# CFD.setup.report_definition('mass-flux', 'surface-massflowrate', mass_flux_list, 'no')
+# CFD.setup.report_definition('pressure', 'surface-areaavg', pressure_face_list)
+# CFD.setup.convergence_criterion()
+# CFD.setup.hyb_initialize()
+# CFD.setup.start_calculate(250)
+# CFD.setup.write_case_data()
+#
+#
+# volume_face_list = ['inlet*', 'outlet*']
+# uni_face_list = ['filter']
+#
+# CFD.post.create_result_file()
+# CFD.post.txt_surface_integrals('volume-flow-rate', volume_face_list)
+# CFD.post.txt_mass_flux()
+# CFD.post.txt_surface_integrals('uniformity-index-area-weighted', uni_face_list, 'velocity-magnitude')
+# CFD.post.txt_surface_integrals('area-weighted-avg', pressure_face_list, 'total-pressure')
+# CFD.post.txt_surface_integrals('area-weighted-avg', pressure_face_list, 'pressure')
+# CFD.post.create_contour('filter_out', 'filter_out')
+# CFD.post.create_streamline('whole_pathline', 'inlet', [0, 15])
+# CFD.post.create_view(evap_d1, hc_d1, filter_d1)
+# CFD.post.read_view()
+# CFD.post.set_background()
+# CFD.post.snip_picture('whole_pathline', 'yes', 'yes')
+#
+# CFD.post.snip_picture('filter_out')
+# CFD.post.snip_model('model')
+#
+#
+#
+# jou.write(CFD.whole_jou)
+# jou.close()
+# os.system(txt_name)

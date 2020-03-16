@@ -149,17 +149,17 @@ from fan_efficiency import fan
 import time
 
 # decode result data
-path = r'G:\GE2_REAR\GE2-rear-round3\GE2-rear-ppd\GE2-rear3d-V1-FH\result_GE2-rear3_V1-FH'
+path = r'G:\_HAVC_Project\D2UX\D2UX_vent\D2UX_vent_ainew\result_D2UX_vent_ainew_R250_3750RPM'
 new_path = path.replace('\\', '\\\\')
-txt_name = path + '\\' + 'GE2-rear3.txt'
+txt_name = path + '\\' + 'D2UX.txt'
 print(path)
 
 data_matrix = process_data(txt_name)
-project_name = 'GE2-rear3'
-version = 'ppd-V1-FH'
+project_name = 'D2UX'
+version = 'vent_ainew_R250'
 producer = 'zonghui'
 
-rpm = 3000
+rpm = 3750
 
 print(data_matrix)
 
@@ -167,7 +167,7 @@ print(data_matrix)
 # insert data into table
 def insert_data(conn, data_matrix, project_name, version, file_path, producer, rpm):
     # preprocess data
-    c_fan = fan(path, rpm)
+    c_fan = fan(txt_name, rpm)
     whole_dp = c_fan.whole_dp
     fan_ef_raw = c_fan.fan_ef()
     torque = float(data_matrix[-1][0])
