@@ -143,13 +143,13 @@ def create_uni_table(conn):
 # create_tp_table(conn)
 # create_uni_table(conn)
 
-import numpy as np
+
 from txt_to_python import process_data
 from fan_efficiency import fan
 import time
 
 # decode result data
-path = r'G:\_HAVC_Project\D2UX\D2UX_vent\D2UX_vent_ainew\result_D2UX_vent_ainew_R250_3750RPM'
+path = r'G:\_HAVC_Project\D2UX\D2UX_vent\D2UX_vent_ainew\result_D2UX_vent_ainew_R250_3600RPM'
 new_path = path.replace('\\', '\\\\')
 txt_name = path + '\\' + 'D2UX.txt'
 print(path)
@@ -159,7 +159,7 @@ project_name = 'D2UX'
 version = 'vent_ainew_R250'
 producer = 'zonghui'
 
-rpm = 3750
+rpm = 3600
 
 print(data_matrix)
 

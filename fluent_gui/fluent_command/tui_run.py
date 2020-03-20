@@ -4,8 +4,8 @@ import cgitb
 
 
 class get_tui():
-    def __init__(self, pamt, body_list, energy_check, K_dict, porous_list, up_list, dead_zone_list, internal_list, view_path):
-        print(pamt, body_list, energy_check, K_dict, porous_list, up_list, dead_zone_list, internal_list, view_path)
+    def __init__(self, pamt, body_list, energy_check, K_dict, porous_list, up_list, dead_zone_list, internal_list):
+        print(pamt, body_list, energy_check, K_dict, porous_list, up_list, dead_zone_list, internal_list)
         self.d = pamt
         self.body_list = body_list
         self.energy_check = energy_check
@@ -14,7 +14,7 @@ class get_tui():
         self.up_list = up_list
         self.dead_zone_list = dead_zone_list
         self.internal_list = internal_list
-        self.view_path = view_path
+
 
         self.prepare_info()
         self.assemble_tui()

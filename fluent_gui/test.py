@@ -430,7 +430,23 @@
 #     ex.show()
 #     sys.exit(app.exec_())
 
-import numpy as np
+# printer是嵌套函数
 
-a = np.array([[6, 5, 2], [4, 3, 5]])
-print(a.max(axis=0))
+import logging
+
+
+def user_logging(func):
+
+    def wrapper(*args, **kwargs):
+        logging.warning("%s is running" % func.__name__)
+        func()
+
+    return wrapper
+
+
+def bar():
+    print("i'm bar")
+
+
+bar = user_logging(bar)
+bar()

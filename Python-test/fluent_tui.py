@@ -130,7 +130,6 @@ mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes
 """ % (quality, feature_angle, iterations)
         self.tui.whole_jou += text
 
-
     def fix_slivers(self, skewness=0.8):
         text = """
 /diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness}
@@ -209,13 +208,13 @@ boundary/manage/rotate valve*()
 
     def write_case(self):
         text = """
-/file/write-case %s\\%s-%s-mesh yes
+/file/write-case %s\\%s_%s_mesh yes
 """ % (self.tui.case_out_path, self.tui.project_title, self.tui.version_name)
         self.tui.whole_jou += text
 
     def write_mesh(self):
         text = """
-/file/write-mesh %s\\%s-%s-mesh yes
+/file/write-mesh %s\\%s_%s_mesh yes
 """ % (self.tui.case_out_path, self.tui.project_title, self.tui.version_name)
         self.tui.whole_jou += text
 
@@ -227,7 +226,7 @@ boundary/manage/rotate valve*()
         else:
             os.makedirs(mesh_path)
         text = """
-/file/write-mesh {mesh_path}\\{project_name}-{version}-{valve_angle}-mesh yes
+/file/write-mesh {mesh_path}\\{project_name}_{version}_{valve_angle}_mesh yes
 """.format(mesh_path=mesh_path, project_name=self.tui.project_title, version=self.tui.version_name,
            valve_angle=valve_angle)
         self.tui.whole_jou += text
@@ -252,20 +251,20 @@ class setup(object):
 
     def read_mesh(self):
         text = """
-/file/read %s\\%s-%s-mesh.msh yes
+/file/read %s\\%s_%s_mesh.msh yes
 """ % (self.tui.case_out_path, self.tui.project_title, self.tui.version_name)
         self.tui.whole_jou += text
 
     def read_case_data(self, plus=''):
         text = """
-/file/read-case-data %s\\%s-%s-%s.cas yes
+/file/read-case-data %s\\%s_%s_%s.cas yes
 """ % (self.tui.case_out_path, self.tui.project_title, self.tui.version_name, plus)
         self.tui.whole_jou += text
 
     def read_lin_mesh(self, valve_angle):
         mesh_path = self.tui.case_out_path + '\\lin_mesh'
         text = """
-/file/read {mesh_path}\\{project_name}-{version}-{valve_angle}-mesh.msh yes
+/file/read {mesh_path}\\{project_name}_{version}_{valve_angle}_mesh.msh yes
 """.format(mesh_path=mesh_path, project_name=self.tui.project_title, version=self.tui.version_name,
            valve_angle=valve_angle)
 
@@ -274,7 +273,7 @@ class setup(object):
     def replace_lin_mesh(self, valve_angle):
         mesh_path = self.tui.case_out_path + '\\lin_mesh'
         text = """
-/file/replace-mesh {mesh_path}\\{project_name}-{version}-{valve_angle}-mesh.msh yes
+/file/replace-mesh {mesh_path}\\{project_name}_{version}_{valve_angle}_mesh.msh yes
 """.format(mesh_path=mesh_path, project_name=self.tui.project_title, version=self.tui.version_name,
            valve_angle=valve_angle)
         self.tui.whole_jou += text
@@ -476,13 +475,13 @@ solve/monitors/residual/criterion-type %s
 
     def write_case_data(self):
         text = """
-/file/write-case-data/ %s\\%s-%s yes
+/file/write-case-data/ %s\\%s_%s yes
 """ % (self.tui.case_out_path, self.tui.project_title, self.tui.version_name)
         self.tui.whole_jou += text
 
     def write_lin_case_data(self, valve_angle):
         text = """
-/file/write-case-data/ {case_path}\\lin_case\\{project_name}-{version}-{valve_angle}\\{project_name}-{version}-{valve_angle} yes
+/file/write-case-data/ {case_path}\\lin_case\\{project_name}_{version}_{valve_angle}\\{project_name}_{version}_{valve_angle} yes
 """.format(case_path=self.tui.case_out_path, project_name=self.tui.project_title, version=self.tui.version_name,
            valve_angle=valve_angle)
         self.tui.whole_jou += text
@@ -502,7 +501,7 @@ class post(object):
 
     def simple_lin_post(self, valve_angle):
         self.tui.result_path = self.tui.case_out_path + \
-                           '\\lin_case\\{project_name}-{version}-{valve_angle}\\result'.format(
+                           '\\lin_case\\{project_name}_{version}_{valve_angle}\\result'.format(
                                project_name=self.tui.project_title, version=self.tui.version_name, valve_angle=valve_angle)
         self.create_result_file()
         self.tui.txt_out = self.tui.result_path + '\\%s_%s.txt' % (self.tui.project_title, valve_angle)

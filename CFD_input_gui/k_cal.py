@@ -40,8 +40,8 @@ class Ui_k_cal(Ui_k_form, QWidget):
             self.check_child_influence(item)
         else:
             parent = item.parent()
-            self.outlet_list_change(item, parent)
             self.table_row_change(item, parent)
+            self.outlet_list_change(item, parent)
             self.check_parent_influence(parent)
 
     def outlet_list_change(self, item, parent):
@@ -63,11 +63,13 @@ class Ui_k_cal(Ui_k_form, QWidget):
                        }
 
         if item.checkState(0) == 2:
-            self.k_table.insertRow(number_dict[parent.text(0)]-1)
+            self.k_table.insertRow(number_dict[parent.text(0)])
             new_item = QTableWidgetItem(item.text(0))
-            self.k_table.setVerticalHeaderItem(number_dict[parent.text(0)]-1, new_item)
+            self.k_table.setVerticalHeaderItem(number_dict[parent.text(0)], new_item)
         else:
-            self.k_table.removeRow(number_dict[parent.text(0)])
+            row_number = number_dict[parent.text(0)] - len(self.mode_list_dict[parent.text(0)]) + \
+                         self.mode_list_dict[parent.text(0)].index(item.text(0))
+            self.k_table.removeRow(row_number)
 
     def check_child_influence(self, item):
         if item.checkState(0) == 1:

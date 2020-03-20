@@ -2,9 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63e04c59-1c04-4b86-8106-908e7ed4bd46" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../Python-test/CFD_post_run.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_gui/func/func_advanced.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_gui/func/func_default_ui_set.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_gui/func/func_short_key.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_gui/func/func_timer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_gui/obsolete_func/table_right_click_func.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k_cal.py" beforeDir="false" afterPath="$PROJECT_DIR$/k_cal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/CFD_post_command.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/CFD_post_command.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/fluent_tui.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/fluent_tui.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/get_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/get_report.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/python_to_pptx.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/python_to_pptx.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_func.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/subUI/sub_k_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/subUI/sub_k_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/ui_py/ui_k_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/ui_py/ui_k_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/ui_qt/ui_k_test.ui" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/ui_qt/ui_k_test.ui" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -14,10 +33,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/MatplotlibWidget.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="441">
+            <state relative-caret-position="504">
               <caret line="28" selection-start-line="28" selection-end-line="28" />
               <folding>
                 <element signature="e#1#40#0" expanded="true" />
@@ -26,20 +45,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/k_cal.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <caret column="24" selection-start-column="24" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ui_k_cal2.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="21">
-              <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
+            <state relative-caret-position="294">
+              <caret line="71" column="44" selection-start-line="71" selection-start-column="44" selection-end-line="71" selection-end-column="44" />
+              <folding>
+                <element signature="e#0#31#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -47,8 +60,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/start.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2709">
-              <caret line="141" column="30" selection-start-line="141" selection-start-column="30" selection-end-line="141" selection-end-column="30" />
+            <state relative-caret-position="192">
+              <caret line="46" column="49" lean-forward="true" selection-start-line="46" selection-start-column="49" selection-end-line="46" selection-end-column="49" />
               <folding>
                 <element signature="e#0#135#0" expanded="true" />
               </folding>
@@ -91,8 +104,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>Ui_k_cal</find>
-      <find>myWin</find>
       <find>mymain</find>
       <find>time</find>
       <find>export_csv</find>
@@ -121,6 +132,8 @@
       <find>QP_</find>
       <find>ICON</find>
       <find>QtGui.QPixmap</find>
+      <find>re</find>
+      <find>QRegExp</find>
     </findStrings>
     <replaceStrings>
       <replace>_slider</replace>
@@ -167,7 +180,6 @@
         <option value="$PROJECT_DIR$/input_ui.py" />
         <option value="$PROJECT_DIR$/test2.py" />
         <option value="$PROJECT_DIR$/test.py" />
-        <option value="$PROJECT_DIR$/k_cal.py" />
         <option value="$PROJECT_DIR$/record_html.py" />
         <option value="$PROJECT_DIR$/../../123.html" />
         <option value="$PROJECT_DIR$/html_parser.py" />
@@ -181,22 +193,13 @@
         <option value="$PROJECT_DIR$/ui_input.py" />
         <option value="$PROJECT_DIR$/MatplotlibWidget.py" />
         <option value="$PROJECT_DIR$/ui_k_cal2.py" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectConfigurationFiles">
-    <option name="files">
-      <list>
-        <option value="$PROJECT_DIR$/.idea/CFD_input_gui.iml" />
-        <option value="$PROJECT_DIR$/.idea/vcs.xml" />
-        <option value="$PROJECT_DIR$/.idea/misc.xml" />
-        <option value="$PROJECT_DIR$/.idea/modules.xml" />
+        <option value="$PROJECT_DIR$/k_cal.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="217" />
-    <option name="y" value="316" />
+    <option name="x" value="596" />
+    <option name="y" value="185" />
     <option name="width" value="1218" />
     <option name="height" value="1152" />
   </component>
@@ -221,6 +224,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
@@ -244,7 +248,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.start">
+  <component name="RunManager" selected="Python.k_cal">
     <configuration name="GUI_convertor" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="CFD_input_gui" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -258,6 +262,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GUI_convertor.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="k_cal" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="CFD_input_gui" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/k_cal.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -308,27 +333,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="translator_file_creator" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="CFD_input_gui" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/translator_file_creator.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="ui_input" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="CFD_input_gui" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -352,11 +356,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.k_cal" />
         <item itemvalue="Python.start" />
         <item itemvalue="Python.ui_input" />
         <item itemvalue="Python.GUI_convertor" />
         <item itemvalue="Python.porous_model" />
-        <item itemvalue="Python.translator_file_creator" />
       </list>
     </recent_temporary>
   </component>
@@ -375,14 +379,13 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-9" y="-9" width="1938" height="1170" extended-state="6" />
-    <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23837209" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23837209" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4989429" weight="0.32902583" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6548626" weight="0.32902583" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6548626" weight="0.23757455" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -493,13 +496,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="214">
           <caret line="117" column="8" selection-start-line="117" selection-start-column="8" selection-end-line="117" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-35653961/PyQt5/QtWidgets/QLineEdit.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="433" column="8" selection-start-line="433" selection-start-column="8" selection-end-line="433" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -634,16 +630,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/start.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2709">
-          <caret line="141" column="30" selection-start-line="141" selection-start-column="30" selection-end-line="141" selection-end-column="30" />
-          <folding>
-            <element signature="e#0#135#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ui_input.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="7245">
@@ -664,6 +650,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/MatplotlibWidget.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="504">
+          <caret line="28" selection-start-line="28" selection-end-line="28" />
+          <folding>
+            <element signature="e#1#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-35653961/PyQt5/QtWidgets/QLineEdit.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="214">
+          <caret line="433" column="8" selection-start-line="433" selection-start-column="8" selection-end-line="433" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/start.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="192">
+          <caret line="46" column="49" lean-forward="true" selection-start-line="46" selection-start-column="49" selection-end-line="46" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#135#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/ui_k_cal2.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="21">
@@ -673,17 +686,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/k_cal.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="24" selection-start-column="24" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MatplotlibWidget.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        <state relative-caret-position="294">
+          <caret line="71" column="44" selection-start-line="71" selection-start-column="44" selection-end-line="71" selection-end-column="44" />
           <folding>
-            <element signature="e#1#40#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>

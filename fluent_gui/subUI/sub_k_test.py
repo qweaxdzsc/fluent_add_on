@@ -1,21 +1,27 @@
 from ui_py.ui_k_test import Ui_k_form
-from PyQt5.QtWidgets import QWidget, QApplication, QTableWidgetItem
+from PyQt5.QtWidgets import QWidget, QApplication, QTableWidgetItem, QTreeWidgetItem
 from PyQt5.QtCore import QThread, pyqtSignal, Qt
 import sys
 import cgitb
 import time
 
 
-class Ui_k_cal(Ui_k_form, QWidget):
+class subUI_outlet_assign(Ui_k_form, QWidget):
     outlet_K_signal = pyqtSignal(dict)
 
-    def __init__(self):
+    def __init__(self, k_dict, R_method=True):
         super(Ui_k_form, self).__init__()
         self.setupUi(self)
         self.outlet_tree.expandAll()
         self.btn()
-        self.R_btn.click()
+        if R_method:
+            self.R_btn.click()
+        else:
+            self.R_btn.click()
+            self.PQ_btn.click()
         self.outlet_list_create()
+        self.k_dict = k_dict
+        self.receive_outlet_info()
         self.auto_calculate()
 
     def btn(self):
@@ -27,7 +33,22 @@ class Ui_k_cal(Ui_k_form, QWidget):
         self.vent_list = []
         self.foot_list = []
         self.defrost_list = []
-        self.mode_list_dict = {'vent': self.vent_list, 'foot': self.foot_list, 'defrost': self.defrost_list}
+        self.other_list = []
+        self.mode_list_dict = {'vent': self.vent_list, 'foot': self.foot_list, 'defrost': self.defrost_list,
+                               'other': self.other_list}
+
+    def outlet_number(self):
+        vent_number = len(self.vent_list)
+        foot_number = len(self.foot_list)
+        defrost_number = len(self.defrost_list)
+        other_number = len(self.other_list)
+
+        number_dict = {'vent': vent_number,
+                       'foot': foot_number + vent_number,
+                       'defrost': vent_number + foot_number + defrost_number,
+                       'other': vent_number + foot_number + defrost_number + other_number
+                       }
+        return number_dict
 
     def auto_calculate(self):
         self.auto_cal_thread = Auto_cal(self)
@@ -35,13 +56,13 @@ class Ui_k_cal(Ui_k_form, QWidget):
         self.auto_cal_thread.k_list_signal.connect(self.set_K)
 
     def check_change(self, item):
-        father_node = ['vent', 'foot', 'defrost']
+        father_node = ['vent', 'foot', 'defrost', 'other']
         if item.text(0) in father_node:
             self.check_child_influence(item)
         else:
             parent = item.parent()
-            self.outlet_list_change(item, parent)
             self.table_row_change(item, parent)
+            self.outlet_list_change(item, parent)
             self.check_parent_influence(parent)
 
     def outlet_list_change(self, item, parent):
@@ -53,21 +74,15 @@ class Ui_k_cal(Ui_k_form, QWidget):
             self.mode_list_dict[parent.text(0)].remove(item.text(0))
 
     def table_row_change(self, item, parent):
-        vent_number = len(self.vent_list)
-        foot_number = len(self.foot_list)
-        defrost_number = len(self.defrost_list)
-
-        number_dict = {'vent': vent_number,
-                       'foot': foot_number + vent_number,
-                       'defrost': vent_number + foot_number + defrost_number
-                       }
-
+        number_dict = self.outlet_number()
         if item.checkState(0) == 2:
-            self.k_table.insertRow(number_dict[parent.text(0)]-1)
+            self.k_table.insertRow(number_dict[parent.text(0)])
             new_item = QTableWidgetItem(item.text(0))
-            self.k_table.setVerticalHeaderItem(number_dict[parent.text(0)]-1, new_item)
+            self.k_table.setItem(number_dict[parent.text(0)], 0, new_item)
         else:
-            self.k_table.removeRow(number_dict[parent.text(0)])
+            row_number = number_dict[parent.text(0)] - len(self.mode_list_dict[parent.text(0)]) + \
+                self.mode_list_dict[parent.text(0)].index(item.text(0))
+            self.k_table.removeRow(row_number)
 
     def check_child_influence(self, item):
         if item.checkState(0) == 1:
@@ -88,13 +103,13 @@ class Ui_k_cal(Ui_k_form, QWidget):
 
     def cal_method_choose(self):
         if self.R_btn.isChecked():
-            self.k_table.hideColumn(2)
             self.k_table.hideColumn(3)
-            self.k_table.showColumn(1)
-        else:
-            self.k_table.hideColumn(1)
+            self.k_table.hideColumn(4)
             self.k_table.showColumn(2)
+        else:
+            self.k_table.hideColumn(2)
             self.k_table.showColumn(3)
+            self.k_table.showColumn(4)
 
     def set_K(self, k_list):
         self.k_list = k_list
@@ -102,10 +117,39 @@ class Ui_k_cal(Ui_k_form, QWidget):
             for i in range(len(k_list)):
                 new_item = QTableWidgetItem(str(k_list[i]))
                 new_item.setFlags(Qt.ItemIsEditable)
-                self.k_table.setItem(i, 4, new_item)
+                self.k_table.setItem(i, 5, new_item)
+
+    def receive_outlet_info(self):
+        # self.outlet_list = list(self.k_dict.keys())
+        # self.outlet_K = list(self.k_dict.values())
+        for i in self.k_dict.keys():
+            item = self.outlet_tree.findItems(i, Qt.MatchExactly | Qt.MatchRecursive)
+
+            if item:
+                item[0].setCheckState(0, 2)
+                number_dict = self.outlet_number()
+                for j in self.k_dict[i]:
+                    new_item = QTableWidgetItem(j)
+                    self.k_table.setItem(number_dict[item[0].parent().text(0)]-1, self.k_dict[i].index(j)+1, new_item)
+                # self.k_table.item(number_dict[item[0].parent().text(0)]-1, 5).setText(self.k_dict[i])
+            else:
+                other_node = self.outlet_tree.topLevelItem(3)
+                other_outlet = QTreeWidgetItem(other_node)
+                other_outlet.setText(0, i)
+                other_outlet.setCheckState(0, 2)
+                number_dict = self.outlet_number()
+                for j in self.k_dict[i]:
+                    new_item = QTableWidgetItem(j)
+                    self.k_table.setItem(number_dict[other_node.text(0)]-1, self.k_dict[i].index(j)+1, new_item)
 
     def closeEvent(self, event):
-        outlet_k_dict = dict(zip(self.outlet_list, self.k_list))
+        value_list = []
+        for row in range(self.k_table.rowCount()):
+            value = [0, 0, 0, 0, 0]
+            for i in range(len(value)):
+                value[i] = self.k_table.item(row, i+1).text()
+            value_list.append(value)
+        outlet_k_dict = dict(zip(self.outlet_list, value_list))
         self.outlet_K_signal.emit(outlet_k_dict)
 
 
@@ -133,9 +177,9 @@ class Auto_cal(QThread):
 
         for i in range(row_count):
             try:
-                ls = float(k_table.item(i, 3).text())
-                mm2 = float(k_table.item(i, 0).text())
-                p = float(k_table.item(i, 2).text())
+                ls = float(k_table.item(i, 4).text())
+                mm2 = float(k_table.item(i, 1).text())
+                p = float(k_table.item(i, 3).text())
             except Exception as e:
                 pass
             else:
@@ -155,8 +199,8 @@ class Auto_cal(QThread):
 
         for i in range(row_count):
             try:
-                r = float(k_table.item(i, 1).text())
-                mm2 = float(k_table.item(i, 0).text())
+                r = float(k_table.item(i, 2).text())
+                mm2 = float(k_table.item(i, 1).text())
             except Exception as e:
                 pass
             else:
@@ -170,7 +214,10 @@ class Auto_cal(QThread):
 if __name__ == "__main__":
     cgitb.enable(format='text')
     app = QApplication(sys.argv)
-    myWin = Ui_k_cal()
+    init_k_dict = {'outlet_cvl': ['10000', '', '50', '200'], 'outlet_cvr': ['8000', '', '40', '220'],
+                   'outlet_foot': ['15000', '', '50', '220'],
+                   'outlet_test2': ['10000', '', '60', '250']}
+    myWin = subUI_outlet_assign(init_k_dict, R_method=False)
     myWin.show()
     sys.exit(app.exec_())
 

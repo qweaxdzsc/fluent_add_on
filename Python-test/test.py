@@ -72,9 +72,9 @@
 # # txt name
 # whole_jou = ''
 # project_title = 'D2UX'
-# version_name = 'AI_V5'
-# cad_name = 'D2UX_AI_V5'
-# case_out = r'G:\_HAVC_Project\D2UX\D2UX_ai\D2UX_AI_V5'
+# version_name = 'AI_V7'
+# cad_name = 'D2UX_AI_V7'
+# case_out = r'G:\_HAVC_Project\D2UX\D2UX_ai\D2UX_AI_V7'
 #
 # jou_title = project_title + '-' + version_name + '-TUI'
 # txt_name = jou_out + '\\' + jou_title + '.jou'            # txt final path
@@ -92,7 +92,7 @@
 # CFD.mesh.compute_volume_region()
 # CFD.mesh.volume_mesh_change_type()
 # CFD.mesh.auto_mesh_volume()
-# CFD.mesh.auto_node_move()
+# CFD.mesh.auto_node_move(0.85)
 # CFD.mesh.rename_cell(zone_list=['ai_duct', 'ai', 'filter', 'cone'])
 # CFD.mesh.retype_face(face_list=['inlet'], face_type='inlet-vent')
 # CFD.mesh.retype_face(face_list=['ai_in', 'filter*'], face_type='internal')
@@ -156,3 +156,49 @@
 # jou.write(CFD.whole_jou)
 # jou.close()
 # os.system(txt_name)
+
+import sys
+import time
+from PyQt5.QtCore import *
+from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
+
+
+class MyTimer(QWidget):
+    def __init__(self, parent=None):
+        super(MyTimer, self).__init__(parent)
+        self.resize(200, 100)
+        self.setWindowTitle("QTimerDemo")
+
+        self.lcd = QLCDNumber()
+        self.lcd.setDigitCount(10)
+        self.lcd.setMode(QLCDNumber.Dec)
+        self.lcd.setSegmentStyle(QLCDNumber.Flat)
+        self.lcd.display(time.strftime("%X", time.localtime()))
+
+        layout = QVBoxLayout()
+        layout.addWidget(self.lcd)
+        self.setLayout(layout)
+
+        # 新建一个QTimer对象
+        self.timer = QTimer()
+        self.timer.setInterval(1000)
+        self.timer.start()
+        self.step = 0
+        # 信号连接到槽
+        self.timer.timeout.connect(self.onTimerOut)
+
+    # 定义槽
+    def onTimerOut(self):
+        self.step += 1
+        print(self.step)
+        self.lcd.display(time.strftime("%X", time.localtime()))
+
+
+app = QApplication(sys.argv)
+t = MyTimer()
+t.show()
+sys.exit(app.exec_())
+
+
+
