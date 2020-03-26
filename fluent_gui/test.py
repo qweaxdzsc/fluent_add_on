@@ -432,21 +432,3 @@
 
 # printer是嵌套函数
 
-import logging
-
-
-def user_logging(func):
-
-    def wrapper(*args, **kwargs):
-        logging.warning("%s is running" % func.__name__)
-        func()
-
-    return wrapper
-
-
-def bar():
-    print("i'm bar")
-
-
-bar = user_logging(bar)
-bar()

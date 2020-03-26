@@ -31,7 +31,7 @@ END
 force_reload=true
 """.format(case_path=self.case_path, case_name=self.case_name)
 
-    def create_plane(self, name, paraller_plane, X, Y, Z, range="Local"):
+    def create_plane(self, name, paraller_plane, X, Y, Z):
         self.cse_file += """
 PLANE: {name}
   Apply Instancing Transform = On
@@ -69,7 +69,7 @@ PLANE: {name}
   Point 1 = 0 [m], 0 [m], 0 [m]
   Point 2 = 1 [m], 0 [m], 0 [m]
   Point 3 = 0 [m], 1 [m], 0 [m]
-  Range = {range}
+  Range = Global
   Render Edge Angle = 0 [degree]
   Specular Lighting = On
   Surface Drawing = Smooth Shading
@@ -106,7 +106,7 @@ PLANE: {name}
   END
 END
 
-# """.format(name=name, dir_plane=paraller_plane, X=X, Y=Y, Z=Z, range=range)
+# """.format(name=name, dir_plane=paraller_plane, X=X, Y=Y, Z=Z)
 
     def create_contour(self, name, variable, plane, range='Local', Max='0.0', Min='0.0'):
         self.cse_file += """
@@ -308,7 +308,9 @@ END
 """.format(name=name, location=location_plane, range=range, max=Max, min=Min)
 
     def show_hide(self, image_type, image_name, show_states='show'):
-        self.cse_file += '>%s /%s:%s' % (show_states, image_type, image_name)
+        self.cse_file += '\n\
+>%s /%s:%s, view=/VIEW:View 1\n \
+                         ' % (show_states, image_type, image_name)
 
     def bat_contour(self, paraller_plane, variable, size_min, size_max):
         plane_array = np.linspace(size_min, size_max, 10)
@@ -322,17 +324,15 @@ END
             else:
                 Z = i
             index = np.where(plane_array == i)[0][0] + 1
-            self.cse_file += self.create_plane('plane%s%s' % (paraller_plane, index), paraller_plane, X, Y, Z,
-                                               range='Global')
-            self.cse_file += self.create_contour('contour%s%s' % (paraller_plane, index), variable,
-                                                 'plane%s%s' % (paraller_plane, index),
-                                                 range='Global')
+            self.create_plane('plane%s%s' % (paraller_plane, index), paraller_plane, X, Y, Z)
+            self.create_contour('contour%s%s' % (paraller_plane, index), variable,
+                                                 'plane%s%s' % (paraller_plane, index), range='Global')
 
-    def save_avz(self):
+    def save_avz(self, suffix=''):
         self.cse_file += """
 HARDCOPY:
   Antialiasing = On
-  Hardcopy Filename = {file_location}/{file_name}.avz
+  Hardcopy Filename = {file_location}/{file_name}{suffix}.avz
   Hardcopy Format = avz
   Hardcopy Tolerance = 0.0001
   Image Height = 600
@@ -345,7 +345,41 @@ HARDCOPY:
 END
 
 >print
-    """.format(file_location=self.result_path, file_name=self.case_name)
+    """.format(file_location=self.result_path, file_name=self.case_name, suffix=suffix)
+
+    def save_png(self, suffix=''):
+        self.cse_file += """
+HARDCOPY:
+  Antialiasing = On
+  Hardcopy Filename = {file_location}/{file_name}{suffix}.avz
+  Hardcopy Format = png
+  Hardcopy Tolerance = 0.0001
+  Image Height = 600
+  Image Scale = 100
+  Image Width = 600
+  JPEG Image Quality = 80
+  Screen Capture = Off
+  Use Screen Size = On
+  White Background = Off
+END
+
+>print
+        """.format(file_location=self.result_path, file_name=self.case_name, suffix=suffix)
+
+    def create_view1(self):
+        self.cse_file += """
+VIEW:View 1
+  Camera Mode = User Specified
+  CAMERA:
+    Option = Pivot Point and Quaternion
+    Pivot Point = 0.744949, -0.00180152, 0.415949
+    Scale = 3.20172
+    Pan = 0.208787, -0.0921302
+    Rotation Quaternion = -0.707107, 0, 0, 0.707107
+  END
+END
+> update
+        """
 
     def create_command_file(self):
         with open(self.script_path, 'w') as cse:
@@ -353,7 +387,7 @@ END
 
     def run_command(self):
         p = subprocess.Popen(
-            r"cd C:\Program Files\ANSYS Inc\v191\CFD-Post\bin && cfdpost -batch %s" % (self.script_path),
+            r"cd C:\Program Files\ANSYS Inc\v191\CFD-Post\bin && cfdpost -batch %s" % self.script_path,
             shell=True, stdout=subprocess.PIPE)
         while p.poll() == None:
             line = p.stdout.readline()

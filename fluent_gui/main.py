@@ -105,23 +105,24 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             self.check_func.part_check(body_list, face_list, porous_list, up_list, dead_zone_list)
 
     def show_outlet_name(self):
-        init_k_dict = {'outlet_cvl': ['10000', '', '50', '200'], 'outlet_cvr': ['8000', '', '40', '220'],
-                       'outlet_foot': ['15000', '', '50', '220'],
-                       'outlet_test2': ['10000', '', '60', '250']}              # temperate test k value
-        self.outlet_assign = subUI_outlet_assign(init_k_dict, R_method=False)
+        self.outlet_assign = subUI_outlet_assign(self.outlet_dict)
         self.outlet_assign.show()
         self.outlet_assign.outlet_K_signal.connect(self.receive_outlet_info)
 
     def receive_outlet_info(self, outlet_dict):
+        print('outlet_dict', outlet_dict)
         self.outlet_list = list(outlet_dict.keys())
         self.face_list.extend(self.outlet_list)
         for i in outlet_dict.keys():
             self.K_dict[i] = outlet_dict[i][-1]
         self.outlet_dict = outlet_dict
-
+        # print(self.outlet_dict)
+        # print(self.K_dict)
+        self.pamt_dict()
         create_scdm_script(self.pamt['file_path'], self.body_list, self.face_list, self.pamt['cad_save_path'])
         if self.need_launch_CAD:
             self.launchCAD()
+            self.need_launch_CAD = False
 
     def show_c(self):
         dic = {}
@@ -160,7 +161,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     def import_info(self):
         path = QFileDialog.getOpenFileName(self, '选择要输入的参数模板',
                                            r'C:\Users\BZMBN4\Desktop', 'CSV Files (*.csv)')
-        self.import_outlet, self.outlet_dict, self.K_dict, self.outlet_dict =\
+        self.import_outlet, self.outlet_dict, self.K_dict, self.outlet_dict = \
             self.IEport.import_pamt(path)
 
     def case_address(self):
@@ -204,6 +205,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.porous_model.close()
 
     def pamt_dict(self):
+        self.pamt = dict()
         self.pamt['project_name'] = self.project_name_edit.text()
         self.pamt['version'] = self.version_name_edit.text()
         self.pamt['file_path'] = self.project_address_edit.text()
@@ -260,13 +262,13 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.check_part()
         self.pamt_dict()
         self.energy_check = self.energy_checkbox.isChecked()
-        try:
-            get_tui(self.pamt, self.body_list, self.energy_check, self.K_dict,
-                self.porous_list, self.up_list, self.dead_zone_list, self.internal_face)
-        except Exception as e:
-            print('error:', e)
-            print('error in file:', e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
-            print('error in line:', e.__traceback__.tb_lineno)  # 发生异常所在的行数
+        # try:
+        get_tui(self.pamt, self.body_list, self.energy_check, self.K_dict,
+            self.porous_list, self.up_list, self.dead_zone_list, self.internal_face)
+        # except Exception as e:
+        #     print('error:', e)
+        #     print('error in file:', e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
+        #     print('error in line:', e.__traceback__.tb_lineno)  # 发生异常所在的行数
 
     def begin(self):
         self.start_btn.setDisabled(True)

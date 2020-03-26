@@ -112,7 +112,7 @@ class get_tui():
 
         setup.report_definition('volume', 'surface-volumeflowrate', ['inlet*'])
         setup.report_definition('mass-flux', 'surface-massflowrate', mass_flux_list, 'no')
-        setup.report_definition('pressure', 'surface-areaavg', ['evap_in'])
+        setup.report_definition('pressure', 'surface-areaavg', self.pressure_face_list)
 
         if self.energy_check is True:
             inlet_temp = float(d['temp_inlet']) + 273.15
@@ -135,16 +135,16 @@ class get_tui():
         volume_face_list = ['inlet*', 'outlet*']
         post.create_result_file()
         post.set_background()
+        porous_dir = {}
+        for i in self.porous_list:
+            d1 = [d[i + '_x1'], d[i + '_y1'], d[i + '_z1']]
+            porous_dir[i] = d1
+        post.create_view(porous_dir)
         if self.energy_check is True:
             post.txt_surface_integrals('area-weighted-avg', ['outlet*'], 'temperature')
             post.create_streamline('temp_pathline', 'inlet', '', 'temperature')
             post.snip_avz('temp_pathline')
         else:
-            porous_dir = {}
-            for i in self.porous_list:
-                d1 = [d[i + '_x1'], d[i + '_y1'], d[i + '_z1']]
-                porous_dir[i] = d1
-            post.create_view(porous_dir)
             post.read_view()
             for i in self.porous_list:
                 post.create_contour(i+'_out', i+'_out')
@@ -152,8 +152,8 @@ class get_tui():
                 # post.snip_avz(i + '_out')
             post.create_streamline('whole_pathline', 'inlet')
             # post.create_streamline('distrib_pathline', 'evap_in', [0, 12])
-            post.snip_avz(5, 'whole_pathline')
-            # post.snip_picture('distrib_pathline', 'yes')
+            post.snip_avz('whole_pathline')
+            post.snip_picture('whole_pathline', 'yes')
             # post.snip_avz('distrib_pathline')
             post.snip_model('model')
 
@@ -194,8 +194,8 @@ class get_tui():
             mesh.fix_slivers()
             mesh.compute_volume_region()
             mesh.volume_mesh_change_type(self.dead_zone_list)
-            mesh.auto_mesh_volume(1.25)
-            mesh.auto_node_move(0.8, 6)
+            mesh.auto_mesh_volume(mesh_type='poly')
+            mesh.auto_node_move(0.85, 6)
             mesh.rename_cell(zone_list=mesh_zone_list)
             mesh.retype_face(face_list=['inlet'], face_type='mass-flow-inlet')
             mesh.retype_face(face_list=self.internal_list, face_type='internal')

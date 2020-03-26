@@ -55,4 +55,4 @@ class default_ui(object):
         self.main_ui.part_tree.topLevelItem(10).setCheckState(0, 0)
         self.main_ui.part_tree.topLevelItem(11).setCheckState(0, 0)
         self.main_ui.distrib_number.setValue(1)
-        self.main_ui.outlet_number.setValue(1)
+        self.main_ui.valve_number.setValue(0)

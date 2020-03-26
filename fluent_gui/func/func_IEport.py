@@ -30,11 +30,12 @@ class IEport(object):
                 if 'outlet' in i:
                     import_outlet = True
                     outlet_list.append(i)
-                    outlet_dict[i] = str(info[i])
-    
+                    outlet_dict[i] = eval(info[i])
+
             for i in outlet_dict.keys():
                 K_dict[i] = outlet_dict[i][-1]
-    
+                # outlet_dict[i].remove(outlet_dict[i][-1])
+
             self.ui.outlet_number.setValue(len(outlet_list))
             self.ui.project_name_edit.setText(info['project_name'])
             self.ui.version_name_edit.setText('V')

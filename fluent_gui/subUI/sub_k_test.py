@@ -79,6 +79,9 @@ class subUI_outlet_assign(Ui_k_form, QWidget):
             self.k_table.insertRow(number_dict[parent.text(0)])
             new_item = QTableWidgetItem(item.text(0))
             self.k_table.setItem(number_dict[parent.text(0)], 0, new_item)
+            for i in range(1, 5):
+                new_item = QTableWidgetItem('0.0001')
+                self.k_table.setItem(number_dict[parent.text(0)], i, new_item)
         else:
             row_number = number_dict[parent.text(0)] - len(self.mode_list_dict[parent.text(0)]) + \
                 self.mode_list_dict[parent.text(0)].index(item.text(0))
@@ -143,13 +146,14 @@ class subUI_outlet_assign(Ui_k_form, QWidget):
                     self.k_table.setItem(number_dict[other_node.text(0)]-1, self.k_dict[i].index(j)+1, new_item)
 
     def closeEvent(self, event):
-        value_list = []
+        outlet_k_dict = dict()
         for row in range(self.k_table.rowCount()):
             value = [0, 0, 0, 0, 0]
             for i in range(len(value)):
                 value[i] = self.k_table.item(row, i+1).text()
-            value_list.append(value)
-        outlet_k_dict = dict(zip(self.outlet_list, value_list))
+            value = tuple(value)
+            outlet_name = self.k_table.item(row, 0).text()
+            outlet_k_dict[outlet_name] = value
         self.outlet_K_signal.emit(outlet_k_dict)
 
 
@@ -214,9 +218,7 @@ class Auto_cal(QThread):
 if __name__ == "__main__":
     cgitb.enable(format='text')
     app = QApplication(sys.argv)
-    init_k_dict = {'outlet_cvl': ['10000', '', '50', '200'], 'outlet_cvr': ['8000', '', '40', '220'],
-                   'outlet_foot': ['15000', '', '50', '220'],
-                   'outlet_test2': ['10000', '', '60', '250']}
+    init_k_dict = {'outlet_test2': ['0.0001', '0.0001', '0.0001', '0.0001']}
     myWin = subUI_outlet_assign(init_k_dict, R_method=False)
     myWin.show()
     sys.exit(app.exec_())

@@ -64,7 +64,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>-810</y>
+       <y>0</y>
        <width>688</width>
        <height>1296</height>
       </rect>
@@ -265,19 +265,22 @@
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_outlet_number">
+            <widget class="QLabel" name="label_valve_number">
              <property name="text">
-              <string>出口数量</string>
+              <string>风门数量</string>
              </property>
              <property name="buddy">
-              <cstring>outlet_number</cstring>
+              <cstring>valve_number</cstring>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QSpinBox" name="outlet_number">
+            <widget class="QSpinBox" name="valve_number">
              <property name="minimum">
-              <number>1</number>
+              <number>0</number>
+             </property>
+             <property name="value">
+              <number>0</number>
              </property>
             </widget>
            </item>
@@ -1410,7 +1413,7 @@
           </widget>
          </item>
          <item row="1" column="1">
-          <widget class="QLineEdit" name="FILTER_y1_edit">
+          <widget class="QLineEdit" name="filter_y1_edit">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -1426,7 +1429,7 @@
           </widget>
          </item>
          <item row="2" column="1">
-          <widget class="QLineEdit" name="hc_z1_edit_2">
+          <widget class="QLineEdit" name="filter_z1_edit">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -2255,7 +2258,7 @@
   <tabstop>project_address_edit</tabstop>
   <tabstop>project_address_explore</tabstop>
   <tabstop>inlet_number</tabstop>
-  <tabstop>outlet_number</tabstop>
+  <tabstop>valve_number</tabstop>
   <tabstop>distrib_number</tabstop>
   <tabstop>energy_checkbox</tabstop>
   <tabstop>quick_distribfc_btn</tabstop>

@@ -24,7 +24,7 @@ class LinReport(object):
         self.temp_dict = {}                 # create empty dict
         self.form_angle_array()             # create valve open angle array
         for i in self.angle_array:          # extract data from all result file
-            result_file = r'{project_address}\lin_case\{project_name}-{version_name}-{angle}\result\{project_name}_{angle}.txt' \
+            result_file = r'{project_address}\lin_case\{project_name}_{version_name}_{angle}\result\{project_name}_{angle}.txt' \
                 .format(project_address=self.project_address, project_name=self.project_name,
                         version_name=self.version_name, angle=i)
 
@@ -124,9 +124,9 @@ class LinReport(object):
 
 
 if __name__ == "__main__":
-    project_address = r"G:\_HAVC_Project\BYD\BYD_linearity\BYD_lin_trl"
-    project_name = 'BYD'
-    version_name = 'lin_trl'
+    project_address = r"G:\_HAVC_Project\458-rear\458-rear-lin2"
+    project_name = '458-rear'
+    version_name = '458-rear-lin2'
 
     whole_name = project_name + '-' + version_name
-    Linearity_report = LinReport(project_address, project_name, version_name, 5, 95, 19)
+    Linearity_report = LinReport(project_address, project_name, version_name, 10, 90, 9)

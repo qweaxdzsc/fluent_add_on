@@ -48,25 +48,36 @@ def main():
 import threading
 import time
 
-
-def fun(argv):
-    print('thread : {0}'.format(argv))
-    time.sleep(2)
+mission = [1, 2, 3, 4, 5, 6, 8, 7, 9]
 
 
-threads = []  # 用于保存线程
-for i in range(5):  # 开5个线程
-    t = threading.Thread(target=fun, args=str(i))
-    threads.append(t)
+def func(mission_list):
+    while True:
+        if mission_list:
+            mission = mission_list[0]
+            mission_list.remove(mission_list[0])
+            print('\nstart mission %s' % mission)
+            time.sleep(10)
+            print('\nfinish mission %s' % mission)
+
+
+def man_mission(mission_list):
+    while True:
+        order = input('\nplease give order(append or remove)')
+        obj = input('\ncurrent list: %s\nplease enter object you want to manipulate: ' % mission_list)
+        try:
+            eval("mission_list.%s(%s)" % (order, obj))
+        except Exception as e:
+            print(e)
+            print('\nWarning: unsuccess, current list: %s' % mission_list)
+        print('\noperation success, current list: %s' % mission_list)
+
 
 if __name__ == '__main__':
-    # 开始所有的线程
-    for i in threads:
-        i.start()
-    # 保证线程执行完
-    for i in threads:
-        i.join()
-    print('all over')
+    cal_thread = threading.Thread(target=func, args=[mission])
+    cal_thread.start()
+    man_thread = threading.Thread(target=man_mission, args=[mission])
+    man_thread.start()
 
-# if __name__ == '__main__':
-#     main()
+
+

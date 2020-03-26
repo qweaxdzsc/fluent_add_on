@@ -34,7 +34,7 @@ class short_key(object):
             if QApplication.keyboardModifiers() == Qt.ControlModifier:  # test mod shortcut
                 self.ui.actionimport.trigger()
                 self.ui.check_part()
-                self.ui.pamt_dict()
+                # self.ui.pamt_dict()
                 self.ui.need_launch_CAD = False
                 self.ui.show_outlet_name()
                 self.ui.pamt_GUI()
@@ -43,6 +43,10 @@ class short_key(object):
         if e.key() == Qt.Key_J:
             if QApplication.keyboardModifiers() == Qt.ControlModifier:  # test mod shortcut
                 self.ui.create_tui()
+
+        if e.key() == Qt.Key_O:
+            if QApplication.keyboardModifiers() == Qt.ControlModifier:  # test mod shortcut
+                self.ui.show_outlet_name()
 
     def name_rule(self):
         """when press F1, it shows a naming rule help document"""

@@ -640,12 +640,14 @@ color-map format %0.1f size {line_size} q step {line_step} skip {line_skip} surf
             x = float(dir_dict[view][0])
             y = float(dir_dict[view][1])
             z = float(dir_dict[view][2])
-            if view[0] < 0:
+            if x < 0:
+                position = '(%s %s %s)' % (-x, -y, -z)
+            elif z < 0:
                 position = '(%s %s %s)' % (-x, -y, -z)
             else:
                 position = '(%s %s %s)' % (x, y, z)
             view_setting += """(%s (%s (0 0 0) (0 0 1) 0.5 0.5 "orthographic") #(1. 0. 0. 0. 0. 1. 0. 0. 0. 0. 1. 0. 0. 0. 0. 1.))""" \
-                            % (dir_dict[view], position)
+                            % (view, position)
         code = """
 (38 ((
 (view-list (

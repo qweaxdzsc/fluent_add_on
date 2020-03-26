@@ -101,7 +101,12 @@ class check_func():
             for i in range(ui.distrib_number.value() - 1):
                 body_list.append('distrib%s' % (i + 2))
 
-        print('body_list:%s\nface_list:%s' % (body_list, face_list))
+        if ui.valve_number.value() > 1:
+            valve_index = body_list.index('valve')
+            body_list[valve_index] = 'valve1'
+            for i in range(ui.valve_number.value() - 1):
+                body_list.append('valve%s' % (i + 2))
+
 
         internal_face = face_list.copy()
         for i in face_list:
