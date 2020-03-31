@@ -1,5 +1,6 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication, QMessageBox
+from report.re_get_report import get_report
 
 
 class short_key(object):
@@ -41,12 +42,19 @@ class short_key(object):
                 self.ui.append_text('进入调试模式')
 
         if e.key() == Qt.Key_J:
-            if QApplication.keyboardModifiers() == Qt.ControlModifier:  # test mod shortcut
+            if QApplication.keyboardModifiers() == Qt.ControlModifier:  # generate script shortcut
                 self.ui.create_tui()
 
         if e.key() == Qt.Key_O:
-            if QApplication.keyboardModifiers() == Qt.ControlModifier:  # test mod shortcut
+            if QApplication.keyboardModifiers() == Qt.ControlModifier:  # modify outlet attributes
                 self.ui.show_outlet_name()
+
+        if e.key() == Qt.Key_R:
+            if QApplication.keyboardModifiers() == Qt.ControlModifier:
+                self.ui.pamt_GUI()
+                get_report(self.ui.pamt['file_path'], self.ui.pamt['project_name'], self.ui.pamt['version'])
+
+
 
     def name_rule(self):
         """when press F1, it shows a naming rule help document"""
@@ -67,18 +75,15 @@ class short_key(object):
             self.ui.default_ui.default_part_tree()
             self.ui.part_tree.topLevelItem(9).setCheckState(0, 2)
             self.ui.distrib_number.setValue(2)
-            self.ui.outlet_number.setValue(1)
 
         if self.ui.quick_distribbil_btn.isChecked():
             self.ui.default_ui.default_part_tree()
             self.ui.part_tree.topLevelItem(9).setCheckState(0, 2)
             self.ui.distrib_number.setValue(1)
-            self.ui.outlet_number.setValue(2)
 
         if self.ui.quick_distriblin_btn.isChecked():
             self.ui.default_ui.default_part_tree()
             self.ui.part_tree.topLevelItem(9).setCheckState(0, 2)
             self.ui.part_tree.topLevelItem(11).setCheckState(0, 2)
             self.ui.energy_checkbox.setChecked(True)
-            self.ui.outlet_number.setValue(1)
             self.ui.distrib_number.setValue(1)

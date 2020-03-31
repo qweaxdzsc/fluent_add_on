@@ -36,7 +36,6 @@ class IEport(object):
                 K_dict[i] = outlet_dict[i][-1]
                 # outlet_dict[i].remove(outlet_dict[i][-1])
 
-            self.ui.outlet_number.setValue(len(outlet_list))
             self.ui.project_name_edit.setText(info['project_name'])
             self.ui.version_name_edit.setText('V')
     

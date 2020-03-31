@@ -2,25 +2,22 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e475a0b-2241-43fa-a10d-e22986a3349c" name="Default Changelist" comment="add K calculator. pop up when right click in the cal_K column at rename_table">
-      <change afterPath="$PROJECT_DIR$/../Python-test/fluent_interactive.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../designer_ideas/about_queue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/report/re_data_to_excel.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/report/re_get_report.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/report/re_python_to_html.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/report/re_txt_to_python.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/.idea/fluent_queue.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/CFD_post_command.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/CFD_post_command.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/CFD_post_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/CFD_post_run.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/Queue_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/Queue_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/get_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/get_report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/linearity_new.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/linearity_new.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/linearity_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/linearity_report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/tui_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/tui_run.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fluent_command/tui_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/fluent_command/tui_func.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fluent_command/tui_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/fluent_command/tui_run.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/func/func_IEport.py" beforeDir="false" afterPath="$PROJECT_DIR$/func/func_IEport.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/func/func_check.py" beforeDir="false" afterPath="$PROJECT_DIR$/func/func_check.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/func/func_short_key.py" beforeDir="false" afterPath="$PROJECT_DIR$/func/func_short_key.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subUI/sub_k_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/subUI/sub_k_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui_py/ui_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui_py/ui_main.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -31,47 +28,23 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-630">
-              <caret line="18" column="45" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="45" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/func/func_short_key.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="525">
-              <caret line="49" selection-start-line="49" selection-end-line="49" />
+            <state relative-caret-position="648">
+              <caret line="296" column="29" lean-forward="true" selection-start-line="296" selection-start-column="29" selection-end-line="296" selection-end-column="29" />
               <folding>
-                <element signature="e#0#27#0" expanded="true" />
+                <element signature="e#42#52#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/func/func_check.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/obsolete_func/table_right_click_func.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2315">
-              <caret line="114" column="8" selection-start-line="114" selection-start-column="8" selection-end-line="114" selection-end-column="8" />
-              <folding>
-                <element signature="e#0#9#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/func/func_default_ui_set.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="544">
-              <caret line="57" column="44" selection-start-line="57" selection-start-column="44" selection-end-line="57" selection-end-column="44" />
-              <folding>
-                <element signature="e#0#11#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="945">
+              <caret line="60" column="40" selection-start-line="60" selection-start-column="40" selection-end-line="60" selection-end-column="40" />
             </state>
           </provider>
         </entry>
@@ -183,7 +156,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/new_test.py" />
         <option value="$PROJECT_DIR$/file_explore.py" />
         <option value="$PROJECT_DIR$/nameselection.py" />
         <option value="$PROJECT_DIR$/rename_tip.py" />
@@ -226,19 +198,21 @@
         <option value="$PROJECT_DIR$/func/func_porous_d2.py" />
         <option value="$PROJECT_DIR$/fluent_command/tui_func.py" />
         <option value="$PROJECT_DIR$/test.py" />
-        <option value="$PROJECT_DIR$/func/func_IEport.py" />
         <option value="$PROJECT_DIR$/fluent_command/tui_run.py" />
-        <option value="$PROJECT_DIR$/func/func_short_key.py" />
         <option value="$PROJECT_DIR$/subUI/sub_k_test.py" />
-        <option value="$PROJECT_DIR$/main.py" />
         <option value="$PROJECT_DIR$/func/func_check.py" />
         <option value="$PROJECT_DIR$/func/func_default_ui_set.py" />
+        <option value="$PROJECT_DIR$/func/func_IEport.py" />
+        <option value="$PROJECT_DIR$/report/get_report.py" />
+        <option value="$PROJECT_DIR$/report/re_get_report.py" />
+        <option value="$PROJECT_DIR$/func/func_short_key.py" />
+        <option value="$PROJECT_DIR$/main.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="318" />
-    <option name="y" value="324" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="596" />
+    <option name="y" value="185" />
     <option name="width" value="1218" />
     <option name="height" value="1152" />
   </component>
@@ -259,12 +233,17 @@
             <path>
               <item name="fluent_gui" type="b2602c69:ProjectViewProjectNode" />
               <item name="fluent_gui" type="462c0819:PsiDirectoryNode" />
+              <item name="fluent_command" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="fluent_gui" type="b2602c69:ProjectViewProjectNode" />
+              <item name="fluent_gui" type="462c0819:PsiDirectoryNode" />
               <item name="func" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="fluent_gui" type="b2602c69:ProjectViewProjectNode" />
               <item name="fluent_gui" type="462c0819:PsiDirectoryNode" />
-              <item name="other_tool" type="462c0819:PsiDirectoryNode" />
+              <item name="obsolete_func" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="fluent_gui" type="b2602c69:ProjectViewProjectNode" />
@@ -283,14 +262,15 @@
     <property name="settings.editor.selected.configurable" value="vcs.Git" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_gui\fluent_command" />
-      <recent name="C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_gui\subfunc" />
-      <recent name="C:\Users\BZMBN4\Desktop\fluent_gui" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_gui\ui_py" />
       <recent name="C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_gui\subUI" />
+      <recent name="C:\Users\BZMBN4\Desktop\fluent_gui" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_gui\report" />
+      <recent name="C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_gui\fluent_command" />
+      <recent name="C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_gui\subfunc" />
       <recent name="C:\Users\BZMBN4\Desktop\fluent_gui" />
     </key>
   </component>
@@ -453,22 +433,22 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1170" extended-state="7" />
+    <frame x="-9" y="-9" width="1938" height="1170" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49867022" visible="true" weight="0.14799154" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.49867022" visible="true" weight="0.09143763" />
       <window_info id="Structure" order="1" sideWeight="0.5013298" side_tool="true" weight="0.15803383" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.1858847" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.63002115" visible="true" weight="0.2524851" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6294926" visible="true" weight="0.2524851" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.49947146" weight="0.39960238" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49841437" weight="0.32902583" />
       <window_info anchor="bottom" id="Version Control" order="7" sideWeight="0.49947146" weight="0.32902583" />
       <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49682876" weight="0.32902583" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.36997885" side_tool="true" weight="0.34890655" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.3705074" side_tool="true" visible="true" weight="0.2524851" />
       <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49682876" weight="0.32902583" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -499,7 +479,6 @@
     <option name="LAST_COMMIT_MESSAGE" value="add K calculator. pop up when right click in the cal_K column at rename_table" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/fluent_tui.py" />
     <entry file="file://$PROJECT_DIR$/example_pyqt5_ui.py" />
     <entry file="file://$PROJECT_DIR$/file_explore.py" />
     <entry file="file://$PROJECT_DIR$/rename_gui/rename_tip.py" />
@@ -635,13 +614,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/obsolete_func/table_right_click_func.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="97" column="20" lean-forward="true" selection-start-line="97" selection-start-column="20" selection-end-line="97" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-35653961/builtins.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="239">
@@ -718,37 +690,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/fluent_command/tui_run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2098">
-          <caret line="277" column="25" lean-forward="true" selection-start-line="277" selection-start-column="25" selection-end-line="277" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ui_py/ui_main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="230">
           <caret line="102" column="13" selection-start-line="102" selection-start-column="13" selection-end-line="102" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/func/func_IEport.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="218">
-          <caret line="58" column="12" lean-forward="true" selection-start-line="58" selection-start-column="12" selection-end-line="58" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/fluent_command/tui_func.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="239">
-          <caret line="185" column="8" selection-start-line="185" selection-start-column="8" selection-end-line="185" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -759,65 +704,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/subUI/sub_k_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="230">
-          <caret line="39" column="16" selection-start-line="39" selection-start-column="16" selection-end-line="39" selection-end-column="16" />
-          <folding>
-            <element signature="e#0#37#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/other_tool/GUI_convertor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="13" selection-start-line="13" selection-end-line="13" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../project_info.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../../project_info.py" />
     <entry file="file://$PROJECT_DIR$/call_api/call_func.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="504">
           <caret line="60" column="43" lean-forward="true" selection-start-line="60" selection-start-column="43" selection-end-line="60" selection-end-column="43" />
           <folding>
             <element signature="e#0#17#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/func/func_short_key.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="49" selection-start-line="49" selection-end-line="49" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/func/func_check.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2315">
-          <caret line="114" column="8" selection-start-line="114" selection-start-column="8" selection-end-line="114" selection-end-column="8" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/func/func_default_ui_set.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="57" column="44" selection-start-line="57" selection-start-column="44" selection-end-line="57" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -856,10 +749,104 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/func/func_check.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2373">
+          <caret line="114" column="8" selection-start-line="114" selection-start-column="8" selection-end-line="114" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/func/func_default_ui_set.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1197">
+          <caret line="57" column="44" selection-start-line="57" selection-start-column="44" selection-end-line="57" selection-end-column="44" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/func/func_IEport.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="441">
+          <caret line="39" column="50" lean-forward="true" selection-start-line="39" selection-start-column="50" selection-end-line="39" selection-end-column="50" />
+          <folding>
+            <element signature="e#0#10#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/subUI/sub_k_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="83">
+          <caret line="32" column="27" lean-forward="true" selection-start-line="32" selection-start-column="27" selection-end-line="32" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/report/re_get_report.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="63">
+          <caret line="3" column="49" lean-forward="true" selection-start-line="3" selection-start-column="49" selection-end-line="3" selection-end-column="49" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/func/func_short_key.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="54" column="108" lean-forward="true" selection-start-line="54" selection-start-column="108" selection-end-line="54" selection-end-column="108" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fluent_command/tui_func.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="2" column="8" lean-forward="true" selection-start-line="2" selection-start-column="8" selection-end-line="2" selection-end-column="86" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/fluent_command/tui_run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="135" column="23" selection-start-line="135" selection-start-column="23" selection-end-line="135" selection-end-column="23" />
+          <folding>
+            <element signature="e#0#35#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/other_tool/GUI_convertor.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="273">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-630">
-          <caret line="18" column="45" selection-start-line="18" selection-start-column="45" selection-end-line="18" selection-end-column="45" />
+        <state relative-caret-position="648">
+          <caret line="296" column="29" lean-forward="true" selection-start-line="296" selection-start-column="29" selection-end-line="296" selection-end-column="29" />
+          <folding>
+            <element signature="e#42#52#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/obsolete_func/table_right_click_func.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="945">
+          <caret line="60" column="40" selection-start-line="60" selection-start-column="40" selection-end-line="60" selection-end-column="40" />
         </state>
       </provider>
     </entry>

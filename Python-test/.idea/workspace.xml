@@ -6,28 +6,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="f8d44180-0242-4157-8c6d-4f3b75ca3fd9" name="Default Changelist" comment="第二次修改">
-      <change afterPath="$PROJECT_DIR$/fluent_interactive.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../designer_ideas/about_queue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_gui/report/re_data_to_excel.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_gui/report/re_get_report.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_gui/report/re_python_to_html.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_gui/report/re_txt_to_python.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/.idea/fluent_queue.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/main.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CFD_post_command.py" beforeDir="false" afterPath="$PROJECT_DIR$/CFD_post_command.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CFD_post_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/CFD_post_run.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Queue_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/Queue_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/get_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/get_report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linearity_new.py" beforeDir="false" afterPath="$PROJECT_DIR$/linearity_new.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/linearity_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/linearity_report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tui_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/tui_run.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_func.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_run.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/func/func_IEport.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/func/func_IEport.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/func/func_check.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/func/func_check.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/func/func_default_ui_set.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/func/func_default_ui_set.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/func/func_short_key.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/func/func_short_key.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/subUI/sub_k_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/subUI/sub_k_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/ui_py/ui_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/ui_py/ui_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/ui_qt/ui_main.ui" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/ui_qt/ui_main.ui" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -40,7 +35,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/tui_run.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1596">
+            <state relative-caret-position="1575">
               <caret line="76" column="20" selection-start-line="76" selection-start-column="20" selection-end-line="76" selection-end-column="20" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -52,7 +47,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/linearity_new.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1827">
+            <state relative-caret-position="1785">
               <caret line="87" column="40" selection-start-line="87" selection-start-column="40" selection-end-line="87" selection-end-column="40" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -64,8 +59,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/linearity_report.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="529">
-              <caret line="127" column="28" selection-start-line="127" selection-start-column="28" selection-end-line="127" selection-end-column="28" />
+            <state relative-caret-position="2499">
+              <caret line="126" column="24" selection-start-line="126" selection-start-column="24" selection-end-line="126" selection-end-column="86" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
               </folding>
@@ -76,8 +71,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/get_report.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="126">
-              <caret line="15" column="27" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
+            <state relative-caret-position="84">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
               <folding>
                 <element signature="e#0#20#0" expanded="true" />
               </folding>
@@ -86,18 +81,9 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/txt_to_python.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="342">
-              <caret line="25" column="11" selection-start-line="25" selection-start-column="11" selection-end-line="25" selection-end-column="11" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="278">
+            <state relative-caret-position="3339">
               <caret line="159" selection-start-line="159" selection-end-line="159" selection-end-column="11" />
             </state>
           </provider>
@@ -106,11 +92,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/fluent_interactive.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="252">
+            <state relative-caret-position="231">
               <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
-              <folding>
-                <element signature="e#1#18#0" expanded="true" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -118,8 +101,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Queue_test.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="509">
-              <caret line="76" column="4" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="62" />
+            <state relative-caret-position="1218">
+              <caret line="60" selection-start-line="60" selection-end-line="60" />
               <folding>
                 <element signature="e#1#24#0" expanded="true" />
               </folding>
@@ -130,8 +113,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CFD_post_run.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="273">
-              <caret line="13" column="10" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="10" />
+            <state relative-caret-position="315">
+              <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -142,7 +125,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/CFD_post_command.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="288">
+            <state relative-caret-position="6510">
               <caret line="311" column="33" selection-start-line="311" selection-start-column="33" selection-end-line="311" selection-end-column="33" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
@@ -285,20 +268,20 @@
         <option value="$PROJECT_DIR$/python_to_pptx.py" />
         <option value="$PROJECT_DIR$/fluent_tui.py" />
         <option value="$PROJECT_DIR$/tui_run.py" />
-        <option value="$PROJECT_DIR$/Queue_test.py" />
-        <option value="$PROJECT_DIR$/CFD_post_run.py" />
         <option value="$PROJECT_DIR$/CFD_post_command.py" />
         <option value="$PROJECT_DIR$/linearity_new.py" />
-        <option value="$PROJECT_DIR$/linearity_report.py" />
         <option value="$PROJECT_DIR$/fluent_interactive.py" />
         <option value="$PROJECT_DIR$/test.py" />
+        <option value="$PROJECT_DIR$/CFD_post_run.py" />
+        <option value="$PROJECT_DIR$/linearity_report.py" />
+        <option value="$PROJECT_DIR$/Queue_test.py" />
         <option value="$PROJECT_DIR$/get_report.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="318" />
-    <option name="y" value="324" />
+    <option name="x" value="596" />
+    <option name="y" value="185" />
     <option name="width" value="1218" />
     <option name="height" value="1152" />
   </component>
@@ -484,20 +467,20 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.txt_to_python" />
-      <item itemvalue="Python.linearity_new" />
-      <item itemvalue="Python.linearity_report" />
       <item itemvalue="Python.CFD_post_run" />
       <item itemvalue="Python.get_report" />
+      <item itemvalue="Python.linearity_new" />
+      <item itemvalue="Python.linearity_report" />
       <item itemvalue="Python.test" />
+      <item itemvalue="Python.txt_to_python" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.get_report" />
-        <item itemvalue="Python.test" />
         <item itemvalue="Python.linearity_report" />
-        <item itemvalue="Python.linearity_new" />
         <item itemvalue="Python.CFD_post_run" />
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.linearity_new" />
       </list>
     </recent_temporary>
   </component>
@@ -535,12 +518,12 @@
     <frame x="-9" y="-9" width="1938" height="1170" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.32" visible="true" weight="0.1987315" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.32" visible="true" weight="0.23731501" />
       <window_info id="Structure" order="1" sideWeight="0.68" side_tool="true" weight="0.1987315" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.75" visible="true" weight="0.3499006" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.75" weight="0.19980119" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39960238" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -616,7 +599,6 @@
     </watches-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/../../K_calculator2.py" />
     <entry file="file://$PROJECT_DIR$/PQ.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="273">
@@ -846,13 +828,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../../PipeDemo/IDEGeneratedMain.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="441">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../../PipeDemo/IDEGeneratedMain.py" />
     <entry file="file://F:/new training document collection/ANSYS tutorial/ACT study/BestDemoACT/AutoRun/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-518" />
@@ -865,39 +841,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tui_run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1596">
-          <caret line="76" column="20" selection-start-line="76" selection-start-column="20" selection-end-line="76" selection-end-column="20" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/helpers/typeshed/stdlib/2and3/threading.pyi">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2898" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CFD_post_command.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="311" column="33" selection-start-line="311" selection-start-column="33" selection-end-line="311" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CFD_post_run.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="273">
-          <caret line="13" column="10" selection-start-line="13" selection-start-column="10" selection-end-line="13" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/txt_to_python.py">
@@ -907,9 +853,29 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/queue.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+          <folding>
+            <element signature="e#47#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tui_run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1575">
+          <caret line="76" column="20" selection-start-line="76" selection-start-column="20" selection-end-line="76" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/linearity_new.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1827">
+        <state relative-caret-position="1785">
           <caret line="87" column="40" selection-start-line="87" selection-start-column="40" selection-end-line="87" selection-end-column="40" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
@@ -919,45 +885,62 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/linearity_report.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="529">
-          <caret line="127" column="28" selection-start-line="127" selection-start-column="28" selection-end-line="127" selection-end-column="28" />
+        <state relative-caret-position="2499">
+          <caret line="126" column="24" selection-start-line="126" selection-start-column="24" selection-end-line="126" selection-end-column="86" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Queue_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="509">
-          <caret line="76" column="4" selection-start-line="76" selection-start-column="4" selection-end-line="76" selection-end-column="62" />
-          <folding>
-            <element signature="e#1#24#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
+        <state relative-caret-position="3339">
           <caret line="159" selection-start-line="159" selection-end-line="159" selection-end-column="11" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/fluent_interactive.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
+        <state relative-caret-position="231">
           <caret line="12" column="10" selection-start-line="12" selection-start-column="10" selection-end-line="12" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Queue_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1218">
+          <caret line="60" selection-start-line="60" selection-end-line="60" />
           <folding>
-            <element signature="e#1#18#0" expanded="true" />
+            <element signature="e#1#24#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CFD_post_run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="315">
+          <caret line="16" column="1" selection-start-line="16" selection-start-column="1" selection-end-line="16" selection-end-column="1" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CFD_post_command.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6510">
+          <caret line="311" column="33" selection-start-line="311" selection-start-column="33" selection-end-line="311" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/get_report.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="126">
-          <caret line="15" column="27" selection-start-line="15" selection-start-column="27" selection-end-line="15" selection-end-column="27" />
+        <state relative-caret-position="84">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
           <folding>
             <element signature="e#0#20#0" expanded="true" />
           </folding>
