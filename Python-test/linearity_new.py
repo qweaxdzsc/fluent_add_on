@@ -5,9 +5,9 @@ import fluent_tui
 
 whole_jou = ''
 project_title = 'BYD'
-version_name = 'lin_bil_V10'
-cad_name = 'BYD_lin_bil_V10'
-project_path = r"G:\_HAVC_Project\BYD\BYD_linearity\BYD_lin_bil\BYD_lin_bil_V10"
+version_name = 'lin_foot_V11'
+cad_name = 'BYD_lin_foot_V11'
+project_path = r"G:\_HAVC_Project\BYD\BYD_linearity\BYD_lin_foot\lin_foot_V11"
 
 # valve_dir = [0, -1, 0]
 # valve_origin = [5407.69, 869.38, 1022.1]
@@ -83,9 +83,10 @@ CFD.setup.BC_mass_flow_inlet('inlet', 0.085)
 
 CFD.setup.BC_outlet_vent(0, 'outlet_svl')
 CFD.setup.BC_outlet_vent(0, 'outlet_svr')
-CFD.setup.BC_outlet_vent(0, 'outlet_cvl')
-CFD.setup.BC_outlet_vent(0, 'outlet_cvr')
-CFD.setup.BC_outlet_vent(0, 'outlet_rv')
+CFD.setup.BC_outlet_vent(0, 'outlet_sdl')
+CFD.setup.BC_outlet_vent(0, 'outlet_sdr')
+CFD.setup.BC_outlet_vent(0, 'outlet_cdl')
+CFD.setup.BC_outlet_vent(0, 'outlet_cdr')
 CFD.setup.BC_outlet_vent(0, 'outlet_ffl')
 CFD.setup.BC_outlet_vent(0, 'outlet_ffr')
 CFD.setup.BC_outlet_vent(0, 'outlet_rfl')

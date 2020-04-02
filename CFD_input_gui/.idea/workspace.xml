@@ -2,98 +2,25 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63e04c59-1c04-4b86-8106-908e7ed4bd46" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Python-test/CFD_post_run.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../fluent_gui/func/func_advanced.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../fluent_gui/func/func_default_ui_set.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../fluent_gui/func/func_short_key.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../fluent_gui/func/func_timer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../fluent_gui/obsolete_func/table_right_click_func.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/func/func_account.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/func/func_list_manage.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/func/func_timer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/func/func_ui_set.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/other_tool/GUI_convertor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/k_cal.py" beforeDir="false" afterPath="$PROJECT_DIR$/k_cal.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/CFD_post_command.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/CFD_post_command.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/database.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/fluent_tui.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/fluent_tui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/get_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/get_report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/python_to_pptx.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/python_to_pptx.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/CFD_post_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/CFD_post_run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/linearity_new.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/linearity_new.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_func.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/subUI/sub_k_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/subUI/sub_k_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/ui_py/ui_k_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/ui_py/ui_k_test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/ui_qt/ui_k_test.ui" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/ui_qt/ui_k_test.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/test.py" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/MatplotlibWidget.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="28" selection-start-line="28" selection-end-line="28" />
-              <folding>
-                <element signature="e#1#40#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/k_cal.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="71" column="44" selection-start-line="71" selection-start-column="44" selection-end-line="71" selection-end-column="44" />
-              <folding>
-                <element signature="e#0#31#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/start.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="192">
-              <caret line="46" column="49" lean-forward="true" selection-start-line="46" selection-start-column="49" selection-end-line="46" selection-end-column="49" />
-              <folding>
-                <element signature="e#0#135#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ui_input.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="7245">
-              <caret line="346" column="55" selection-start-line="346" selection-start-column="55" selection-end-line="346" selection-end-column="55" />
-              <folding>
-                <element signature="e#198#240#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/ui_porous_model.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="483">
-              <caret line="24" column="39" selection-start-line="24" selection-start-column="39" selection-end-line="24" selection-end-column="39" />
-              <folding>
-                <element signature="e#205#247#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -102,126 +29,15 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>mymain</find>
-      <find>time</find>
-      <find>export_csv</find>
-      <find>'porous_name'</find>
-      <find>%s</find>
-      <find>table_matrix</find>
-      <find>message</find>
-      <find>style</find>
-      <find>import_csv</find>
-      <find>html</find>
-      <find>evap</find>
-      <find>hc</find>
-      <find>self.RPM_div</find>
-      <find>self.input_d</find>
-      <find>d['RPM']</find>
-      <find>QLineEdit</find>
-      <find>vent_edit</find>
-      <find>read</find>
-      <find>valve_number</find>
-      <find>myMain</find>
-      <find>添加</find>
-      <find>无</find>
-      <find>add</find>
-      <find>&quot;add&quot;</find>
-      <find>effective_dimension_box</find>
-      <find>QP_</find>
-      <find>ICON</find>
-      <find>QtGui.QPixmap</find>
-      <find>re</find>
-      <find>QRegExp</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>_slider</replace>
-      <replace>defog</replace>
-      <replace>bil</replace>
-      <replace>trl</replace>
-      <replace>hil</replace>
-      <replace>G:\迅雷下载</replace>
-      <replace>r&quot;G:\迅雷下载&quot;</replace>
-      <replace>edit</replace>
-      <replace>mode_dict</replace>
-      <replace>mode_list_dict</replace>
-      <replace>foot</replace>
-      <replace>defrost</replace>
-      <replace>self.mode_dict</replace>
-      <replace>Ui_k_cal</replace>
-      <replace>Ui_project_name</replace>
-      <replace>mymain</replace>
-      <replace>myMain</replace>
-      <replace>export_html</replace>
-      <replace>model_type</replace>
-      <replace>data_dict</replace>
-      <replace>html</replace>
-      <replace>import_html</replace>
-      <replace>self.html</replace>
-      <replace>hc</replace>
-      <replace>filter</replace>
-      <replace>di</replace>
-      <replace>div</replace>
-      <replace>RPM_dict</replace>
-      <replace>self.myMain</replace>
-      <replace>none</replace>
-    </replaceStrings>
-  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/names.csv" />
-        <option value="$PROJECT_DIR$/HorizontalBar.py" />
-        <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/input_ui.py" />
-        <option value="$PROJECT_DIR$/test2.py" />
-        <option value="$PROJECT_DIR$/test.py" />
-        <option value="$PROJECT_DIR$/record_html.py" />
-        <option value="$PROJECT_DIR$/../../123.html" />
-        <option value="$PROJECT_DIR$/html_parser.py" />
-        <option value="$PROJECT_DIR$/output_html.py" />
-        <option value="$PROJECT_DIR$/translator_file_creator.py" />
-        <option value="$PROJECT_DIR$/project_name.py" />
-        <option value="$PROJECT_DIR$/porous_model.py" />
-        <option value="$PROJECT_DIR$/start.py" />
-        <option value="$PROJECT_DIR$/ui_porous_model.py" />
-        <option value="$PROJECT_DIR$/GUI_convertor.py" />
-        <option value="$PROJECT_DIR$/ui_input.py" />
-        <option value="$PROJECT_DIR$/MatplotlibWidget.py" />
-        <option value="$PROJECT_DIR$/ui_k_cal2.py" />
-        <option value="$PROJECT_DIR$/k_cal.py" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="596" />
-    <option name="y" value="185" />
-    <option name="width" value="1218" />
-    <option name="height" value="1152" />
-  </component>
+  <component name="ProjectId" id="1ZvdjlOvHdOSWgvJxhyQCYJAe8v" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="CFD_input_gui" type="b2602c69:ProjectViewProjectNode" />
-              <item name="CFD_input_gui" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
@@ -236,19 +52,7 @@
       <recent name="C:\Users\BZMBN4\Desktop\fluent_add_on\CFD_input_gui\translator_file" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Python.k_cal">
+  <component name="RunManager" selected="Python.start">
     <configuration name="GUI_convertor" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="CFD_input_gui" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -356,8 +160,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.k_cal" />
         <item itemvalue="Python.start" />
+        <item itemvalue="Python.k_cal" />
         <item itemvalue="Python.ui_input" />
         <item itemvalue="Python.GUI_convertor" />
         <item itemvalue="Python.porous_model" />
@@ -376,323 +180,5 @@
       <updated>1576645979751</updated>
     </task>
     <servers />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1170" extended-state="6" />
-    <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.23837209" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4989429" weight="0.32902583" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6548626" weight="0.23757455" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.34513742" side_tool="true" weight="0.32902583" />
-      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49947146" weight="0.32902583" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout>
-    <layout-to-restore>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24577168" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Favorites" order="2" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.4989429" weight="0.32902583" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6548626" weight="0.32902583" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Version Control" order="7" />
-      <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.34513742" side_tool="true" weight="0.32902583" />
-      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.49947146" weight="0.32902583" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout-to-restore>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/easy_test.py" />
-    <entry file="file://$PROJECT_DIR$/tui_run.py" />
-    <entry file="file://$PROJECT_DIR$/test.csv" />
-    <entry file="file://$PROJECT_DIR$/rename_tip.py" />
-    <entry file="file://$PROJECT_DIR$/p1.png" />
-    <entry file="file://$PROJECT_DIR$/outlet.py" />
-    <entry file="file://$PROJECT_DIR$/names.csv" />
-    <entry file="file://$PROJECT_DIR$/file_explore.py" />
-    <entry file="file://$PROJECT_DIR$/example_pyqt5_ui.py" />
-    <entry file="file://$PROJECT_DIR$/fluent_tui.py" />
-    <entry file="file://$PROJECT_DIR$/main.py" />
-    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-35653961/PyQt5/QtWidgets/QComboBox.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="193">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../K_calculator2.py" />
-    <entry file="file://$PROJECT_DIR$/input_ui.py" />
-    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-35653961/PyQt5/QtWidgets/QTableView.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="35" column="8" selection-start-line="35" selection-start-column="8" selection-end-line="35" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-35653961/PyQt5/Qt.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-35653961/PyQt5/QtCore/Qt.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="6300">
-          <caret line="301" column="10" selection-start-line="301" selection-start-column="4" selection-end-line="301" selection-end-column="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-35653961/PyQt5/QtWidgets/QTableWidgetItem.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="79" column="8" selection-start-line="79" selection-start-column="8" selection-end-line="79" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-35653961/PyQt5/QtWidgets/QLayout.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="141" column="8" selection-start-line="141" selection-start-column="8" selection-end-line="141" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-35653961/PyQt5/QtWidgets/QLayoutItem.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="385">
-          <caret line="85" column="8" selection-start-line="85" selection-start-column="8" selection-end-line="85" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-35653961/PyQt5/QtWidgets/QFormLayout.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="135" column="8" selection-start-line="135" selection-start-column="8" selection-end-line="135" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-35653961/PyQt5/QtCore/QObject.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="319">
-          <caret line="81" column="48" lean-forward="true" selection-start-line="81" selection-start-column="48" selection-end-line="81" selection-end-column="48" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../123.html" />
-    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-35653961/PyQt5/QtCore/QRegExp.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="117" column="8" selection-start-line="117" selection-start-column="8" selection-end-line="117" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-35653961/PyQt5/QtGui/QRegExpValidator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="432">
-          <caret line="57" column="8" selection-start-line="57" selection-start-column="8" selection-end-line="57" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-35653961/PyQt5/QtWidgets/QAbstractItemView.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="474" column="67" selection-start-line="474" selection-start-column="46" selection-end-line="474" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-35653961/PyQt5/QtWidgets/QItemDelegate.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1176">
-          <caret line="25" lean-forward="true" selection-start-line="25" selection-end-line="25" />
-          <folding>
-            <element signature="e#184#221#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/scipy/optimize/minpack.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2902">
-          <caret line="453" lean-forward="true" selection-start-line="453" selection-end-line="453" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-35653961/PyQt5/QtWidgets/QTableWidget.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="239" column="8" selection-start-line="239" selection-start-column="8" selection-end-line="239" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/shutil.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="562" selection-start-line="562" selection-end-line="562" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../../trans_test.py" />
-    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-35653961/PyQt5/QtCore/QTranslator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="34" column="8" selection-start-line="34" selection-start-column="8" selection-end-line="34" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../Python-test/GUI_convertor.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/html_parser.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1659">
-          <caret line="79" column="38" selection-start-line="79" selection-start-column="38" selection-end-line="79" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/HorizontalBar.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="462">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/output_html.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="19" lean-forward="true" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/porous_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="37" selection-start-column="37" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/project_name.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="693">
-          <caret line="33" column="57" selection-start-line="33" selection-start-column="57" selection-end-line="33" selection-end-column="57" />
-          <folding>
-            <element signature="e#0#50#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="3" column="29" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="29" />
-          <folding>
-            <element signature="e#0#10#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/translator_file_creator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="147">
-          <caret line="7" column="44" selection-start-line="7" selection-start-column="44" selection-end-line="7" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test2.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ui_project_name.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="32" selection-start-line="9" selection-start-column="32" selection-end-line="9" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ui_input.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7245">
-          <caret line="346" column="55" selection-start-line="346" selection-start-column="55" selection-end-line="346" selection-end-column="55" />
-          <folding>
-            <element signature="e#198#240#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ui_porous_model.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="483">
-          <caret line="24" column="39" selection-start-line="24" selection-start-column="39" selection-end-line="24" selection-end-column="39" />
-          <folding>
-            <element signature="e#205#247#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MatplotlibWidget.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="504">
-          <caret line="28" selection-start-line="28" selection-end-line="28" />
-          <folding>
-            <element signature="e#1#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.PyCharmCE2019.1/system/python_stubs/-35653961/PyQt5/QtWidgets/QLineEdit.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="433" column="8" selection-start-line="433" selection-start-column="8" selection-end-line="433" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/start.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="192">
-          <caret line="46" column="49" lean-forward="true" selection-start-line="46" selection-start-column="49" selection-end-line="46" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#135#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ui_k_cal2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="21">
-          <caret line="10" column="6" selection-start-line="10" selection-start-column="6" selection-end-line="10" selection-end-column="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/k_cal.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="71" column="44" selection-start-line="71" selection-start-column="44" selection-end-line="71" selection-end-column="44" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
   </component>
 </project>
