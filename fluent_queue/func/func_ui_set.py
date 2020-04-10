@@ -4,6 +4,7 @@ from PyQt5.QtGui import QIcon, QPixmap
 class UiSet(object):
     def __init__(self, ui):
         self.ui = ui
+        self.ui.action_delete.setDisabled(True)
 
     def set_all_icon(self):
         self._set_icon('login.png', self.ui.action_login)
@@ -21,5 +22,9 @@ class UiSet(object):
     def ui_user_logoff(self, logoff=True):
         self.ui.action_add.setDisabled(logoff)
         self.ui.action_delete.setDisabled(logoff)
+        self.ui.action_logout.setDisabled(logoff)
         self.ui.action_add.setStatusTip('请先登陆后使用添加功能')
         self.ui.action_delete.setStatusTip('请先登陆后使用删除功能')
+        self.ui.listWidget_queue.setDisabled(logoff)
+
+

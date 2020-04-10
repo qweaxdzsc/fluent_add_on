@@ -5,9 +5,9 @@ import fluent_tui
 
 whole_jou = ''
 project_title = 'BYD'
-version_name = 'lin_foot_V11'
-cad_name = 'BYD_lin_foot_V11'
-project_path = r"G:\_HAVC_Project\BYD\BYD_linearity\BYD_lin_foot\lin_foot_V11"
+version_name = 'lin_foot_V12'
+cad_name = 'BYD_lin_foot_V12'
+project_path = r"G:\_HAVC_Project\BYD\BYD_linearity\BYD_lin_foot\lin_foot_V12"
 
 # valve_dir = [0, -1, 0]
 # valve_origin = [5407.69, 869.38, 1022.1]

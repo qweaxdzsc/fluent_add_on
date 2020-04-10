@@ -31,7 +31,6 @@ def into_fluent(p):
             p.stdin.flush()
 
 
-
 read_thread = threading.Thread(target=read_line, args=[p])
 read_thread.start()
 in_thread = threading.Thread(target=into_fluent, args=[p])

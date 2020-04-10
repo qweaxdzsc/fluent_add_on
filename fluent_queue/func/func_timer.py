@@ -1,6 +1,7 @@
 from PyQt5.QtCore import pyqtSignal, QThread, QTimer
 from PyQt5.QtCore import QEvent
 from PyQt5.QtWidgets import QMainWindow
+import time
 
 
 class timer(QThread):
@@ -41,7 +42,7 @@ class SleepOut(QMainWindow):
         super(QMainWindow, self).__init__()
         self.ui = ui
         self.time_out_minutes = time_out_minutes
-        self.sleep_time = timer(1000)
+        self.sleep_time = timer(60000)
         self.sleep_time.time_count.connect(self.time_out)                   # create sleep timer
         ui.eventFilter = self.eventFilter                                   # rewrite ui's eventFilter function
 
@@ -60,4 +61,6 @@ class SleepOut(QMainWindow):
             self.sleep_time.stop()
 
 
-
+def current_time():
+    ct = time.strftime("%Y-%m-%d %H:%M:%S")
+    return ct

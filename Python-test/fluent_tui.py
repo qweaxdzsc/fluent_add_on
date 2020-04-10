@@ -178,7 +178,6 @@ boundary/manage/rotate valve*()
 """ % (skewness, iterations)
         self.tui.whole_jou += text
 
-
     def rename_cell(self, zone_list):
         for i in range(len(zone_list)):
             text = """
@@ -248,6 +247,20 @@ class setup(object):
     def __init__(self, tui):
         self.tui = tui
         print('create_object_setup')
+
+    def start_transcript(self):
+        text = """
+/file/start-transcript %s\\%s_%s
+""" % (self.tui.case_out_path, self.tui.project_title, self.tui.version_name)
+        self.tui.whole_jou += text
+        return self.tui.whole_jou
+
+    def set_timeout(self, minutes=5):
+        text = """
+/file/set-idle-timeout yes {time_out} no
+""" % minutes
+        self.tui.whole_jou += text
+        return self.tui.whole_jou
 
     def read_mesh(self):
         text = """
