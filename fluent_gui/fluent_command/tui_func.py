@@ -28,6 +28,7 @@ class tui(object):
         self.whole_jou += text
         return self.whole_jou
 
+
 class mesh(object):
     def __init__(self, tui):
         self.tui = tui

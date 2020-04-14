@@ -1,8 +1,10 @@
-from PyQt5.QtCore import pyqtSignal, QThread
 import csv
 import time
-from func.func_timer import current_time
 import subprocess
+
+from PyQt5.QtCore import pyqtSignal, QThread, QFileInfo
+
+from func.func_timer import current_time
 
 
 class Calculate(QThread):
@@ -47,8 +49,9 @@ class Calculate(QThread):
         """
         # TODO add fluent calculation in the future when test is done
         self.start_time = time.time()
-        cores = 24
+        cores = 12
         running_journal = self.running_project[0]["journal"]
+
         p = subprocess.Popen(r'cd C:\Program Files\ANSYS Inc\v201\fluent\ntbin\win64 && '
                              r'fluent 3d -t%s -i %s' % (cores, running_journal), shell=True,
                              stdout=subprocess.PIPE, stdin=subprocess.PIPE,
@@ -58,7 +61,10 @@ class Calculate(QThread):
             line = p.stdout.readline()
             msg = line
             print(msg)
+
         print('finish')
+        self.complete_status = self.check_result()
+        print(self.complete_status)
         # TODO determine whether it is finished
         self.finish_time = time.time()
         self.finish_cal()
@@ -107,11 +113,21 @@ class Calculate(QThread):
             if self.running_project:
                 csv_writer.writerow(self.running_project[0])
 
+    def check_result(self):
+        case_path = self.running_project[0]["project_address"]
+        case_name = self.running_project[0]["project_name"]
+        result_txt = case_path + "\\%s_result\\totalresult.txt" % case_name
+        result_file = QFileInfo(result_txt)
+        if result_file.exists():
+            return 'result produced'
+        else:
+            return 'no result'
 
-class CheckFinish(QThread):
+
+class CheckResult(QThread):
     """ create checking thread"""
     def __init__(self):
-        super(CheckFinish, self).__init__()
+        super(CheckResult, self).__init__()
         pass
 
 

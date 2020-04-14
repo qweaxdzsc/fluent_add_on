@@ -2,23 +2,16 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8d44180-0242-4157-8c6d-4f3b75ca3fd9" name="Default Changelist" comment="第二次修改">
-      <change afterPath="$PROJECT_DIR$/test2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../fluent_queue/func/func_dragable_list.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../fluent_queue/func/func_run_calculation.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../fluent_queue/func/func_short_key.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fluent_interactive.py" beforeDir="false" afterPath="$PROJECT_DIR$/fluent_interactive.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fluent_tui.py" beforeDir="false" afterPath="$PROJECT_DIR$/fluent_tui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linearity_new.py" beforeDir="false" afterPath="$PROJECT_DIR$/linearity_new.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linearity_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/linearity_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/get_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/get_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tui_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/tui_run.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_func.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/subUI/sub_k_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/subUI/sub_k_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_list_manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_list_manage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_timer.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_timer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_ui_set.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_ui_set.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/other_tool/GUI_convertor.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/other_tool/GUI_convertor.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_run_calculation.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_run_calculation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_short_key.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_short_key.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_queue/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,72 +28,6 @@
         <option value="Python Script" />
       </list>
     </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>unit_transform</find>
-      <find>part</find>
-      <find>Liter_per_second_de</find>
-      <find>_exist</find>
-      <find>copy</find>
-      <find>worksheet2</find>
-      <find>%s</find>
-      <find>txt[i]</find>
-      <find>row</find>
-      <find>原始函数</find>
-      <find>vent</find>
-      <find>avg_diff_dict</find>
-      <find>cbook</find>
-      <find>foot</find>
-      <find>defog</find>
-      <find>defrost</find>
-      <find>bil</find>
-      <find>hil</find>
-      <find>list</find>
-      <find>self.angle_array</find>
-      <find>i</find>
-      <find>foot_V3</find>
-      <find>vent_V3</find>
-      <find>vent_V9</find>
-      <find>vent_ainew</find>
-      <find>self.path</find>
-      <find>txt_name</find>
-      <find>os</find>
-      <find>self.script_name</find>
-      <find>range</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>clasif_outlet_dict</replace>
-      <replace>diff</replace>
-      <replace>side_vent</replace>
-      <replace>side_defrost</replace>
-      <replace>self.outlet_list</replace>
-      <replace>Linearity_report</replace>
-      <replace>txt_rest</replace>
-      <replace>txt_string</replace>
-      <replace>txt_data</replace>
-      <replace>unit_convert</replace>
-      <replace>type</replace>
-      <replace>lps_round</replace>
-      <replace>data_round</replace>
-      <replace>_string</replace>
-      <replace>worksheet</replace>
-      <replace>row</replace>
-      <replace>txt[i]</replace>
-      <replace>orgi</replace>
-      <replace>vent</replace>
-      <replace>foot</replace>
-      <replace>hil</replace>
-      <replace>avg_dict</replace>
-      <replace>defrost</replace>
-      <replace>bil</replace>
-      <replace>defog</replace>
-      <replace>trl</replace>
-      <replace>vent_V2</replace>
-      <replace>bil_V6</replace>
-      <replace>foot_V10</replace>
-      <replace>foot_V5</replace>
-    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
@@ -135,8 +62,8 @@
       <recent name="C:\Users\BZMBN4\Desktop\Python-test" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.tui_run">
-    <configuration name="CFD_post_run" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.test">
+    <configuration name="get_report" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Python-test" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -148,7 +75,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/CFD_post_run.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/get_report.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -199,7 +126,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Python-test" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -211,7 +138,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -263,20 +190,20 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.CFD_post_run" />
+      <item itemvalue="Python.txt_to_python" />
       <item itemvalue="Python.linearity_new" />
       <item itemvalue="Python.linearity_report" />
-      <item itemvalue="Python.test2" />
       <item itemvalue="Python.tui_run" />
-      <item itemvalue="Python.txt_to_python" />
+      <item itemvalue="Python.test" />
+      <item itemvalue="Python.get_report" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.get_report" />
         <item itemvalue="Python.tui_run" />
         <item itemvalue="Python.linearity_new" />
         <item itemvalue="Python.linearity_report" />
-        <item itemvalue="Python.test2" />
-        <item itemvalue="Python.CFD_post_run" />
       </list>
     </recent_temporary>
   </component>
@@ -342,22 +269,30 @@
     <option name="LAST_COMMIT_MESSAGE" value="第二次修改" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1892" height="167" key="GridCell.Tab.0.bottom" timestamp="1586419112196">
+    <state x="670" y="356" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1586497342475">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1892" height="167" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1586419112196" />
-    <state width="1892" height="167" key="GridCell.Tab.0.center" timestamp="1586419112196">
+    <state x="670" y="356" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1586497342475" />
+    <state width="1892" height="297" key="GridCell.Tab.0.bottom" timestamp="1586755084265">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1892" height="167" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1586419112196" />
-    <state width="1892" height="167" key="GridCell.Tab.0.left" timestamp="1586419112196">
+    <state width="1892" height="297" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1586755084265" />
+    <state width="1892" height="297" key="GridCell.Tab.0.center" timestamp="1586755084265">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1892" height="167" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1586419112196" />
-    <state width="1892" height="167" key="GridCell.Tab.0.right" timestamp="1586419112196">
+    <state width="1892" height="297" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1586755084265" />
+    <state width="1892" height="297" key="GridCell.Tab.0.left" timestamp="1586755084265">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1892" height="167" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1586419112196" />
+    <state width="1892" height="297" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1586755084265" />
+    <state width="1892" height="297" key="GridCell.Tab.0.right" timestamp="1586755084265">
+      <screen x="0" y="0" width="1920" height="1152" />
+    </state>
+    <state width="1892" height="297" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1586755084265" />
+    <state x="559" y="67" width="802" height="1017" key="find.popup" timestamp="1586497448471">
+      <screen x="0" y="0" width="1920" height="1152" />
+    </state>
+    <state x="559" y="67" width="802" height="1017" key="find.popup/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1586497448471" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

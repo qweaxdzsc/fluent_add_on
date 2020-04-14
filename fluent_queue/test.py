@@ -66,29 +66,3 @@
 # use_time = (time_end - time_start)/60
 #
 # print('totally cost', use_time)
-import subprocess
-import time
-import os
-
-cores = 24
-p = subprocess.Popen(r'cd C:\Program Files\ANSYS Inc\v201\fluent\ntbin\win64 && '
-                             r'fluent 3d -t%s' % cores, shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE,
-                             stderr=subprocess.PIPE, universal_newlines=True)
-
-while p.poll() == None:
-    time.sleep(5)
-    line = p.stdout.readline()
-    msg = line
-    print(msg)
-
-print('finish')
-
-# p = subprocess.call(r'cd C:\Program Files\ANSYS Inc\v201\fluent\ntbin\win64 && '
-#                              r'fluent 3d -t%s' % cores, shell=True)
-#
-# print('finish')
-
-# os.system(r'cd C:\Program Files\ANSYS Inc\v201\fluent\ntbin\win64 && '
-#                              r'fluent 3d -t%s' % cores)
-#
-# print('finish')

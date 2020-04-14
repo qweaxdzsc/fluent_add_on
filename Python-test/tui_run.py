@@ -5,9 +5,9 @@ import fluent_tui
 # txt name
 whole_jou = ''
 project_title = 'D2UX'
-version_name = 'vent_ainew'
-cad_name = 'D2UX_foot_V5'
-case_out = r'G:\_HAVC_Project\D2UX\D2UX_vent\D2UX_vent_ainew'
+version_name = 'foot_V6'
+cad_name = 'D2UX_foot_V6'
+case_out = r'G:\_HAVC_Project\D2UX\D2UX_foot\D2UX_foot_V6'
 
 
 jou_out = case_out
@@ -19,8 +19,8 @@ jou = open(txt_name, 'w')
 
 CFD = fluent_tui.tui(whole_jou, project_title, version_name, case_out, cad_name)
 
-CFD.mesh.simple_import(['ai', 'volute'], ['evap', 'filter'])
-# CFD.mesh.simple_import(['ai', 'volute'], ['evap', 'filter', 'hc'])
+# CFD.mesh.simple_import(['ai', 'volute'], ['evap', 'filter'])
+CFD.mesh.simple_import(['ai', 'volute'], ['evap', 'filter', 'hc'])
 # CFD.mesh.simple_import(['volute'], ['evap'])
 # CFD.mesh.simple_import(['volute'], ['evap', 'hc'])
 # CFD.mesh.import_distrib()
@@ -32,13 +32,13 @@ CFD.mesh.volume_mesh_change_type()
 # CFD.mesh.volume_mesh_change_type(dead_zone_list=['fan_blade'])
 CFD.mesh.auto_mesh_volume(mesh_type='poly')
 CFD.mesh.auto_node_move(skewness=0.85)
-CFD.mesh.rename_cell(zone_list=['ai', 'ai_duct', 'evap', 'fan', 'volute', 'filter', 'hc', 'distrib1', 'distrib2', 'cone'])
+CFD.mesh.rename_cell(zone_list=['ai', 'evap', 'fan', 'volute', 'filter', 'hc', 'distrib1', 'distrib2', 'cone'])
 # CFD.mesh.rename_cell(zone_list=['ai', 'ai_duct', 'filter', 'cone', 'evap', 'fan', 'volute', 'distrib'])
 # CFD.mesh.rename_cell(zone_list=['ai', 'evap', 'fan', 'volute', 'distrib'])
 # CFD.mesh.rename_cell(zone_list=['ai', 'evap', 'hc', 'fan', 'volute'])
 # CFD.mesh.retype_face(face_list=['inlet', 'inlet2'], face_type='pressure-inlet')
 CFD.mesh.retype_face(face_list=['inlet'], face_type='inlet-vent')
-# CFD.mesh.retype_face(face_list=['fan_out', 'evap*', 'filter*'], face_type='internal')
+CFD.mesh.retype_face(face_list=['fan_out', 'evap*', 'filter*'], face_type='internal')
 # CFD.mesh.retype_face(face_list=['ai_in', 'fan_in', 'fan_out', 'evap*', 'filter*'], face_type='internal')
 # CFD.mesh.retype_face(face_list=['fan_in', 'fan_out', 'evap*'], face_type='internal')
 CFD.mesh.retype_face(face_list=['ai_in', 'fan_in', 'fan_out', 'evap*', 'hc*'], face_type='internal')
@@ -48,7 +48,7 @@ CFD.mesh.prepare_for_solve()
 CFD.mesh.switch_to_solver()
 
 
-fan_origin = [2.15225, 0.35303, 0.89591]
+fan_origin = [2.12225, 0.35303, 1.31595]
 fan_axis = [0, 0, 1]
 rpm = 3900
 evap_d1 = [1, 0, 0]
@@ -74,7 +74,12 @@ CFD.setup.porous_zone('hc', hc_d1, hc_d2, 5.86e+07, 674.4)
 # CFD.setup.BC_type('outlet*()', 'outlet-vent')
 # CFD.setup.BC_type('outlet_vr', 'outlet-vent')
 # CFD.setup.BC_pressure_inlet('inlet')
-CFD.setup.BC_mass_flow_inlet('inlet', 0.0735)
+# CFD.setup.BC_mass_flow_inlet('inlet', 0.0735)
+CFD.setup.BC_outlet_vent(5.117, 'outlet_cdl')
+CFD.setup.BC_outlet_vent(5.117, 'outlet_cdr')
+CFD.setup.BC_outlet_vent(27.46, 'outlet_sdl')
+CFD.setup.BC_outlet_vent(27.46, 'outlet_sdr')
+
 CFD.setup.BC_outlet_vent(17.8, 'outlet_svl')
 CFD.setup.BC_outlet_vent(17.8, 'outlet_svr')
 CFD.setup.BC_outlet_vent(2.6, 'outlet_ffl')

@@ -18,5 +18,5 @@ class ShortKey(object):
                                "project_address": r'G:\_fluent_setup_test',
                                "journal": r'G:\_fluent_setup_test\GE2-rear2-V33-FC.jou'}
                 self.ui.user_login(acc_name)
-                self.ui.new_project(new_pj_dict)
+                # self.ui.new_project(new_pj_dict)
 

@@ -153,13 +153,14 @@ class AddPj(QWidget, Ui_Widget_add):
             return jou_file
 
     def default_journal(self, case_path):
+        print('journal')
         """
         create default journal for calculation only
         :param case_path:
         :return:
         """
         jou_file = case_path.absolutePath() + '\\' + case_path.baseName() + '.jou'
-        transcript = case_path.absolutePath() + '\\' + case_path.baseName()
+        transcript = case_path.absolutePath() + '\\%s_transcript' % case_path.baseName()
         time_out_min = 1
         content = """
 /file/start-transcript {transcript}
@@ -168,6 +169,7 @@ class AddPj(QWidget, Ui_Widget_add):
 /solve/initialize/hyb-initialization yes
 /solve/iterate/{iteration} yes
 /file/write-case-data/ {case_path} yes
+/exit yes
 """.format(iteration=self.edit_iteration.text(), case_path=case_path.filePath(), transcript=transcript,
            time_out=time_out_min)
         with open(jou_file, 'w') as jou:
