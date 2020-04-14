@@ -4,7 +4,7 @@ import sys
 import cgitb
 
 from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QLineEdit
-from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtCore import pyqtSignal, QFileInfo
 from PyQt5.QtGui import QTextCursor
 
 from ui_py.ui_main import Ui_MainWindow
@@ -38,6 +38,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.K_dict = {}
         self.outlet_list = []
         self.body_list = []
+        self.script_address = str()
         self.show_c_on = False
         self.snip_on = True
         self.actionstop.setEnabled(False)
@@ -54,7 +55,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.actionsolve.triggered.connect(self.advFunc.direct_solve)
         self.actionstop.triggered.connect(self.advFunc.force_stop)
         self.actiondarkstyle.triggered.connect(self.advFunc.darkstyle)
-        self.project_address_explore.clicked.connect(self.case_address)
+        self.cad_address_explore.clicked.connect(self.cad_address)
 
         self.quick_distribfc_btn.toggled.connect(self.short_key.quick_distrib_judge)
         self.quick_distribfh_btn.toggled.connect(self.short_key.quick_distrib_judge)
@@ -119,7 +120,9 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         # print(self.outlet_dict)
         # print(self.K_dict)
         self.pamt_dict()
-        create_scdm_script(self.pamt['file_path'], self.body_list, self.face_list, self.pamt['cad_save_path'])
+        print(self.pamt['cad_name'])
+        self.script_address = create_scdm_script(self.pamt['file_path'], self.pamt['open_cad_name'],
+                           self.body_list, self.face_list, self.pamt['cad_save_path'])
         if self.need_launch_CAD:
             self.launchCAD()
             self.need_launch_CAD = False
@@ -154,7 +157,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.pamt_GUI()                                                 # show parameter GUI
         self.launch_time = launch_time_count(self, 35)                  # create thread must have self.
         self.append_text('正在打开CAD, 请大佬耐心等待')
-        self.CAD_thread = SCDM()
+        self.CAD_thread = SCDM(self.script_address)
         self.CAD_thread.start()
         self.CAD_thread.finishCAD.connect(self.append_text)
 
@@ -164,10 +167,11 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.import_outlet, self.outlet_dict, self.K_dict, self.outlet_dict = \
             self.IEport.import_pamt(path)
 
-    def case_address(self):
-        case_out = QFileDialog.getExistingDirectory(self, '选择项目路径', 'C:/Users/BZMBN4/Desktop/')
-        self.case_path = case_out
-        self.project_address_edit.setText(self.case_path)
+    def cad_address(self):
+        get_file = QFileDialog.getOpenFileName(self, '选择模型文件', 'C:/Users/BZMBN4/Desktop/'
+                                               )
+        cad_path = get_file[0]
+        self.cad_address_edit.setText(cad_path)
 
     def export_pamt(self):
         self.pamt_dict()
@@ -176,7 +180,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         except Exception as e:
             print(e)
 
-        path = QFileDialog.getSaveFileName(self, directory='%s'%(self.project_address_edit.text()),
+        path = QFileDialog.getSaveFileName(self, directory='%s'%(self.cad_address_edit.text()),
                                            filter='CSV, *.csv')
         self.IEport.export_pamt(path, self.pamt)
 
@@ -208,7 +212,9 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.pamt = dict()
         self.pamt['project_name'] = self.project_name_edit.text()
         self.pamt['version'] = self.version_name_edit.text()
-        self.pamt['file_path'] = self.project_address_edit.text()
+        cad_path = QFileInfo(self.cad_address_edit.text())
+        self.pamt['file_path'] = cad_path.absolutePath()
+        self.pamt['open_cad_name'] = cad_path.fileName()
         self.pamt['edit_time'] = self.version_date_edit.text()
         self.pamt['cad_name'] = self.pamt['project_name'] + '_' + self.pamt['version'] + '_' + self.pamt['edit_time']
         self.pamt['cad_save_path'] = self.pamt['file_path'] + '/' + self.pamt['cad_name'] + '.scdoc'

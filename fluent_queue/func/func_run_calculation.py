@@ -33,6 +33,7 @@ class Calculate(QThread):
                 del self.mission_list[0]
                 self.ui.update_waiting_list_log()
                 self.ui.listWidget_queue.takeItem(0)
+                # time.sleep(20)
                 self.calculation()
 
     def running_show(self):

@@ -34,6 +34,8 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.init_queue_showing()                               # show running and waiting list
         self.calculation = Calculate(self, self.mission_list, self.running_project)   # start calculation thread
         self.calculation.start()
+        self.manager_authority(False)
+        print('whether have manager authority?: ', self.listWidget_queue.drag_permission)
 
     def read_csv(self, csv_name):
         read_list = list()
@@ -93,6 +95,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         """
         self.ui_alter.ui_user_logoff()
         self.setWindowTitle('未登录-请登陆后使用添加删除功能')
+        self.manager_authority(False)
 
     def add_project(self):
         """
@@ -152,6 +155,9 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
             if self.mission_list:
                 for i in self.mission_list:
                     csv_writer.writerow(i)
+
+    def manager_authority(self, switch):
+        self.listWidget_queue.drag_permission = switch
 
 
 if __name__ == "__main__":

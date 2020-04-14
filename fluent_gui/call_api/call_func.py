@@ -6,11 +6,13 @@ import time
 class SCDM(QThread):
     finishCAD = pyqtSignal(str)
 
-    def __init__(self, parent=None):
-        super(SCDM, self).__init__(parent)
+    def __init__(self, py_script):
+        super(SCDM, self).__init__()
+        self.py_script = py_script
 
     def run(self):
-        p = subprocess.Popen(r'C:\Program Files\ANSYS Inc\v191\scdm\SpaceClaim.exe', shell=True, stdout=subprocess.PIPE)
+        p = subprocess.Popen(r'cd C:\Program Files\ANSYS Inc\v201\scdm && SpaceClaim.exe /RunScript=%s' % self.py_script,
+                             shell=True, stdout=subprocess.PIPE)
         out, err = p.communicate()
         # out = out.decode()
 

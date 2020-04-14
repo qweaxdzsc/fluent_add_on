@@ -1904,7 +1904,7 @@
             <number>0</number>
            </property>
            <item>
-            <widget class="QLabel" name="project_address_label">
+            <widget class="QLabel" name="cad_address_label">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                <horstretch>0</horstretch>
@@ -1918,15 +1918,15 @@
               </size>
              </property>
              <property name="text">
-              <string>项目地址</string>
+              <string>模型文件</string>
              </property>
              <property name="buddy">
-              <cstring>project_address_edit</cstring>
+              <cstring>cad_address_edit</cstring>
              </property>
             </widget>
            </item>
            <item>
-            <widget class="QLineEdit" name="project_address_edit">
+            <widget class="QLineEdit" name="cad_address_edit">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
                <horstretch>0</horstretch>
@@ -1948,7 +1948,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QToolButton" name="project_address_explore">
+            <widget class="QToolButton" name="cad_address_explore">
              <property name="text">
               <string>...</string>
              </property>
@@ -2255,8 +2255,8 @@
   <tabstop>project_name_edit</tabstop>
   <tabstop>version_name_edit</tabstop>
   <tabstop>version_date_edit</tabstop>
-  <tabstop>project_address_edit</tabstop>
-  <tabstop>project_address_explore</tabstop>
+  <tabstop>cad_address_edit</tabstop>
+  <tabstop>cad_address_explore</tabstop>
   <tabstop>inlet_number</tabstop>
   <tabstop>valve_number</tabstop>
   <tabstop>distrib_number</tabstop>

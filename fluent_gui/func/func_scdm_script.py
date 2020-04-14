@@ -1,34 +1,38 @@
-def create_scdm_script(file_path, body_list, face_list, cad_save_path):
-        f = open('%s/project_info.py' % file_path, 'w')
+def create_scdm_script(file_path, original_cad_name, body_list, face_list, cad_save_path):
+        cad_open_path = file_path + '/' + original_cad_name
+        py_path = '%s/project_info.py' % file_path
+        f = open(py_path, 'w')
         message = """
 print('start script')
 body_list = %s
 body_number = len(body_list)
 
+for i in range(body_number):
+    # Create Sphere
+    SphereBody.Create(Point.Create(MM(0), MM(0), MM(0)), Point.Create(MM(1), MM(1), MM(1)), ExtrudeType.None, None)
+    # Rename 'Solid' to 'body name'
+    selection = Selection.Create(GetRootPart().Bodies[0])
+    result = RenameObject.Execute(selection,body_list[i])
+    # Make Components
+    selection = Selection.Create(GetRootPart().Bodies[0])
+    result = ComponentHelper.MoveBodiesToComponent(selection, None)
+
+# Delete sphere
 selection = Selection.Create(GetRootPart().GetAllBodies())
-result = RenameObject.Execute(selection,"solid")
-
-result = Copy.ToClipboard(Selection.Create(GetRootPart().GetAllBodies()))
-result = Paste.FromClipboard()
-
-# Delete Selection
-selection = Selection.Create(GetRootPart().Components[:])
 result = Delete.Execute(selection)
 
-for i in range(body_number):
-    result = Copy.ToClipboard(Selection.Create(GetRootPart().Bodies[0]))
-    result = Paste.FromClipboard()
+# Insert From File
+importOptions = ImportOptions.Create()
+DocumentInsert.Execute(r"%s", importOptions, GetMaps("1cf69ef6"))
 
-for i in range(body_number):
-    selection = Selection.Create(GetRootPart().Bodies[-1-i])
-    result = RenameObject.Execute(selection, body_list[i])
+# Take out bodies
+selections = Selection.Create(GetRootPart().GetAllBodies())
+component = Selection.Create(GetRootPart())
+result = ComponentHelper.MoveBodiesToComponent(selections, component, False, None)
 
-selection = Selection.Create(GetRootPart().Bodies[-body_number:])
-result = ComponentHelper.CreateSeparateComponents(selection, None)
-
-for i in range(body_number):
-    selection = Selection.CreateByNames(body_list[i])
-    result = Delete.Execute(selection)
+# Delete old empty component
+selection = Selection.Create(GetRootPart().Components[-1])
+result = Delete.Execute(selection)
 
 # face rename
 face_list = %s
@@ -48,6 +52,8 @@ for i in range(len(face_list)):
 options = ExportOptions.Create()
 DocumentSave.Execute(r"%s", options)
 print('script finished')
-""" % (body_list, face_list, cad_save_path)
+""" % (body_list, cad_open_path, face_list, cad_save_path)
         f.write(message)
         f.close()
+
+        return py_path
