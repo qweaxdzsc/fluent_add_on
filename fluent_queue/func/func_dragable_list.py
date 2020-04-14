@@ -4,6 +4,12 @@ from PyQt5.QtGui import QCursor
 
 
 class DragListWidget(QListWidget):
+    """
+    rewrite the Qlistwidget
+    it is imported by ui_queue_main.py file
+    1. it make list widget dragable and dropable
+    2. if have drag permission, false by default, can alter the sequence of list item
+    """
     def __init__(self, central_widget):
         super(DragListWidget, self).__init__()
         self.setAcceptDrops(True)
@@ -13,6 +19,12 @@ class DragListWidget(QListWidget):
         self.drag_permission = False
 
     def dropEvent(self, event):
+        """
+        rewrite dropEvent
+        effect when have permission
+        :param event:
+        :return:
+        """
         if self.drag_permission:
             print('yes')
             items = self.selectedItems()

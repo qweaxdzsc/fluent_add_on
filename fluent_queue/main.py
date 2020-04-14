@@ -37,7 +37,19 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.manager_authority(False)
         print('whether have manager authority?: ', self.listWidget_queue.drag_permission)
 
+    def btn(self):
+        self.action_login.triggered.connect(self.account_verification)
+        self.action_logout.triggered.connect(self.user_logout)
+        self.action_add.triggered.connect(self.add_project)
+        self.action_delete.triggered.connect(self.delete_project)
+
     def read_csv(self, csv_name):
+        """
+        check if have unfinished project
+        read log csv in net disk path
+        :param csv_name:
+        :return: read_list
+        """
         read_list = list()
         log_path = r'S:\PE\Engineering database\CFD\03_Tools\queue_backup'
         csv_path = log_path + "\\" + csv_name
@@ -49,6 +61,10 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         return read_list
 
     def init_queue_showing(self):
+        """
+        show unfinished items in 2 list widget
+        :return:
+        """
         if self.running_project:
             project = self.running_project[0]
             self.listWidget_running.addItem("用户：%s   项目： %s" % (project["account_name"],
@@ -56,12 +72,6 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         if self.mission_list:
             for i in self.mission_list:
                 self.listWidget_queue.addItem("用户：%s   项目： %s" % (i["account_name"], i["project_name"]))
-
-    def btn(self):
-        self.action_login.triggered.connect(self.account_verification)
-        self.action_logout.triggered.connect(self.user_logout)
-        self.action_add.triggered.connect(self.add_project)
-        self.action_delete.triggered.connect(self.delete_project)
 
     def account_verification(self):
         """
@@ -107,6 +117,12 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.add_pj_ui.signal_add_pj.connect(self.new_project)
 
     def new_project(self, new_pj_dict):
+        """
+        When received signal from add project UI, it form new project dict
+        add project to mission list, update waiting list log, add item in UI list
+        :param new_pj_dict:
+        :return:
+        """
         self.new_pj = {"account_name": '', "project_name": '', "project_address": '', "journal": '',
                        "register_time": ''}
         self.new_pj.update(new_pj_dict)
@@ -146,6 +162,11 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
                 self.listWidget_queue.takeItem(item_index)
 
     def update_waiting_list_log(self):
+        """
+        use csv to record waiting list, in case main program closed accidentally.
+        This func overwrite csv every time when mission list is updated.
+        :return:
+        """
         waiting_list_csv = r'S:\PE\Engineering database\CFD\03_Tools\queue_backup\waiting_list.csv'
         header = ["account_name", "project_name", "project_address", "journal", "register_time"]
         with open(waiting_list_csv, 'w', newline='') as f:
@@ -157,6 +178,12 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
                     csv_writer.writerow(i)
 
     def manager_authority(self, switch):
+        """
+        set manager authority:
+        1. able to drag item in queue list(change sequence)
+        :param switch:
+        :return:
+        """
         self.listWidget_queue.drag_permission = switch
 
 

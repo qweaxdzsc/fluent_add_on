@@ -153,7 +153,6 @@ class AddPj(QWidget, Ui_Widget_add):
             return jou_file
 
     def default_journal(self, case_path):
-        print('journal')
         """
         create default journal for calculation only
         :param case_path:
