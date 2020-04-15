@@ -98,10 +98,14 @@ class AddPj(QWidget, Ui_Widget_add):
             self.label_journal_address.show()
             self.edit_journal_address.show()
             self.btn_journal_address.show()
+            self.edit_iteration.setDisabled(True)
+            self.label_iteration.setDisabled(True)
         else:
             self.label_journal_address.hide()
             self.edit_journal_address.hide()
             self.btn_journal_address.hide()
+            self.edit_iteration.setDisabled(False)
+            self.label_iteration.setDisabled(False)
 
     def open_jou_file(self):
         """

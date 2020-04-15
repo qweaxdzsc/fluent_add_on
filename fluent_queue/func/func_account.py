@@ -3,7 +3,7 @@ import cgitb
 import csv
 
 from PyQt5.QtWidgets import QApplication, QWidget
-from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtCore import pyqtSignal, Qt
 
 from ui_py.ui_login import Ui_Frame_account
 
@@ -56,6 +56,14 @@ class AccVerify(QWidget, Ui_Frame_account):
                 account[row['Account']] = row['Password']   # relate account name and password to account dict
 
         return account
+
+    def keyPressEvent(self, e):
+        """ Event from QT, can be rewrite
+        if e.key() = Qt.Key_?,  ? represent short key
+        """
+        if e.key() == Qt.Key_Return:  # used for test
+            # if QApplication.keyboardModifiers() == Qt.ControlModifier:
+            self.btn_login.click()
 
 
 if __name__ == "__main__":

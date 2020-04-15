@@ -1,6 +1,5 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication
-import time
 
 
 class ShortKey(object):
@@ -19,9 +18,13 @@ class ShortKey(object):
                                "project_address": r'G:\_fluent_setup_test',
                                "journal": r'G:\_fluent_setup_test\GE2-rear2-V33-FC.jou'}
                 self.ui.user_login(acc_name)
-                # self.ui.new_project(new_pj_dict)
+                self.ui.new_project(new_pj_dict)
                 self.ui.manager_authority(True)
     #             self.ui.calculation.run = self.run
+
+        # if e.key() == Qt.Key_P:                                                     # used for test
+        #     if QApplication.keyboardModifiers() == Qt.ControlModifier:
+        #         print('', self.ui.Hist_viewer.log_show.isFinished())
     #
     # def run(self):
     #     if self.running_project:

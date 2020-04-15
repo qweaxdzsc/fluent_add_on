@@ -66,3 +66,22 @@
 # use_time = (time_end - time_start)/60
 #
 # print('totally cost', use_time)
+import subprocess
+import time
+cores = 12
+running_journal = r'F:\luo\aest.jou'
+project_address = r'F:\luo'
+disk = project_address[:2]
+print(disk)
+
+p = subprocess.Popen(r'%s &&'
+                     r'cd %s &&'
+                     r'"C:\Program Files\ANSYS Inc\v201\fluent\ntbin\win64\fluent" 3d -t%s -i %s' %
+                     (disk, project_address, cores, running_journal),
+                     shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE,
+                     stderr=subprocess.PIPE, universal_newlines=True)
+while p.poll() == None:                         # block calculation thread until finished
+    # time.sleep(5)
+    line = p.stdout.readline()
+    msg = line
+    print('cmd output', msg)

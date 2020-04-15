@@ -44,6 +44,7 @@ class UiSet(object):
         self.ui.action_add.setDisabled(logoff)
         self.ui.action_delete.setDisabled(logoff)
         self.ui.action_logout.setDisabled(logoff)
+        self.ui.action_login.setEnabled(logoff)
         self.ui.action_add.setStatusTip('请先登陆后使用添加功能')
         self.ui.action_delete.setStatusTip('请先登陆后使用删除功能')
         self.ui.listWidget_queue.setDisabled(logoff)

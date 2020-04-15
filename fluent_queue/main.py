@@ -12,6 +12,7 @@ from func.func_timer import SleepOut, current_time
 from func.func_list_manage import AddPj
 from func.func_short_key import ShortKey
 from func.func_run_calculation import Calculate
+from func.func_journal import HistoryView
 
 
 class MyMainWindow(QMainWindow, Ui_fluent_queue):
@@ -28,11 +29,14 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         # --------- initial_variable--------
         self.acc_name = str()
         self.new_pj = dict()
+        self.csv_path = r"S:\PE\Engineering database\CFD\03_Tools\queue_backup"
         self.mission_list = self.read_csv('waiting_list.csv')
         self.running_project = self.read_csv('running_list.csv')
         # ------------------------------------
         self.init_queue_showing()                               # show running and waiting list
-        self.calculation = Calculate(self, self.mission_list, self.running_project)   # start calculation thread
+        self.calculation = Calculate(self, self.mission_list, self.running_project)       # start calculation thread
+        self.calculation.update_finished_log.connect(self.update_finished_list_log)
+        self.calculation.update_running_log.connect(self.update_running_list_log)
         self.calculation.start()
         self.manager_authority(False)
         print('whether have manager authority?: ', self.listWidget_queue.drag_permission)
@@ -42,6 +46,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.action_logout.triggered.connect(self.user_logout)
         self.action_add.triggered.connect(self.add_project)
         self.action_delete.triggered.connect(self.delete_project)
+        self.action_journal.triggered.connect(self.view_history_log)
 
     def read_csv(self, csv_name):
         """
@@ -51,8 +56,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         :return: read_list
         """
         read_list = list()
-        log_path = r'S:\PE\Engineering database\CFD\03_Tools\queue_backup'
-        csv_path = log_path + "\\" + csv_name
+        csv_path = self.csv_path + "\\" + csv_name
         with open(csv_path, 'r') as f:
             csv_reader = csv.DictReader(f)
             for row in csv_reader:
@@ -96,6 +100,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.setWindowTitle(window_title)
         self.sleep_time.start_count()
         self.ui_alter.ui_user_logoff(False)
+        # self.action_login.setEnabled()
 
     def user_logout(self):
         """
@@ -154,7 +159,8 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         """
         item_belongs = self.mission_list[item_index]['account_name']
         if self.acc_name == item_belongs:
-            reply = QMessageBox.warning(self, '删除警告', '删除后无法恢复，是否确认删除', QMessageBox.Yes| QMessageBox.No, QMessageBox.No)
+            reply = QMessageBox.warning(self, '删除警告', '删除后无法恢复，是否确认删除',
+                                        QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
             if reply == QMessageBox.Yes:
                 del self.mission_list[item_index]
                 print(self.mission_list)
@@ -167,7 +173,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         This func overwrite csv every time when mission list is updated.
         :return:
         """
-        waiting_list_csv = r'S:\PE\Engineering database\CFD\03_Tools\queue_backup\waiting_list.csv'
+        waiting_list_csv = r'%s\waiting_list.csv' % self.csv_path
         header = ["account_name", "project_name", "project_address", "journal", "register_time"]
         with open(waiting_list_csv, 'w', newline='') as f:
             csv_writer = csv.DictWriter(f, fieldnames=header)
@@ -177,6 +183,36 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
                 for i in self.mission_list:
                     csv_writer.writerow(i)
 
+    def update_finished_list_log(self, finished_project):
+        """
+        append new finished project to log csv
+        :return:
+        """
+        log_csv = r'%s\history_list.csv' % self.csv_path
+        header = ["account_name", "project_name", "project_address", "journal", "register_time",
+                  "start_time", "using_time", "complete_status"]
+        with open(log_csv, 'a+', newline='') as f:
+            f.seek(0, 0)                                           # move cursor to the beginning of file
+            csv_reader = csv.reader(f)
+            csv_writer = csv.DictWriter(f, fieldnames=header)
+            if not [row for row in csv_reader]:
+                csv_writer.writeheader()
+            if finished_project:
+                csv_writer.writerow(finished_project)
+
+    def update_running_list_log(self, running_project):
+        """
+        update running project to log csv
+        :return:
+        """
+        running_list_csv = r'%s\running_list.csv' % self.csv_path
+        header = ["account_name", "project_name", "project_address", "journal", "register_time"]
+        with open(running_list_csv, 'w', newline='') as f:
+            csv_writer = csv.DictWriter(f, fieldnames=header)
+            csv_writer.writeheader()
+            if running_project:
+                csv_writer.writerow(running_project[0])
+
     def manager_authority(self, switch):
         """
         set manager authority:
@@ -185,6 +221,16 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         :return:
         """
         self.listWidget_queue.drag_permission = switch
+
+    def view_history_log(self):
+        file_name = 'history_list.csv'
+        csv_file = '%s/%s' % (self.csv_path, file_name)
+        self.Hist_viewer = HistoryView(csv_file)
+        self.Hist_viewer.viewer_closed.connect(self.reboot_journal_func)
+        self.action_journal.setDisabled(True)
+
+    def reboot_journal_func(self):
+        self.action_journal.setEnabled(True)
 
 
 if __name__ == "__main__":

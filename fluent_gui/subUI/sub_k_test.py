@@ -84,7 +84,7 @@ class subUI_outlet_assign(Ui_k_form, QWidget):
                 self.k_table.setItem(number_dict[parent.text(0)], i, new_item)
         else:
             row_number = number_dict[parent.text(0)] - len(self.mode_list_dict[parent.text(0)]) + \
-                self.mode_list_dict[parent.text(0)].index(item.text(0))
+                self.mode_list_dict[parent.text(0)].index(item.text(0))      # TODO bug here
             self.k_table.removeRow(row_number)
         # TODO when change outlet name, how to remove row
 

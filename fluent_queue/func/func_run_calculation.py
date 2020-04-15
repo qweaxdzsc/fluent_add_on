@@ -10,6 +10,8 @@ from func.func_timer import current_time
 class Calculate(QThread):
     """ create calculation thread"""
     time_count = pyqtSignal(int)
+    update_finished_log = pyqtSignal(dict)
+    update_running_log = pyqtSignal(list)
 
     def __init__(self, ui, mission_list, running_project):
         super(Calculate, self).__init__()
@@ -42,7 +44,7 @@ class Calculate(QThread):
                 del self.mission_list[0]
                 self.ui.update_waiting_list_log()
                 self.ui.listWidget_queue.takeItem(0)
-                # time.sleep(20)
+                # time.sleep(5)
                 self.calculation()
 
     def running_show(self):
@@ -53,7 +55,7 @@ class Calculate(QThread):
         user = self.mission_list[0]["account_name"]
         project = self.mission_list[0]["project_name"]
         self.running_project.append(self.mission_list[0])
-        self.update_running_list_log()
+        self.update_running_log.emit(self.running_project)
         self.ui.listWidget_running.addItem("用户：%s   项目： %s" % (user, project))
 
     def calculation(self):
@@ -68,16 +70,20 @@ class Calculate(QThread):
         self.start_time_str = current_time()
         cores = 12
         running_journal = self.running_project[0]["journal"]
-
-        p = subprocess.Popen(r'cd C:\Program Files\ANSYS Inc\v201\fluent\ntbin\win64 && '
-                             r'fluent 3d -t%s -i %s' % (cores, running_journal), shell=True,
-                             stdout=subprocess.PIPE, stdin=subprocess.PIPE,
+        project_address = self.running_project[0]['project_address']
+        disk = project_address[:2]
+        # go to disk first, then go to directory, then launch fluent and its launching options
+        p = subprocess.Popen(r'%s &&'
+                             r'cd %s &&'
+                             r'"C:\Program Files\ANSYS Inc\v201\fluent\ntbin\win64\fluent" 3d -t%s -i %s' %
+                             (disk, project_address, cores, running_journal),
+                             shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE,
                              stderr=subprocess.PIPE, universal_newlines=True)
         while p.poll() == None:                         # block calculation thread until finished
             time.sleep(5)
             line = p.stdout.readline()
             msg = line
-            print(msg)
+            print('cmd output', msg)
 
         print('finish')
         self.complete_status = self.check_result()
@@ -94,9 +100,9 @@ class Calculate(QThread):
         """
         self.ui.listWidget_running.takeItem(0)
         self.form_finish_project_info()
-        self.update_finished_list_log()
+        self.update_finished_log.emit(self.finished_project)
         self.running_project.clear()
-        self.update_running_list_log()
+        self.update_running_log.emit(self.running_project)
 
     def form_finish_project_info(self):
         """
@@ -117,38 +123,6 @@ class Calculate(QThread):
         self.finished_project["start_time"] = self.start_time_str
         self.finished_project["using_time"] = self.use_time
         self.finished_project["complete_status"] = self.complete_status
-    
-    def update_finished_list_log(self):
-        """
-        append new finished project to log csv
-        :return:
-        """
-        log_csv = r'S:\PE\Engineering database\CFD\03_Tools\queue_backup\history_list.csv'
-        header = ["account_name", "project_name", "project_address", "journal", "register_time",
-                  "start_time", "using_time", "complete_status"]
-        with open(log_csv, 'a+', newline='') as f:
-            f.seek(0, 0)                                           # move cursor to the beginning of file
-            csv_reader = csv.reader(f)
-            csv_writer = csv.DictWriter(f, fieldnames=header)
-            if not [row for row in csv_reader]:
-                csv_writer.writeheader()
-            # print(self.finished_project)
-            if self.finished_project:
-                csv_writer.writerow(self.finished_project)
-
-    def update_running_list_log(self):
-        """
-        update running project to log csv
-        :return:
-        """
-        running_list_csv = r'S:\PE\Engineering database\CFD\03_Tools\queue_backup\running_list.csv'
-        header = ["account_name", "project_name", "project_address", "journal", "register_time"]
-        with open(running_list_csv, 'w', newline='') as f:
-            csv_writer = csv.DictWriter(f, fieldnames=header)
-            csv_writer.writeheader()
-            # print(self.running_project)
-            if self.running_project:
-                csv_writer.writerow(self.running_project[0])
 
     def check_result(self):
         """
