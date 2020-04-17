@@ -39,6 +39,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.calculation.update_running_log.connect(self.update_running_list_log)
         self.calculation.start()
         self.manager_authority(False)
+        self.listWidget_queue.file_receive.connect(self.receive_drop_file)
         print('whether have manager authority?: ', self.listWidget_queue.drag_permission)
 
     def btn(self):
@@ -47,6 +48,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.action_add.triggered.connect(self.add_project)
         self.action_delete.triggered.connect(self.delete_project)
         self.action_journal.triggered.connect(self.view_history_log)
+        self.action_help.triggered.connect(self.help_show)
 
     def read_csv(self, csv_name):
         """
@@ -120,6 +122,8 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         """
         self.add_pj_ui = AddPj()
         self.add_pj_ui.signal_add_pj.connect(self.new_project)
+        self.add_pj_ui.signal_enable_action_add.connect(self.enable_action_add)
+        self.action_add.setDisabled(True)
 
     def new_project(self, new_pj_dict):
         """
@@ -136,6 +140,9 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.mission_list.append(self.new_pj)
         self.update_waiting_list_log()
         self.listWidget_queue.addItem("用户：%s   项目： %s" % (self.acc_name, self.new_pj["project_name"]))
+
+    def enable_action_add(self):
+        self.action_add.setEnabled(True)
 
     def delete_project(self):
         """
@@ -231,6 +238,14 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
 
     def reboot_journal_func(self):
         self.action_journal.setEnabled(True)
+
+    def help_show(self):
+        QMessageBox.about(self, "帮助", "请找管理员询问")
+
+    def receive_drop_file(self, file):
+        if self.action_add.isEnabled():
+            self.action_add.trigger()
+            self.add_pj_ui.edit_project_address.setText(file)
 
 
 if __name__ == "__main__":

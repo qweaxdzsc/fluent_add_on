@@ -156,38 +156,41 @@
 # jou.write(CFD.whole_jou)
 # jou.close()
 # os.system(txt_name)
+#
+# import urllib.request
+# from urllib.parse import urlencode
+# from http import cookiejar
+# import requests
+# import random
+# import json
+#
+# if __name__ == '__main__':
+#     random_number = str(random.random())
+#     print(random_number)
+#     data = {
+#         "name": 'admin',
+#         'password': '123456',
+#         'num': '10',
+#         'random': random_number
+#     }
+#     # data = json.dumps(data)
+#
+#     data = urllib.parse.urlencode(data).encode('utf-8')
+#
+#     url = 'http://10.243.75.57/'
+#     headers = {
+#         'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36'
+#     }
+#
+#     cookie_file = r'C:\Users\BZMBN4\Desktop\cookie.txt'
+#     cookie = cookiejar.MozillaCookieJar(cookie_file)
+#     handler = urllib.request.HTTPCookieProcessor(cookie)
+#     opener = urllib.request.build_opener(handler)
+#     req = opener.open(url, data)
+#     cookie.save(ignore_discard=True, ignore_expires=True)
 
-import urllib.request
-from urllib.parse import urlencode
-from http import cookiejar
-import requests
-import random
-import json
-
-if __name__ == '__main__':
-    random_number = str(random.random())
-    print(random_number)
-    data = {
-        "name": 'admin',
-        'password': '123456',
-        'num': '10',
-        'random': random_number
-    }
-    # data = json.dumps(data)
-
-    data = urllib.parse.urlencode(data).encode('utf-8')
-
-    url = 'http://10.243.75.57/'
-    headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36'
-    }
-
-    cookie_file = r'C:\Users\BZMBN4\Desktop\cookie.txt'
-    cookie = cookiejar.MozillaCookieJar(cookie_file)
-    handler = urllib.request.HTTPCookieProcessor(cookie)
-    opener = urllib.request.build_opener(handler)
-    req = opener.open(url, data)
-    cookie.save(ignore_discard=True, ignore_expires=True)
+import os
+os.system("")
 
 
 

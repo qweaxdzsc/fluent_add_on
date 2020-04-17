@@ -17,6 +17,7 @@ class AddPj(QWidget, Ui_Widget_add):
     3. choose whether use own journal; will check if it is journal and whether exist
     """
     signal_add_pj = pyqtSignal(dict)
+    signal_enable_action_add = pyqtSignal()
 
     def __init__(self, parent=None):
         super(AddPj, self).__init__(parent)
@@ -85,8 +86,8 @@ class AddPj(QWidget, Ui_Widget_add):
         """
         path = QFileDialog.getOpenFileName(self, '选择要计算文件',
                                            r'C:\Users\BZMBN4\Desktop',
-                                           'Fluent Case(*.cas);;Fluent Mesh(*.msh)',
-                                           'Fluent Case(*.cas)')
+                                           'Fluent Case(*.cas*);;Fluent Mesh(*.msh)',
+                                           'Fluent Case(*.cas*)')
         self.edit_project_address.setText(path[0])
 
     def use_journal(self):
@@ -127,8 +128,8 @@ class AddPj(QWidget, Ui_Widget_add):
         """
         self.pj_dict = {"project_name": '', "project_address": '', "journal": ''}
         case_path = QFileInfo(self.edit_project_address.text())               # QFileInfo can deeply analyze path info
-
-        if (case_path.exists()) and (case_path.suffix() == "cas" or case_path.suffix() == "msh"):
+        accepted_file_type = ['cas', 'msh', 'cas.h5']
+        if (case_path.exists()) and (case_path.suffix() in accepted_file_type):
             self.pj_dict["project_name"] = case_path.baseName()
             self.pj_dict["project_address"] = case_path.absolutePath()
             self.pj_dict['journal'] = self.get_journal(case_path)
@@ -179,6 +180,10 @@ class AddPj(QWidget, Ui_Widget_add):
             jou.write(content)
 
         return jou_file
+
+    def closeEvent(self, event):
+        self.signal_enable_action_add.emit()
+
 
 
 if __name__ == "__main__":
