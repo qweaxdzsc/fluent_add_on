@@ -2,21 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8d44180-0242-4157-8c6d-4f3b75ca3fd9" name="Default Changelist" comment="第二次修改">
-      <change afterPath="$PROJECT_DIR$/../fluent_queue/func/func_ansys_license.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../fluent_queue/func/func_progress.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/func/func_change_cores.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fluent_tui.py" beforeDir="false" afterPath="$PROJECT_DIR$/fluent_tui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/web_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/web_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_func.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/func/func_check.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/func/func_check.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_dragable_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_dragable_list.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_list_manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_list_manage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_run_calculation.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_run_calculation.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_ui_set.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_ui_set.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_short_key.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_short_key.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/other_tool/GUI_convertor.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/other_tool/GUI_convertor.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -24,7 +24,7 @@ class Calculate(QThread):
         self.start_time_str = str()
         self.finish_time = float()
         self.use_time = float()
-        self.cores = 150
+        self.cores = 24
         self.complete_status = 'complete'
 
     def run(self):

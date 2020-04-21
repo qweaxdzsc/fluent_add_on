@@ -1,5 +1,6 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import QApplication
+from func.func_change_cores import ChangeCore
 
 
 class ShortKey(object):
@@ -22,20 +23,13 @@ class ShortKey(object):
                 self.ui.manager_authority(True)
     #             self.ui.calculation.run = self.run
 
-        # if e.key() == Qt.Key_P:                                                     # used for test
-        #     if QApplication.keyboardModifiers() == Qt.ControlModifier:
-        #         print('', self.ui.Hist_viewer.log_show.isFinished())
-    #
-    # def run(self):
-    #     if self.running_project:
-    #         time.sleep(1)
-    #     while True:
-    #         time.sleep(1)
-    #         if self.mission_list:
-    #             self.running_show()
-    #             del self.mission_list[0]
-    #             self.ui.update_waiting_list_log()
-    #             self.ui.listWidget_queue.takeItem(0)
-    #             time.sleep(20)
+        if e.key() == Qt.Key_S:                                                     # used for test
+            if QApplication.keyboardModifiers() == Qt.ControlModifier:
+                print('123')
+                self.ui.change_core = ChangeCore()
+                self.ui.change_core.signal_change_core.connect(self.alter_cores)
 
+    def alter_cores(self, core):
+        self.ui.calculation.cores = core
+        print(self.ui.calculation.cores)
 
