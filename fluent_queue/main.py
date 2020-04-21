@@ -35,8 +35,9 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         # ------------------------------------
         self.init_queue_showing()                               # show running and waiting list
         self.calculation = Calculate(self, self.mission_list, self.running_project)       # start calculation thread
-        self.calculation.update_finished_log.connect(self.update_finished_list_log)
-        self.calculation.update_running_log.connect(self.update_running_list_log)
+        self.calculation.signal_update_finished_log.connect(self.update_finished_list_log)
+        self.calculation.signal_update_running_log.connect(self.update_running_list_log)
+        self.calculation.signal_license_error.connect(self.show_license_error)
         self.calculation.start()
         self.manager_authority(False)
         self.listWidget_queue.file_receive.connect(self.receive_drop_file)
@@ -219,6 +220,9 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
             csv_writer.writeheader()
             if running_project:
                 csv_writer.writerow(running_project[0])
+
+    def show_license_error(self, msg):
+        self.statusbar.showMessage(msg, 3000)
 
     def manager_authority(self, switch):
         """

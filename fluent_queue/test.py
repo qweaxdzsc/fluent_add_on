@@ -19,10 +19,11 @@
 #         # widget.right_widget.dropEvent = self.dropEvent
 #
 #     def dropEvent(self, event):
-#         # source_Widget = event.source()                        # 获取拖入元素的父组件
+#         source_Widget = event.source()                        # 获取拖入元素的父组件
 #         print('yes')
-#         # items = source_Widget.selectedItems()
-#         items = self.selectedItems()
+#         items = source_Widget.selectedItems()
+#         # items = self.selectedItems()
+#         print(event.mimeData())
 #         print(items)
 #         for i in items:
 #             self.takeItem(self.indexFromItem(i).row())          # 先删除再加回来，不能存在两个指向同一内存的对象
@@ -42,12 +43,12 @@
 #         super(MainWidget, self).__init__()
 #         self.setWindowTitle('检测拖入')
 #         self.main_layout = QHBoxLayout()
-#         # self.left_widget = DropInList()
-#         self.right_widget = QListWidget()
+#         self.left_widget = DropInList()
+#         # self.right_widget = QListWidget()
 #         self.right_widget = DropInList()
 #         pre_list = ['a', 'b', 'c', 'd']
 #         self.right_widget.addItems(pre_list)
-#         # self.main_layout.addWidget(self.left_widget)
+#         self.main_layout.addWidget(self.left_widget)
 #         self.main_layout.addWidget(self.right_widget)
 #         self.setLayout(self.main_layout)
 #
@@ -66,22 +67,43 @@
 # use_time = (time_end - time_start)/60
 #
 # print('totally cost', use_time)
-import subprocess
-import time
-cores = 12
-running_journal = r'F:\luo\aest.jou'
-project_address = r'F:\luo'
-disk = project_address[:2]
-print(disk)
+# import subprocess
+# import time
+# cores = 12
+# running_journal = r'F:\luo\aest.jou'
+# project_address = r'F:\luo'
+# disk = project_address[:2]
+# print(disk)
+#
+# p = subprocess.Popen(r'%s &&'
+#                      r'cd %s &&'
+#                      r'"C:\Program Files\ANSYS Inc\v201\fluent\ntbin\win64\fluent" 3d -t%s -i %s' %
+#                      (disk, project_address, cores, running_journal),
+#                      shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE,
+#                      stderr=subprocess.PIPE, universal_newlines=True)
+# while p.poll() == None:                         # block calculation thread until finished
+#     # time.sleep(5)
+#     line = p.stdout.readline()
+#     msg = line
+#     print('cmd output', msg)
 
-p = subprocess.Popen(r'%s &&'
-                     r'cd %s &&'
-                     r'"C:\Program Files\ANSYS Inc\v201\fluent\ntbin\win64\fluent" 3d -t%s -i %s' %
-                     (disk, project_address, cores, running_journal),
-                     shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE,
-                     stderr=subprocess.PIPE, universal_newlines=True)
-while p.poll() == None:                         # block calculation thread until finished
-    # time.sleep(5)
-    line = p.stdout.readline()
-    msg = line
-    print('cmd output', msg)
+
+import os
+import time
+
+start_time = time.time()
+
+
+info = ''
+license_list = ["10.243.75.38", "10.243.75.40", "10.243.75.67"]
+for i in license_list:
+    with os.popen(
+        '"C:\Program Files\ANSYS Inc\Shared Files\Licensing\winx64\lmutil" lmstat -a -c 1055@%s' % i) as f:
+        txt = f.read()
+# info = info.split("\n")
+
+
+print(info)
+end_time = time.time()
+
+print('time_use:', end_time - start_time)

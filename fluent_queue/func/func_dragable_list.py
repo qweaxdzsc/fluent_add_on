@@ -13,7 +13,7 @@ class DragListWidget(QListWidget):
     file_receive = pyqtSignal(str)
 
     def __init__(self, central_widget):
-        super(DragListWidget, self).__init__()
+        super(DragListWidget, self).__init__(central_widget)
         self.setAcceptDrops(True)
         self.setDragEnabled(True)                                   # 开启拖出功能
         self.setSelectionMode(QAbstractItemView.ExtendedSelection)  # 开启多选模式
@@ -37,7 +37,7 @@ class DragListWidget(QListWidget):
         if received_data.hasUrls:
             file = str(received_data.urls()[0].toLocalFile())
             file_info = QFileInfo(file)
-            accept_file_type = ['msh', 'cas', 'cas.h5']
+            accept_file_type = ['msh', 'cas', 'h5']
             self.file_receive.emit(file)
         else:
             if self.drag_permission:

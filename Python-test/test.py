@@ -156,41 +156,50 @@
 # jou.write(CFD.whole_jou)
 # jou.close()
 # os.system(txt_name)
-#
-# import urllib.request
-# from urllib.parse import urlencode
-# from http import cookiejar
-# import requests
-# import random
-# import json
-#
-# if __name__ == '__main__':
-#     random_number = str(random.random())
-#     print(random_number)
-#     data = {
-#         "name": 'admin',
-#         'password': '123456',
-#         'num': '10',
-#         'random': random_number
-#     }
-#     # data = json.dumps(data)
-#
-#     data = urllib.parse.urlencode(data).encode('utf-8')
-#
-#     url = 'http://10.243.75.57/'
-#     headers = {
-#         'User-Agent': 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36'
-#     }
-#
-#     cookie_file = r'C:\Users\BZMBN4\Desktop\cookie.txt'
-#     cookie = cookiejar.MozillaCookieJar(cookie_file)
-#     handler = urllib.request.HTTPCookieProcessor(cookie)
-#     opener = urllib.request.build_opener(handler)
-#     req = opener.open(url, data)
-#     cookie.save(ignore_discard=True, ignore_expires=True)
-
-import os
-os.system("")
 
 
+import subprocess
+import time
+
+start_time = time.time()
+
+hosts = ['10.243.75.67', '10.243.75.40', '10.243.75.38']
+
+
+def license_usage(host_name, license=''):
+    p = subprocess.run(r'cd C:\Program Files\ANSYS Inc\Shared Files\Licensing\winx64 && '
+                         r'lmutil  lmstat -a -c 1055@%s > 123.txt' % host_name, shell=True, stdout=subprocess.PIPE,
+                         stdin=subprocess.PIPE,
+                         stderr=subprocess.PIPE, universal_newlines=True)
+    # print(p.stdout.read())
+    # time.sleep(1)
+    # p.wait()
+    # msg = ''
+    # nl = 0
+    # line = p.stdout.read()
+    # print(line)
+    print('----------------------------------------------------------')
+    with open(r'C:\Program Files\ANSYS Inc\Shared Files\Licensing\winx64\123.txt', 'r') as f:
+        a = f.read()
+        print(a)
+    print('----------------------------------------------------------')
+    # print(line)
+    # while p.poll() == None:
+    #     line = p.stdout.readline()
+    #     msg = line
+    #     # print(nl, msg)
+    #     nl += 1
+
+    # print('总共有%s行输出语句' % nl)
+    pass
+    # TODO process info and return license usage
+
+
+for host_name in hosts:
+    license_usage(host_name)
+
+end_time = time.time()
+
+print('time_use:', end_time - start_time)
+# TODO summarize license usage data, then return BOOL to tell if fluent solver can be run
 

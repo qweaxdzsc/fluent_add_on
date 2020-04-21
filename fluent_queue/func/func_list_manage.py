@@ -1,6 +1,6 @@
 import sys
 import cgitb
-import csv
+import os
 
 from PyQt5.QtWidgets import QApplication, QWidget, QFileDialog, QMessageBox
 from PyQt5.QtCore import pyqtSignal, QFileInfo
@@ -66,7 +66,7 @@ class AddPj(QWidget, Ui_Widget_add):
         :return:
         """
         icon = QIcon()
-        icon.addPixmap(QPixmap("../icon/%s" % (pict)), QIcon.Normal, QIcon.Off)
+        icon.addPixmap(QPixmap("./icon/%s" % (pict)), QIcon.Normal, QIcon.Off)
         action.setIcon(icon)
 
     def set_all_icon(self):
@@ -74,6 +74,7 @@ class AddPj(QWidget, Ui_Widget_add):
         use _set_icon to set all icon
         :return:
         """
+        print(os.getcwd())
         self._set_icon('openfile.png', self.btn_project_address)
         self._set_icon('openfile.png', self.btn_journal_address)
         self._set_icon('extend.png', self.btn_extend)
@@ -128,7 +129,8 @@ class AddPj(QWidget, Ui_Widget_add):
         """
         self.pj_dict = {"project_name": '', "project_address": '', "journal": ''}
         case_path = QFileInfo(self.edit_project_address.text())               # QFileInfo can deeply analyze path info
-        accepted_file_type = ['cas', 'msh', 'cas.h5']
+        accepted_file_type = ['cas', 'msh', 'h5']
+
         if (case_path.exists()) and (case_path.suffix() in accepted_file_type):
             self.pj_dict["project_name"] = case_path.baseName()
             self.pj_dict["project_address"] = case_path.absolutePath()
@@ -169,7 +171,7 @@ class AddPj(QWidget, Ui_Widget_add):
         content = """
 /file/start-transcript {transcript}
 /file/set-idle-timeout yes {time_out} no
-/file/read-case-data/ {case_path} yes
+/file/read-case/ {case_path} yes
 /solve/initialize/hyb-initialization yes
 /solve/iterate/{iteration} yes
 /file/write-case-data/ {case_path} yes

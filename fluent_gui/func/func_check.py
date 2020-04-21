@@ -44,16 +44,15 @@ class check_func():
             body_list.append('ai')
             if ui.part_tree.topLevelItem(0).checkState(0) == 2:
                 face_list.append('ai_in')
-        if ui.part_tree.topLevelItem(2).checkState(0) == 2:
-            if ui.part_tree.topLevelItem(3).checkState(0) == 0:
-                print('filter and cone should be all checked')
-            else:
-                body_list.append('filter')
-                body_list.append('cone')
-                porous_list.append('filter')
-                up_list.append('ai')
-                face_list.append('filter_in')
-                face_list.append('filter_out')
+        if ui.part_tree.topLevelItem(2).checkState(0)*ui.part_tree.topLevelItem(3).checkState(0) == 0:
+            print('filter and cone should be all checked')
+        else:
+            body_list.append('filter')
+            body_list.append('cone')
+            porous_list.append('filter')
+            up_list.append('ai')
+            face_list.append('filter_in')
+            face_list.append('filter_out')
         if ui.part_tree.topLevelItem(4).checkState(0) == 2:
             if ui.part_tree.topLevelItem(5).checkState(0) == 0:
                 print('volute and fan should be all checked')
@@ -62,9 +61,7 @@ class check_func():
                 up_list.append('volute')
                 body_list.append('fan')
                 dead_zone_list.append('fan_blade')
-                if ui.part_tree.topLevelItem(0).checkState(0) == 2:
-                    face_list.append('fan_in')
-                if ui.part_tree.topLevelItem(1).checkState(0) == 2:
+                if ui.part_tree.topLevelItem(0).checkState(0)*ui.part_tree.topLevelItem(1).checkState(0) > 0:
                     face_list.append('fan_in')
                 face_list.append('fan_out')
                 face_list.append('fan_blade')

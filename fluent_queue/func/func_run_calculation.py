@@ -1,17 +1,17 @@
-import csv
 import time
 import subprocess
 
 from PyQt5.QtCore import pyqtSignal, QThread, QFileInfo
-
+from func.func_ansys_license import LicenseUsage
 from func.func_timer import current_time
 
 
 class Calculate(QThread):
     """ create calculation thread"""
-    time_count = pyqtSignal(int)
-    update_finished_log = pyqtSignal(dict)
-    update_running_log = pyqtSignal(list)
+    signal_time_count = pyqtSignal(int)
+    signal_update_finished_log = pyqtSignal(dict)
+    signal_update_running_log = pyqtSignal(list)
+    signal_license_error = pyqtSignal(str)
 
     def __init__(self, ui, mission_list, running_project):
         super(Calculate, self).__init__()
@@ -24,6 +24,7 @@ class Calculate(QThread):
         self.start_time_str = str()
         self.finish_time = float()
         self.use_time = float()
+        self.cores = 150
         self.complete_status = 'complete'
 
     def run(self):
@@ -40,12 +41,18 @@ class Calculate(QThread):
         while True:
             time.sleep(1)
             if self.mission_list:
-                self.running_show()
-                del self.mission_list[0]
-                self.ui.update_waiting_list_log()
-                self.ui.listWidget_queue.takeItem(0)
-                # time.sleep(5)
-                self.calculation()
+                ansys_license = LicenseUsage()
+                if ansys_license.is_enough(self.cores):
+                    self.running_show()
+                    del self.mission_list[0]
+                    self.ui.update_waiting_list_log()
+                    self.ui.listWidget_queue.takeItem(0)
+                    self.calculation()
+                else:
+                    self.signal_license_error.emit('not enough license')
+                    time.sleep(3)
+            else:
+                time.sleep(1)
 
     def running_show(self):
         """
@@ -55,7 +62,7 @@ class Calculate(QThread):
         user = self.mission_list[0]["account_name"]
         project = self.mission_list[0]["project_name"]
         self.running_project.append(self.mission_list[0])
-        self.update_running_log.emit(self.running_project)
+        self.signal_update_running_log.emit(self.running_project)
         self.ui.listWidget_running.addItem("用户：%s   项目： %s" % (user, project))
 
     def calculation(self):
@@ -68,7 +75,6 @@ class Calculate(QThread):
         """
         self.start_time = time.time()
         self.start_time_str = current_time()
-        cores = 12
         running_journal = self.running_project[0]["journal"]
         project_address = self.running_project[0]['project_address']
         disk = project_address[:2]
@@ -76,7 +82,7 @@ class Calculate(QThread):
         p = subprocess.Popen(r'%s &&'
                              r'cd %s &&'
                              r'"C:\Program Files\ANSYS Inc\v201\fluent\ntbin\win64\fluent" 3d -t%s -i %s' %
-                             (disk, project_address, cores, running_journal),
+                             (disk, project_address, self.cores, running_journal),
                              shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE,
                              stderr=subprocess.PIPE, universal_newlines=True)
         while p.poll() == None:                         # block calculation thread until finished
@@ -100,9 +106,9 @@ class Calculate(QThread):
         """
         self.ui.listWidget_running.takeItem(0)
         self.form_finish_project_info()
-        self.update_finished_log.emit(self.finished_project)
+        self.signal_update_finished_log.emit(self.finished_project)
         self.running_project.clear()
-        self.update_running_log.emit(self.running_project)
+        self.signal_update_running_log.emit(self.running_project)
 
     def form_finish_project_info(self):
         """

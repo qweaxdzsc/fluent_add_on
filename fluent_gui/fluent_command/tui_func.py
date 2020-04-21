@@ -114,7 +114,7 @@ class mesh(object):
         text = """
 /file/import/cad-options/save-PMDB no
 /file/import/cad-options/extract-features yes 10
-/file/import/cad-geometry yes %s.scdoc.pmdb no mm cfd-surface-mesh yes %s
+/file/import/cad-geometry yes %s.scdoc.pmdb no mm cfd-surface-mesh yes %s yes
 """ % (self.tui.cad_path, self.tui.size_field)
 
         self.tui.whole_jou += text

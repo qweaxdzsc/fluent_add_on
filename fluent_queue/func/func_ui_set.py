@@ -11,6 +11,7 @@ class UiSet(object):
         """
         self.ui = ui
         self.ui.action_delete.setDisabled(True)
+        # self.ui.progressBar.hide()
 
     def set_all_icon(self):
         self._set_icon('login.png', self.ui.action_login)
