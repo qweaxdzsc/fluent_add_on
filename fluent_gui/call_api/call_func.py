@@ -30,10 +30,12 @@ class fluent_mesh(QThread):
 
     def run(self):
         start_time = time.strftime('%M:%S', time.localtime(time.time()))
-        self.p = subprocess.Popen(r'cd C:\\Program Files\\ANSYS Inc\\v191\\fluent\\ntbin\\win64 && '
-                           r'fluent 3d -meshing -t4 -gu -i %s' % (self.tui),
-                                  shell=True, stdout=subprocess.PIPE)
+        # self.p = subprocess.Popen(r'cd C:\\Program Files\\ANSYS Inc\\v191\\fluent\\ntbin\\win64 && '
+        #                    r'fluent 3d -meshing -t4 -gu -i %s' % (self.tui),
+        #                           shell=True, stdout=subprocess.PIPE)
 
+        self.p = subprocess.Popen(r'cd C:\\Program Files\\ANSYS Inc\\v201\\fluent\\ntbin\\win64 && '
+                                  r'fluent 3d -meshing -t4', shell=True, stdout=subprocess.PIPE)
         nl = 0
         finish_count = 0
         while self.p.poll() == None:

@@ -23,7 +23,7 @@ result = Delete.Execute(selection)
 
 # Insert From File
 importOptions = ImportOptions.Create()
-DocumentInsert.Execute(r"%s", importOptions, GetMaps("1cf69ef6"))
+DocumentInsert.Execute(r"%s")
 
 # Take out bodies
 selections = Selection.Create(GetRootPart().GetAllBodies())

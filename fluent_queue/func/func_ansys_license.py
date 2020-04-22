@@ -7,7 +7,7 @@ class LicenseUsage(object):
         self.license_list = ["10.243.75.38", "10.243.75.40", "10.243.75.67"]
         self.application = r'C:\Program Files\ANSYS Inc\Shared Files\Licensing\winx64\lmutil'
         self.license_command = r'lmstat -a -c 1055@'
-        self.module_dict = {'spaceclaim': ["Users of a_spaceclaim_dirmod"],
+        self.module_dict = {'spaceclaim': ["Users of a_spaceclaim_dirmod", 'Users of acfd_preppost'],
                             'hpc': ['Users of anshpc_pack'],
                             'pre_post': ['Users of acfd_preppost', 'Users of acfdsol2', 'Users of cfd_base'],
                             'solver': ['Users of cfd_base', 'Users of acfdsol2']

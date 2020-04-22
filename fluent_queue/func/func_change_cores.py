@@ -3,7 +3,7 @@ from PyQt5.QtCore import pyqtSignal
 from ui_py.ui_cores import Ui_widget_cores
 
 
-class ChangeCore(QWidget,Ui_widget_cores):
+class ChangeCore(QWidget, Ui_widget_cores):
     signal_change_core = pyqtSignal(int)
 
     def __init__(self):

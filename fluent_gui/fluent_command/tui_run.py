@@ -125,6 +125,8 @@ class get_tui():
             setup.convergence_criterion('temperature')
         else:
             setup.convergence_criterion('volume')
+        setup.start_transcript()
+        setup.set_timeout(60)
         setup.hyb_initialize()
         if 'fan' in self.body_list:
             setup.start_calculate(800)

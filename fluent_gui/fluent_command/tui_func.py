@@ -503,7 +503,7 @@ q
             text = """
 solve/monitors/residual/criterion-type %s
 /solve/convergence-conditions/conv-reports add %s-stable
-report-defs %s initial-values-to-ignore 120 previous-values-to-consider 4 
+report-defs %s initial-values-to-ignore 120 previous-values-to-consider 20 
 stop-criterion 0.0002 print yes active yes
 q q q
 """ % (switch, type, type)
@@ -511,7 +511,7 @@ q q q
             text = """
 /solve/monitors/residual/criterion-type %s
 /solve/convergence-conditions/conv-reports add %s-stable
-report-defs volume initial-values-to-ignore 400 previous-values-to-consider 4 
+report-defs volume initial-values-to-ignore 400 previous-values-to-consider 20 
 stop-criterion 0.0001 print yes active yes
 q q q
 """ % (switch, type)
