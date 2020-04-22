@@ -25,9 +25,12 @@ class ShortKey(object):
 
         if e.key() == Qt.Key_S:                                                     # used for test
             if QApplication.keyboardModifiers() == Qt.ControlModifier:
-                print('123')
                 self.ui.change_core = ChangeCore()
                 self.ui.change_core.signal_change_core.connect(self.alter_cores)
+
+        if e.key() == Qt.Key_L:                                                     # used for suspend calculation loop
+            if QApplication.keyboardModifiers() == Qt.ControlModifier:
+                self.ui.pause_cal()
 
     def alter_cores(self, core):
         self.ui.calculation.cores = core

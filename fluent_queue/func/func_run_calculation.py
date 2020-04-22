@@ -40,19 +40,20 @@ class Calculate(QThread):
             self.calculation()
         while True:
             time.sleep(1)
-            if self.mission_list:
-                ansys_license = LicenseUsage()
-                if ansys_license.is_enough(self.cores):
-                    self.running_show()
-                    del self.mission_list[0]
-                    self.ui.update_waiting_list_log()
-                    self.ui.listWidget_queue.takeItem(0)
-                    self.calculation()
+            if not self.ui.pause:
+                if self.mission_list:
+                    ansys_license = LicenseUsage()
+                    if ansys_license.is_enough(self.cores):
+                        self.running_show()
+                        del self.mission_list[0]
+                        self.ui.update_waiting_list_log()
+                        self.ui.listWidget_queue.takeItem(0)
+                        self.calculation()
+                    else:
+                        self.signal_license_error.emit('not enough license')
+                        time.sleep(3)
                 else:
-                    self.signal_license_error.emit('not enough license')
-                    time.sleep(3)
-            else:
-                time.sleep(1)
+                    time.sleep(1)
 
     def running_show(self):
         """
@@ -85,7 +86,7 @@ class Calculate(QThread):
                              (disk, project_address, self.cores, running_journal),
                              shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE,
                              stderr=subprocess.PIPE, universal_newlines=True)
-        while p.poll() == None:                         # block calculation thread until finished
+        while p.poll() == None:                                     # block calculation thread until finished
             time.sleep(5)
             line = p.stdout.readline()
             msg = line
@@ -94,7 +95,6 @@ class Calculate(QThread):
         print('finish')
         self.complete_status = self.check_result()
         print(self.complete_status)
-        # TODO determine whether it is finished
         self.finish_time = time.time()
         self.finish_cal()
 

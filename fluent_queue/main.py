@@ -29,6 +29,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         # --------- initial_variable--------
         self.acc_name = str()
         self.new_pj = dict()
+        self.pause = False
         self.csv_path = r"S:\PE\Engineering database\CFD\03_Tools\queue_backup"
         self.mission_list = self.read_csv('waiting_list.csv')
         self.running_project = self.read_csv('running_list.csv')
@@ -250,6 +251,13 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         if self.action_add.isEnabled():
             self.action_add.trigger()
             self.add_pj_ui.edit_project_address.setText(file)
+
+    def pause_cal(self):
+        if self.pause:
+            self.pause = False
+        else:
+            self.pause = True
+        print('calculation queue paused:', self.pause)
 
 
 if __name__ == "__main__":
