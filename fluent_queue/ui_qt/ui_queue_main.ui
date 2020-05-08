@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>fluent_queue</class>
+ <widget class="QMainWindow" name="fluent_queue">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>471</width>
+    <height>642</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>400</width>
+    <height>550</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>550</width>
+    <height>900</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>未登陆-请登陆后使用更多功能</string>
+  </property>
+  <property name="iconSize">
+   <size>
+    <width>30</width>
+    <height>30</height>
+   </size>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <property name="spacing">
+     <number>1</number>
+    </property>
+    <property name="leftMargin">
+     <number>30</number>
+    </property>
+    <property name="topMargin">
+     <number>20</number>
+    </property>
+    <property name="rightMargin">
+     <number>30</number>
+    </property>
+    <property name="bottomMargin">
+     <number>25</number>
+    </property>
+    <item>
+     <widget class="QListWidget" name="listWidget_running">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>500</width>
+        <height>25</height>
+       </size>
+      </property>
+      <property name="toolTip">
+       <string/>
+      </property>
+      <property name="statusTip">
+       <string>正在计算的项目</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-top: 0px;
+background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1,
+                                      stop: 0 #9ACD32, stop: 1 #FFFFF0);</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="DragListWidget" name="listWidget_queue">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="toolTip">
+       <string/>
+      </property>
+      <property name="statusTip">
+       <string>待处理项目队列</string>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">border-top: 0px</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeType">
+       <enum>QSizePolicy::Preferred</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>20</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <widget class="QProgressBar" name="progressBar">
+      <property name="statusTip">
+       <string>总进度</string>
+      </property>
+      <property name="value">
+       <number>50</number>
+      </property>
+      <property name="textVisible">
+       <bool>false</bool>
+      </property>
+      <property name="invertedAppearance">
+       <bool>false</bool>
+      </property>
+      <property name="textDirection">
+       <enum>QProgressBar::BottomToTop</enum>
+      </property>
+      <property name="format">
+       <string>%p%</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QToolBar" name="toolBar">
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="windowTitle">
+    <string>未登陆-请登陆后使用更多功能</string>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">QToolBar {
+	spacing:5px;
+	
+	padding:8px;
+
+}
+</string>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>50</width>
+     <height>40</height>
+    </size>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="action_login"/>
+   <addaction name="separator"/>
+   <addaction name="action_logout"/>
+   <addaction name="separator"/>
+   <addaction name="action_add"/>
+   <addaction name="separator"/>
+   <addaction name="action_delete"/>
+   <addaction name="separator"/>
+   <addaction name="action_journal"/>
+   <addaction name="separator"/>
+   <addaction name="action_help"/>
+   <addaction name="separator"/>
+  </widget>
+  <action name="action_login">
+   <property name="icon">
+    <iconset>
+     <normaloff>../icon/login.png</normaloff>../icon/login.png</iconset>
+   </property>
+   <property name="text">
+    <string>登陆</string>
+   </property>
+  </action>
+  <action name="action_logout">
+   <property name="icon">
+    <iconset>
+     <normaloff>../icon/logoff.png</normaloff>../icon/logoff.png</iconset>
+   </property>
+   <property name="text">
+    <string>注销</string>
+   </property>
+  </action>
+  <action name="action_add">
+   <property name="icon">
+    <iconset>
+     <normaloff>../icon/add.png</normaloff>../icon/add.png</iconset>
+   </property>
+   <property name="text">
+    <string>添加项目</string>
+   </property>
+  </action>
+  <action name="action_journal">
+   <property name="icon">
+    <iconset>
+     <normaloff>../icon/dialog.png</normaloff>../icon/dialog.png</iconset>
+   </property>
+   <property name="text">
+    <string>项目日志</string>
+   </property>
+   <property name="toolTip">
+    <string>完成项目记录</string>
+   </property>
+  </action>
+  <action name="action_delete">
+   <property name="icon">
+    <iconset>
+     <normaloff>../icon/delete.png</normaloff>../icon/delete.png</iconset>
+   </property>
+   <property name="text">
+    <string>删除项目</string>
+   </property>
+   <property name="toolTip">
+    <string>删除选中项目</string>
+   </property>
+  </action>
+  <action name="action_help">
+   <property name="icon">
+    <iconset>
+     <normaloff>../icon/help.png</normaloff>../icon/help.png</iconset>
+   </property>
+   <property name="text">
+    <string>帮助</string>
+   </property>
+   <property name="toolTip">
+    <string>帮助文档</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>DragListWidget</class>
+   <extends>QListWidget</extends>
+   <header>func_dragable_list</header>
+  </customwidget>
+ </customwidgets>
+ <resources/>
+ <connections/>
+</ui>
