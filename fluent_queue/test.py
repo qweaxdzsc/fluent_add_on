@@ -86,24 +86,24 @@
 #     line = p.stdout.readline()
 #     msg = line
 #     print('cmd output', msg)
+# import subprocess
+# # import time
+# # import os
+# # journal =
+# p = subprocess.Popen(r'"C:\Program Files\ANSYS Inc\v201\fluent\ntbin\win64\fluent" 3d -t24',
+#                      shell=True, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+#                      universal_newlines=True)
+# # p = os.system(r'"C:\Program Files\ANSYS Inc\v201\fluent\ntbin\win64\fluent" 3d -t12')
+# # while p.poll() == None:                                     # block calculation thread until finished
+# #     time.sleep(1)
+# line = p.stdout.readline()
+# #     p.stdout.flush()
+# # p.wait()
+# # p.communicate()
+#
+# print('yes')
+#
+#
+# print('finish')
 
-
-import os
-import time
-
-start_time = time.time()
-
-
-info = ''
-license_list = ["10.243.75.38", "10.243.75.40", "10.243.75.67"]
-for i in license_list:
-    with os.popen(
-        '"C:\Program Files\ANSYS Inc\Shared Files\Licensing\winx64\lmutil" lmstat -a -c 1055@%s' % i) as f:
-        txt = f.read()
-# info = info.split("\n")
-
-
-print(info)
-end_time = time.time()
-
-print('time_use:', end_time - start_time)
+# fluent idle time_out

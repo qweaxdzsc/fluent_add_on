@@ -4,17 +4,17 @@ import fluent_tui
 
 
 whole_jou = ''
-project_title = 'BYD'
-version_name = 'lin_foot_V12'
-cad_name = 'BYD_lin_foot_V12'
-project_path = r"G:\_HAVC_Project\BYD\BYD_linearity\BYD_lin_foot\lin_foot_V12"
+project_title = 'D2U-2'
+version_name = 'V12_lin_bil'
+cad_name = 'D2U-2_V12_lin_bil'
+project_path = r"G:\_HAVC_Project\D2U-2\D2U-2_lin_bil"
 
 # valve_dir = [0, -1, 0]
 # valve_origin = [5407.69, 869.38, 1022.1]
 # linearity angle setup
-total_angle = 100
+total_angle = 110
 start_angle = 10
-points = 9
+points = 10
 
 end_angle = total_angle-start_angle
 
@@ -47,10 +47,10 @@ for i in angle_array:
     # CFD.mesh.auto_mesh_volume(1.25)
     CFD.mesh.auto_mesh_volume(1.25, 'poly')
     CFD.mesh.auto_node_move(0.85, 6)
-    CFD.mesh.rename_cell(zone_list=['ai', 'distrib', 'evap', 'hc'])
+    CFD.mesh.rename_cell(zone_list=['diffuser', 'distrib', 'evap', 'hc'])
     CFD.mesh.retype_face(face_list=['inlet'], face_type='mass-flow-inlet')
-    CFD.mesh.retype_face(face_list=['evap*', 'dct*'], face_type='internal')
-    CFD.mesh.retype_face(face_list=['hc*'], face_type='radiator')
+    CFD.mesh.retype_face(face_list=['evap*', 'hc*'], face_type='internal')
+    # CFD.mesh.retype_face(face_list=['hc_out'], face_type='radiator')
     CFD.mesh.retype_face(face_list=['outlet*'], face_type='outlet-vent')
     CFD.mesh.prepare_for_solve()
     CFD.mesh.write_lin_mesh(i)

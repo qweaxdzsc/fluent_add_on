@@ -187,7 +187,6 @@ class AddPj(QWidget, Ui_Widget_add):
         self.signal_enable_action_add.emit()
 
 
-
 if __name__ == "__main__":
     cgitb.enable(format='text')
     app = QApplication(sys.argv)

@@ -21,14 +21,14 @@ class LinReport(object):
         self.angle_array = np.linspace(self.start_percent, self.end_percent, self.process_point, dtype=int)
         self.data_matrix = []
 
-        result_file = r'{project_address}\lin_case\{project_name}-{version_name}-{angle}\result\{project_name}_{angle}.txt' \
+        result_file = r'{project_address}\lin_case\{project_name}_{version_name}_{angle}\result\{project_name}_{angle}.txt' \
             .format(project_address=self.project_address, project_name=self.project_name,
                     version_name=self.version_name, angle=self.angle_array[0])
 
         temp_dict_total = self.txt_to_dict(result_file)
 
         for i in self.angle_array[1:]:                      # extract data from all result file
-            result_file = r'{project_address}\lin_case\{project_name}-{version_name}-{angle}\result\{project_name}_{angle}.txt' \
+            result_file = r'{project_address}\lin_case\{project_name}_{version_name}_{angle}\result\{project_name}_{angle}.txt' \
                 .format(project_address=self.project_address, project_name=self.project_name,
                         version_name=self.version_name, angle=i)
 
@@ -442,18 +442,18 @@ class LinReport(object):
 
 
 if __name__ == "__main__":
-    project_address = r"G:\_HAVC_Project\BYD\BYD_linearity\BYD_lin_foot\lin_foot_V2"
-    project_name = 'BYD'
-    version_name = 'lin_foot_V2'
+    project_address = r"G:\_HAVC_Project\D2U-2\D2U-2_lin_bil"
+    project_name = 'D2U-2'
+    version_name = 'V12_lin_bil'
 
     whole_name = project_name + '-' + version_name
-    Linearity_report = LinReport(project_address, project_name, version_name, 10, 90, 9)
+    Linearity_report = LinReport(project_address, project_name, version_name, 10, 100, 10)
     # Linearity_report.plot_temp()
-    Linearity_report.plot_effective_area('foot', (np.where(Linearity_report.avg_dict['foot'] > 25))[0][0]*10, 100)
+    # Linearity_report.plot_effective_area('foot', (np.where(Linearity_report.avg_dict['foot'] > 25))[0][0]*10, 100)
     # Linearity_report.plot_temp_diff(-10, 10)
     # Linearity_report.plot_avg_temp_diff(0, 5)
     # Linearity_report.plot_side_temp_diff(-5, 5)
     # Linearity_report.plot_vent_temp_diff(-5, 5)
-    Linearity_report.plot_fr_temp_diff(-12, 12)
+    # Linearity_report.plot_fr_temp_diff(-12, 12)
     # fig, ax = plt.subplots(figsize=(10, 6))
 

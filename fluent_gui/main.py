@@ -269,7 +269,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.pamt_dict()
         self.energy_check = self.energy_checkbox.isChecked()
         # try:
-        get_tui(self.pamt, self.body_list, self.energy_check, self.K_dict,
+        self.tui = get_tui(self.pamt, self.body_list, self.energy_check, self.K_dict,
             self.porous_list, self.up_list, self.dead_zone_list, self.internal_face)
         # except Exception as e:
         #     print('error:', e)
@@ -283,7 +283,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.mesh_condition = '启动fluent'
         self.append_text(self.mesh_condition)
 
-        self.mesh_thread = fluent_mesh(self.jou_mesh_path)
+        self.mesh_thread = fluent_mesh(self.tui.jou_mesh_path)
         self.mesh_thread.start()
         self.mesh_clock = mesh_clock(self, 120)
         self.mesh_thread.mesh_feedback.connect(self.mesh_msg)
@@ -311,7 +311,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.solver_condition = '启动fluent...'
         self.append_text(self.solver_condition)
 
-        self.solver_thread = fluent_solver(self.jou_solve_path)
+        self.solver_thread = fluent_solver(self.tui.jou_solve_path)
         self.solver_thread.start()
         # self.solver_clock()
         # self.solver_thread.solver_feedback.connect(self.solver_msg)

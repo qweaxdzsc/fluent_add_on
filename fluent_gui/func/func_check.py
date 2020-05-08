@@ -61,8 +61,7 @@ class check_func():
                 up_list.append('volute')
                 body_list.append('fan')
                 dead_zone_list.append('fan_blade')
-                if ui.part_tree.topLevelItem(0).checkState(0)*ui.part_tree.topLevelItem(1).checkState(0) > 0:
-                    face_list.append('fan_in')
+                face_list.append('fan_in')
                 face_list.append('fan_out')
                 face_list.append('fan_blade')
         if ui.part_tree.topLevelItem(6).checkState(0) == 2:

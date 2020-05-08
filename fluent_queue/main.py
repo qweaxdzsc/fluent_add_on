@@ -4,7 +4,6 @@ import csv
 
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox
 # from PyQt5.QtCore import pyqtSignal
-
 from ui_py.ui_queue_main import Ui_fluent_queue
 from func.func_ui_set import UiSet
 from func.func_account import AccVerify
@@ -233,6 +232,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         :return:
         """
         self.listWidget_queue.drag_permission = switch
+        print("management authority: %s" % switch)
 
     def view_history_log(self):
         file_name = 'history_list.csv'

@@ -11,7 +11,7 @@ class SCDM(QThread):
         self.py_script = py_script
 
     def run(self):
-        p = subprocess.Popen(r'cd C:\Program Files\ANSYS Inc\v201\scdm && SpaceClaim.exe /RunScript="%s"' % self.py_script,
+        p = subprocess.Popen(r'cd C:\Program Files\ANSYS Inc\v191\scdm && SpaceClaim.exe /RunScript="%s"' % self.py_script,
                              shell=True, stdout=subprocess.PIPE)
         out, err = p.communicate()
         # out = out.decode()
@@ -34,7 +34,7 @@ class fluent_mesh(QThread):
         #                    r'fluent 3d -meshing -t4 -gu -i %s' % (self.tui),
         #                           shell=True, stdout=subprocess.PIPE)
 
-        self.p = subprocess.Popen(r'cd C:\\Program Files\\ANSYS Inc\\v201\\fluent\\ntbin\\win64 && '
+        self.p = subprocess.Popen(r'cd C:\\Program Files\\ANSYS Inc\\v191\\fluent\\ntbin\\win64 && '
                                   r'fluent 3d -meshing -t4', shell=True, stdout=subprocess.PIPE)
         nl = 0
         finish_count = 0

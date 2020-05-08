@@ -96,7 +96,7 @@ class mesh(object):
 
     def write_size_field(self):
         text = """
-/file/write-size-field %s
+/file/write-size-field %s yes
 """ % (self.tui.size_field)
         self.tui.whole_jou += text
 
@@ -118,10 +118,16 @@ class mesh(object):
 /file/import/cad-options/extract-features yes 10
 /file/import/cad-geometry yes {cad_path}.scdoc no 
 mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes 
-{normal_angle} {gap_cell} edges yes no
+{normal_angle} {gap_cell} edges yes no yes
 """.format(cad_path=cad_path, min_size=min_size, max_size=max_size, grow_rate=grow_rate,
            normal_angle=normal_angle, gap_cell=gap_cell)
 
+        self.tui.whole_jou += text
+
+    def stitch_free_face(self, tolerance=0.2):
+        text = """
+/diagnostics/face-connectivity/fix-free-faces objects *() stitch %s
+""" % tolerance
         self.tui.whole_jou += text
 
     def general_improve(self, quality=0.75, feature_angle=30, iterations=10):
@@ -449,23 +455,25 @@ q
            per_surface=per_surface, field=field)
         self.tui.whole_jou += text
 
-    def convergence_criterion(self, type=None, switch=3):
+    def convergence_criterion(self, type=None, switch=3, frequency=10):
         if type == 'pressure' or type == 'temperature':
             text = """
 solve/monitors/residual/criterion-type %s
-/solve/convergence-conditions/conv-reports add %s-stable
-report-defs %s initial-values-to-ignore 120 previous-values-to-consider 4 
+/solve/convergence-conditions/frequency %s
+/conv-reports add %s-stable
+report-defs %s initial-values-to-ignore 120 previous-values-to-consider 20 
 stop-criterion 0.0002 print yes active yes
 q q q
-""" % (switch, type, type)
+""" % (switch, frequency, type, type)
         elif type == 'volume':
             text = """
 /solve/monitors/residual/criterion-type %s
-/solve/convergence-conditions/conv-reports add %s-stable
-report-defs volume initial-values-to-ignore 400 previous-values-to-consider 4 
+/solve/convergence-conditions/frequency %s
+conv-reports add %s-stable
+report-defs volume initial-values-to-ignore 600 previous-values-to-consider 20 
 stop-criterion 0.0001 print yes active yes
 q q q
-""" % (switch, type)
+""" % (switch, frequency, type)
         else:
             text = """
 solve/monitors/residual/criterion-type %s

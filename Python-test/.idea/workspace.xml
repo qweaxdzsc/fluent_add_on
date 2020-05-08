@@ -2,9 +2,33 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8d44180-0242-4157-8c6d-4f3b75ca3fd9" name="Default Changelist" comment="第二次修改">
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/batch_plane.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/fl-10440.trn" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/fl-1632.trn" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/fl-8088.trn" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/fl-8928.trn" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fluent_tui.py" beforeDir="false" afterPath="$PROJECT_DIR$/fluent_tui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/get_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/get_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lin_report_new.py" beforeDir="false" afterPath="$PROJECT_DIR$/lin_report_new.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/linearity_new.py" beforeDir="false" afterPath="$PROJECT_DIR$/linearity_new.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/linearity_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/linearity_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_packer.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_packer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/start.spec" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/time_performance.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tui_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/tui_run.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/func/func_scdm_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/func/func_scdm_script.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/call_api/call_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/call_api/call_func.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_func.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/func/func_check.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/func/func_check.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_ansys_license.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_ansys_license.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_list_manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_list_manage.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_run_calculation.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_run_calculation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,12 +56,15 @@
     </option>
   </component>
   <component name="ProjectId" id="1Zy0tSqeMZnnnjJpWh8VnbaxNxT" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -50,7 +77,28 @@
       <recent name="C:\Users\BZMBN4\Desktop\Python-test" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.linearity_new">
+  <component name="RunManager" selected="Python.batch_plane">
+    <configuration name="batch_plane" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Python-test" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/batch_plane.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="get_report" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Python-test" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -72,7 +120,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="linearity_new" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="lin_report_new" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Python-test" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -84,7 +132,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/linearity_new.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/lin_report_new.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -93,7 +141,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="python_packer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="linearity_report" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Python-test" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -105,7 +153,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python_packer.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/linearity_report.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -156,42 +204,21 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="web_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Python-test" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/web_test.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <list>
       <item itemvalue="Python.txt_to_python" />
       <item itemvalue="Python.get_report" />
+      <item itemvalue="Python.lin_report_new" />
+      <item itemvalue="Python.linearity_report" />
       <item itemvalue="Python.test" />
-      <item itemvalue="Python.python_packer" />
-      <item itemvalue="Python.web_test" />
-      <item itemvalue="Python.linearity_new" />
+      <item itemvalue="Python.batch_plane" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.linearity_new" />
+        <item itemvalue="Python.batch_plane" />
         <item itemvalue="Python.test" />
-        <item itemvalue="Python.web_test" />
-        <item itemvalue="Python.python_packer" />
         <item itemvalue="Python.get_report" />
+        <item itemvalue="Python.lin_report_new" />
+        <item itemvalue="Python.linearity_report" />
       </list>
     </recent_temporary>
   </component>
@@ -252,6 +279,7 @@
     <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="第二次修改" />
     <option name="LAST_COMMIT_MESSAGE" value="第二次修改" />
   </component>
@@ -260,22 +288,30 @@
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state x="670" y="356" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1586497342475" />
-    <state width="1892" height="269" key="GridCell.Tab.0.bottom" timestamp="1587449666411">
+    <state width="1892" height="232" key="GridCell.Tab.0.bottom" timestamp="1588899338566">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1892" height="269" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1587449666411" />
-    <state width="1892" height="269" key="GridCell.Tab.0.center" timestamp="1587449666411">
+    <state width="1417" height="232" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1587992286389" />
+    <state width="1892" height="232" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1588899338566" />
+    <state width="1417" height="232" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1588149065564" />
+    <state width="1892" height="232" key="GridCell.Tab.0.center" timestamp="1588899338566">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1892" height="269" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1587449666411" />
-    <state width="1892" height="269" key="GridCell.Tab.0.left" timestamp="1587449666411">
+    <state width="1417" height="232" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1587992286389" />
+    <state width="1892" height="232" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1588899338566" />
+    <state width="1417" height="232" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1588149065563" />
+    <state width="1892" height="232" key="GridCell.Tab.0.left" timestamp="1588899338566">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1892" height="269" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1587449666411" />
-    <state width="1892" height="269" key="GridCell.Tab.0.right" timestamp="1587449666411">
+    <state width="1417" height="232" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1587992286389" />
+    <state width="1892" height="232" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1588899338566" />
+    <state width="1417" height="232" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1588149065563" />
+    <state width="1892" height="232" key="GridCell.Tab.0.right" timestamp="1588899338566">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1892" height="269" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1587449666411" />
+    <state width="1417" height="232" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1587992286389" />
+    <state width="1892" height="232" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1588899338566" />
+    <state width="1417" height="232" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1588149065563" />
     <state x="579" y="355" key="com.intellij.ide.util.TipDialog" timestamp="1586832004790">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>

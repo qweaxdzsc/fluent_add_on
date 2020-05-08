@@ -48,7 +48,7 @@ class LicenseUsage(object):
 
     def is_license(self, license_name):
         usable_license = self.license_dict[license_name][1]
-        print('license left:', usable_license)
+        print('license "%s" left:' % (license_name), usable_license)
         if usable_license:
             return True
         else:
@@ -74,4 +74,4 @@ class LicenseUsage(object):
 
 if __name__ == '__main__':
     ansys_license = LicenseUsage()
-    ansys_license.print_license_info()
+    ansys_license.is_license('pre_post')

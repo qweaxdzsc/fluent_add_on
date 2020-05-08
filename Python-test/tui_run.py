@@ -4,10 +4,10 @@ import fluent_tui
 
 # txt name
 whole_jou = ''
-project_title = 'D2UX'
-version_name = 'foot_V6'
-cad_name = 'D2UX_foot_V6'
-case_out = r'G:\_HAVC_Project\D2UX\D2UX_foot\D2UX_foot_V6'
+project_title = 'K2'
+version_name = 'V4_vent'
+cad_name = 'K2_V4_vent_200428'
+case_out = r'G:\_HAVC_Project\K2\K2_VENT\K2_V4_VENT'
 
 
 jou_out = case_out
@@ -30,7 +30,7 @@ CFD.mesh.fix_slivers()
 CFD.mesh.compute_volume_region()
 CFD.mesh.volume_mesh_change_type()
 # CFD.mesh.volume_mesh_change_type(dead_zone_list=['fan_blade'])
-CFD.mesh.auto_mesh_volume(mesh_type='poly')
+CFD.mesh.auto_mesh_volume(mesh_type='tet')
 CFD.mesh.auto_node_move(skewness=0.85)
 CFD.mesh.rename_cell(zone_list=['ai', 'evap', 'fan', 'volute', 'filter', 'hc', 'distrib1', 'distrib2', 'cone'])
 # CFD.mesh.rename_cell(zone_list=['ai', 'ai_duct', 'filter', 'cone', 'evap', 'fan', 'volute', 'distrib'])
@@ -38,22 +38,21 @@ CFD.mesh.rename_cell(zone_list=['ai', 'evap', 'fan', 'volute', 'filter', 'hc', '
 # CFD.mesh.rename_cell(zone_list=['ai', 'evap', 'hc', 'fan', 'volute'])
 # CFD.mesh.retype_face(face_list=['inlet', 'inlet2'], face_type='pressure-inlet')
 CFD.mesh.retype_face(face_list=['inlet'], face_type='inlet-vent')
-CFD.mesh.retype_face(face_list=['fan_out', 'evap*', 'filter*'], face_type='internal')
+CFD.mesh.retype_face(face_list=['fan_in', 'fan_out', 'evap*', 'filter*', 'hc*'], face_type='internal')
 # CFD.mesh.retype_face(face_list=['ai_in', 'fan_in', 'fan_out', 'evap*', 'filter*'], face_type='internal')
 # CFD.mesh.retype_face(face_list=['fan_in', 'fan_out', 'evap*'], face_type='internal')
-CFD.mesh.retype_face(face_list=['ai_in', 'fan_in', 'fan_out', 'evap*', 'hc*'], face_type='internal')
+# CFD.mesh.retype_face(face_list=['ai_in', 'fan_in', 'fan_out', 'evap*', 'hc*'], face_type='internal')
 CFD.mesh.retype_face(face_list=['outlet*'], face_type='outlet-vent')
 CFD.mesh.write_mesh()
 CFD.mesh.prepare_for_solve()
 CFD.mesh.switch_to_solver()
 
-
-fan_origin = [2.12225, 0.35303, 1.31595]
-fan_axis = [0, 0, 1]
-rpm = 3900
-evap_d1 = [1, 0, 0]
+fan_origin = [0.14943, -0.88991, 0.19135]
+fan_axis = [0.17365, 0, -0.98481]
+rpm = 3700
+evap_d1 = [0.97815, -0.00001, -0.20791]
 evap_d2 = [0, 1, 0]
-hc_d1 = [-0.25882, 0, -0.96593]
+hc_d1 = [-0.96592, 0, -0.25882]
 hc_d2 = [0, 1, 0]
 filter_d1 = [0, 0, 1]
 filter_d2 = [1, 1, 0]

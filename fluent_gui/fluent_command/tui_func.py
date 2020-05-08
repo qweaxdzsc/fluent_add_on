@@ -104,7 +104,7 @@ class mesh(object):
 
     def write_size_field(self):
         text = """
-/file/write-size-field %s
+/file/write-size-field %s yes
 """ % (self.tui.size_field)
         self.tui.whole_jou += text
 
@@ -129,7 +129,7 @@ class mesh(object):
 /file/import/cad-options/extract-features yes 10
 /file/import/cad-geometry yes {cad_path}.scdoc no 
 mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes 
-{normal_angle} {gap_cell} edges yes no
+{normal_angle} {gap_cell} edges yes no yes
 """.format(cad_path=cad_path, min_size=min_size, max_size=max_size, grow_rate=grow_rate,
            normal_angle=normal_angle, gap_cell=gap_cell)
 
@@ -279,7 +279,7 @@ class setup(object):
 
     def start_transcript(self):
         text = """
-/file/start-transcript %s\\%s_%s
+/file/start-transcript %s\\%s_%s_transcript
 """ % (self.tui.case_out_path, self.tui.project_title, self.tui.version_name)
         self.tui.whole_jou += text
         return self.tui.whole_jou
@@ -287,7 +287,7 @@ class setup(object):
     def set_timeout(self, minutes=5):
         text = """
 /file/set-idle-timeout yes {time_out} no
-""" % minutes
+""".format(time_out=minutes)
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
@@ -498,23 +498,25 @@ q
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
-    def convergence_criterion(self, type=None, switch=3):
+    def convergence_criterion(self, type=None, switch=3, frequency=10):
         if type == 'pressure' or type == 'temperature':
             text = """
 solve/monitors/residual/criterion-type %s
-/solve/convergence-conditions/conv-reports add %s-stable
+/solve/convergence-conditions/frequency %s
+/conv-reports add %s-stable
 report-defs %s initial-values-to-ignore 120 previous-values-to-consider 20 
 stop-criterion 0.0002 print yes active yes
 q q q
-""" % (switch, type, type)
+""" % (switch, frequency, type, type)
         elif type == 'volume':
             text = """
 /solve/monitors/residual/criterion-type %s
-/solve/convergence-conditions/conv-reports add %s-stable
-report-defs volume initial-values-to-ignore 400 previous-values-to-consider 20 
+/solve/convergence-conditions/frequency %s
+conv-reports add %s-stable
+report-defs volume initial-values-to-ignore 600 previous-values-to-consider 20 
 stop-criterion 0.0001 print yes active yes
 q q q
-""" % (switch, type)
+""" % (switch, frequency, type)
         else:
             text = """
 solve/monitors/residual/criterion-type %s

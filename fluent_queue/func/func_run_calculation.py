@@ -1,7 +1,7 @@
-import time
 import subprocess
+import time
 
-from PyQt5.QtCore import pyqtSignal, QThread, QFileInfo
+from PyQt5.QtCore import pyqtSignal, QThread, QFileInfo, QDir
 from func.func_ansys_license import LicenseUsage
 from func.func_timer import current_time
 
@@ -35,9 +35,11 @@ class Calculate(QThread):
         3. in while loop do calculation
         :return:
         """
-        if self.running_project:
-            time.sleep(1)
-            self.calculation()
+        time.sleep(2)
+        ansys_license = LicenseUsage()
+        if ansys_license.is_enough(self.cores):
+            if self.running_project:
+                    self.calculation()
         while True:
             time.sleep(1)
             if not self.ui.pause:
@@ -82,15 +84,18 @@ class Calculate(QThread):
         # go to disk first, then go to directory, then launch fluent and its launching options
         p = subprocess.Popen(r'%s &&'
                              r'cd %s &&'
-                             r'"C:\Program Files\ANSYS Inc\v201\fluent\ntbin\win64\fluent" 3d -t%s -i %s' %
+                             r'"C:\Program Files\ANSYS Inc\v191\fluent\ntbin\win64\fluent" 3d -t%s -i %s' %
                              (disk, project_address, self.cores, running_journal),
                              shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE,
                              stderr=subprocess.PIPE, universal_newlines=True)
-        while p.poll() == None:                                     # block calculation thread until finished
-            time.sleep(5)
-            line = p.stdout.readline()
-            msg = line
-            print('cmd output', msg)
+        # while p.poll() == None:                                     # block calculation thread until finished
+        #     time.sleep(5)
+            # line = p.stdout.readline()
+        transcript_name = '%s_transcript' % self.running_project[0]['project_name']
+        self.calguard = CalGuard(project_address, transcript_name)
+        self.calguard.start()
+        out, err = p.communicate()
+        self.calguard.quit()
 
         print('finish')
         self.complete_status = self.check_result()
@@ -145,15 +150,46 @@ class Calculate(QThread):
             return 'no result'
 
 
-class CheckResult(QThread):
-    """ create checking thread"""
-    def __init__(self):
-        super(CheckResult, self).__init__()
-        pass
+class CalGuard(QThread):
+    """thread ensures calculation normally"""
+    def __init__(self, directory, transcript_name):
+        super().__init__()
+        self.dir = directory
+        self.transcript = '%s\%s' % (directory, transcript_name)
+        self.wait_time = 60
+        self.check_interval = 200
 
+    def run(self):
+        print('start Guard')
+        time.sleep(self.wait_time)
+        file_transcript = QFileInfo(self.transcript)
+        if file_transcript.isFile():
+            print('have transcript')
+            self.check_transcript(self.check_interval)
+            self.ensure_finish(self.dir)
+        else:
+            print('Warning: Error, transcript dose not exist')
 
-class CheckLicense(QThread):
-    """ create checking thread"""
-    def __init__(self):
-        super(CheckLicense, self).__init__()
-        pass
+    def check_transcript(self, check_interval):
+        line_count = 0
+        line_count_new = 1
+        while line_count_new > line_count:
+            time.sleep(check_interval)
+            line_count = line_count_new
+            with open(self.transcript, 'r') as f:
+                content = f.readlines()
+                line_count_new = len(content)
+                print(line_count_new)
+
+        print('transcript finish')
+
+    def ensure_finish(self, dir):
+        folder = QDir(dir)
+        file_list = folder.entryInfoList(QDir.Files | QDir.CaseSensitive)
+        for i in file_list:
+            if i.suffix() == 'bat':
+                print(i.absoluteFilePath())
+                subprocess.call(i.absoluteFilePath(), shell=True)
+        print('no bat file now')
+        print('\nall finished')
+
