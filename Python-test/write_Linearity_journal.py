@@ -1,157 +1,48 @@
-
-import numpy as np
 import os
+import fluent_tui
+import numpy as np
+# jou_out = r'C:\Users\BZMBN4\Desktop'       # txt output root
 
-out_path = 'C:\\Users\\BZMBN4\\Desktop\\'       # txt output root
-title = 'solve'                                  # txt name
+# txt name
+whole_jou = ''
+project_title = 'MQBA1'
+version_name = 'V9_lin_defrost'
+cad_name = 'MQBA1_V9_defrost'
+case_out = r'G:\_HAVC_Project\MQBA1\MQBA1_V9_lin_defrost'
 
-txt_name = out_path + title + '.jou'            # txt final path
-print('output journal in:', txt_name)
-report = open(txt_name, 'w')                    # create txt
+angle_array = [30, 40, 50, 60]
 
-# linearity angle setup
-total_angle = 92.25
-angle_array = np.linspace(9.225, total_angle, 10, endpoint=True)   # define your angle range and points
 print('angle array:', angle_array)
 
+jou_out = case_out
+jou_title = project_title + '-' + version_name + '-TUI'
+txt_name = jou_out + '\\' + jou_title + '.jou'            # txt final path
+print('output journal in:', txt_name)
+jou = open(txt_name, 'w')
 
-# content for journal
-def mesh_case(cad_path, min_size=0.8, max_size=5.5, grow_rate=1.2, normal_angle=16, gap_cell=2):
-    mesh_case = """
-/file/import/cad-options/save-PMDB yes
-/file/import/cad-options/extract-features yes 10
-/file/import/cad-geometry yes {cad_path}.scdoc mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes 
-{normal_angle} {gap_cell} edges yes no
-""".format(cad_path=cad_path, min_size=min_size, max_size=max_size, grow_rate=grow_rate,
-               normal_angle=normal_angle, gap_cell=gap_cell)
+CFD = fluent_tui.tui(whole_jou, project_title, version_name, case_out, cad_name)
 
-    return mesh_case
-
-
-def lin_mesh(project_name, angle_array, mesh_path, valve_dir, valve_origin):
-    message = """;0
-;write mesh
-file/write-mesh %s\\%s-%s 
-""" % (mesh_path, project_name, angle_array[0])
-    j = 0
-    for i in angle_array[1:]:
-        j = j + 1
-        rotate = round(angle_array[j]-angle_array[j-1],2)
-        mesh_part = """;{valve_angle}
-;delet-cells \n
-/objects/volumetric-regions/delete-cells * *()
-q
-
-;repair face mesh
-/diagnostics/quality/general-improve objects *() skewness 0.5 30 5 yes
-
-;rotate
-boundary/manage/rotate valve*()
-{rotate_angle} {valve_dx} {valve_dy} {valve_dz}() {valve_origin_x} {valve_origin_y} {valve_origin_z}() no
+for i in angle_array:
+    CFD.mesh.delete_cell('*distrib*')
+    CFD.mesh.face_zone_delete('*valve*')
+    cad_lin_name = 'valve_%s' % i
+    CFD.mesh.import_distrib(cad_name=cad_lin_name, append='yes')
+    CFD.mesh.object_merge('*')
+    CFD.mesh.fix_slivers()
+    CFD.mesh.fix_slivers()
+    CFD.mesh.compute_volume_region()
+    CFD.mesh.volume_mesh_change_type(dead_zone_list=['*valve*'])
+    CFD.mesh.auto_fill_volume('*distrib*')
+    CFD.mesh.auto_node_move(0.85)
+    CFD.mesh.rename_cell(zone_list=['diffuser', 'distrib', 'evap', 'hc', 'rear_duct'])
+    CFD.mesh.retype_face(face_list=['inlet'], face_type='mass-flow-inlet')
+    CFD.mesh.retype_face(face_list=['evap*', 'hc*', 'dct*'], face_type='internal')
+    CFD.mesh.retype_face(face_list=['hc*'], face_type='radiator')
+    CFD.mesh.retype_face(face_list=['outlet*'], face_type='outlet-vent')
+    CFD.mesh.prepare_for_solve()
+    CFD.mesh.write_lin_mesh(i)
 
 
-;compute volume region
-/objects/volumetric-regions/compute * no yes
-
-;volume region change type
-/objects/volumetric-regions/change-type * *() fluid
-/objects/volumetric-regions/change-type * valve*() dead
-
-;Auto-mesh-volume
-/mesh/tet/controls/cell-sizing geometric 1.25
-/mesh/auto-mesh * yes pyramids tet no
-
-
-;Auto-node-move
-/mesh/modify/auto-node-move *() *() 0.7 50 120 yes 10
-
-;rename cell zone
-mesh/manage/name *ai* ai
-mesh/manage/name *distrib* distrib
-mesh/manage/name *evap* evap
-mesh/manage/name *hc* hc
-
-;retype face
-/boundary/manage/type evap_in evap_out hc_out()
-internal
-
-/boundary/manage/type inlet*()
-pressure-inlet
-
-/boundary/manage/type outlet*()
-outlet-vent
-
-/boundary/manage/type hc_in()
-radiator
-
-;write mesh
-file/write-mesh {mesh_path}\\{project_name}-{valve_angle} 
-
-""".format(valve_angle=i, rotate_angle=rotate, valve_dx=valve_dir[0], valve_dy=valve_dir[1], valve_dz=valve_dir[2],
-           valve_origin_x=valve_origin[0], valve_origin_y=valve_origin[1], valve_origin_z=valve_origin[2],
-           mesh_path=mesh_path, project_name=project_name)
-        message += mesh_part
-
-    return message
-
-
-def lin_solve(project_name, angle, mesh_path, case_path, result_path):
-    import post_process
-    message = ''
-    for i in angle:
-        solve_part = """
-;replace mesh
-file/replace-mesh {mesh_path}\\{project_name}-{angle}.msh yes
-
-;re scale
-mesh/scale 0.001 0.001 0.001
-
-
-;modify heat flux
-/define/boundary-conditions/set/pressure-inlet inlet*() t0 no 273.15 q q q
-/define/boundary-conditions/set/outlet-vent outlet*() t0 no 273.15 q q q
-
-/define/boundary-conditions/zone-type hc_in radiator
-/define/boundary-conditions/set/radiator hc_in() temperature 348.15 hc constant 1000000 q 
-/define/boundary-conditions/zone-type hc_out radiator
-/define/boundary-conditions/set/radiator hc_out() temperature 348.15 hc constant 1000000
-q
-
-;initialize
-/solve/initialize/hyb-initialization yes
-
-;calculation
-solve/iterate/210 yes
-
-;write case and data
-file/write-case-data/ {case_path}/{project_name}_{angle}\\{project_name}_{angle}
-""".format(mesh_path=mesh_path, case_path= case_path, project_name=project_name, angle=i)
-        message += solve_part
-        message += post_process.post_process(i, result_path)
-
-    return message
-
-
-project_path = r"G:\458-rear\458-rear-lin\458-vent-lin"
-cad_name = "458-vent-lin"
-project_name = '458-rear'
-valve_dir = [0, -1, 0]
-valve_origin = [5407.69, 869.38, 1022.1]
-
-
-cad_path = project_path + '\\' + cad_name
-case_path = project_path + '\\lin_case'
-mesh_out_path = project_path + '\\lin_mesh'
-result_path = case_path
-
-# mesh_case = mesh_case(cad_path)
-# mesh_part = lin_mesh(project_name, angle_array, mesh_out_path, valve_dir, valve_origin)
-# whole_message = mesh_case + mesh_part
-solve_part = lin_solve(project_name, angle_array, mesh_out_path, case_path, result_path)
-whole_message = solve_part
-
-report.write(whole_message)
-report.close()
-
+jou.write(CFD.whole_jou)
+jou.close()
 os.system(txt_name)
-

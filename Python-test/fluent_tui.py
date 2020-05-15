@@ -109,19 +109,28 @@ class mesh(object):
 
         self.tui.whole_jou += text
 
-    def import_distrib(self, cad_name='', min_size=0.8, max_size=5, grow_rate=1.2, normal_angle=16, gap_cell=2):
+    def import_distrib(self, cad_name='', min_size=0.8, max_size=5, grow_rate=1.2, normal_angle=16, gap_cell=2, append='no'):
         if cad_name == '':
             cad_path = self.tui.cad_path
         else:
             cad_path = self.tui.case_out_path + '\\' + cad_name
         text = """
 /file/import/cad-options/extract-features yes 10
-/file/import/cad-geometry yes {cad_path}.scdoc no 
+/file/import/cad-geometry yes {cad_path}.scdoc {append} 
 mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes 
 {normal_angle} {gap_cell} edges yes no yes
 """.format(cad_path=cad_path, min_size=min_size, max_size=max_size, grow_rate=grow_rate,
-           normal_angle=normal_angle, gap_cell=gap_cell)
+           normal_angle=normal_angle, gap_cell=gap_cell, append=append)
 
+        self.tui.whole_jou += text
+
+    def object_merge(self, *object_name):
+        object = ''
+        for i in object_name:
+            object += ' %s' %i
+        text = """
+/objects/merge%s() ,
+""" % object
         self.tui.whole_jou += text
 
     def stitch_free_face(self, tolerance=0.2):
@@ -145,6 +154,12 @@ mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes
 """.format(skewness=skewness)
         self.tui.whole_jou += text
 
+    def face_zone_delete(self, face_zone_name):
+        text = """
+/boundary/manage/delete {face_zone}() yes
+""".format(face_zone=face_zone_name)
+        self.tui.whole_jou += text
+
     def valve_rotate(self, rotate_angle, valve_dir, valve_origin):
         text = """
 boundary/manage/rotate valve*()
@@ -155,7 +170,7 @@ boundary/manage/rotate valve*()
 
     def compute_volume_region(self):
         text = """
-/objects/volumetric-regions/compute * no
+/objects/volumetric-regions/compute * no yes
 """
         self.tui.whole_jou += text
 
@@ -176,6 +191,13 @@ boundary/manage/rotate valve*()
 /mesh/tet/controls/cell-sizing geometric {rate}
 /mesh/auto-mesh * yes pyramids {mesh_type} no
 """.format(rate=grow_rate, mesh_type=mesh_type)
+        self.tui.whole_jou += text
+
+    def auto_fill_volume(self, regions='*'):
+        text = """
+/objects/volumetric-regions/auto-fill-volume * {regions}() 
+pyramids tet no yes
+""".format(regions=regions)
         self.tui.whole_jou += text
 
     def auto_node_move(self, skewness=0.8, iterations=5):
@@ -200,10 +222,10 @@ boundary/manage/rotate valve*()
         """ % (face_type)
         self.tui.whole_jou += text1 + text2
 
-    def delete_cell(self):
+    def delete_cell(self, zone_name='*'):
         text = """
-/objects/volumetric-regions/delete-cells * *() q
-"""
+/objects/volumetric-regions/delete-cells * %s() q
+""" % zone_name
         self.tui.whole_jou += text
 
     def check_quality(self):

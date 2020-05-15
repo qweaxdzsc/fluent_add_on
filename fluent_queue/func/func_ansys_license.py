@@ -74,4 +74,4 @@ class LicenseUsage(object):
 
 if __name__ == '__main__':
     ansys_license = LicenseUsage()
-    ansys_license.is_license('pre_post')
+    ansys_license.is_license('hpc')

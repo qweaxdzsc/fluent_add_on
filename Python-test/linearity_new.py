@@ -4,21 +4,20 @@ import fluent_tui
 
 
 whole_jou = ''
-project_title = 'D2U-2'
-version_name = 'V12_lin_bil'
-cad_name = 'D2U-2_V12_lin_bil'
-project_path = r"G:\_HAVC_Project\D2U-2\D2U-2_lin_bil"
+project_title = 'MQBA1'
+version_name = 'V9_lin_defrost'
+cad_name = 'MQBA1_V9_lin_defrost_200515'
+project_path = r"G:\_HAVC_Project\MQBA1\MQBA1_V9_lin_defrost"
 
 # valve_dir = [0, -1, 0]
 # valve_origin = [5407.69, 869.38, 1022.1]
 # linearity angle setup
-total_angle = 110
-start_angle = 10
-points = 10
+total_angle = 60
+start_angle = 20
+points = 5
 
-end_angle = total_angle-start_angle
 
-angle_array = np.linspace(start_angle, end_angle, points, endpoint=True)   # define your angle range and points
+angle_array = np.linspace(start_angle, total_angle, points, endpoint=True)   # define your angle range and points
 # angle_array = [round(i, 3) for i in angle_array]
 angle_array = [int(i) for i in angle_array]
 
@@ -45,12 +44,12 @@ for i in angle_array:
     CFD.mesh.compute_volume_region()
     CFD.mesh.volume_mesh_change_type(dead_zone_list=['valve'])
     # CFD.mesh.auto_mesh_volume(1.25)
-    CFD.mesh.auto_mesh_volume(1.25, 'poly')
+    CFD.mesh.auto_mesh_volume(1.25, 'tet')
     CFD.mesh.auto_node_move(0.85, 6)
     CFD.mesh.rename_cell(zone_list=['diffuser', 'distrib', 'evap', 'hc'])
     CFD.mesh.retype_face(face_list=['inlet'], face_type='mass-flow-inlet')
-    CFD.mesh.retype_face(face_list=['evap*', 'hc*'], face_type='internal')
-    # CFD.mesh.retype_face(face_list=['hc_out'], face_type='radiator')
+    CFD.mesh.retype_face(face_list=['evap*', 'hc*', 'dct*'], face_type='internal')
+    CFD.mesh.retype_face(face_list=['hc*'], face_type='radiator')
     CFD.mesh.retype_face(face_list=['outlet*'], face_type='outlet-vent')
     CFD.mesh.prepare_for_solve()
     CFD.mesh.write_lin_mesh(i)
@@ -105,11 +104,13 @@ CFD.post.simple_lin_post(start_angle)
 for i in angle_array[1:]:
     CFD.setup.replace_lin_mesh(i)
     CFD.setup.rescale()
-    CFD.setup.init_temperature('mass-flow-inlet', 'outlet-vent', 273.15)
+    # CFD.setup.init_temperature('mass-flow-inlet', 'outlet-vent', 273.15)
     CFD.setup.hyb_initialize()
     CFD.setup.start_calculate(350)
     CFD.setup.write_lin_case_data(i)
     CFD.post.simple_lin_post(i)
+    CFD.post.txt_surface_integrals('area-weighted-avg', ['dct*'], 'temperature')
+    CFD.post.txt_surface_integrals('volume-flow-rate', ['dct*'])
 
 jou.write(CFD.whole_jou)
 jou.close()

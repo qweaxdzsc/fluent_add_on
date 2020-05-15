@@ -157,6 +157,29 @@
 # jou.close()
 # os.system(txt_name)
 
+import subprocess
+import time
+import threading
+
+
+def get_info(ip):
+    print('start')
+    p = subprocess.Popen(r'"C:\Program Files\ANSYS Inc\Shared Files\Licensing\winx64\lmutil" lmstat -a -c 1055@%s' % ip,
+                         shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE, stderr=subprocess.PIPE)
+    lines = p.stdout.readlines()
+    print(lines)
+    end_time = time.time()
+    print('run_time:', end_time - start_time)
+
+
+ip_list = ["10.243.75.38", "10.243.75.40", "10.243.75.67"]
+
+start_time = time.time()
+for i in ip_list:
+    # get_info(i)
+    process = threading.Thread(target=get_info, args=[i])
+    process.start()
+end_time = time.time()
 
 
 

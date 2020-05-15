@@ -84,7 +84,8 @@ class Calculate(QThread):
         # go to disk first, then go to directory, then launch fluent and its launching options
         p = subprocess.Popen(r'%s &&'
                              r'cd %s &&'
-                             r'"C:\Program Files\ANSYS Inc\v191\fluent\ntbin\win64\fluent" 3d -t%s -i %s' %
+                             r'"C:\Program Files\ANSYS Inc\v191\fluent\ntbin\win64\fluent" 3d -t%s -i %s -mpi=intel'
+                             r'-cnf=C:\Users\BZMBN4\Desktop\host_BZMBN4.txt' %
                              (disk, project_address, self.cores, running_journal),
                              shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE,
                              stderr=subprocess.PIPE, universal_newlines=True)
