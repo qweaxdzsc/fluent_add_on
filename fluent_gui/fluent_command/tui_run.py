@@ -56,7 +56,7 @@ class get_tui():
             mesh.simple_import(self.up_list, self.porous_list)
         else:
             mesh.import_distrib()
-
+        mesh.stitch_free_face()
         mesh.general_improve()
         mesh.fix_slivers()
         mesh.compute_volume_region()

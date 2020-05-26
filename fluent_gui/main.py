@@ -301,7 +301,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     def mesh_finish_msg(self, msg):
         self.interact_edit.undo()
         self.append_text(msg)
-        self.solver_btn.click()
+        # self.solver_btn.click()   # auto start calculation
 
     def solver(self):
         self.start_btn.setDisabled(True)

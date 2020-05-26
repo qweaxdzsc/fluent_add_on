@@ -1,10 +1,52 @@
 import os
+import shutil
 
-# command = "-F"               # create one file
-command = "-D -w"               # create one directory
-package_path = r"C:\Users\BZMBN4\Desktop"
-package_name = "PDF_TO_PNG.py"
-package = package_path + "\\" + package_name
-out_path = r"C:\Users\BZMBN4\Desktop\PDF_TO_PNG_V1.1"
 
-os.system("pyinstaller %s %s --distpath %s" % (command, package, out_path))
+class PythonPacker(object):
+    def __init__(self, project_path, project_name):
+        self.project_path = project_path
+        self.project_name = project_name
+        self.out_path = '%s/pack' % project_path
+        self.packed_path = '%s/%s' % (self.out_path, self.project_name[:-3])
+
+    def pack_python(self, command="-D -w"):
+        # command = "-F"               # create one file
+        package = self.project_path + "\\" + self.project_name
+        os.system("pyinstaller %s %s --distpath %s" % (command, package, self.out_path))
+
+    def copy_directory(self, file_list):
+        if file_list:
+            for directory in file_list:
+                file_path, file_name = os.path.split(directory)
+                source_path = directory
+                target_path = '%s/%s' % (self.packed_path, file_name)
+                if os.path.exists(target_path):
+                    print('directory already exist in packed file, please review it first')
+                else:
+                    shutil.copytree(source_path, target_path)
+                    print('copy dir from %s to %s' % (source_path, target_path))
+
+    def copy_qt5core(self):
+        dll_file = 'Qt5Core.dll'
+        dll_path = '%s/%s' % (self.packed_path, dll_file)
+        target_path = r'%s/PyQt5\Qt\bin' % (self.packed_path)
+        if os.path.exists(dll_path):
+            shutil.copy(dll_path, target_path)
+        else:
+            print('dll file not exist')
+
+    def simple_packer(self, file_list):
+        self.pack_python()
+        self.copy_directory(file_list)
+        self.copy_qt5core()
+
+
+if __name__ == "__main__":
+    python_path = r"Z:\EHCT"
+    python_name = "EHCT_V3.1.py"
+    copy_file_list = [
+        r'Z:\EHCT\image',
+        r'Z:\EHCT\path',
+    ]
+    packer = PythonPacker(python_path, python_name)
+    packer.simple_packer(copy_file_list)

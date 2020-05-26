@@ -6,9 +6,9 @@ import numpy as np
 # txt name
 whole_jou = ''
 project_title = 'MQBA1'
-version_name = 'V9_lin_defrost'
-cad_name = 'MQBA1_V9_defrost'
-case_out = r'G:\_HAVC_Project\MQBA1\MQBA1_V9_lin_defrost'
+version_name = 'V6_lin_defrost'
+cad_name = 'MQBA1_V6_defrost'
+case_out = r'G:\_HAVC_Project\MQBA1\MQBA1_V6_lin_defrost'
 
 angle_array = [30, 40, 50, 60]
 

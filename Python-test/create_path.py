@@ -1,16 +1,7 @@
-from root_transfer import add_slash
-
-angle = [20, 40, 60, 80]
-
-raw_path = r'G:\GE2_REAR\GE2-rear-vent\GE2-rear-linearty\GE2-rear-linearity-case-v2\result'
+import os
 
 
 def mkdir(path):
-
-    import os
-    path = path.strip()
-    path = path.rstrip("\\")
-
     isExists = os.path.exists(path)
 
     if not isExists:
@@ -24,7 +15,8 @@ def mkdir(path):
         return False
 
 
-for i in angle:
-    out_path = add_slash(raw_path)
-    final_path = out_path + 'GE2-%s' % (i)
-    mkdir(final_path)
+if __name__ == "__main__":
+    dir = r'S:\PE\Engineering database\CFD\02_Projects\SVW_MQB_A1_HVAC\02_Lineairty'
+    for i in range(1, 11):
+        address = "%s\\result_MQB_A1_V%s_lin_defrost" % (dir, i)
+        mkdir(address)

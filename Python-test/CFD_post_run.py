@@ -1,9 +1,9 @@
 import os
 from CFD_post_command import CfdPost
 
-case_dir = r"G:\_HAVC_Project\BYD\BYD_linearity\BYD_lin_foot\lin_foot_V10"
-case_name = r"BYD_lin_foot_V10"
-result_path = r"G:\_HAVC_Project\BYD\BYD_linearity\BYD_lin_foot\lin_foot_V10"
+case_dir = r"G:\_HAVC_Project\MQBA1\MQBA1_lin_defrost"
+case_name = r"MQBA1_lin_defrost_V1"
+result_path = r"G:\_HAVC_Project\MQBA1\MQBA1_lin_defrost"
 cse_file = ''
 
 cfp = CfdPost(case_dir, case_name, result_path, cse_file)
@@ -35,11 +35,13 @@ cfp = CfdPost(case_dir, case_name, result_path, cse_file)
 
 # cfp.bat_contour('XY', 'Temperature', 1.1, 1.45)
 # cfp.bat_contour('YZ', 'Temperature', 2.1, 2.3)
-cfp.bat_contour('ZX', 'Temperature', -0.124, 0.124)
+# cfp.bat_contour('ZX', 'Temperature', -0.124, 0.124)
 
 # cfp.create_contour('contour2', 'Velocity', 'filter_in filter')
 
-
+cfp.create_contour('contour1', 'Temperature', 'dct_left distrib')
+cfp.create_contour('contour2', 'Temperature', 'dct_mid distrib')
+cfp.create_contour('contour3', 'Temperature', 'dct_right distrib')
 cfp.create_command_file()
 
 # cfp.run_command()

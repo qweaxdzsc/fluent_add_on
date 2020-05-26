@@ -136,6 +136,12 @@ mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
+    def stitch_free_face(self, tolerance=0.2):
+        text = """
+/diagnostics/face-connectivity/fix-free-faces objects *() stitch %s 1
+""" % tolerance
+        self.tui.whole_jou += text
+
     def general_improve(self, quality=0.75, feature_angle=30, iterations=10):
         text = """
 /diagnostics/quality/general-improve objects *() skewness %s %s %s yes

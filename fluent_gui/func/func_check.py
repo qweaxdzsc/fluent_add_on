@@ -42,6 +42,7 @@ class check_func():
             body_list.append('inlet_sphere')
         if ui.part_tree.topLevelItem(1).checkState(0) == 2:
             body_list.append('ai')
+            up_list.append('ai')
             if ui.part_tree.topLevelItem(0).checkState(0) == 2:
                 face_list.append('ai_in')
         if ui.part_tree.topLevelItem(2).checkState(0)*ui.part_tree.topLevelItem(3).checkState(0) == 0:
@@ -50,7 +51,7 @@ class check_func():
             body_list.append('filter')
             body_list.append('cone')
             porous_list.append('filter')
-            up_list.append('ai')
+            up_list.append('cone')
             face_list.append('filter_in')
             face_list.append('filter_out')
         if ui.part_tree.topLevelItem(4).checkState(0) == 2:
@@ -102,7 +103,6 @@ class check_func():
             body_list[valve_index] = 'valve1'
             for i in range(ui.valve_number.value() - 1):
                 body_list.append('valve%s' % (i + 2))
-
 
         internal_face = face_list.copy()
         for i in face_list:

@@ -135,7 +135,7 @@ mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes
 
     def stitch_free_face(self, tolerance=0.2):
         text = """
-/diagnostics/face-connectivity/fix-free-faces objects *() stitch %s
+/diagnostics/face-connectivity/fix-free-faces objects *() stitch %s 1
 """ % tolerance
         self.tui.whole_jou += text
 

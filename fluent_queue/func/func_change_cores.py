@@ -16,6 +16,7 @@ class ChangeCore(QWidget, Ui_widget_cores):
         self.btn_confirm.clicked.connect(self.confirm_change)
 
     def confirm_change(self):
-        core = int(self.edit_cores.text())
-        self.signal_change_core.emit(core)
+        if self.edit_cores.text():
+            core = int(self.edit_cores.text())
+            self.signal_change_core.emit(core)
         self.close()

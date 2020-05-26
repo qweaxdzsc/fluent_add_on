@@ -5,9 +5,9 @@ import fluent_tui
 
 whole_jou = ''
 project_title = 'MQBA1'
-version_name = 'V9_lin_defrost'
-cad_name = 'MQBA1_V9_lin_defrost_200515'
-project_path = r"G:\_HAVC_Project\MQBA1\MQBA1_V9_lin_defrost"
+version_name = 'V10_lin_defrost'
+cad_name = 'MQBA1_V10_lin_defrost_200512'
+project_path = r"G:\_HAVC_Project\MQBA1\MQBA1_V10_lin_defrost"
 
 # valve_dir = [0, -1, 0]
 # valve_origin = [5407.69, 869.38, 1022.1]
