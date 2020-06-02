@@ -6,15 +6,15 @@ import fluent_tui
 whole_jou = ''
 project_title = 'MQBA1'
 version_name = 'V10_lin_defrost'
-cad_name = 'MQBA1_V10_lin_defrost_200512'
+cad_name = 'MQBA1_V10_lin_defrost_200515'
 project_path = r"G:\_HAVC_Project\MQBA1\MQBA1_V10_lin_defrost"
 
 # valve_dir = [0, -1, 0]
 # valve_origin = [5407.69, 869.38, 1022.1]
 # linearity angle setup
-total_angle = 60
-start_angle = 20
-points = 5
+total_angle = 100
+start_angle = 100
+points = 1
 
 
 angle_array = np.linspace(start_angle, total_angle, points, endpoint=True)   # define your angle range and points

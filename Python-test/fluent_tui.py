@@ -483,7 +483,7 @@ q
 solve/monitors/residual/criterion-type %s
 /solve/convergence-conditions/frequency %s
 /conv-reports add %s-stable
-report-defs %s initial-values-to-ignore 120 previous-values-to-consider 20 
+report-defs %s initial-values-to-ignore 150 previous-values-to-consider 20 
 stop-criterion 0.0002 print yes active yes
 q q q
 """ % (switch, frequency, type, type)
@@ -492,7 +492,7 @@ q q q
 /solve/monitors/residual/criterion-type %s
 /solve/convergence-conditions/frequency %s
 conv-reports add %s-stable
-report-defs volume initial-values-to-ignore 600 previous-values-to-consider 20 
+report-defs volume initial-values-to-ignore 1000 previous-values-to-consider 20 
 stop-criterion 0.0001 print yes active yes
 q q q
 """ % (switch, frequency, type)

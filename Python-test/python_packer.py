@@ -35,18 +35,19 @@ class PythonPacker(object):
         else:
             print('dll file not exist')
 
-    def simple_packer(self, file_list):
-        self.pack_python()
+    def simple_packer(self, file_list, command="-D -w"):
+        self.pack_python(command)
         self.copy_directory(file_list)
         self.copy_qt5core()
 
 
 if __name__ == "__main__":
     python_path = r"Z:\EHCT"
-    python_name = "EHCT_V3.1.py"
+    python_name = "ansys_license_info.py"
     copy_file_list = [
         r'Z:\EHCT\image',
         r'Z:\EHCT\path',
     ]
     packer = PythonPacker(python_path, python_name)
-    packer.simple_packer(copy_file_list)
+    # packer.simple_packer(copy_file_list, "-F -w")
+    packer.pack_python("-F")

@@ -65,8 +65,9 @@ def get_xls(path, matrix, sheet_name, excel_name, data_name):
 
         for i in range(len(matrix)):
             width_array = [len(data) for data in matrix[i]]         # width of this column
-            col_width[i] = max(width_array)                         # save max width of each column into col_width                                               
-            head_width[i] = len(head_line[i])                       # get heading width
+            if width_array:
+                col_width[i] = max(width_array)                         # save max width of each column into col_width
+                head_width[i] = len(head_line[i])                       # get heading width
            
             col_letter = get_column_letter(i + 1 + shift_right)     # get column sequence letter
             worksheet.column_dimensions[col_letter].width = max(col_width[i], head_width[i])*1.2 + 2    # modify

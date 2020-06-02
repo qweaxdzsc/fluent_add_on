@@ -55,7 +55,7 @@ class Calculate(QThread):
                         self.signal_license_error.emit('not enough license')
                         time.sleep(3)
                 else:
-                    time.sleep(1)
+                    time.sleep(2)
 
     def running_show(self):
         """
@@ -84,7 +84,7 @@ class Calculate(QThread):
         # go to disk first, then go to directory, then launch fluent and its launching options
         p = subprocess.Popen(r'%s &&'
                              r'cd %s &&'
-                             r'"C:\Program Files\ANSYS Inc\v191\fluent\ntbin\win64\fluent" 3d -t%s -i %s -mpi=intel'
+                             r'"C:\Program Files\ANSYS Inc\v191\fluent\ntbin\win64\fluent" 3d -t%s -i %s -mpi=ibmmpi'
                              r' -cnf=C:\Users\BZMBN4\Desktop\host_BZMBN4.txt' %
                              (disk, project_address, self.cores, running_journal),
                              shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE,
