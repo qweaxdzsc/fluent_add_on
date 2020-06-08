@@ -87,12 +87,12 @@ class CFDProject(object):
 
 
 if __name__ == "__main__":
-    project_name = r"EX11"
+    project_name = r"C095"
     create_path = r"G:\_HAVC_Project"
     share_drive_path = r"S:\PE\Engineering database\CFD\02_Projects"
-    new_project = CFDProject(project_name, create_path, mode_number=7)
-    # new_project.create_project_folder()
-    # new_project.create_sub_folder()
-    # new_project.create_record_excel()
+    new_project = CFDProject(project_name, create_path, mode_number=3)
+    new_project.create_project_folder()
+    new_project.create_sub_folder()
+    new_project.create_record_excel()
     new_project.create_share_project(share_drive_path)
 

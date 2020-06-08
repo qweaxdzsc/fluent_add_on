@@ -45,15 +45,15 @@ class check_func():
             up_list.append('ai')
             if ui.part_tree.topLevelItem(0).checkState(0) == 2:
                 face_list.append('ai_in')
-        if ui.part_tree.topLevelItem(2).checkState(0)*ui.part_tree.topLevelItem(3).checkState(0) == 0:
-            print('filter and cone should be all checked')
-        else:
+        if ui.part_tree.topLevelItem(2).checkState(0) == 2:
             body_list.append('filter')
-            body_list.append('cone')
             porous_list.append('filter')
-            up_list.append('cone')
             face_list.append('filter_in')
             face_list.append('filter_out')
+        if ui.part_tree.topLevelItem(3).checkState(0) == 2:
+            body_list.append('cone')
+            up_list.append('cone')
+            face_list.append('fan_in')
         if ui.part_tree.topLevelItem(4).checkState(0) == 2:
             if ui.part_tree.topLevelItem(5).checkState(0) == 0:
                 print('volute and fan should be all checked')
@@ -62,7 +62,6 @@ class check_func():
                 up_list.append('volute')
                 body_list.append('fan')
                 dead_zone_list.append('fan_blade')
-                face_list.append('fan_in')
                 face_list.append('fan_out')
                 face_list.append('fan_blade')
         if ui.part_tree.topLevelItem(6).checkState(0) == 2:
@@ -88,9 +87,6 @@ class check_func():
             porous_list.append('ptc')
             face_list.append('ptc_in')
             face_list.append('ptc_out')
-        if ui.part_tree.topLevelItem(11).checkState(0) == 2:
-            body_list.append('valve')
-            dead_zone_list.append('valve')
 
         if ui.distrib_number.value() > 1:
             distrib_index = body_list.index('distrib')
@@ -98,11 +94,9 @@ class check_func():
             for i in range(ui.distrib_number.value() - 1):
                 body_list.append('distrib%s' % (i + 2))
 
-        if ui.valve_number.value() > 1:
-            valve_index = body_list.index('valve')
-            body_list[valve_index] = 'valve1'
-            for i in range(ui.valve_number.value() - 1):
-                body_list.append('valve%s' % (i + 2))
+        if ui.valve_number.value() > 0:
+            for i in range(ui.valve_number.value()):
+                body_list.append('valve%s' % (i + 1))
 
         internal_face = face_list.copy()
         for i in face_list:

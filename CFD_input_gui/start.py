@@ -2,12 +2,13 @@ from PyQt5.QtWidgets import (
     QMainWindow, QApplication, QLabel, QSlider, QLineEdit, QTableWidgetItem, QFileDialog, QItemDelegate
 )
 from PyQt5.QtGui import QRegExpValidator
-from PyQt5.QtCore import QRegExp, QTranslator
+from PyQt5.QtCore import QRegExp, QTranslator, QFileInfo
 from ui_input import Ui_MainWindow
 from porous_model import Ui_porous
 from k_cal import Ui_k_cal
 from project_name import Ui_project_name
 from output_html import output_web
+from output_csv import OutputCsv
 from html_parser import HtmlParser
 import cgitb
 import sys
@@ -32,8 +33,8 @@ class MyMainWindow(QMainWindow, Ui_MainWindow, QItemDelegate):
         self.comment_d = {}
 
     def signal_slot(self):
-        self.actionexport.triggered.connect(self.export_html)
-        self.actionimport.triggered.connect(self.import_html)
+        self.actionexport.triggered.connect(self.export_cfd_parameter)
+        self.actionimport.triggered.connect(self.import_cfd_parameter)
         self.mode_slider.valueChanged.connect(self.mode_choose)
         self.valve_slider.valueChanged.connect(self.valve_number)
         self.RPM_slider_signal()
@@ -245,23 +246,22 @@ class MyMainWindow(QMainWindow, Ui_MainWindow, QItemDelegate):
             self.porous_d[model_c1] = self.porous_model.db_dict[model]['c1']
             self.porous_d[model_c2] = self.porous_model.db_dict[model]['c2']
 
-    def export_html(self):
+    def export_cfd_parameter(self):
         self.data_dict()
         print(self.input_d)
         # output = output_web(r'C:/Users/BZMBN4/Desktop/123.html', self.input_d)
         path = QFileDialog.getSaveFileName(self, filter='html, *.html')
         try:
-            html_save_path = path[0]
-            output = output_web(html_save_path, self.input_d)
-        #     with open(csv_save_path, 'w', newline='') as f:
-        #         writer = csv.writer(f)
-        #         for i in self.input_d.keys():
-        #             writer.writerow([i, self.input_d[i]])
-        #
+            save_path = QFileInfo(path[0])
+            html_save_path = save_path.filePath()
+            csv_save_path = save_path.absolutePath() + '\\' + save_path.baseName() + '.csv'
+            output_html = output_web(html_save_path, self.input_d)
+            output_csv = OutputCsv(csv_save_path, self.input_d)
+
         except Exception as e:
             print(e)
 
-    def import_html(self):
+    def import_cfd_parameter(self):
         path = QFileDialog.getOpenFileName(self, '选择要输入的参数模板', filter='html, *.html')
         if path[0] != '':
             html_path = path[0]

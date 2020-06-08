@@ -2,29 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8d44180-0242-4157-8c6d-4f3b75ca3fd9" name="Default Changelist" comment="第二次修改">
-      <change afterPath="$PROJECT_DIR$/ansys_license_info.spec" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/ansys_license_info/Analysis-00.toc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/ansys_license_info/EXE-00.toc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/ansys_license_info/PKG-00.pkg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/ansys_license_info/PKG-00.toc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/ansys_license_info/PYZ-00.pyz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/ansys_license_info/PYZ-00.toc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/ansys_license_info/Tree-00.toc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/ansys_license_info/Tree-01.toc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/ansys_license_info/ansys_license_info.exe.manifest" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/ansys_license_info/base_library.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/ansys_license_info/warn-ansys_license_info.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/build/ansys_license_info/xref-ansys_license_info.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/new_project_folder.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CFD_input_gui/CsvParser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../CFD_input_gui/output_csv.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mail_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/start.py" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/start.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/data_to_excel.py" beforeDir="false" afterPath="$PROJECT_DIR$/data_to_excel.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fluent_tui.py" beforeDir="false" afterPath="$PROJECT_DIR$/fluent_tui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/database.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/get_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/get_report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linearity_new.py" beforeDir="false" afterPath="$PROJECT_DIR$/linearity_new.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/python_packer.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_packer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new_project_folder.py" beforeDir="false" afterPath="$PROJECT_DIR$/new_project_folder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_to_pptx.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_to_pptx.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_func.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_run_calculation.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_run_calculation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/func/func_check.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/func/func_check.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +62,28 @@
       <recent name="C:\Users\BZMBN4\Desktop\Python-test" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.new_project_folder">
+  <component name="RunManager" selected="Python.get_report">
+    <configuration name="database" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Python-test" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/database.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="get_report" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Python-test" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -87,27 +97,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/get_report.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="linearity_new" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Python-test" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/linearity_new.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -137,7 +126,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="python_packer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="python_to_pptx" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Python-test" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -149,7 +138,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python_packer.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python_to_pptx.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -203,18 +192,18 @@
     <list>
       <item itemvalue="Python.txt_to_python" />
       <item itemvalue="Python.get_report" />
-      <item itemvalue="Python.python_packer" />
       <item itemvalue="Python.test" />
+      <item itemvalue="Python.database" />
+      <item itemvalue="Python.python_to_pptx" />
       <item itemvalue="Python.new_project_folder" />
-      <item itemvalue="Python.linearity_new" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.new_project_folder" />
         <item itemvalue="Python.get_report" />
-        <item itemvalue="Python.linearity_new" />
-        <item itemvalue="Python.python_packer" />
+        <item itemvalue="Python.new_project_folder" />
         <item itemvalue="Python.test" />
+        <item itemvalue="Python.python_to_pptx" />
+        <item itemvalue="Python.database" />
       </list>
     </recent_temporary>
   </component>
@@ -284,30 +273,30 @@
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state x="670" y="356" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1586497342475" />
-    <state width="1892" height="181" key="GridCell.Tab.0.bottom" timestamp="1591003160080">
+    <state width="1892" height="358" key="GridCell.Tab.0.bottom" timestamp="1591345824893">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1417" height="232" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1587992286389" />
+    <state width="1892" height="341" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1591261406507" />
     <state width="1892" height="327" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1590385277182" />
-    <state width="1892" height="181" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1591003160080" />
-    <state width="1892" height="181" key="GridCell.Tab.0.center" timestamp="1591003160080">
+    <state width="1892" height="358" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1591345824893" />
+    <state width="1892" height="358" key="GridCell.Tab.0.center" timestamp="1591345824893">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1417" height="232" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1587992286389" />
+    <state width="1892" height="341" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1591261406507" />
     <state width="1892" height="327" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1590385277182" />
-    <state width="1892" height="181" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1591003160080" />
-    <state width="1892" height="181" key="GridCell.Tab.0.left" timestamp="1591003160080">
+    <state width="1892" height="358" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1591345824893" />
+    <state width="1892" height="358" key="GridCell.Tab.0.left" timestamp="1591345824893">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1417" height="232" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1587992286389" />
+    <state width="1892" height="341" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1591261406507" />
     <state width="1892" height="327" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1590385277182" />
-    <state width="1892" height="181" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1591003160080" />
-    <state width="1892" height="181" key="GridCell.Tab.0.right" timestamp="1591003160080">
+    <state width="1892" height="358" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1591345824893" />
+    <state width="1892" height="358" key="GridCell.Tab.0.right" timestamp="1591345824893">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1417" height="232" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1587992286389" />
+    <state width="1892" height="341" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1591261406507" />
     <state width="1892" height="327" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1590385277182" />
-    <state width="1892" height="181" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1591003160080" />
+    <state width="1892" height="358" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1591345824893" />
     <state x="579" y="355" key="com.intellij.ide.util.TipDialog" timestamp="1586832004790">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
@@ -316,6 +305,10 @@
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state x="559" y="67" width="802" height="1017" key="find.popup/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1586497448471" />
+    <state x="539" y="117" width="840" height="1034" key="search.everywhere.popup" timestamp="1591169593586">
+      <screen x="0" y="0" width="1920" height="1152" />
+    </state>
+    <state x="539" y="117" width="840" height="1034" key="search.everywhere.popup/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1591169593586" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

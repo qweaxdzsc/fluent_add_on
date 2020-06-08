@@ -2,14 +2,18 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63e04c59-1c04-4b86-8106-908e7ed4bd46" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/CsvParser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/output_csv.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/mail_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/start.py" beforeDir="false" afterPath="$PROJECT_DIR$/start.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/linearity_new.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/linearity_new.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/linearity_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/linearity_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/get_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/get_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/new_project_folder.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/new_project_folder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/python_to_pptx.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/python_to_pptx.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_list_manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_list_manage.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_timer.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_timer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/func/func_check.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/func/func_check.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -30,7 +34,6 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
@@ -46,28 +49,7 @@
       <recent name="C:\Users\BZMBN4\Desktop\fluent_add_on\CFD_input_gui\translator_file" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.start">
-    <configuration name="GUI_convertor" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="CFD_input_gui" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/GUI_convertor.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.test2">
     <configuration name="k_cal" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="CFD_input_gui" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -89,7 +71,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="porous_model" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="output_csv" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="CFD_input_gui" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -101,7 +83,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/porous_model.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/output_csv.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -123,6 +105,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/start.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="CFD_input_gui" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -154,11 +157,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test2" />
         <item itemvalue="Python.start" />
+        <item itemvalue="Python.output_csv" />
         <item itemvalue="Python.k_cal" />
         <item itemvalue="Python.ui_input" />
-        <item itemvalue="Python.GUI_convertor" />
-        <item itemvalue="Python.porous_model" />
       </list>
     </recent_temporary>
   </component>
@@ -176,21 +179,21 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1892" height="205" key="GridCell.Tab.0.bottom" timestamp="1585891869370">
+    <state width="1892" height="296" key="GridCell.Tab.0.bottom" timestamp="1591330853066">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1892" height="205" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1585891869370" />
-    <state width="1892" height="205" key="GridCell.Tab.0.center" timestamp="1585891869370">
+    <state width="1892" height="296" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1591330853066" />
+    <state width="1892" height="296" key="GridCell.Tab.0.center" timestamp="1591330853066">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1892" height="205" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1585891869370" />
-    <state width="1892" height="205" key="GridCell.Tab.0.left" timestamp="1585891869370">
+    <state width="1892" height="296" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1591330853066" />
+    <state width="1892" height="296" key="GridCell.Tab.0.left" timestamp="1591330853065">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1892" height="205" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1585891869370" />
-    <state width="1892" height="205" key="GridCell.Tab.0.right" timestamp="1585891869370">
+    <state width="1892" height="296" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1591330853065" />
+    <state width="1892" height="296" key="GridCell.Tab.0.right" timestamp="1591330853066">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1892" height="205" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1585891869370" />
+    <state width="1892" height="296" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1591330853066" />
   </component>
 </project>
