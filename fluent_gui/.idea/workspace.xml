@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e475a0b-2241-43fa-a10d-e22986a3349c" name="Default Changelist" comment="add K calculator. pop up when right click in the cal_K column at rename_table">
-      <change afterPath="$PROJECT_DIR$/../CFD_input_gui/CsvParser.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CFD_input_gui/output_csv.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/mail_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CFD_input_gui/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/start.py" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/start.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/database.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/get_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/get_report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/new_project_folder.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/new_project_folder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/python_to_pptx.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/python_to_pptx.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/linearity_new.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/linearity_new.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/test2.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/test2.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -122,6 +117,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="func_scdm_script" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="fluent_gui" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/func" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/func/func_scdm_script.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="fluent_gui" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -135,27 +151,6 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/main.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="sub_k_test" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="fluent_gui" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/subUI" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/subUI/sub_k_test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -188,10 +183,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.func_scdm_script" />
         <item itemvalue="Python.GUI_convertor" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.call_func" />
-        <item itemvalue="Python.sub_k_test" />
       </list>
     </recent_temporary>
   </component>
@@ -221,30 +216,30 @@
     <option name="LAST_COMMIT_MESSAGE" value="add K calculator. pop up when right click in the cal_K column at rename_table" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1186" height="225" key="GridCell.Tab.0.bottom" timestamp="1591579198187">
+    <state width="1185" height="219" key="GridCell.Tab.0.bottom" timestamp="1591690234310">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1189" height="187" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1590914260703" />
     <state width="1892" height="187" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1590127296374" />
-    <state width="1186" height="225" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1591579198187" />
-    <state width="1186" height="225" key="GridCell.Tab.0.center" timestamp="1591579198187">
+    <state width="1185" height="219" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1591690234310" />
+    <state width="1185" height="219" key="GridCell.Tab.0.center" timestamp="1591690234310">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1189" height="187" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1590914260703" />
     <state width="1892" height="187" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1590127296374" />
-    <state width="1186" height="225" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1591579198187" />
-    <state width="1186" height="225" key="GridCell.Tab.0.left" timestamp="1591579198187">
+    <state width="1185" height="219" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1591690234310" />
+    <state width="1185" height="219" key="GridCell.Tab.0.left" timestamp="1591690234310">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1189" height="187" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1590914260703" />
     <state width="1892" height="187" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1590127296374" />
-    <state width="1186" height="225" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1591579198187" />
-    <state width="1186" height="225" key="GridCell.Tab.0.right" timestamp="1591579198187">
+    <state width="1185" height="219" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1591690234310" />
+    <state width="1185" height="219" key="GridCell.Tab.0.right" timestamp="1591690234310">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1189" height="187" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1590914260703" />
     <state width="1892" height="187" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1590127296374" />
-    <state width="1186" height="225" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1591579198187" />
+    <state width="1185" height="219" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1591690234310" />
     <state x="471" y="163" key="SettingsEditor" timestamp="1590128012339">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>

@@ -15,11 +15,11 @@ from func.func_advanced import advanced_func
 from func.func_check import check_func
 from func.func_IEport import IEport
 from func.func_porous_d2 import porous_d2
-from func.func_scdm_script import create_scdm_script
+from func.func_scdm_script import create_import_script, create_rotate_script
 from subUI.sub_unit_converter import subUI_unit_converter
 from subUI.sub_porous_model import subUI_porous
 from subUI.sub_k_test import subUI_outlet_assign
-from fluent_command.tui_run import get_tui
+from fluent_command.tui_run import GetTui
 from call_api.call_func import SCDM, fluent_mesh, fluent_solver
 
 
@@ -39,6 +39,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.outlet_list = []
         self.body_list = []
         self.script_address = str()
+        self.mesh_type = 'tet'
         self.show_c_on = False
         self.snip_on = True
         self.actionstop.setEnabled(False)
@@ -50,19 +51,28 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.btn()
 
     def btn(self):
+        """
+        Connect Signal and slot
+        include all button and action signal
+        :return:
+        """
+        # ------------menu action btn-----------------
         self.actionimport.triggered.connect(self.import_info)
         self.actionexport.triggered.connect(self.export_pamt)
         self.actionsolve.triggered.connect(self.advFunc.direct_solve)
         self.actionstop.triggered.connect(self.advFunc.force_stop)
         self.actiondarkstyle.triggered.connect(self.advFunc.darkstyle)
-        self.cad_address_explore.clicked.connect(self.cad_address)
+        self.action_mesh_poly.triggered.connect(lambda: self.choose_mesh_type('poly'))
+        self.action_mesh_tet.triggered.connect(lambda: self.choose_mesh_type('tet'))
 
+        self.cad_address_explore.clicked.connect(self.cad_address)
+        # ------------quick mode radio btn------------
         self.quick_distribfc_btn.toggled.connect(self.short_key.quick_distrib_judge)
         self.quick_distribfh_btn.toggled.connect(self.short_key.quick_distrib_judge)
         self.quick_distribbil_btn.toggled.connect(self.short_key.quick_distrib_judge)
         self.quick_distriblin_btn.toggled.connect(self.short_key.quick_distrib_judge)
         self.finish_mode_info_btn.clicked.connect(self.into_CAD)
-
+        # ------------parameter or launch related btn-------------------
         self.unit_btn.clicked.connect(self.unit_convert)
         self.choose_evap_btn.clicked.connect(lambda: self.porous_choose('evap'))
         self.choose_hc_btn.clicked.connect(lambda: self.porous_choose('hc'))
@@ -70,7 +80,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.start_btn.clicked.connect(self.begin)
         self.return_btn.clicked.connect(self.default_ui.mode_ui_default)
         self.solver_btn.clicked.connect(self.solver)
-
+        # ------------ unavailable test btn------------------
         self.show_workflow_btn.clicked.connect(self.test)
         self.actionalter_default_parameter.triggered.connect(lambda: self.append_text('功能未开放,敬请期待'))
 
@@ -121,8 +131,9 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         # print(self.K_dict)
         self.pamt_dict()
         print(self.pamt['cad_name'])
-        self.script_address = create_scdm_script(self.pamt['file_path'], self.pamt['open_cad_name'],
-                           self.body_list, self.face_list, self.pamt['cad_save_path'])
+        self.script_address = create_import_script(self.pamt['file_path'], self.pamt['open_cad_name'],
+                                                   self.body_list, self.face_list, self.pamt['cad_save_path'])
+
         if self.need_launch_CAD:
             self.launchCAD()
             self.need_launch_CAD = False
@@ -132,7 +143,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         dic['evap'] = self.evap_c
         dic['hc'] = self.hc_c
         dic['filter'] = self.filter_c
-        dic['valve'] = self.valve_c
+        dic['valve1'] = self.valve_c
         dic['fan'] = self.fan_c
 
         for i in self.body_list:
@@ -247,7 +258,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             self.pamt['filter_x2'], self.pamt['filter_y2'], self.pamt['filter_z2'] = \
                 porous_d2(self.pamt['filter_x1'], self.pamt['filter_y1'], self.pamt['filter_z1'])
 
-        if 'valve' in self.body_list:
+        if 'valve1' in self.body_list:
             self.pamt['valve_td'] = self.valve_td_edit.text()
             self.pamt['valve_rp'] = self.valve_rp_edit.text()
 
@@ -264,22 +275,27 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             self.pamt['temp_inlet'] = self.temp_inlet_edit.text()
             self.pamt['temp_hc'] = self.temp_hc_edit.text()
 
+    def choose_mesh_type(self, mesh_type):
+        self.mesh_type = mesh_type
+
     def create_tui(self):
         self.check_part()
         self.pamt_dict()
         self.energy_check = self.energy_checkbox.isChecked()
-        # try:
-        self.tui = get_tui(self.pamt, self.body_list, self.energy_check, self.K_dict,
-            self.porous_list, self.up_list, self.dead_zone_list, self.internal_face)
-        # except Exception as e:
-        #     print('error:', e)
-        #     print('error in file:', e.__traceback__.tb_frame.f_globals["__file__"])  # 发生异常所在的文件
-        #     print('error in line:', e.__traceback__.tb_lineno)  # 发生异常所在的行数
+        if 'valve1' in self.body_list:
+            valve_number = 0
+            for i in self.body_list:
+                if 'valve' in i:
+                    valve_number += 1
+            create_rotate_script(self.pamt['file_path'], self.pamt['open_cad_name'], self.pamt['valve_td'],
+                                 self.pamt['valve_rp'], valve_number)
+        self.tui = GetTui(self.pamt, self.body_list, self.energy_check, self.K_dict,
+                          self.porous_list, self.up_list, self.dead_zone_list, self.internal_face,
+                          self.mesh_type)
 
     def begin(self):
         self.start_btn.setDisabled(True)
         self.create_tui()
-
         self.mesh_condition = '启动fluent'
         self.append_text(self.mesh_condition)
 

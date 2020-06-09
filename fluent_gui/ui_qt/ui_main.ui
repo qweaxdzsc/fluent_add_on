@@ -2150,10 +2150,18 @@
     <property name="title">
      <string>高级</string>
     </property>
+    <widget class="QMenu" name="menu_mesh_type">
+     <property name="title">
+      <string>网格类型</string>
+     </property>
+     <addaction name="action_mesh_tet"/>
+     <addaction name="action_mesh_poly"/>
+    </widget>
     <addaction name="actionalter_default_parameter"/>
     <addaction name="actionsolve"/>
     <addaction name="actionstop"/>
     <addaction name="actiondarkstyle"/>
+    <addaction name="menu_mesh_type"/>
    </widget>
    <widget class="QMenu" name="menu">
     <property name="title">
@@ -2240,6 +2248,16 @@
    </property>
    <property name="toolTip">
     <string>显示截图设置</string>
+   </property>
+  </action>
+  <action name="action_mesh_tet">
+   <property name="text">
+    <string>tet</string>
+   </property>
+  </action>
+  <action name="action_mesh_poly">
+   <property name="text">
+    <string>poly</string>
    </property>
   </action>
  </widget>

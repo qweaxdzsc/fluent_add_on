@@ -3,8 +3,10 @@ import os
 import cgitb
 
 
-class get_tui():
-    def __init__(self, pamt, body_list, energy_check, K_dict, porous_list, up_list, dead_zone_list, internal_list):
+class GetTui(object):
+    def __init__(self, pamt, body_list, energy_check, K_dict,
+                 porous_list, up_list, dead_zone_list, internal_list,
+                 mesh_type):
         print(pamt, body_list, energy_check, K_dict, porous_list, up_list, dead_zone_list, internal_list)
         self.d = pamt
         self.body_list = body_list
@@ -14,14 +16,14 @@ class get_tui():
         self.up_list = up_list
         self.dead_zone_list = dead_zone_list
         self.internal_list = internal_list
-
-
+        self.mesh_type = mesh_type
+        # ---------------------Form TUI-------------------------
         self.prepare_info()
         self.assemble_tui()
         self.open_tui()
 
     def assemble_tui(self):
-        if 'valve' in self.body_list:
+        if 'valve1' in self.body_list:
             self.angle_array()
             self.lin_mesh()
             self.lin_solver()
@@ -66,9 +68,9 @@ class get_tui():
         mesh.retype_face(face_list=['outlet*'], face_type='outlet-vent')
         if self.energy_check is True:
             mesh.retype_face(face_list=['hc*'], face_type='radiator')
-            mesh.auto_mesh_volume(1.25, 'poly')
+            mesh.auto_mesh_volume(1.25, mesh_type=self.mesh_type)
         else:
-            mesh.auto_mesh_volume()
+            mesh.auto_mesh_volume(mesh_type=self.mesh_type)
         mesh.auto_node_move(0.85)
         mesh.rename_cell(zone_list=mesh_zone_list)
         mesh.check_quality()
@@ -88,6 +90,8 @@ class get_tui():
         jou_solve = open(self.jou_solve_path, 'w')
 
         mass_flux_list = ['inlet*', 'outlet*']
+        setup.start_transcript()
+        setup.set_timeout(60)
         setup.read_mesh()
         setup.rescale()
         setup.turb_models()
@@ -125,8 +129,7 @@ class get_tui():
             setup.convergence_criterion('temperature')
         else:
             setup.convergence_criterion('volume')
-        setup.start_transcript()
-        setup.set_timeout(60)
+
         setup.hyb_initialize()
         if 'fan' in self.body_list:
             setup.start_calculate(800)
@@ -185,7 +188,7 @@ class get_tui():
         mesh = self.CFD.mesh
         mesh_zone_list = self.body_list.copy()
         for i in mesh_zone_list:
-            if 'valve' in i:
+            if 'valve1' in i:
                 mesh_zone_list.remove(i)
 
         jou_mesh = open(self.jou_mesh_path, 'w')
@@ -196,12 +199,13 @@ class get_tui():
             mesh.fix_slivers()
             mesh.compute_volume_region()
             mesh.volume_mesh_change_type(self.dead_zone_list)
-            mesh.auto_mesh_volume(mesh_type='poly')
+            mesh.auto_mesh_volume(mesh_type=self.mesh_type)
             mesh.auto_node_move(0.85, 6)
             mesh.rename_cell(zone_list=mesh_zone_list)
             mesh.retype_face(face_list=['inlet'], face_type='mass-flow-inlet')
             mesh.retype_face(face_list=self.internal_list, face_type='internal')
-            mesh.retype_face(face_list=['hc*'], face_type='radiator')
+            if self.energy_check is True:
+                mesh.retype_face(face_list=['hc*'], face_type='radiator')
             mesh.retype_face(face_list=['outlet*'], face_type='outlet-vent')
             mesh.prepare_for_solve()
             mesh.write_lin_mesh(i)
@@ -219,9 +223,6 @@ class get_tui():
         print('output journal in:', d['file_path'])
 
         mass_flux_list = ['inlet*', 'outlet*']
-        inlet_temp = float(d['temp_inlet'])+273.15
-        hc_temp = float(d['temp_hc']) + 273.15
-
         jou_solve = open(self.jou_solve_path, 'w')
 
         setup.replace_lin_mesh(self.lin_array[0])
@@ -245,20 +246,24 @@ class get_tui():
 
         setup.BC_type('outlet*()', 'outlet-vent')
         setup.solution_method()
-        setup.energy_eqt('yes')
+        setup.convergence_criterion('pressure')
+        if self.energy_check is True:
+            inlet_temp = float(d['temp_inlet']) + 273.15
+            hc_temp = float(d['temp_hc']) + 273.15
+            setup.energy_eqt('yes')
         # setup.BC_pressure_inlet('inlet')
-        if 'fan' in self.body_list:
-            setup.init_temperature('pressure-inlet', 'outlet-vent', inlet_temp)
-        else:
-            setup.init_temperature('mass-flow-inlet', 'outlet-vent', inlet_temp)
+            if 'fan' in self.body_list:
+                setup.init_temperature('pressure-inlet', 'outlet-vent', inlet_temp)
+            else:
+                setup.init_temperature('mass-flow-inlet', 'outlet-vent', inlet_temp)
+            setup.heat_flux('hc_in', hc_temp)
+            setup.heat_flux('hc_out', hc_temp)
+            setup.report_definition('temperature', 'surface-areaavg', ['outlet*'], 'yes', 'temperature')
+            setup.convergence_criterion('temperature')
 
         for i in self.K_dict:
             setup.BC_outlet_vent(self.K_dict[i], i)
-        setup.heat_flux('hc_in', hc_temp)
-        setup.heat_flux('hc_out', hc_temp)
-        setup.report_definition('temperature', 'surface-areaavg', ['outlet*'], 'yes', 'temperature')
         setup.report_definition('mass-flux', 'surface-massflowrate', mass_flux_list, 'no')
-        setup.convergence_criterion('temperature')
         setup.hyb_initialize()
         setup.start_calculate(350)
         setup.write_lin_case_data(self.lin_array[0])
@@ -267,10 +272,7 @@ class get_tui():
         for i in self.lin_array[1:]:
             setup.replace_lin_mesh(i)
             setup.rescale()
-            setup.init_temperature('mass-flow-inlet', 'outlet-vent', inlet_temp)
             setup.BC_mass_flow_inlet('inlet', d['mass_inlet'])
-            setup.heat_flux('hc_in', hc_temp)
-            setup.heat_flux('hc_out', hc_temp)
             setup.hyb_initialize()
             setup.start_calculate(350)
             setup.write_lin_case_data(i)

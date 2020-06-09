@@ -1,7 +1,7 @@
-def create_scdm_script(file_path, original_cad_name, body_list, face_list, cad_save_path):
+def create_import_script(file_path, original_cad_name, body_list, face_list, cad_save_path):
         cad_open_path = file_path + '/' + original_cad_name
-        py_path = '%s/project_info.py' % file_path
-        f = open(py_path, 'w')
+        script_path = '%s/project_info.py' % file_path
+        f = open(script_path, 'w')
         message = """
 print('start script')
 body_list = %s
@@ -56,4 +56,52 @@ print('script finished')
         f.write(message)
         f.close()
 
-        return py_path
+        return script_path
+
+
+def create_rotate_script(file_path, original_cad_name, valve_total_angle, valve_percentage, valve_number):
+        every_rotate = int(valve_total_angle) / (100/int(valve_percentage))
+        script_path = '%s/rotate_valve.py' % file_path
+        f = open(script_path, 'w')
+        message = """        
+save_path = r"%s"
+file_name = r'%s'
+rotate_angle = [%s for i in range(valve_number)]
+valve_number = %s 
+
+save_file = save_path + '\\\\' + file_name
+
+options = ExportOptions.Create()
+DocumentSave.Execute(r"%%s.scdoc" %%(save_path), options)
+
+cnumber = len(GetRootPart().Components)
+
+valve_name_list = ['valve%%s' %% (i+1) for i in range(valve_number)] 
+valve_name_index = [0 for i in range(valve_number)]
+
+for i in range(cnumber):
+    for j in range(len(valve_name_list)):
+        if valve_name_list[j] == GetRootPart().Components[i].GetName():
+            valve_name_index[j] = i
+
+print(valve_name_index)
+
+for j in range(%s, 100, %s):
+    for i in range(len(valve_name_index)):
+        selection = Selection.Create(GetRootPart().Components[valve_name_index[i]])
+        # Rotate About Z Handle
+        anchor = Selection.CreateByNames('Axis%%s'%%(i+1))
+        axis = Move.GetAxis(anchor)
+        options = MoveOptions()
+        result = Move.Rotate(selection, axis, DEG(rotate_angle[i]), options, Info1)
+        # EndBlock
+
+    # Save File
+    options = ExportOptions.Create()
+    DocumentSave.Execute(r"%%s_%%s.scdoc" %%(save_file, j), options)
+
+""" % (file_path, original_cad_name, every_rotate, valve_number, valve_percentage, valve_percentage)
+        f.write(message)
+        f.close()
+
+        return script_path
