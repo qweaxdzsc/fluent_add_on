@@ -175,7 +175,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     def import_info(self):
         path = QFileDialog.getOpenFileName(self, '选择要输入的参数模板',
                                            r'C:\Users\BZMBN4\Desktop', 'CSV Files (*.csv)')
-        self.import_outlet, self.outlet_dict, self.K_dict, self.outlet_dict = \
+        self.import_outlet, self.outlet_dict, self.K_dict= \
             self.IEport.import_pamt(path)
 
     def cad_address(self):

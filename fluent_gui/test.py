@@ -431,9 +431,3 @@
 #     sys.exit(app.exec_())
 
 # printer是嵌套函数
-
-from PyQt5.QtCore import QFileInfo
-
-a = r'C:\Users\BZMBN4\Desktop\test_avz\Test_V2_200414.scdoc'
-b = QFileInfo(a)
-print(b.fileName())

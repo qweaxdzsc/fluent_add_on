@@ -41,7 +41,7 @@ class IEport(object):
     
             self.ui.append_text('参数模板:%s导入成功' % path[0])
         
-        return import_outlet, outlet_dict, K_dict, outlet_dict
+        return import_outlet, outlet_dict, K_dict
     
     def csv_import(self, excel_path):
         """import csv as a dict(info)"""

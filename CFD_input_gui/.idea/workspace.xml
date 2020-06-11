@@ -5,14 +5,11 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/get_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/get_report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/linearity_new.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/linearity_new.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/test2.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/test2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/func/func_scdm_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/func/func_scdm_script.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/ui_py/ui_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/ui_py/ui_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/ui_qt/ui_main.ui" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/ui_qt/ui_main.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -156,9 +156,9 @@ class GetTui(object):
                 post.snip_picture(i+'_out')
                 # post.snip_avz(i + '_out')
             post.create_streamline('whole_pathline', 'inlet')
-            # post.create_streamline('distrib_pathline', 'evap_in', [0, 12])
+            post.create_streamline('distrib_pathline', 'evap_in', [0, 15])
             post.snip_avz('whole_pathline')
-            post.snip_picture('whole_pathline', 'yes')
+            post.snip_picture('distrib_pathline', 'yes')
             # post.snip_avz('distrib_pathline')
             post.snip_model('model')
 
