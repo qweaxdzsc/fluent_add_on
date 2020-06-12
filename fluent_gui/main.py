@@ -43,7 +43,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.show_c_on = False
         self.snip_on = True
         self.actionstop.setEnabled(False)
-        self.import_outlet = False
         # --------init function---------
         self.short_key = short_key(self)
         self.check_func = check_func(self)
@@ -124,6 +123,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         print('outlet_dict', outlet_dict)
         self.outlet_list = list(outlet_dict.keys())
         self.face_list.extend(self.outlet_list)
+        self.K_dict = {}
         for i in outlet_dict.keys():
             self.K_dict[i] = outlet_dict[i][-1]
         self.outlet_dict = outlet_dict
@@ -175,8 +175,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     def import_info(self):
         path = QFileDialog.getOpenFileName(self, '选择要输入的参数模板',
                                            r'C:\Users\BZMBN4\Desktop', 'CSV Files (*.csv)')
-        self.import_outlet, self.outlet_dict, self.K_dict= \
-            self.IEport.import_pamt(path)
+        self.outlet_list, self.outlet_dict, self.K_dict = self.IEport.import_pamt(path)
 
     def cad_address(self):
         get_file = QFileDialog.getOpenFileName(self, '选择模型文件', 'C:/Users/BZMBN4/Desktop/'
@@ -190,9 +189,10 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             self.pamt.update(self.outlet_dict)
         except Exception as e:
             print(e)
-
-        path = QFileDialog.getSaveFileName(self, directory='%s'%(self.cad_address_edit.text()),
-                                           filter='CSV, *.csv')
+        default_csv = '%s/%s_%s.csv' % (self.cad_address_edit.text(),
+                                        self.project_name_edit.text(),
+                                        self.version_name_edit.text())
+        path = QFileDialog.getSaveFileName(self, directory=default_csv, filter='CSV, *.csv')
         self.IEport.export_pamt(path, self.pamt)
 
     def unit_convert(self):

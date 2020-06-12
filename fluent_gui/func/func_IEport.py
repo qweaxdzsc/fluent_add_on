@@ -12,8 +12,10 @@ class IEport(object):
         """import parameter from csv file, 
             then use name to find all corresponding QLineEdit,
             and put data into LineEdit,
-            Also return outlet info if exist"""
-        import_outlet = False
+            Also return outlet info if exist
+            outlet_dict contains outlet name, area size, R, P, Q, K
+            K_dict contains outlet name and K
+            """
         outlet_dict = {}
         K_dict = {}
         outlet_list = []
@@ -28,7 +30,6 @@ class IEport(object):
                 if widget != None:
                     widget.setText(str(info[i]))
                 if 'outlet' in i:
-                    import_outlet = True
                     outlet_list.append(i)
                     outlet_dict[i] = eval(info[i])
 
@@ -41,7 +42,7 @@ class IEport(object):
     
             self.ui.append_text('参数模板:%s导入成功' % path[0])
         
-        return import_outlet, outlet_dict, K_dict
+        return outlet_list, outlet_dict, K_dict
     
     def csv_import(self, excel_path):
         """import csv as a dict(info)"""
