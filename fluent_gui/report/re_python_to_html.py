@@ -1,6 +1,6 @@
 def get_html(matrix, title, html_output_path):
     """ data matrix to html"""
-    # import os
+    import os
 
     def get_table(table_matrix, head):
         """form html table tag"""
@@ -32,12 +32,33 @@ def get_html(matrix, title, html_output_path):
 
         return table
 
+    def get_picture_div(result_path):
+        picture_list = list()
+        pic_name_list = list()
+        total_picture_div = str()
+        for file in os.listdir(result_path):
+            if file.endswith('jpg') or file.endswith('png'):
+                pic_name_list.append(file.split('.')[0])
+                picture_list.append(file)
+        print(pic_name_list)
+        print(picture_list)
+        for index, pic in enumerate(picture_list):
+            total_picture_div += """
+            <div class="lineblock"></div>
+            <h4 style="font-size:30px">%s</h4>
+            <img src="%s" width = 900px  />
+        """ % (pic_name_list[index], pic)
+
+        return total_picture_div
+
     # create all table in html1
     volume_table = get_table(matrix[0:3], ['Volume Flow Rate', '(L/S)', 'Percentage%'])
     sp_table = get_table(matrix[3:5], ['Static Pressure', '(Pa)'])
     tp_table = get_table(matrix[5:7], ['Total Pressure', '(Pa)'])
     uni_table = get_table(matrix[7:9], ['Uniformity', ' '])
     moment_table = get_table(matrix[9:10], ['Torque(N/M)'])
+    picture_div = get_picture_div(html_output_path)
+
 
     # output to HTML
     ResultHtml = html_output_path + title + ".html"
@@ -110,36 +131,10 @@ def get_html(matrix, title, html_output_path):
         <div class="lineblock"></div>
         <div>%s</div>
         
-        <div class="lineblock"></div>
-        <h4 style="font-size:30px">Distrib_pathline</h4>
-        <img src="distrib_pathline.jpg" width = 900px  />
-        
-        <div class="lineblock"></div>     
-        <h4 style="font-size:30px">Whole_pathline</h4>
-        <img src="whole_pathline.jpg" width = 900px />
-        
-        <div class="lineblock"></div>
-        <h4 style="font-size:30px">Evap_out_Contour</h4>   
-        <img src="evap_out.jpg" width = 900px />
-        
-        <div class="lineblock"></div>
-        <h4 style="font-size:30px">Evap_out_0-4_Contour</h4>   
-        <img src="evap_out_0-4.jpg" width = 900px /> 
-        
-        <div class="lineblock"></div>
-        <h4 style="font-size:30px">Filter_out_Contour</h4>
-        <img src="filter_out.jpg" width = 900px />
-            
-        <div class="lineblock"></div> 
-        <h4 style="font-size:30px">Filter_out_0-4_Contour</h4>
-        <img src="filter_out_0-4.jpg" width = 900px />
-          
-        <div class="lineblock"></div>      
-        <h4 style="font-size:30px">Hc_out Contour</h4>
-        <img src="hc_out.jpg" width = 900px/>      
-        
+        %s
+
     </body>
-    </html>""" % (title, html_output_path, volume_table, sp_table, tp_table, uni_table, moment_table)
+    </html>""" % (title, html_output_path, volume_table, sp_table, tp_table, uni_table, moment_table, picture_div)
 
     report.write(message)
     report.close()

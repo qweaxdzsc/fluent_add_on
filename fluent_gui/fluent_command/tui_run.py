@@ -140,6 +140,7 @@ class GetTui(object):
         volume_face_list = ['inlet*', 'outlet*']
         post.create_result_file()
         post.set_background()
+        post.create_viewing_model()
         porous_dir = {}
         for i in self.porous_list:
             d1 = [d[i + '_x1'], d[i + '_y1'], d[i + '_z1']]
@@ -148,7 +149,8 @@ class GetTui(object):
         if self.energy_check is True:
             post.txt_surface_integrals('area-weighted-avg', ['outlet*'], 'temperature')
             post.create_streamline('temp_pathline', 'inlet', '', 'temperature')
-            post.snip_avz('temp_pathline')
+            post.create_scene('temp_pathline')
+            post.snip_avz('temp_pathline_scene')
         else:
             post.read_view()
             for i in self.porous_list:
@@ -157,8 +159,10 @@ class GetTui(object):
                 # post.snip_avz(i + '_out')
             post.create_streamline('whole_pathline', 'inlet')
             post.create_streamline('distrib_pathline', 'evap_in', [0, 15])
-            post.snip_avz('whole_pathline')
-            post.snip_picture('distrib_pathline', 'yes')
+            post.create_scene('whole_pathline')
+            post.create_scene('distrib_pathline')
+            post.snip_avz('whole_pathline_scene')
+            post.snip_picture('distrib_pathline_scene', 'yes')
             # post.snip_avz('distrib_pathline')
             post.snip_model('model')
 

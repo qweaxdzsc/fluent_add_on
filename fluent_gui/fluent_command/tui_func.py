@@ -586,9 +586,11 @@ class post(object):
         self.txt_surface_integrals('area-weighted-avg', pressure_face_list, 'total-pressure')
         self.txt_surface_integrals('area-weighted-avg', pressure_face_list, 'pressure')
 
-        self.create_streamline('whole_pathline', 'inlet', field_type='temperature')
         self.set_background()
-        self.snip_avz('whole_pathline')
+        self.create_viewing_model()
+        self.create_streamline('whole_pathline', 'inlet', field_type='temperature')
+        self.create_scene('whole_pathline')
+        self.snip_avz('whole_pathline_scene')
 
     def txt_surface_integrals(self, report_type, face_list, field=''):
         if field == '':
@@ -618,9 +620,16 @@ yes %s yes q
 /report/forces/wall-moments no 
 {fan_name}() {origin_x} {origin_y} {origin_z} {axis_x} {axis_y} {axis_z} yes {out_path} yes
 """.format(fan_name=fan_name, origin_x=origin_xyz[0], origin_y=origin_xyz[1], origin_z=origin_xyz[2],
-            axis_x=axis_xyz[0], axis_y=axis_xyz[1], axis_z=axis_xyz[2],out_path=self.tui.txt_out)
+            axis_x=axis_xyz[0], axis_y=axis_xyz[1], axis_z=axis_xyz[2], out_path=self.tui.txt_out)
         self.tui.whole_jou += text
         return self.tui.whole_jou
+
+    def create_viewing_model(self):
+        text = """
+/display/objects/create mesh view_model options edges no q 
+surfaces-list *%s*() q
+""" % self.tui.project_title
+        self.tui.whole_jou += text
 
     def create_contour(self, contour_name, contour_face, range='auto-range-on', field='velocity-magnitude'):
         if range == 'auto-range-on':
@@ -653,6 +662,15 @@ color-map format %0.1f size {line_size} q step {line_step} skip {line_skip} surf
             line_skip=skip, surface_name=surface_name)
         self.tui.whole_jou += text
         return self.tui.whole_jou
+
+    def create_scene(self, graphic_object):
+        text = """
+/display/objects/create scene %s_scene graphics-objects 
+add 'view_model' transparency 80 q
+add '%s' 
+q q q
+""" % (graphic_object, graphic_object)
+        self.tui.whole_jou += text
 
     def create_view(self, dir_dict):
         view_file = self.tui.case_out_path + '\\' + self.tui.version_name + '.vw'
@@ -692,48 +710,39 @@ color-map format %0.1f size {line_size} q step {line_step} skip {line_skip} surf
 /display/set/lights/headlight-on no
 /views/camera/projection orthographic
 /display/set/colors/color-by-type yes
-/display/set/filled-mesh no
-/display/set/rendering-options/surface-edge-visibility yes no yes no
+;/display/set/filled-mesh no
+;/display/set/rendering-options/surface-edge-visibility yes no yes no
 /display/set/colors/inlet-faces "foreground"
 /display/set/colors/outlet-faces "foreground" q
 """
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
-    def snip_picture(self, graphic_name, mesh_outline='', avz_file='', window_number=9):
-        if mesh_outline == '':
-            pass
-        else:
-            mesh_outline = '/display/mesh-outline'
-        if avz_file == '':
-            pass
-        else:
-            avz_file = '/display/set/picture/driver/avz ' \
-'/display/save-picture %s\\%s.avz' % (self.tui.result_path, graphic_name)
-        end_index = graphic_name.rindex('_')
+    def snip_picture(self, graphic_name, lights_on='no', window_number=9):
+        end_index = graphic_name.index('_')
         view_name = graphic_name[:end_index]
         text = """
 /display/open-window {window_number}
-/display/set/overlays yes
 /display/objects/display/{graphic_name}
-{mesh_outline}
 /views/restore-view {view_name}
 /views/auto-scale
+/display/set/lights/lights-on {light}
+/display/set/lights/headlight-on {light}
 /display/set/picture/driver/jpeg
+/display/set/picture/use-window-resolution no
+/display/set/picture/x-resolution 4096
+/display/set/picture/y-resolution 2160
 /display/save-picture {out_path}\\{graphic_name}.jpg yes
-{avz_file} yes
 /display/close-window {window_number}
-""".format(window_number=window_number, graphic_name=graphic_name, mesh_outline=mesh_outline,
-           out_path=self.tui.result_path, avz_file=avz_file, view_name=view_name)
+""".format(window_number=window_number, graphic_name=graphic_name,
+           out_path=self.tui.result_path, view_name=view_name, light=lights_on)
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
     def snip_avz(self, graphic_name, window_number=10):
         text = """
 /display/open-window {window_number}
-/display/set/overlays yes
 /display/objects/display/{graphic_name}
-/display/mesh-outline
 /display/set/picture/driver/avz
 /display/save-picture {out_path}\\{graphic_name}.avz yes
 /display/close-window {window_number}
