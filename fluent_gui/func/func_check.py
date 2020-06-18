@@ -95,6 +95,7 @@ class check_func():
                 body_list.append('distrib%s' % (i + 2))
 
         if ui.valve_number.value() > 0:
+            dead_zone_list.append('valve')
             for i in range(ui.valve_number.value()):
                 body_list.append('valve%s' % (i + 1))
 

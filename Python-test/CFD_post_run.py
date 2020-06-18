@@ -1,9 +1,9 @@
 import os
 from CFD_post_command import CfdPost
 
-case_dir = r"G:\_HAVC_Project\MQBA1\MQBA1_lin_defrost"
-case_name = r"MQBA1_lin_defrost_V1"
-result_path = r"G:\_HAVC_Project\MQBA1\MQBA1_lin_defrost"
+case_dir = r"G:\_HAVC_Project\D2U-2\D2U-2_lin_vent"
+case_name = r"D2U-2_V29_lin_vent"
+result_path = r"G:\_HAVC_Project\D2U-2\D2U-2_lin_vent"
 cse_file = ''
 
 cfp = CfdPost(case_dir, case_name, result_path, cse_file)
@@ -35,13 +35,14 @@ cfp = CfdPost(case_dir, case_name, result_path, cse_file)
 
 # cfp.bat_contour('XY', 'Temperature', 1.1, 1.45)
 # cfp.bat_contour('YZ', 'Temperature', 2.1, 2.3)
-# cfp.bat_contour('ZX', 'Temperature', -0.124, 0.124)
-
+cfp.bat_contour('ZX', 'Temperature', -0.16, 0.16, 15)
+cfp.bat_contour('XY', 'Temperature', 1.2, 1.45, 15)
+cfp.bat_contour('YZ', 'Temperature', 2.15, 2.25, 15)
 # cfp.create_contour('contour2', 'Velocity', 'filter_in filter')
 
-cfp.create_contour('contour1', 'Temperature', 'dct_left distrib')
-cfp.create_contour('contour2', 'Temperature', 'dct_mid distrib')
-cfp.create_contour('contour3', 'Temperature', 'dct_right distrib')
+# cfp.create_contour('contour1', 'Temperature', 'dct_left distrib')
+# cfp.create_contour('contour2', 'Temperature', 'dct_mid distrib')
+# cfp.create_contour('contour3', 'Temperature', 'dct_right distrib')
 cfp.create_command_file()
 
 # cfp.run_command()

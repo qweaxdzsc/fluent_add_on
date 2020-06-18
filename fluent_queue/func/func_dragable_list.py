@@ -11,6 +11,7 @@ class DragListWidget(QListWidget):
     2. if have drag permission, false by default, can alter the sequence of list item
     """
     file_receive = pyqtSignal(str)
+    project_exchange = pyqtSignal(dict)
 
     def __init__(self, central_widget):
         super(DragListWidget, self).__init__(central_widget)
@@ -34,7 +35,7 @@ class DragListWidget(QListWidget):
         :return:
         """
         received_data = event.mimeData()
-        if received_data.hasUrls:
+        if received_data.urls():
             file = str(received_data.urls()[0].toLocalFile())
             file_info = QFileInfo(file)
             accept_file_type = ['msh', 'cas', 'h5']
@@ -45,13 +46,19 @@ class DragListWidget(QListWidget):
                 items = self.selectedItems()
                 print(items)
                 for i in items:
-                    self.takeItem(self.indexFromItem(i).row())          # 先删除再加回来，不能存在两个指向同一内存的对象
+                    # "exchange_dict" used as an reference for self.mission list to exchange
+                    exchange_dict = dict()
+                    exchange_dict['original_index'] = self.indexFromItem(i).row()
+                    self.takeItem(self.indexFromItem(i).row())              # 先删除再加回来，不能存在两个指向同一内存的对象
                     pts = self.mapFromGlobal(QCursor.pos())
                     last_pos_item = self.indexAt(pts).row()
                     print(last_pos_item)
                     if last_pos_item == -1:
                         self.addItem(i)
+                        exchange_dict['after_index'] = -1
                     else:
                         self.insertItem(last_pos_item, i)
+                        exchange_dict['after_index'] = last_pos_item
+                    self.project_exchange.emit(exchange_dict)
 
                 print('有东西拖入')

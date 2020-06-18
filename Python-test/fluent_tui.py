@@ -483,7 +483,7 @@ q
 solve/monitors/residual/criterion-type %s
 /solve/convergence-conditions/frequency %s
 /conv-reports add %s-stable
-report-defs %s initial-values-to-ignore 150 previous-values-to-consider 20 
+report-defs %s initial-values-to-ignore 250 previous-values-to-consider 20 
 stop-criterion 0.0002 print yes active yes
 q q q
 """ % (switch, frequency, type, type)
@@ -556,6 +556,7 @@ class post(object):
         self.txt_surface_integrals('area-weighted-avg', pressure_face_list, 'pressure')
 
         self.set_background()
+        self.delete_display_object()
         self.create_viewing_model()
         self.create_streamline('whole_pathline', 'inlet', field_type='temperature')
         self.create_scene('whole_pathline')
@@ -596,6 +597,12 @@ surfaces-list *%s*() q
 """ % self.tui.project_title
         self.tui.whole_jou += text
 
+    def delete_display_object(self, display_object='view_model'):
+        text = """
+/display/objects/delete %s
+""" % display_object
+        self.tui.whole_jou += text
+
     def create_contour(self, contour_name, contour_face, range='auto-range-on', field='velocity-magnitude'):
         if range == 'auto-range-on':
             pass
@@ -629,8 +636,8 @@ color-map format %0.1f size {line_size} q step {line_step} skip {line_skip} surf
     def create_scene(self, graphic_object):
         text = """
 /display/objects/create scene %s_scene graphics-objects 
-add 'view_model' transparency 80 q
-add '%s' 
+add "view_model" transparency 80 q
+add "%s" 
 q q q
 """ % (graphic_object, graphic_object)
         self.tui.whole_jou += text

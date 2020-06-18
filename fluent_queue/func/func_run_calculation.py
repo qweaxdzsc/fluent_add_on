@@ -37,9 +37,10 @@ class Calculate(QThread):
         """
         time.sleep(2)
         ansys_license = LicenseUsage()
-        if ansys_license.is_enough(self.cores):
-            if self.running_project:
-                    self.calculation()
+        if not self.ui.pause:
+            if ansys_license.is_enough(self.cores):
+                if self.running_project:
+                        self.calculation()
         while True:
             time.sleep(1)
             if not self.ui.pause:

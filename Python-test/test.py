@@ -178,6 +178,3 @@
 #     process.start()
 # end_time = time.time()
 
-arg = {'a': 1, 'b': 2, 'c': 3}
-for i in arg.keys():
-    exec("%s_ = %s" % (i, arg[i]))

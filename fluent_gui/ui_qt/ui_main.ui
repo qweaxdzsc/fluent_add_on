@@ -64,7 +64,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>0</y>
+       <y>-917</y>
        <width>688</width>
        <height>1296</height>
       </rect>
@@ -1551,30 +1551,8 @@
          <property name="verticalSpacing">
           <number>10</number>
          </property>
-         <item row="0" column="0">
-          <widget class="QLabel" name="valve_td_label">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>总行程(°)</string>
-           </property>
-           <property name="buddy">
-            <cstring>valve_td_edit</cstring>
-           </property>
-          </widget>
-         </item>
          <item row="0" column="1">
-          <widget class="QLineEdit" name="valve_td_edit">
+          <widget class="QLineEdit" name="valve_rp_edit">
            <property name="minimumSize">
             <size>
              <width>132</width>
@@ -1589,7 +1567,7 @@
            </property>
           </widget>
          </item>
-         <item row="0" column="2">
+         <item row="0" column="0">
           <widget class="QLabel" name="valve_rp_label">
            <property name="minimumSize">
             <size>
@@ -1606,13 +1584,10 @@
            <property name="text">
             <string>每转比例(%)</string>
            </property>
-           <property name="buddy">
-            <cstring>valve_rp_edit</cstring>
-           </property>
           </widget>
          </item>
          <item row="0" column="3">
-          <widget class="QLineEdit" name="valve_rp_edit">
+          <widget class="QLineEdit" name="valve_td_edit">
            <property name="minimumSize">
             <size>
              <width>132</width>
@@ -1624,6 +1599,25 @@
              <width>132</width>
              <height>22</height>
             </size>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QLabel" name="valve_td_label">
+           <property name="minimumSize">
+            <size>
+             <width>100</width>
+             <height>0</height>
+            </size>
+           </property>
+           <property name="maximumSize">
+            <size>
+             <width>100</width>
+             <height>16777215</height>
+            </size>
+           </property>
+           <property name="text">
+            <string>风门行程</string>
            </property>
           </widget>
          </item>
@@ -2297,8 +2291,6 @@
   <tabstop>hc_c1_edit</tabstop>
   <tabstop>hc_c2_edit</tabstop>
   <tabstop>choose_hc_btn</tabstop>
-  <tabstop>valve_td_edit</tabstop>
-  <tabstop>valve_rp_edit</tabstop>
   <tabstop>temp_inlet_edit</tabstop>
   <tabstop>temp_hc_edit</tabstop>
   <tabstop>show_workflow_btn</tabstop>

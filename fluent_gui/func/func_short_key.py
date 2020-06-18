@@ -54,8 +54,6 @@ class short_key(object):
                 self.ui.pamt_GUI()
                 get_report(self.ui.pamt['file_path'], self.ui.pamt['project_name'], self.ui.pamt['version'])
 
-
-
     def name_rule(self):
         """when press F1, it shows a naming rule help document"""
         reply = QMessageBox.about(self.ui, '帮助——命名规则', '命名分为体与面的命名：\n'
@@ -84,6 +82,6 @@ class short_key(object):
         if self.ui.quick_distriblin_btn.isChecked():
             self.ui.default_ui.default_part_tree()
             self.ui.part_tree.topLevelItem(9).setCheckState(0, 2)
-            self.ui.part_tree.topLevelItem(11).setCheckState(0, 2)
             self.ui.energy_checkbox.setChecked(True)
             self.ui.distrib_number.setValue(1)
+            self.ui.valve_number.setValue(1)

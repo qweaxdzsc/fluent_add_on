@@ -3,8 +3,8 @@
 import sys
 import cgitb
 
-from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QLineEdit
-from PyQt5.QtCore import pyqtSignal, QFileInfo
+from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QLineEdit, QLabel
+from PyQt5.QtCore import pyqtSignal, QFileInfo, QSize
 from PyQt5.QtGui import QTextCursor
 
 from ui_py.ui_main import Ui_MainWindow
@@ -29,7 +29,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     def __init__(self, app, parent=None):
         super(MyMainWindow, self).__init__(parent)
         self.setupUi(self)
-
         self.default_ui = default_ui(self)
         self.advFunc = advanced_func(self, app)
         # ----------init parameter----------
@@ -155,8 +154,38 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             self.mass_inlet_c.show()
         if self.energy_checkbox.isChecked():
             self.temp_c.show()
-
+        # self.valve_c.show()
         self.show_c_on = True
+        # valve_number = self.valve_number.value()
+        # for i in range(valve_number):
+        #     row = int(i/2)
+        #     col = (i % 2) * 2
+        #     self.valve_td_label = QLabel(self.valve_c)
+        #     self.valve_td_label.setMinimumSize(QSize(100, 0))
+        #     self.valve_td_label.setMaximumSize(QSize(100, 16777215))
+        #     self.valve_td_label.setObjectName("valve_td_label%s" % (i + 1))
+        #     self.valve_td_label.setText('风门%s行程' % (i + 1))
+        #     self.gridLayout_4.addWidget(self.valve_td_label, row + 1, col, 1, 1)
+        #     self.valve_td_edit = QLineEdit(self.valve_c)
+        #     self.valve_td_edit.setMinimumSize(QSize(132, 22))
+        #     self.valve_td_edit.setMaximumSize(QSize(132, 22))
+        #     self.valve_td_edit.setObjectName("valve_td_edit%s" % (i + 1))
+        #     self.gridLayout_4.addWidget(self.valve_td_edit, row + 1, col + 1, 1, 1)
+        # self.valve_td_edit = QtWidgets.QLineEdit(self.valve_c)
+        # self.valve_td_edit.setMinimumSize(QtCore.QSize(132, 22))
+        # self.valve_td_edit.setMaximumSize(QtCore.QSize(132, 22))
+        # self.valve_td_edit.setObjectName("valve_td_edit")
+        # self.gridLayout_4.addWidget(self.valve_td_edit, 0, 1, 1, 1)
+        # self.valve_rp_label = QtWidgets.QLabel(self.valve_c)
+        # self.valve_rp_label.setMinimumSize(QtCore.QSize(100, 0))
+        # self.valve_rp_label.setMaximumSize(QtCore.QSize(100, 16777215))
+        # self.valve_rp_label.setObjectName("valve_rp_label")
+        # self.gridLayout_4.addWidget(self.valve_rp_label, 0, 2, 1, 1)
+        # self.valve_rp_edit = QtWidgets.QLineEdit(self.valve_c)
+        # self.valve_rp_edit.setMinimumSize(QtCore.QSize(132, 22))
+        # self.valve_rp_edit.setMaximumSize(QtCore.QSize(132, 22))
+        # self.valve_rp_edit.setObjectName("valve_rp_edit")
+        # self.gridLayout_4.addWidget(self.valve_rp_edit, 0, 3, 1, 1)
 
     def pamt_GUI(self):
         self.mode_info_frame.hide()
@@ -259,7 +288,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
                 porous_d2(self.pamt['filter_x1'], self.pamt['filter_y1'], self.pamt['filter_z1'])
 
         if 'valve1' in self.body_list:
-            self.pamt['valve_td'] = self.valve_td_edit.text()
+            # self.pamt['valve_td'] = self.valve_td_edit.text()
             self.pamt['valve_rp'] = self.valve_rp_edit.text()
 
         if 'fan' in self.body_list:
@@ -287,8 +316,8 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             for i in self.body_list:
                 if 'valve' in i:
                     valve_number += 1
-            create_rotate_script(self.pamt['file_path'], self.pamt['open_cad_name'], self.pamt['valve_td'],
-                                 self.pamt['valve_rp'], valve_number)
+            # create_rotate_script(self.pamt['file_path'], self.pamt['open_cad_name'], self.pamt['valve_td'],
+            #                      self.pamt['valve_rp'], valve_number)
         self.tui = GetTui(self.pamt, self.body_list, self.energy_check, self.K_dict,
                           self.porous_list, self.up_list, self.dead_zone_list, self.internal_face,
                           self.mesh_type)

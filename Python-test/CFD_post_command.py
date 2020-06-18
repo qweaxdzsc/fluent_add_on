@@ -312,8 +312,8 @@ END
 >%s /%s:%s, view=/VIEW:View 1\n \
                          ' % (show_states, image_type, image_name)
 
-    def bat_contour(self, paraller_plane, variable, size_min, size_max):
-        plane_array = np.linspace(size_min, size_max, 10)
+    def bat_contour(self, paraller_plane, variable, size_min, size_max, bat_number=10):
+        plane_array = np.linspace(size_min, size_max, bat_number)
         X, Y, Z = 0, 0, 0
 
         for i in plane_array:

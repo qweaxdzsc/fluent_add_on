@@ -61,7 +61,7 @@ class CsvReader(QThread):
                 for row in csv_reader:
                     finished_list.append(row)
             self.content_list.emit(finished_list)
-            time.sleep(10)
+            time.sleep(25)
 
     def stop(self):
         self.runnable = False

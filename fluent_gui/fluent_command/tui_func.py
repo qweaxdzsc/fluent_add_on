@@ -155,6 +155,8 @@ mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes
 /diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness}
 /diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness}
 /diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness}
+/diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness}
+/diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness}
 /diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness} q
 """.format(skewness=skewness)
         self.tui.whole_jou += text
@@ -510,7 +512,7 @@ q
 solve/monitors/residual/criterion-type %s
 /solve/convergence-conditions/frequency %s
 /conv-reports add %s-stable
-report-defs %s initial-values-to-ignore 150 previous-values-to-consider 20 
+report-defs %s initial-values-to-ignore 250 previous-values-to-consider 20 
 stop-criterion 0.0002 print yes active yes
 q q q
 """ % (switch, frequency, type, type)
@@ -587,8 +589,10 @@ class post(object):
         self.txt_surface_integrals('area-weighted-avg', pressure_face_list, 'pressure')
 
         self.set_background()
+        self.delete_display_object('view_model')
+        self.delete_display_object('whole_pathline_scene')
         self.create_viewing_model()
-        self.create_streamline('whole_pathline', 'inlet', field_type='temperature')
+        self.create_streamline('whole_pathline', 'inlet', field_type='temperature', skip='2')
         self.create_scene('whole_pathline')
         self.snip_avz('whole_pathline_scene')
 
@@ -623,6 +627,12 @@ yes %s yes q
             axis_x=axis_xyz[0], axis_y=axis_xyz[1], axis_z=axis_xyz[2], out_path=self.tui.txt_out)
         self.tui.whole_jou += text
         return self.tui.whole_jou
+
+    def delete_display_object(self, display_object='view_model'):
+        text = """
+/display/objects/delete %s
+""" % display_object
+        self.tui.whole_jou += text
 
     def create_viewing_model(self):
         text = """
@@ -666,8 +676,8 @@ color-map format %0.1f size {line_size} q step {line_step} skip {line_skip} surf
     def create_scene(self, graphic_object):
         text = """
 /display/objects/create scene %s_scene graphics-objects 
-add 'view_model' transparency 80 q
-add '%s' 
+add "view_model" transparency 80 q
+add "%s" 
 q q q
 """ % (graphic_object, graphic_object)
         self.tui.whole_jou += text
@@ -706,8 +716,6 @@ q q q
 
     def set_background(self):
         text = """
-/display/set/lights/lights-on no
-/display/set/lights/headlight-on no
 /views/camera/projection orthographic
 /display/set/colors/color-by-type yes
 ;/display/set/filled-mesh no

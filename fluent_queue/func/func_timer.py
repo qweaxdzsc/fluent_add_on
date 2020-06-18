@@ -42,7 +42,7 @@ class SleepOut(QMainWindow):
         super(QMainWindow, self).__init__()
         self.ui = ui
         self.time_out_minutes = time_out_minutes
-        self.sleep_time = timer(60000)
+        self.sleep_time = timer(60000)                                      # 60000 means one minutes
         self.sleep_time.time_count.connect(self.time_out)                   # create sleep timer
         ui.eventFilter = self.eventFilter                                   # rewrite ui's eventFilter function
 

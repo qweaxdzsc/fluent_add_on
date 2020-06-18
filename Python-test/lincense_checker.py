@@ -1,4 +1,5 @@
 import os
+import tkinter
 
 
 class LicenseUsage(object):
@@ -82,5 +83,4 @@ class LicenseUsage(object):
 
 
 if __name__ == '__main__':
-    ansys_license = LicenseUsage()
-    ansys_license.is_license('hpc')
+    pass

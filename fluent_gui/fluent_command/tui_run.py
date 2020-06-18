@@ -153,18 +153,18 @@ class GetTui(object):
             post.snip_avz('temp_pathline_scene')
         else:
             post.read_view()
-            for i in self.porous_list:
-                post.create_contour(i+'_out', i+'_out')
-                post.snip_picture(i+'_out')
-                # post.snip_avz(i + '_out')
             post.create_streamline('whole_pathline', 'inlet')
-            post.create_streamline('distrib_pathline', 'evap_in', [0, 15])
+            post.create_streamline('distrib_pathline', 'evap_in', [0, 15], skip='2')
             post.create_scene('whole_pathline')
             post.create_scene('distrib_pathline')
             post.snip_avz('whole_pathline_scene')
             post.snip_picture('distrib_pathline_scene', 'yes')
             # post.snip_avz('distrib_pathline')
             post.snip_model('model')
+            for i in self.porous_list:
+                post.create_contour(i+'_out', i+'_out')
+                post.snip_picture(i+'_out')
+                # post.snip_avz(i + '_out')
 
         post.txt_surface_integrals('volume-flow-rate', volume_face_list)
         post.txt_mass_flux()
@@ -229,8 +229,10 @@ class GetTui(object):
         mass_flux_list = ['inlet*', 'outlet*']
         jou_solve = open(self.jou_solve_path, 'w')
 
-        setup.replace_lin_mesh(self.lin_array[0])
-        # setup.read_lin_mesh(start_angle)
+        setup.start_transcript()
+        setup.set_timeout(60)
+        # setup.replace_lin_mesh(self.lin_array[0])
+        setup.read_lin_mesh(self.lin_array[0])
         setup.rescale()
         setup.turb_models()
 

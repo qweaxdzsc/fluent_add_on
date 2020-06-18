@@ -43,15 +43,16 @@ class default_ui(object):
     def default_part_tree(self):
         """default setting for which model part in the tree should be checked"""
         self.main_ui.part_tree.topLevelItem(0).setCheckState(0, 0)   # 0 means unchecked, 2 means checked
-        self.main_ui.part_tree.topLevelItem(1).setCheckState(0, 2)
+        self.main_ui.part_tree.topLevelItem(1).setCheckState(0, 0)
         self.main_ui.part_tree.topLevelItem(2).setCheckState(0, 0)
         self.main_ui.part_tree.topLevelItem(3).setCheckState(0, 0)
         self.main_ui.part_tree.topLevelItem(4).setCheckState(0, 0)
         self.main_ui.part_tree.topLevelItem(5).setCheckState(0, 0)
-        self.main_ui.part_tree.topLevelItem(6).setCheckState(0, 0)
+        self.main_ui.part_tree.topLevelItem(6).setCheckState(0, 2)
         self.main_ui.part_tree.topLevelItem(7).setCheckState(0, 2)
         self.main_ui.part_tree.topLevelItem(8).setCheckState(0, 2)
         self.main_ui.part_tree.topLevelItem(9).setCheckState(0, 0)
         self.main_ui.part_tree.topLevelItem(10).setCheckState(0, 0)
+        self.main_ui.energy_checkbox.setChecked(False)
         self.main_ui.distrib_number.setValue(1)
         self.main_ui.valve_number.setValue(0)

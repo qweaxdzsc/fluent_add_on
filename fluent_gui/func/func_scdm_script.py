@@ -72,7 +72,7 @@ valve_number = %s
 save_file = save_path + '\\\\' + file_name
 
 options = ExportOptions.Create()
-DocumentSave.Execute(r"%%s.scdoc" %%(save_path), options)
+DocumentSave.Execute(r"%%s/%%s.scdoc" %%(save_path, file_name), options)
 
 cnumber = len(GetRootPart().Components)
 

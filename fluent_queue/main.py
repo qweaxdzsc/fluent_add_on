@@ -28,7 +28,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         # --------- initial_variable--------
         self.acc_name = str()
         self.new_pj = dict()
-        self.pause = False
+        self.pause = True
         self.csv_path = r"S:\PE\Engineering database\CFD\03_Tools\queue_backup"
         self.mission_list = self.read_csv('waiting_list.csv')
         self.running_project = self.read_csv('running_list.csv')
@@ -41,6 +41,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.calculation.start()
         self.manager_authority(False)
         self.listWidget_queue.file_receive.connect(self.receive_drop_file)
+        self.listWidget_queue.project_exchange.connect(self.exchange_project)
         print('whether have manager authority?: ', self.listWidget_queue.drag_permission)
 
     def btn(self):
@@ -152,10 +153,22 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         :return:
         """
         cur_index = self.listWidget_queue.currentIndex().row()
+        print(cur_index)
         if cur_index == -1:
             pass
         else:
             self.verify_delete(cur_index)
+
+    def exchange_project(self, exchange_dict):
+        original_pos = exchange_dict['original_index']
+        after_pos = exchange_dict['after_index']
+        project = self.mission_list[original_pos]
+        del self.mission_list[original_pos]
+        if after_pos == -1:
+            self.mission_list.append(project)
+        else:
+            self.mission_list.insert(after_pos, project)
+        self.update_waiting_list_log()
 
     def verify_delete(self, item_index):
         """
