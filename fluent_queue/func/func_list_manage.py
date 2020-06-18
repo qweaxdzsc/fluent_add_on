@@ -100,12 +100,14 @@ class AddPj(QWidget, Ui_Widget_add):
             self.label_journal_address.show()
             self.edit_journal_address.show()
             self.btn_journal_address.show()
+            self.edit_project_address.setDisabled(True)
             self.edit_iteration.setDisabled(True)
             self.label_iteration.setDisabled(True)
         else:
             self.label_journal_address.hide()
             self.edit_journal_address.hide()
             self.btn_journal_address.hide()
+            self.edit_project_address.setDisabled(False)
             self.edit_iteration.setDisabled(False)
             self.label_iteration.setDisabled(False)
 
@@ -128,13 +130,16 @@ class AddPj(QWidget, Ui_Widget_add):
         :return: signal_add_pj(dict)
         """
         self.pj_dict = {"project_name": '', "project_address": '', "journal": ''}
-        case_path = QFileInfo(self.edit_project_address.text())               # QFileInfo can deeply analyze path info
-        accepted_file_type = ['cas', 'msh', 'h5']
+        if self.checkbox_journal.isChecked():
+            case_path = QFileInfo(self.edit_journal_address.text())
+        else:
+            case_path = QFileInfo(self.edit_project_address.text())               # QFileInfo can deeply analyze path info
+        accepted_file_type = ['cas', 'msh', 'h5', 'jou']
 
         if (case_path.exists()) and (case_path.suffix() in accepted_file_type):
             self.pj_dict["project_name"] = case_path.baseName()
             self.pj_dict["project_address"] = case_path.absolutePath()
-            self.pj_dict['journal'] = self.get_journal(case_path)
+            self.pj_dict['journal'] = self.get_journal(case_path, case_path.fileName())
             self.signal_add_pj.emit(self.pj_dict)
             self.close()
             print(self.pj_dict)
@@ -142,7 +147,7 @@ class AddPj(QWidget, Ui_Widget_add):
             QMessageBox.warning(self, '警告', 'case或者mesh不存在', QMessageBox.Yes, QMessageBox.Yes)
             print('file not exists')
 
-    def get_journal(self, case_path):
+    def get_journal(self, case_path, file_type):
         """
         if checbox checked, it will use own journal which fill in the LineEdit_journal
         if not checked, it will use default_journal func to get default journal
@@ -156,28 +161,32 @@ class AddPj(QWidget, Ui_Widget_add):
             else:
                 QMessageBox.warning(self, '警告', 'journal不存在', QMessageBox.Yes, QMessageBox.Yes)
         else:
-            jou_file = self.default_journal(case_path)
+            jou_file = self.default_journal(case_path, file_type)
             return jou_file
 
-    def default_journal(self, case_path):
+    def default_journal(self, case_path, file_type):
         """
         create default journal for calculation only
         :param case_path:
         :return:
         """
+        if '.cas' in file_type:
+            read_type = 'read-case/'
+        else:
+            read_type = 'read'
         jou_file = case_path.absolutePath() + '\\' + case_path.baseName() + '.jou'
         transcript = case_path.absolutePath() + '\\%s_transcript' % case_path.baseName()
         time_out_min = 1
         content = """
 /file/start-transcript {transcript}
 /file/set-idle-timeout yes {time_out} no
-/file/read-case/ {case_path} yes
+/file/{read_type} {case_path} yes
 /solve/initialize/hyb-initialization yes
 /solve/iterate/{iteration} yes
 /file/write-case-data/ {case_path} yes
 /exit yes
 """.format(iteration=self.edit_iteration.text(), case_path=case_path.filePath(), transcript=transcript,
-           time_out=time_out_min)
+           time_out=time_out_min, read_type=read_type)
         with open(jou_file, 'w') as jou:
             jou.write(content)
 

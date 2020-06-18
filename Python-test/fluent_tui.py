@@ -667,7 +667,7 @@ q q q
     def read_view(self):
         view_file = self.tui.case_out_path + '\\' + self.tui.version_name + '.vw'
         text = """
-/views/read-views %s OK
+/views/read-views %s ok
 """ % view_file
         self.tui.whole_jou += text
 
@@ -689,11 +689,12 @@ q q q
         view_name = graphic_name[:end_index]
         text = """
 /display/open-window {window_number}
+/display/set-window {window_number}
+/display/set/lights/lights-on {light}
+/display/set/lights/headlight-on {light}
 /display/objects/display/{graphic_name}
 /views/restore-view {view_name}
 /views/auto-scale
-/display/set/lights/lights-on {light}
-/display/set/lights/headlight-on {light}
 /display/set/picture/driver/jpeg
 /display/set/picture/use-window-resolution no
 /display/set/picture/x-resolution 4096

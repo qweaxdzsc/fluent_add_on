@@ -157,6 +157,7 @@ class GetTui(object):
             post.create_streamline('distrib_pathline', 'evap_in', [0, 15], skip='2')
             post.create_scene('whole_pathline')
             post.create_scene('distrib_pathline')
+            post.snip_residual()
             post.snip_avz('whole_pathline_scene')
             post.snip_picture('distrib_pathline_scene', 'yes')
             # post.snip_avz('distrib_pathline')

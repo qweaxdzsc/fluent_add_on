@@ -263,7 +263,12 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
     def receive_drop_file(self, file):
         if self.action_add.isEnabled():
             self.action_add.trigger()
-            self.add_pj_ui.edit_project_address.setText(file)
+            if '.jou' in file:
+                self.add_pj_ui.btn_extend.click()
+                self.add_pj_ui.checkbox_journal.click()
+                self.add_pj_ui.edit_journal_address.setText(file)
+            else:
+                self.add_pj_ui.edit_project_address.setText(file)
 
     def pause_cal(self):
         if self.pause:

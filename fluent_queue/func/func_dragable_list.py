@@ -38,7 +38,7 @@ class DragListWidget(QListWidget):
         if received_data.urls():
             file = str(received_data.urls()[0].toLocalFile())
             file_info = QFileInfo(file)
-            accept_file_type = ['msh', 'cas', 'h5']
+            accept_file_type = ['msh', 'cas', 'h5', 'jou']
             self.file_receive.emit(file)
         else:
             if self.drag_permission:
