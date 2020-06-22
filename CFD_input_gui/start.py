@@ -3,13 +3,13 @@ from PyQt5.QtWidgets import (
 )
 from PyQt5.QtGui import QRegExpValidator
 from PyQt5.QtCore import QRegExp, QTranslator, QFileInfo
-from ui_input import Ui_MainWindow
-from porous_model import Ui_porous
-from k_cal import Ui_k_cal
-from project_name import Ui_project_name
-from output_html import output_web
-from output_csv import OutputCsv
-from html_parser import HtmlParser
+from ui_py.ui_input import Ui_MainWindow
+from func.func_porous_model import Ui_porous
+from func.func_k_cal import Ui_k_cal
+from func.func_project_name import Ui_project_name
+from func.func_output_html import output_web
+from func.func_output_csv import OutputCsv
+from func.func_html_parser import HtmlParser
 import cgitb
 import sys
 
@@ -63,7 +63,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow, QItemDelegate):
     def _translate(self, language):
         self.language = language
         self.trans = QTranslator()
-        self.trans.load("ui_input_%s" % language)
+        self.trans.load("./ui_translate/ui_input_%s" % language)
         _app = QApplication.instance()
         _app.installTranslator(self.trans)
         self.retranslateUi(self)

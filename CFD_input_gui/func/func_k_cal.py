@@ -1,4 +1,4 @@
-from ui_k_cal2 import Ui_k_form
+from ui_py.ui_k_cal2 import Ui_k_form
 from PyQt5.QtWidgets import QWidget, QApplication, QTableWidgetItem
 from PyQt5.QtCore import QThread, pyqtSignal, Qt
 import sys

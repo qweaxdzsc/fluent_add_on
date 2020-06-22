@@ -8,7 +8,7 @@
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
-from HorizontalBar import HorizontalTabBar
+from func.func_bar_horizontal import HorizontalTabBar
 
 
 class Ui_MainWindow(object):
@@ -342,17 +342,17 @@ class Ui_MainWindow(object):
         MainWindow.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
         self.actionexport = QtWidgets.QAction(MainWindow)
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("./icon/export.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("../icon/export.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionexport.setIcon(icon1)
         self.actionexport.setObjectName("actionexport")
         self.actionimport = QtWidgets.QAction(MainWindow)
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("./icon/import.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap("../icon/import.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionimport.setIcon(icon2)
         self.actionimport.setObjectName("actionimport")
         self.actionhelp = QtWidgets.QAction(MainWindow)
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("./icon/help.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon3.addPixmap(QtGui.QPixmap("../icon/help.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionhelp.setIcon(icon3)
         self.actionhelp.setObjectName("actionhelp")
         self.toolBar.addAction(self.actionhelp)

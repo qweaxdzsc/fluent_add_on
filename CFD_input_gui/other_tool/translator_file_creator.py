@@ -1,10 +1,10 @@
 import os
 
 
-path = r'C:/Users/BZMBN4/Desktop/fluent_add_on/CFD_input_gui'
+path = r'/'
 
 
-py_file_name = 'ui_porous_model.py'
+py_file_name = '../ui_py/ui_porous_model.py'
 language_file_name = py_file_name[:-3] + '_EN' + '.ts'
 
 

@@ -59,14 +59,24 @@ print('script finished')
         return script_path
 
 
-def create_rotate_script(file_path, original_cad_name, valve_total_angle, valve_percentage, valve_number):
-        every_rotate = int(valve_total_angle) / (100/int(valve_percentage))
+def create_rotate_script(pamt_dict, valve_number):
+        file_path = pamt_dict['file_path']
+        valve_percentage = pamt_dict['valve_rp']
+        original_cad_name = pamt_dict['open_cad_name']
+        valve_list = list(pamt_dict.keys())
+        valve_list.sort()
+        rotate_list = list()
+        for i in valve_list:
+            if '_td' in i and 'valve' in i:
+                total_degree = pamt_dict[i]
+                every_rotate = int(total_degree) / (100 / int(valve_percentage))
+                rotate_list.append(every_rotate)
         script_path = '%s/rotate_valve.py' % file_path
         f = open(script_path, 'w')
         message = """        
 save_path = r"%s"
 file_name = r'%s'
-rotate_angle = [%s for i in range(valve_number)]
+rotate_angle = %s
 valve_number = %s 
 
 save_file = save_path + '\\\\' + file_name
@@ -100,7 +110,7 @@ for j in range(%s, 100, %s):
     options = ExportOptions.Create()
     DocumentSave.Execute(r"%%s_%%s.scdoc" %%(save_file, j), options)
 
-""" % (file_path, original_cad_name, every_rotate, valve_number, valve_percentage, valve_percentage)
+""" % (file_path, original_cad_name, rotate_list, valve_number, valve_percentage, valve_percentage)
         f.write(message)
         f.close()
 

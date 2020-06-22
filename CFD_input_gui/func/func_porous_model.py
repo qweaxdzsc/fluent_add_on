@@ -1,4 +1,4 @@
-from ui_porous_model import Ui_porous_model_form
+from ui_py.ui_porous_model import Ui_porous_model_form
 from PyQt5.QtWidgets import QWidget, QLineEdit, QMenu, QMessageBox, QTableWidgetItem, QApplication
 from PyQt5.QtCore import pyqtSignal, QTranslator
 import csv
@@ -51,7 +51,7 @@ class Ui_porous(Ui_porous_model_form, QWidget):
 
     def translate(self, language):
         self.trans = QTranslator()
-        self.trans.load("ui_porous_model_%s" % language)
+        self.trans.load("./ui_translate/ui_porous_model_%s" % language)
         _app = QApplication.instance()
         _app.installTranslator(self.trans)
         self.retranslateUi(self)

@@ -1,4 +1,4 @@
-from ui_project_name import Ui_project_name_widget
+from ui_py.ui_project_name import Ui_project_name_widget
 from PyQt5.QtWidgets import QWidget, QApplication
 from PyQt5.QtGui import QRegExpValidator
 from PyQt5.QtCore import QRegExp, QTranslator
@@ -38,7 +38,7 @@ class Ui_project_name(Ui_project_name_widget, QWidget):
     def _translate(self, i):
         language = self.language_combox.currentText()
         lauguage_file_dict = {' Chinese': 'CN', ' English': 'EN'}
-        self.trans.load("ui_project_name_%s" % lauguage_file_dict[language])
+        self.trans.load("./ui_translate/ui_project_name_%s" % lauguage_file_dict[language])
         _app = QApplication.instance()
         _app.installTranslator(self.trans)
         self.retranslateUi(self)

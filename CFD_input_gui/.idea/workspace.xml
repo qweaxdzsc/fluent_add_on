@@ -2,19 +2,43 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63e04c59-1c04-4b86-8106-908e7ed4bd46" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/ui_qt/ui_input.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui_qt/ui_porous_model.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ui_qt/ui_project_name.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CsvParser.py" beforeDir="false" afterPath="$PROJECT_DIR$/func/CsvParser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/HorizontalBar.py" beforeDir="false" afterPath="$PROJECT_DIR$/func/HorizontalBar.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MatplotlibWidget.py" beforeDir="false" afterPath="$PROJECT_DIR$/func/MatplotlibWidget.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/html_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/func/html_parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/k_cal.py" beforeDir="false" afterPath="$PROJECT_DIR$/k_cal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_csv.py" beforeDir="false" afterPath="$PROJECT_DIR$/func/output_csv.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/output_html.py" beforeDir="false" afterPath="$PROJECT_DIR$/func/output_html.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/porous_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/func/porous_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/project_name.py" beforeDir="false" afterPath="$PROJECT_DIR$/func/project_name.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/start.py" beforeDir="false" afterPath="$PROJECT_DIR$/start.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/translator_file_creator.py" beforeDir="false" afterPath="$PROJECT_DIR$/other_tool/translator_file_creator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_input.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui_py/ui_input.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_input_CN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui_translate/ui_input_CN.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_input_EN.qm" beforeDir="false" afterPath="$PROJECT_DIR$/ui_translate/ui_input_EN.qm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_input_EN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui_translate/ui_input_EN.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_k_cal2.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui_py/ui_k_cal2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_porous_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui_py/ui_porous_model.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_porous_model_CN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui_translate/ui_porous_model_CN.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_porous_model_EN.qm" beforeDir="false" afterPath="$PROJECT_DIR$/ui_translate/ui_porous_model_EN.qm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_porous_model_EN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui_translate/ui_porous_model_EN.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_project_name.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui_py/ui_project_name.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_project_name_CN.qm" beforeDir="false" afterPath="$PROJECT_DIR$/ui_translate/ui_project_name_CN.qm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_project_name_CN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui_translate/ui_project_name_CN.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_project_name_EN.qm" beforeDir="false" afterPath="$PROJECT_DIR$/ui_translate/ui_project_name_EN.qm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_project_name_EN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/ui_translate/ui_project_name_EN.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/CFD_post_command.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/CFD_post_command.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/CFD_post_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/CFD_post_run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/fluent_tui.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/fluent_tui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/get_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/get_report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/linearity_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/linearity_report.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_func.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/func/func_check.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/func/func_check.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/func/func_short_key.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/func/func_short_key.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/func/func_default_ui_set.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/func/func_default_ui_set.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/func/func_scdm_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/func/func_scdm_script.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/ui_py/ui_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/ui_py/ui_main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/ui_qt/ui_main.ui" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/ui_qt/ui_main.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,14 +67,60 @@
     <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\BZMBN4\Desktop\fluent_add_on\CFD_input_gui\func" />
+      <recent name="C:\Users\BZMBN4\Desktop\fluent_add_on\CFD_input_gui\ui_translate" />
+      <recent name="C:\Users\BZMBN4\Desktop\fluent_add_on\CFD_input_gui\ui_py" />
+      <recent name="C:\Users\BZMBN4\Desktop\fluent_add_on\CFD_input_gui\other_tool" />
+      <recent name="C:\Users\BZMBN4\Desktop\fluent_add_on\CFD_input_gui\translator_file" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\BZMBN4\Desktop\fluent_add_on\CFD_input_gui" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\Users\BZMBN4\Desktop\fluent_add_on\CFD_input_gui\translator_file" />
-    </key>
   </component>
-  <component name="RunManager" selected="Python.test2">
+  <component name="RunManager" selected="Python.start">
+    <configuration name="func_output_csv" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="CFD_input_gui" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="C:\Users\BZMBN4\Desktop\fluent_add_on\CFD_input_gui\func\func_output_csv.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="func_project_name" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="CFD_input_gui" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="C:\Users\BZMBN4\Desktop\fluent_add_on\CFD_input_gui\func\func_project_name.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="k_cal" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="CFD_input_gui" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -63,28 +133,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/k_cal.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="output_csv" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="CFD_input_gui" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/output_csv.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\BZMBN4\Desktop\fluent_add_on\CFD_input_gui\func\func_k_cal.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -135,34 +184,13 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="ui_input" type="PythonConfigurationType" factoryName="Python" temporary="true">
-      <module name="CFD_input_gui" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ui_input.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.test2" />
         <item itemvalue="Python.start" />
-        <item itemvalue="Python.output_csv" />
+        <item itemvalue="Python.func_project_name" />
+        <item itemvalue="Python.test2" />
+        <item itemvalue="Python.func_output_csv" />
         <item itemvalue="Python.k_cal" />
-        <item itemvalue="Python.ui_input" />
       </list>
     </recent_temporary>
   </component>
@@ -180,21 +208,21 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1892" height="296" key="GridCell.Tab.0.bottom" timestamp="1592182417092">
+    <state width="1892" height="296" key="GridCell.Tab.0.bottom" timestamp="1592814509207">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1892" height="296" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1592182417092" />
-    <state width="1892" height="296" key="GridCell.Tab.0.center" timestamp="1592182417092">
+    <state width="1892" height="296" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1592814509207" />
+    <state width="1892" height="296" key="GridCell.Tab.0.center" timestamp="1592814509207">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1892" height="296" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1592182417092" />
-    <state width="1892" height="296" key="GridCell.Tab.0.left" timestamp="1592182417092">
+    <state width="1892" height="296" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1592814509207" />
+    <state width="1892" height="296" key="GridCell.Tab.0.left" timestamp="1592814509207">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1892" height="296" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1592182417092" />
-    <state width="1892" height="296" key="GridCell.Tab.0.right" timestamp="1592182417092">
+    <state width="1892" height="296" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1592814509207" />
+    <state width="1892" height="296" key="GridCell.Tab.0.right" timestamp="1592814509207">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1892" height="296" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1592182417092" />
+    <state width="1892" height="296" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1592814509207" />
   </component>
 </project>

@@ -18,7 +18,7 @@ class MatplotlibWidget(QFrame):
 
     def initUi(self):
         self.layout = QVBoxLayout(self)
-        from MatplotlibWidget import MyMplCanvas
+        from func.func_widget_matplotlib import MyMplCanvas
         self.mpl = MyMplCanvas(self, width=4, height=2, dpi=70)
         # self.mpl_ntb = NavigationToolbar(self.mpl, self)  # 添加完整的 toolbar
 
