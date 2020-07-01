@@ -431,20 +431,11 @@
 #     sys.exit(app.exec_())
 
 # printer是嵌套函数
+a = {'valve1': 0, 'valve2': 0, 'valve3': 0}
+b = {}
+a.update(b)
+print(a)
 
-a = {'vasdasde6': 70,
-     'valve1': 20,
-     'valve2': 30,
-     'valve3': 40,
-     'vadb12': 40,
-     'valve4': 50,
-     'valve6': 70,
-     'valve5': 60,
-     }
-
-b = list(a.keys())
-b.sort()
-print(b)
 # for i in b.sort():
 #     if 'valve' in i:
 #         print(i)

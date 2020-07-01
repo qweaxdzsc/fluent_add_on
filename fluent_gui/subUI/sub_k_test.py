@@ -7,7 +7,7 @@ import time
 
 
 class subUI_outlet_assign(Ui_k_form, QWidget):
-    outlet_K_signal = pyqtSignal(dict)
+    signal_outlet_K = pyqtSignal(dict)
 
     def __init__(self, k_dict, R_method=True):
         super(Ui_k_form, self).__init__()
@@ -155,7 +155,7 @@ class subUI_outlet_assign(Ui_k_form, QWidget):
             value = tuple(value)
             outlet_name = self.k_table.item(row, 0).text()
             outlet_k_dict[outlet_name] = value
-        self.outlet_K_signal.emit(outlet_k_dict)
+        self.signal_outlet_K.emit(outlet_k_dict)
 
 
 class Auto_cal(QThread):

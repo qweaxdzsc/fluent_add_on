@@ -5,7 +5,7 @@ import cgitb
 
 
 # designate path
-root = r"G:\_HAVC_Project\D2U-2\D2U-2_foot\D2U-2_V37_foot\result_D2U-2_V37_foot_distrib"
+root = r"G:\_HAVC_Project\D2U-2\D2U-2_trl\D2U-2_V37.3_trl\result_D2U-2_V37.3_trl"
 path = root + '\\'
 
 # Txt input path
@@ -13,7 +13,7 @@ txt_name = path + 'D2U-2.txt'
 
 
 # Excel output info
-excel_name = 'D2U-2_V37_foot_distrib'         # Output excel name
+excel_name = 'D2U-2_V37.3_trl'         # Output excel name
 sheet_name = excel_name                  # The sheet in excel
 data_name = excel_name                   # get a title for your data
 
@@ -30,4 +30,3 @@ python_to_html.get_html(data_matrix, title, html_output_path)
 
 # get fan efficiency
 cgitb.enable(format='text')
-

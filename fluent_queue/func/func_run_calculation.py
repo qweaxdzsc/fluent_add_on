@@ -57,6 +57,8 @@ class Calculate(QThread):
                         time.sleep(3)
                 else:
                     time.sleep(2)
+            else:
+                time.sleep(2)
 
     def running_show(self):
         """

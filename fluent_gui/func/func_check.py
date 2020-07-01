@@ -2,7 +2,7 @@ import os
 from PyQt5.QtWidgets import QMessageBox
 
 
-class check_func():
+class check_func(object):
     def __init__(self, ui):
         self.ui = ui
 

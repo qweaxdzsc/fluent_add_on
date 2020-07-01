@@ -95,4 +95,3 @@ if __name__ == "__main__":
     new_project.create_sub_folder()
     new_project.create_record_excel()
     new_project.create_share_project(share_drive_path)
-

@@ -64,9 +64,9 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>-917</y>
+       <y>-11</y>
        <width>688</width>
-       <height>1296</height>
+       <height>1221</height>
       </rect>
      </property>
      <property name="minimumSize">
@@ -157,7 +157,7 @@
              <string>进口(ai)</string>
             </property>
             <property name="checkState">
-             <enum>Checked</enum>
+             <enum>Unchecked</enum>
             </property>
            </item>
            <item>
@@ -197,7 +197,7 @@
              <string>扩张段(diffuser)</string>
             </property>
             <property name="checkState">
-             <enum>Unchecked</enum>
+             <enum>Checked</enum>
             </property>
            </item>
            <item>
@@ -1523,94 +1523,6 @@
             <bool>false</bool>
            </property>
           </widget>
-         </item>
-        </layout>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="valve_c">
-        <property name="title">
-         <string>风门转动参数</string>
-        </property>
-        <layout class="QGridLayout" name="gridLayout_4">
-         <property name="leftMargin">
-          <number>40</number>
-         </property>
-         <property name="topMargin">
-          <number>10</number>
-         </property>
-         <property name="rightMargin">
-          <number>40</number>
-         </property>
-         <property name="bottomMargin">
-          <number>10</number>
-         </property>
-         <property name="horizontalSpacing">
-          <number>40</number>
-         </property>
-         <property name="verticalSpacing">
-          <number>10</number>
-         </property>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="valve_rp_edit">
-           <property name="minimumSize">
-            <size>
-             <width>132</width>
-             <height>22</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>132</width>
-             <height>22</height>
-            </size>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="0">
-          <widget class="QLabel" name="valve_rp_label">
-           <property name="minimumSize">
-            <size>
-             <width>100</width>
-             <height>0</height>
-            </size>
-           </property>
-           <property name="maximumSize">
-            <size>
-             <width>100</width>
-             <height>16777215</height>
-            </size>
-           </property>
-           <property name="text">
-            <string>每转比例(%)</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="2">
-          <spacer name="horizontalSpacer_4">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
-         </item>
-         <item row="0" column="3">
-          <spacer name="horizontalSpacer_5">
-           <property name="orientation">
-            <enum>Qt::Horizontal</enum>
-           </property>
-           <property name="sizeHint" stdset="0">
-            <size>
-             <width>40</width>
-             <height>20</height>
-            </size>
-           </property>
-          </spacer>
          </item>
         </layout>
        </widget>

@@ -19,6 +19,7 @@ from func.func_scdm_script import create_import_script, create_rotate_script
 from subUI.sub_unit_converter import subUI_unit_converter
 from subUI.sub_porous_model import subUI_porous
 from subUI.sub_k_test import subUI_outlet_assign
+from subUI.sub_valve_c import subUI_valve
 from fluent_command.tui_run import GetTui
 from call_api.call_func import SCDM, fluent_mesh, fluent_solver
 
@@ -32,15 +33,25 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.default_ui = default_ui(self)
         self.advFunc = advanced_func(self, app)
         # ----------init parameter----------
-        self.pamt = {}
-        self.outlet_dict = {}
-        self.K_dict = {}
-        self.outlet_list = []
-        self.body_list = []
+        self.pamt = dict()
+        self.outlet_dict = dict()
+        self.K_dict = dict()
+        self.outlet_list = list()
+        self.valve_dict = dict()
+        self.face_list = list()
+        self.body_list = list()
+        self.porous_list = list()
+        self.up_list = list()
+        self.dead_zone_list = list()
+        self.internal_face = list()
+        self.body_list = list()
         self.script_address = str()
+        self.confirm_info = bool()
+        self.need_launch_CAD = bool()
         self.mesh_type = 'tet'
         self.show_c_on = False
         self.snip_on = True
+        self.energy_check = bool()
         self.actionstop.setEnabled(False)
         # --------init function---------
         self.short_key = short_key(self)
@@ -62,7 +73,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.actiondarkstyle.triggered.connect(self.advFunc.darkstyle)
         self.action_mesh_poly.triggered.connect(lambda: self.choose_mesh_type('poly'))
         self.action_mesh_tet.triggered.connect(lambda: self.choose_mesh_type('tet'))
-
         self.cad_address_explore.clicked.connect(self.cad_address)
         # ------------quick mode radio btn------------
         self.quick_distribfc_btn.toggled.connect(self.short_key.quick_distrib_judge)
@@ -104,19 +114,25 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         return confirm_info
 
     def check_part(self):
-        body_list = []
-        face_list = ['inlet']
-        porous_list = []
-        up_list = []
-        dead_zone_list = []
+        self.body_list = []
+        self.face_list = ['inlet']
+        self.porous_list = []
+        self.up_list = []
+        self.dead_zone_list = []
 
-        self.face_list, self.body_list, self.porous_list, self.up_list, self.dead_zone_list, self.internal_face = \
-            self.check_func.part_check(body_list, face_list, porous_list, up_list, dead_zone_list)
+        self.face_list, self.body_list, self.porous_list, \
+        self.up_list, self.dead_zone_list, self.internal_face = \
+            self.check_func.part_check(self.body_list,
+                                       self.face_list,
+                                       self.porous_list,
+                                       self.up_list,
+                                       self.dead_zone_list,
+                                       )
 
     def show_outlet_name(self):
         self.outlet_assign = subUI_outlet_assign(self.outlet_dict)
         self.outlet_assign.show()
-        self.outlet_assign.outlet_K_signal.connect(self.receive_outlet_info)
+        self.outlet_assign.signal_outlet_K.connect(self.receive_outlet_info)
 
     def receive_outlet_info(self, outlet_dict):
         print('outlet_dict', outlet_dict)
@@ -126,12 +142,20 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         for i in outlet_dict.keys():
             self.K_dict[i] = outlet_dict[i][-1]
         self.outlet_dict = outlet_dict
-        # print(self.outlet_dict)
-        # print(self.K_dict)
+
+        valve_number = self.valve_number.value()
+        if valve_number > 0:
+            self.valve_window = subUI_valve(self.valve_dict, self.valve_number.value())
+            self.valve_window.show()
+            self.valve_window.signal_valve_dict.connect(self.update_valve_dict)
 
         if self.need_launch_CAD:
             self.launchCAD()
             self.need_launch_CAD = False
+
+    def update_valve_dict(self, dic):
+        self.valve_dict = dic
+        create_rotate_script(self.pamt, self.valve_dict)
 
     def show_c(self):
         dic = dict()
@@ -152,10 +176,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 
         self.show_c_on = True
 
-        valve_number = self.valve_number.value()
-        if valve_number > 0:
-            self.valve_c = self.default_ui.add_valve_c(self.requisite_c_area, self.verticalLayout, valve_number)
-
     def pamt_GUI(self):
         self.mode_info_frame.hide()
         self.return_btn.show()
@@ -163,11 +183,11 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.show_c()
 
     def launchCAD(self):
-        self.pamt_GUI()                                                 # show parameter GUI
+        self.pamt_GUI()  # show parameter GUI
         self.pamt_dict()
         self.script_address = create_import_script(self.pamt['file_path'], self.pamt['open_cad_name'],
                                                    self.body_list, self.face_list, self.pamt['cad_save_path'])
-        self.launch_time = launch_time_count(self, 35)                  # create thread must have self.
+        self.launch_time = launch_time_count(self, 35)  # create thread must have self.
         self.append_text('正在打开CAD, 请大佬耐心等待')
         self.CAD_thread = SCDM(self.script_address)
         self.CAD_thread.start()
@@ -186,13 +206,10 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 
     def export_pamt(self):
         self.pamt_dict()
-        try:
-            self.pamt.update(self.outlet_dict)
-        except Exception as e:
-            print(e)
         default_csv = '%s/%s_%s.csv' % (self.cad_address_edit.text(),
                                         self.project_name_edit.text(),
-                                        self.version_name_edit.text())
+                                        self.version_name_edit.text(),
+                                        )
         path = QFileDialog.getSaveFileName(self, directory=default_csv, filter='CSV, *.csv')
         self.IEport.export_pamt(path, self.pamt)
 
@@ -221,7 +238,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.porous_model.close()
 
     def pamt_dict(self):
-        self.pamt = dict()
+        self.pamt = {}
         self.pamt['project_name'] = self.project_name_edit.text()
         self.pamt['version'] = self.version_name_edit.text()
         cad_path = QFileInfo(self.cad_address_edit.text())
@@ -259,17 +276,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             self.pamt['filter_x2'], self.pamt['filter_y2'], self.pamt['filter_z2'] = \
                 porous_d2(self.pamt['filter_x1'], self.pamt['filter_y1'], self.pamt['filter_z1'])
 
-        for i in self.body_list:
-            if 'valve' in i:
-                object_name = i + '_td_edit'
-                key_name = i + '_td'
-                edit = self.valve_c.findChild(QLineEdit, object_name)
-                self.pamt[key_name] = edit.text()
-                # self.valve_c.findChild
-                # self.pamt['valve_rp'] = self.valve_rp_edit.text()  # TODO valve_rp to scdm_script
-                self.pamt['valve_rp'] = '10'
-            # self.pamt['valve_td'] = self.valve_td_edit.text()
-
         if 'fan' in self.body_list:
             self.pamt['fan_ox'] = self.fan_ox_edit.text()
             self.pamt['fan_oy'] = self.fan_oy_edit.text()
@@ -283,7 +289,9 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             self.pamt['temp_inlet'] = self.temp_inlet_edit.text()
             self.pamt['temp_hc'] = self.temp_hc_edit.text()
 
-        print(self.pamt)
+        self.pamt.update(self.outlet_dict)
+        self.pamt.update(self.valve_dict)
+        print('pamt_dict:', self.pamt)
 
     def choose_mesh_type(self, mesh_type):
         self.mesh_type = mesh_type
@@ -292,12 +300,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.check_part()
         self.pamt_dict()
         self.energy_check = self.energy_checkbox.isChecked()
-        if 'valve1' in self.body_list:
-            valve_number = 0
-            for i in self.body_list:
-                if 'valve' in i:
-                    valve_number += 1
-            create_rotate_script(self.pamt, valve_number)
+
         self.tui = GetTui(self.pamt, self.body_list, self.energy_check, self.K_dict,
                           self.porous_list, self.up_list, self.dead_zone_list, self.internal_face,
                           self.mesh_type)
@@ -350,5 +353,3 @@ if __name__ == "__main__":
     myWin = MyMainWindow(app)
     myWin.show()
     sys.exit(app.exec_())
-
-

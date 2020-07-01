@@ -35,7 +35,7 @@ class short_key(object):
             if QApplication.keyboardModifiers() == Qt.ControlModifier:  # test mod shortcut
                 self.ui.actionimport.trigger()
                 self.ui.check_part()
-                # self.ui.pamt_dict()
+                self.ui.pamt_dict()
                 self.ui.need_launch_CAD = False
                 self.ui.show_outlet_name()
                 self.ui.pamt_GUI()

@@ -2,43 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8d44180-0242-4157-8c6d-4f3b75ca3fd9" name="Default Changelist" comment="第二次修改">
-      <change afterPath="$PROJECT_DIR$/../CFD_input_gui/ui_qt/ui_input.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CFD_input_gui/ui_qt/ui_porous_model.ui" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../CFD_input_gui/ui_qt/ui_project_name.ui" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/mail_win32/Analysis-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/mail_win32/EXE-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/mail_win32/PKG-00.pkg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/mail_win32/PKG-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/mail_win32/PYZ-00.pyz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/mail_win32/PYZ-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/mail_win32/base_library.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/mail_win32/mail_win32.exe.manifest" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/mail_win32/warn-mail_win32.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/build/mail_win32/xref-mail_win32.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mail_win32.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/mail_win32.spec" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_gui/subUI/sub_valve_c.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_gui/ui_qt/ui_valve.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CFD_input_gui/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/CsvParser.py" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/func/func_csv_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/HorizontalBar.py" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/func/func_bar_horizontal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/MatplotlibWidget.py" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/func/func_widget_matplotlib.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/html_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/func/func_html_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/k_cal.py" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/func/func_k_cal.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/output_csv.py" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/func/func_output_csv.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/output_html.py" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/func/func_output_html.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/porous_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/func/func_porous_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/project_name.py" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/func/func_project_name.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/start.py" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/start.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/translator_file_creator.py" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/other_tool/translator_file_creator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/ui_input.py" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/ui_py/ui_input.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/ui_input_CN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/ui_translate/ui_input_CN.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/ui_input_EN.qm" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/ui_translate/ui_input_EN.qm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/ui_input_EN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/ui_translate/ui_input_EN.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/ui_k_cal2.py" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/ui_py/ui_k_cal2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/ui_porous_model.py" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/ui_py/ui_porous_model.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/ui_porous_model_CN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/ui_translate/ui_porous_model_CN.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/ui_porous_model_EN.qm" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/ui_translate/ui_porous_model_EN.qm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/ui_porous_model_EN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/ui_translate/ui_porous_model_EN.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/ui_project_name.py" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/ui_py/ui_project_name.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/ui_project_name_CN.qm" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/ui_translate/ui_project_name_CN.qm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/ui_project_name_CN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/ui_translate/ui_project_name_CN.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/ui_project_name_EN.qm" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/ui_translate/ui_project_name_EN.qm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/ui_project_name_EN.ts" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/ui_translate/ui_project_name_EN.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/get_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/get_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/linearity_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/linearity_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mesh_info_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/mesh_info_parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/new_project_folder.py" beforeDir="false" afterPath="$PROJECT_DIR$/new_project_folder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_packer.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_packer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test2.py" beforeDir="false" afterPath="$PROJECT_DIR$/test2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/func/func_check.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/func/func_check.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/func/func_default_ui_set.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/func/func_default_ui_set.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/func/func_scdm_script.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/func/func_scdm_script.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/func/func_short_key.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/func/func_short_key.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/subUI/sub_k_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/subUI/sub_k_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/ui_py/ui_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/ui_py/ui_main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/ui_qt/ui_main.ui" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/ui_qt/ui_main.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_run_calculation.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_run_calculation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/test.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +74,7 @@
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+    <property name="settings.editor.selected.configurable" value="editing.templates" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -87,28 +84,7 @@
       <recent name="C:\Users\BZMBN4\Desktop\Python-test" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.mesh_info_parser">
-    <configuration name="get_report" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Python-test" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/get_report.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.linearity_report">
     <configuration name="linearity_report" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Python-test" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -122,6 +98,27 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/linearity_report.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="mail_win32" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Python-test" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/mail_win32.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -151,7 +148,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="python_packer" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Python-test" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -163,7 +160,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/python_packer.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -216,19 +213,19 @@
     </configuration>
     <list>
       <item itemvalue="Python.txt_to_python" />
-      <item itemvalue="Python.get_report" />
-      <item itemvalue="Python.linearity_report" />
-      <item itemvalue="Python.test" />
       <item itemvalue="Python.test2" />
       <item itemvalue="Python.mesh_info_parser" />
+      <item itemvalue="Python.mail_win32" />
+      <item itemvalue="Python.python_packer" />
+      <item itemvalue="Python.linearity_report" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.mesh_info_parser" />
-        <item itemvalue="Python.test" />
-        <item itemvalue="Python.test2" />
-        <item itemvalue="Python.get_report" />
         <item itemvalue="Python.linearity_report" />
+        <item itemvalue="Python.mail_win32" />
+        <item itemvalue="Python.python_packer" />
+        <item itemvalue="Python.test2" />
+        <item itemvalue="Python.mesh_info_parser" />
       </list>
     </recent_temporary>
   </component>
@@ -298,30 +295,34 @@
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state x="670" y="356" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1586497342475" />
-    <state width="1413" height="379" key="GridCell.Tab.0.bottom" timestamp="1592795184830">
+    <state width="1412" height="298" key="GridCell.Tab.0.bottom" timestamp="1593564612116">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1413" height="283" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1592723974841" />
     <state width="1892" height="327" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1590385277182" />
-    <state width="1413" height="379" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1592795184830" />
-    <state width="1413" height="379" key="GridCell.Tab.0.center" timestamp="1592795184830">
+    <state width="1412" height="298" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1593564612116" />
+    <state width="1412" height="298" key="GridCell.Tab.0.center" timestamp="1593564612116">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1413" height="283" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1592723974841" />
     <state width="1892" height="327" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1590385277182" />
-    <state width="1413" height="379" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1592795184830" />
-    <state width="1413" height="379" key="GridCell.Tab.0.left" timestamp="1592795184830">
+    <state width="1412" height="298" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1593564612116" />
+    <state width="1412" height="298" key="GridCell.Tab.0.left" timestamp="1593564612116">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1413" height="283" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1592723974841" />
     <state width="1892" height="327" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1590385277182" />
-    <state width="1413" height="379" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1592795184830" />
-    <state width="1413" height="379" key="GridCell.Tab.0.right" timestamp="1592795184830">
+    <state width="1412" height="298" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1593564612116" />
+    <state width="1412" height="298" key="GridCell.Tab.0.right" timestamp="1593564612116">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1413" height="283" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1592723974841" />
     <state width="1892" height="327" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1590385277182" />
-    <state width="1413" height="379" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1592795184830" />
+    <state width="1412" height="298" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1593564612116" />
+    <state x="279" y="165" key="SettingsEditor" timestamp="1593314527795">
+      <screen x="0" y="0" width="1920" height="1152" />
+    </state>
+    <state x="279" y="165" key="SettingsEditor/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1593314527795" />
     <state x="579" y="355" key="com.intellij.ide.util.TipDialog" timestamp="1586832004790">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
@@ -343,6 +344,11 @@
           <url>file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/matplotlib/backends/backend_webagg.py</url>
           <line>13</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/win32com/client/__init__.py</url>
+          <line>8</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

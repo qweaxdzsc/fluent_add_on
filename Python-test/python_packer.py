@@ -42,8 +42,8 @@ class PythonPacker(object):
 
 
 if __name__ == "__main__":
-    python_path = r"Z:\EHCT"
-    python_name = "ansys_license_info.py"
+    python_path = r"C:\Users\BZMBN4\Desktop"
+    python_name = "mail_win32.py"
     copy_file_list = [
         r'Z:\EHCT\image',
         r'Z:\EHCT\path',

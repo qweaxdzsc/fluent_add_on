@@ -1,8 +1,8 @@
 def create_import_script(file_path, original_cad_name, body_list, face_list, cad_save_path):
-        cad_open_path = file_path + '/' + original_cad_name
-        script_path = '%s/project_info.py' % file_path
-        f = open(script_path, 'w')
-        message = """
+    cad_open_path = file_path + '/' + original_cad_name
+    script_path = '%s/project_info.py' % file_path
+    f = open(script_path, 'w')
+    message = """
 print('start script')
 body_list = %s
 body_number = len(body_list)
@@ -53,36 +53,34 @@ options = ExportOptions.Create()
 DocumentSave.Execute(r"%s", options)
 print('script finished')
 """ % (body_list, cad_open_path, face_list, cad_save_path)
-        f.write(message)
-        f.close()
+    f.write(message)
+    f.close()
 
-        return script_path
+    return script_path
 
 
-def create_rotate_script(pamt_dict, valve_number):
-        file_path = pamt_dict['file_path']
-        valve_percentage = pamt_dict['valve_rp']
-        original_cad_name = pamt_dict['open_cad_name']
-        valve_list = list(pamt_dict.keys())
-        valve_list.sort()
-        rotate_list = list()
-        for i in valve_list:
-            if '_td' in i and 'valve' in i:
-                total_degree = pamt_dict[i]
-                every_rotate = int(total_degree) / (100 / int(valve_percentage))
-                rotate_list.append(every_rotate)
-        script_path = '%s/rotate_valve.py' % file_path
-        f = open(script_path, 'w')
-        message = """        
-save_path = r"%s"
-file_name = r'%s'
+def create_rotate_script(pamt_dict, valve_dict):
+    valve_number = len(valve_dict) - 1
+    file_path = pamt_dict['file_path']
+    cad_name = pamt_dict['cad_name']
+    valve_percentage = valve_dict['valve_rp']
+    rotate_list = []
+    for i in range(valve_number):
+        key_name = 'valve%s_td' % (i + 1)
+        angle = int(valve_dict[key_name])/(100/int(valve_percentage))
+        rotate_list.append(angle)
+    script_path = '%s/rotate_valve.py' % file_path
+    f = open(script_path, 'w')
+    message = """
+save_path = r"%s"        
+file_name = r"%s"
 rotate_angle = %s
 valve_number = %s 
 
-save_file = save_path + '\\\\' + file_name
+save_file = save_path + "\\\\" + file_name
 
 options = ExportOptions.Create()
-DocumentSave.Execute(r"%%s/%%s.scdoc" %%(save_path, file_name), options)
+DocumentSave.Execute("%%s\%%s.scdoc" %%(save_path, file_name), options)
 
 cnumber = len(GetRootPart().Components)
 
@@ -103,15 +101,15 @@ for j in range(%s, 100, %s):
         anchor = Selection.CreateByNames('Axis%%s'%%(i+1))
         axis = Move.GetAxis(anchor)
         options = MoveOptions()
-        result = Move.Rotate(selection, axis, DEG(rotate_angle[i]), options, Info1)
+        result = Move.Rotate(selection, axis, DEG(rotate_angle[i]), options)
         # EndBlock
 
     # Save File
     options = ExportOptions.Create()
     DocumentSave.Execute(r"%%s_%%s.scdoc" %%(save_file, j), options)
 
-""" % (file_path, original_cad_name, rotate_list, valve_number, valve_percentage, valve_percentage)
-        f.write(message)
-        f.close()
+""" % (file_path, cad_name, rotate_list, valve_number, valve_percentage, valve_percentage)
+    f.write(message)
+    f.close()
 
-        return script_path
+    return script_path
