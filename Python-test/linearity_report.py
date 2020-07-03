@@ -124,9 +124,9 @@ class LinReport(object):
 
 
 if __name__ == "__main__":
-    project_address = r"G:\_HAVC_Project\D2U-2\D2U-2_lin_defrost\D2U-2_V37_lin_defrost"
+    project_address = r"G:\_HAVC_Project\D2U-2\D2U-2_lin_defog\DU2-2_V37_lin_defog"
     project_name = 'D2U-2'
-    version_name = 'V37_lin_defrost'
+    version_name = 'V37_lin_defog'
 
     whole_name = project_name + '-' + version_name
     Linearity_report = LinReport(project_address, project_name, version_name, 30, 90, 7)

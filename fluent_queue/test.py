@@ -1,38 +1,58 @@
-import time
+import cgitb
+import sys
+from ui_py.ui_plan_timer import Ui_set_timer_Form
+from PyQt5.QtWidgets import QApplication, QWidget
+from PyQt5.QtCore import QDateTime, QThread, pyqtSignal, QEvent
 
 
-class Scheduler(object):
-    def __init__(self, schedule_day, schedule_hour, schedule_min):
-        self.schedule_day = int(schedule_day)
-        self.schedule_hour = int(schedule_hour)
-        self.schedule_min = int(schedule_min)
-        # --------------init variable-----------------------
-        self.local_time = time.localtime()
-        # print(self.local_time)
-        self.wait_time = int()
-        # --------------init function------------------------
-        self.get_wait_time()
+class Scheduler(QWidget, Ui_set_timer_Form):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setupUi(self)
+        self.edit_setting()
+        self.btn()
+        self.launch_thread = QThread()
 
-    def get_wait_time(self):
-        current_day = self.local_time.tm_mday
-        current_hour = self.local_time.tm_hour
-        current_min = self.local_time.tm_min
+    def edit_setting(self):
+        self.edit_plan_datetime.setDateTime(QDateTime.currentDateTime())
+        self.edit_plan_datetime.setMinimumDateTime(QDateTime.currentDateTime())
+        self.edit_plan_datetime.setMaximumDateTime(QDateTime.currentDateTime().addDays(5))
+        # self.edit_plan_datetime.setCalendarPopup(True)
 
-        day_diff = self.schedule_day - current_day
-        hour_diff = self.schedule_hour - current_hour
-        min_diff = self.schedule_min - current_min
+    def btn(self):
+        self.btn_plan_start.clicked.connect(self.plan_start)
 
-        # total_diff =
+    def plan_start(self):
+        current_time = self.get_current_time()
+        schedule_time = self.get_schedule_time()
+        time_waiting = schedule_time - current_time
+        self.launch_thread = DelayLauncher(time_waiting)
+        self.launch_thread.start()
+        self.close()
+
+    def get_current_time(self):
+        return QDateTime.currentSecsSinceEpoch()
+
+    def get_schedule_time(self):
+        return self.edit_plan_datetime.dateTime().toSecsSinceEpoch()
 
 
-if __name__ == '__main__':
-    day = '1'
-    hour = '10'
-    min = '50'
-    scheduler = Scheduler(day, hour, min)
-    tss1 = '2013-10-10 23:40:00'
-    # timeArray = time.strptime(tss1, "%Y-%m-%d %H:%M:%S")
-    timeArray = time.localtime()
-    timeStamp = time.mktime(timeArray)
-    print(time.time())
-    print(timeStamp)
+class DelayLauncher(QThread):
+    launch_signal = pyqtSignal(int)
+
+    def __init__(self, delay_time):
+        super().__init__()
+        self.delay_time = delay_time
+
+    def run(self):
+        self.sleep(self.delay_time)
+        # self.launch_signal
+
+
+if __name__ == "__main__":
+    cgitb.enable(format='text')
+    app = QApplication(sys.argv)
+    myWin = Scheduler()
+    app.installEventFilter(myWin)
+    myWin.show()
+    sys.exit(app.exec_())

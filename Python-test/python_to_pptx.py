@@ -1,7 +1,7 @@
 
-project_name = 'EX11'
-version = 'V1_vent'
-Rotation_speed = 3700
+project_name = 'D2U-2'
+version = 'V20.2_vent'
+Rotation_speed = 3600
 
 
 def get_ppt(project_name, version, RPM):
@@ -243,29 +243,6 @@ def get_ppt(project_name, version, RPM):
         width = Inches(6)
         slide.shapes.add_picture(file_path + picture, left, top, width)
 
-    # streamline slide
-    wstrm_slide = ppt.slides[3]
-    title_set(wstrm_slide, 'Whole_Streamline')
-    set_picture(result_path, wstrm_slide, 'whole_pathline.jpg')
-
-    # distrib_streamline slide
-    dstrm_slide = ppt.slides[4]
-    title_set(dstrm_slide, 'Distributor_Streamline')
-    set_picture(result_path, dstrm_slide, 'distrib_pathline.jpg')
-
-    # contour slide
-    cont_slide = ppt.slides[5]
-    title_set(cont_slide, 'Evap_out-Contour')
-    set_picture(result_path, cont_slide, 'evap_out.jpg')
-
-    # contour slide
-    # cont_table = cont_slide.shapes[2].table
-
-    # cont_table_head = ['Evap_out Contour', 'Evap_out_0-4 Contour']
-    # jpg_table_head(cont_table, cont_table_head)
-    # jpg_into_table(result_path, cont_slide, 'evap_out.jpg', 'evap_out.jpg')
-
-    # Pressure Drop slide
     def dp_table_create(table, head, dp_data):
         for j in range(col):
             table.cell(0, j).text = head[j]
@@ -277,7 +254,8 @@ def get_ppt(project_name, version, RPM):
         table_font(table, Pt(10), Pt(10))
         aligning_table(table)
 
-    dp_slide = ppt.slides[6]
+    # Pressure Drop slide
+    dp_slide = ppt.slides[3]
     title_set(dp_slide, whole_title + '-Pressure-Drop')
 
     # create table
@@ -295,6 +273,22 @@ def get_ppt(project_name, version, RPM):
     tp_table = place_table(row, col, Inches(4), top, width, height, dp_slide)
     tp_table_head = ['Total Pressure', version]
     dp_table_create(tp_table, tp_table_head, tp_data)
+
+    # picture slides
+    picture_list = list()
+    pic_name_list = list()
+    total_picture_div = str()
+    for file in os.listdir(result_path):
+        if file.endswith('jpg') or file.endswith('png'):
+            pic_name_list.append(file.split('.')[0])
+            picture_list.append(file)
+    print(pic_name_list)
+    print(picture_list)
+    for index, pic in enumerate(picture_list):
+        if index < 3:
+            wstrm_slide = ppt.slides[4 + index]
+            title_set(wstrm_slide, '%s' % pic_name_list[index])
+            set_picture(result_path, wstrm_slide, '%s' % pic)
 
     # save ppt and open it
     ppt.save(result_path + '\\' + whole_title + '.pptx')

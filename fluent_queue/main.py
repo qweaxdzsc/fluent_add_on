@@ -7,7 +7,7 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox
 from ui_py.ui_queue_main import Ui_fluent_queue
 from func.func_ui_set import UiSet
 from func.func_account import AccVerify
-from func.func_timer import SleepOut, current_time
+from func.func_timer import SleepOut, current_time, Scheduler
 from func.func_list_manage import AddPj
 from func.func_short_key import ShortKey
 from func.func_run_calculation import Calculate
@@ -28,6 +28,8 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         # --------- initial_variable--------
         self.acc_name = str()
         self.new_pj = dict()
+        self.have_schedule = False
+        self.waiting_min = int()
         self.pause = True
         self.csv_path = r"S:\PE\Engineering database\CFD\03_Tools\queue_backup"
         self.mission_list = self.read_csv('waiting_list.csv')
@@ -37,7 +39,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.calculation = Calculate(self, self.mission_list, self.running_project)       # start calculation thread
         self.calculation.signal_update_finished_log.connect(self.update_finished_list_log)
         self.calculation.signal_update_running_log.connect(self.update_running_list_log)
-        self.calculation.signal_license_error.connect(self.show_license_error)
+        self.calculation.signal_license_error.connect(self.show_status_message)
         self.calculation.start()
         self.manager_authority(False)
         self.listWidget_queue.file_receive.connect(self.receive_drop_file)
@@ -50,7 +52,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.action_add.triggered.connect(self.add_project)
         self.action_delete.triggered.connect(self.delete_project)
         self.action_journal.triggered.connect(self.view_history_log)
-        self.action_help.triggered.connect(self.help_show)
+        self.action_setting.triggered.connect(self.set_schedule)
 
     def read_csv(self, csv_name):
         """
@@ -234,8 +236,8 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
             if running_project:
                 csv_writer.writerow(running_project[0])
 
-    def show_license_error(self, msg):
-        self.statusbar.showMessage(msg, 3000)
+    def show_status_message(self, msg):
+        self.statusbar.showMessage(msg)
 
     def manager_authority(self, switch):
         """
@@ -257,8 +259,16 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
     def reboot_journal_func(self):
         self.action_journal.setEnabled(True)
 
-    def help_show(self):
-        QMessageBox.about(self, "帮助", "请找管理员询问")
+    def set_schedule(self):
+        self.schedule = Scheduler(self.have_schedule, self.waiting_min)
+        self.schedule.signal_control_cal.connect(self.set_pause_cal)
+        self.schedule.signal_waiting_min.connect(self.waiting_msg)
+        self.schedule.signal_cancel_plan.connect(self.show_status_message)
+
+    def waiting_msg(self, min):
+        self.waiting_min = min
+        waiting_msg = '计划任务将在%s分钟后启动' % min
+        self.show_status_message(waiting_msg)
 
     def receive_drop_file(self, file):
         if self.action_add.isEnabled():
@@ -270,11 +280,19 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
             else:
                 self.add_pj_ui.edit_project_address.setText(file)
 
-    def pause_cal(self):
+    def toggle_pause_cal(self):
         if self.pause:
             self.pause = False
         else:
             self.pause = True
+
+        self.show_status_message('后续计算任务停止：%s' % self.pause)
+        print('calculation queue paused:', self.pause)
+
+    def set_pause_cal(self, status):
+        self.pause = status
+        self.have_schedule = status
+        self.show_status_message('后续计算任务停止：%s' % self.pause)
         print('calculation queue paused:', self.pause)
 
 

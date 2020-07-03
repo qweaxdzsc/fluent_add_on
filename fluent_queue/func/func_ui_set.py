@@ -19,7 +19,7 @@ class UiSet(object):
         self._set_icon('add.png', self.ui.action_add)
         self._set_icon('journal.png', self.ui.action_journal)
         self._set_icon('delete.png', self.ui.action_delete)
-        self._set_icon('help.png', self.ui.action_help)
+        self._set_icon('setting.png', self.ui.action_setting)
 
     def _set_icon(self, pict, action):
         """
@@ -46,8 +46,9 @@ class UiSet(object):
         self.ui.action_delete.setDisabled(logoff)
         self.ui.action_logout.setDisabled(logoff)
         self.ui.action_login.setEnabled(logoff)
-        self.ui.action_add.setStatusTip('请先登陆后使用添加功能')
-        self.ui.action_delete.setStatusTip('请先登陆后使用删除功能')
+        self.ui.action_setting.setDisabled(logoff)
+        # self.ui.action_add.setStatusTip('请先登陆后使用添加功能')
+        # self.ui.action_delete.setStatusTip('请先登陆后使用删除功能')
         self.ui.listWidget_queue.setDisabled(logoff)
 
 

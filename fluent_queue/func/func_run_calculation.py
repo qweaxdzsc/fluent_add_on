@@ -47,6 +47,7 @@ class Calculate(QThread):
                 if self.mission_list:
                     ansys_license = LicenseUsage()
                     if ansys_license.is_enough(self.cores):
+                        self.signal_license_error.emit('')
                         self.running_show()
                         del self.mission_list[0]
                         self.ui.update_waiting_list_log()

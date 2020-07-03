@@ -63,7 +63,7 @@
        <string/>
       </property>
       <property name="statusTip">
-       <string>正在计算的项目</string>
+       <string/>
       </property>
       <property name="styleSheet">
        <string notr="true">border-top: 0px;
@@ -81,7 +81,7 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1,
        <string/>
       </property>
       <property name="statusTip">
-       <string>待处理项目队列</string>
+       <string/>
       </property>
       <property name="styleSheet">
        <string notr="true">border-top: 0px</string>
@@ -107,7 +107,7 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1,
     <item>
      <widget class="QProgressBar" name="progressBar">
       <property name="statusTip">
-       <string>总进度</string>
+       <string/>
       </property>
       <property name="value">
        <number>50</number>
@@ -170,7 +170,7 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1,
    <addaction name="separator"/>
    <addaction name="action_journal"/>
    <addaction name="separator"/>
-   <addaction name="action_help"/>
+   <addaction name="action_setting"/>
    <addaction name="separator"/>
   </widget>
   <action name="action_login">
@@ -224,10 +224,10 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1,
     <string>删除选中项目</string>
    </property>
   </action>
-  <action name="action_help">
+  <action name="action_setting">
    <property name="icon">
     <iconset>
-     <normaloff>../icon/help.png</normaloff>../icon/help.png</iconset>
+     <normaloff>../icon/setting.png</normaloff>../icon/setting.png</iconset>
    </property>
    <property name="text">
     <string>帮助</string>

@@ -28,6 +28,7 @@ class Ui_fluent_queue(object):
         self.listWidget_running.setEnabled(True)
         self.listWidget_running.setMaximumSize(QtCore.QSize(500, 25))
         self.listWidget_running.setToolTip("")
+        self.listWidget_running.setStatusTip("")
         self.listWidget_running.setStyleSheet("border-top: 0px;\n"
 "background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1,\n"
 "                                      stop: 0 #9ACD32, stop: 1 #FFFFF0);")
@@ -36,12 +37,14 @@ class Ui_fluent_queue(object):
         self.listWidget_queue = DragListWidget(self.centralwidget)
         self.listWidget_queue.setEnabled(True)
         self.listWidget_queue.setToolTip("")
+        self.listWidget_queue.setStatusTip("")
         self.listWidget_queue.setStyleSheet("border-top: 0px")
         self.listWidget_queue.setObjectName("listWidget_queue")
         self.verticalLayout.addWidget(self.listWidget_queue)
         spacerItem = QtWidgets.QSpacerItem(20, 20, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Preferred)
         self.verticalLayout.addItem(spacerItem)
         self.progressBar = QtWidgets.QProgressBar(self.centralwidget)
+        self.progressBar.setStatusTip("")
         self.progressBar.setProperty("value", 50)
         self.progressBar.setTextVisible(False)
         self.progressBar.setInvertedAppearance(False)
@@ -89,11 +92,11 @@ class Ui_fluent_queue(object):
         icon4.addPixmap(QtGui.QPixmap("../icon/delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.action_delete.setIcon(icon4)
         self.action_delete.setObjectName("action_delete")
-        self.action_help = QtWidgets.QAction(fluent_queue)
+        self.action_setting = QtWidgets.QAction(fluent_queue)
         icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap("../icon/help.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
-        self.action_help.setIcon(icon5)
-        self.action_help.setObjectName("action_help")
+        icon5.addPixmap(QtGui.QPixmap("../icon/setting.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        self.action_setting.setIcon(icon5)
+        self.action_setting.setObjectName("action_setting")
         self.toolBar.addAction(self.action_login)
         self.toolBar.addSeparator()
         self.toolBar.addAction(self.action_logout)
@@ -104,7 +107,7 @@ class Ui_fluent_queue(object):
         self.toolBar.addSeparator()
         self.toolBar.addAction(self.action_journal)
         self.toolBar.addSeparator()
-        self.toolBar.addAction(self.action_help)
+        self.toolBar.addAction(self.action_setting)
         self.toolBar.addSeparator()
 
         self.retranslateUi(fluent_queue)
@@ -113,9 +116,6 @@ class Ui_fluent_queue(object):
     def retranslateUi(self, fluent_queue):
         _translate = QtCore.QCoreApplication.translate
         fluent_queue.setWindowTitle(_translate("fluent_queue", "未登陆-请登陆后使用更多功能"))
-        self.listWidget_running.setStatusTip(_translate("fluent_queue", "正在计算的项目"))
-        self.listWidget_queue.setStatusTip(_translate("fluent_queue", "待处理项目队列"))
-        self.progressBar.setStatusTip(_translate("fluent_queue", "总进度"))
         self.progressBar.setFormat(_translate("fluent_queue", "%p%"))
         self.toolBar.setWindowTitle(_translate("fluent_queue", "未登陆-请登陆后使用更多功能"))
         self.action_login.setText(_translate("fluent_queue", "登陆"))
@@ -125,8 +125,6 @@ class Ui_fluent_queue(object):
         self.action_journal.setToolTip(_translate("fluent_queue", "完成项目记录"))
         self.action_delete.setText(_translate("fluent_queue", "删除项目"))
         self.action_delete.setToolTip(_translate("fluent_queue", "删除选中项目"))
-        self.action_help.setText(_translate("fluent_queue", "帮助"))
-        self.action_help.setToolTip(_translate("fluent_queue", "帮助文档"))
-
-
+        self.action_setting.setText(_translate("fluent_queue", "帮助"))
+        self.action_setting.setToolTip(_translate("fluent_queue", "帮助文档"))
 

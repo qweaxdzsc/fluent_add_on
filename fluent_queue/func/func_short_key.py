@@ -30,7 +30,7 @@ class ShortKey(object):
 
         if e.key() == Qt.Key_L:                                                     # used for suspend calculation loop
             if QApplication.keyboardModifiers() == Qt.ControlModifier:
-                self.ui.pause_cal()
+                self.ui.toggle_pause_cal()
 
     def alter_cores(self, core):
         self.ui.calculation.cores = core

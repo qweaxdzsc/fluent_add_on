@@ -2,28 +2,40 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e475a0b-2241-43fa-a10d-e22986a3349c" name="Default Changelist" comment="add K calculator. pop up when right click in the cal_K column at rename_table">
-      <change afterPath="$PROJECT_DIR$/../Python-test/build/mail_win32/Analysis-00.toc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/build/mail_win32/EXE-00.toc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/build/mail_win32/PKG-00.pkg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/build/mail_win32/PKG-00.toc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/build/mail_win32/PYZ-00.pyz" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/build/mail_win32/PYZ-00.toc" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/build/mail_win32/base_library.zip" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/build/mail_win32/mail_win32.exe.manifest" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/build/mail_win32/warn-mail_win32.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/build/mail_win32/xref-mail_win32.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/mail_win32.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/mail_win32.spec" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/build/main/Analysis-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/build/main/COLLECT-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/build/main/EXE-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/build/main/PKG-00.pkg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/build/main/PKG-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/build/main/PYZ-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/build/main/Tree-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/build/main/base_library.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/build/main/main.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/build/main/main.exe.manifest" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/build/main/warn-main.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/build/main/xref-main.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/main.spec" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/icon/setting.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_py/ui_plan_timer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_qt/ui_plan_timer.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CFD_input_gui/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/database.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/get_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/get_report.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/linearity_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/linearity_report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/mesh_info_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/mesh_info_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/new_project_folder.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/new_project_folder.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/python_packer.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/python_packer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/test2.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/test2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/python_to_pptx.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/python_to_pptx.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_run_calculation.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_run_calculation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_short_key.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_short_key.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_timer.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_timer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_ui_set.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_ui_set.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/other_tool/GUI_convertor.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/other_tool/GUI_convertor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_queue/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/ui_py/ui_queue_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/ui_py/ui_queue_main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/ui_qt/ui_queue_main.ui" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/ui_qt/ui_queue_main.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -76,7 +88,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/New Scratch File" value="BuildoutCfg" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/report" />
-    <property name="settings.editor.selected.configurable" value="org.jetbrains.plugins.github.ui.GithubSettingsConfigurable" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -238,42 +250,43 @@
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state x="623" y="259" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1591934953200" />
-    <state width="1892" height="309" key="GridCell.Tab.0.bottom" timestamp="1593504677746">
+    <state width="1182" height="309" key="GridCell.Tab.0.bottom" timestamp="1593650535788">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1892" height="199" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1592395311268" />
     <state width="1892" height="187" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1590127296374" />
-    <state width="1892" height="309" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1593504677746" />
-    <state width="1892" height="309" key="GridCell.Tab.0.center" timestamp="1593504677746">
+    <state width="1182" height="309" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1593650535788" />
+    <state width="1182" height="309" key="GridCell.Tab.0.center" timestamp="1593650535788">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1892" height="199" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1592395311268" />
     <state width="1892" height="187" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1590127296374" />
-    <state width="1892" height="309" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1593504677746" />
-    <state width="1892" height="309" key="GridCell.Tab.0.left" timestamp="1593504677746">
+    <state width="1182" height="309" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1593650535788" />
+    <state width="1182" height="309" key="GridCell.Tab.0.left" timestamp="1593650535788">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1892" height="199" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1592395311267" />
     <state width="1892" height="187" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1590127296374" />
-    <state width="1892" height="309" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1593504677746" />
-    <state width="1892" height="309" key="GridCell.Tab.0.right" timestamp="1593504677746">
+    <state width="1182" height="309" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1593650535788" />
+    <state width="1182" height="309" key="GridCell.Tab.0.right" timestamp="1593650535788">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1892" height="199" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1592395311268" />
     <state width="1892" height="187" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1590127296374" />
-    <state width="1892" height="309" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1593504677746" />
-    <state x="471" y="163" key="SettingsEditor" timestamp="1590128012339">
+    <state width="1182" height="309" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1593650535788" />
+    <state x="471" y="163" key="SettingsEditor" timestamp="1593650586391">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state x="471" y="163" key="SettingsEditor/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1590128012339" />
+    <state x="471" y="163" key="SettingsEditor/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1593650586391" />
     <state x="579" y="355" key="com.intellij.ide.util.TipDialog" timestamp="1586479212568">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state x="579" y="355" key="com.intellij.ide.util.TipDialog/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1586479212568" />
-    <state x="602" y="243" width="716" height="666" key="find.popup" timestamp="1592882701166">
+    <state x="602" y="243" width="716" height="666" key="find.popup" timestamp="1593592722671">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state x="602" y="243" width="716" height="666" key="find.popup/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1592882701166" />
+    <state x="602" y="243" width="716" height="666" key="find.popup/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1593592722671" />
     <state x="539" y="117" width="840" height="1034" key="search.everywhere.popup" timestamp="1592875381401">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>

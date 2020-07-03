@@ -42,12 +42,12 @@ class PythonPacker(object):
 
 
 if __name__ == "__main__":
-    python_path = r"C:\Users\BZMBN4\Desktop"
-    python_name = "mail_win32.py"
+    python_path = r"C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_queue"
+    python_name = "main.py"
     copy_file_list = [
-        r'Z:\EHCT\image',
-        r'Z:\EHCT\path',
+        r'C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_queue\icon',
+        # r'Z:\EHCT\path',
     ]
     packer = PythonPacker(python_path, python_name)
-    # packer.simple_packer(copy_file_list, "-F -w")
-    packer.pack_python("-F")
+    packer.simple_packer(copy_file_list, "-D -w")
+    # packer.pack_python("-D")

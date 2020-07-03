@@ -148,12 +148,12 @@ class GetTui(object):
         post.create_view(porous_dir)
         if self.energy_check is True:
             post.txt_surface_integrals('area-weighted-avg', ['outlet*'], 'temperature')
-            post.create_streamline('temp_pathline', 'inlet', '', 'temperature')
+            post.create_streamline('temp_pathline', 'inlet', '', 'temperature', skip=2)
             post.create_scene('temp_pathline')
             post.snip_avz('temp_pathline_scene')
         else:
             post.read_view()
-            post.create_streamline('whole_pathline', 'inlet')
+            post.create_streamline('whole_pathline', 'inlet', skip='2')
             post.create_streamline('distrib_pathline', 'evap_in', [0, 15], skip='2')
             post.create_scene('whole_pathline')
             post.create_scene('distrib_pathline')
