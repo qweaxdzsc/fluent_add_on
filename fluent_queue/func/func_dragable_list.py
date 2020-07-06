@@ -10,8 +10,8 @@ class DragListWidget(QListWidget):
     1. it make list widget dragable and dropable
     2. if have drag permission, false by default, can alter the sequence of list item
     """
-    file_receive = pyqtSignal(str)
-    project_exchange = pyqtSignal(dict)
+    signal_file_receive = pyqtSignal(str)
+    signal_project_exchange = pyqtSignal(dict)
 
     def __init__(self, central_widget):
         super(DragListWidget, self).__init__(central_widget)
@@ -39,7 +39,7 @@ class DragListWidget(QListWidget):
             file = str(received_data.urls()[0].toLocalFile())
             file_info = QFileInfo(file)
             accept_file_type = ['msh', 'cas', 'h5', 'jou']
-            self.file_receive.emit(file)
+            self.signal_file_receive.emit(file)
         else:
             if self.drag_permission:
                 print('yes')
@@ -59,6 +59,6 @@ class DragListWidget(QListWidget):
                     else:
                         self.insertItem(last_pos_item, i)
                         exchange_dict['after_index'] = last_pos_item
-                    self.project_exchange.emit(exchange_dict)
+                    self.signal_project_exchange.emit(exchange_dict)
 
                 print('有东西拖入')

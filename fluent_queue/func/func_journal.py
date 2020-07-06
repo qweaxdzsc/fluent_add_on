@@ -1,10 +1,9 @@
 import sys
 import cgitb
 import csv
-import time
 
 from PyQt5.QtWidgets import QApplication, QWidget, QHeaderView, QTableWidgetItem
-from PyQt5.QtCore import pyqtSignal, QThread
+from PyQt5.QtCore import pyqtSignal
 
 from ui_py.ui_journal import Ui_widget_journal
 
@@ -13,19 +12,35 @@ class HistoryView(QWidget, Ui_widget_journal):
     """
     SubUi object to view history csv
     """
-    viewer_closed = pyqtSignal()
+    signal_viewer_closed = pyqtSignal()
 
-    def __init__(self, csv_path):
-        super(HistoryView, self).__init__()
+    def __init__(self, csv_path, signal_timer):
+        super().__init__()
+        # -----------init variable-------------
+        self.csv_path = csv_path
+        self.finished_list = list()
+        # -----------init function-------------
         self.setupUi(self)
-        self.log_show = CsvReader(csv_path)
-        self.log_show.content_list.connect(self.list_to_ui)
-        self.log_show.start()
+        signal_timer.connect(self.show_log)
+        self.show_log()
         self.show()                                                             # show window
 
-    def list_to_ui(self, finished_list):
-        header = finished_list[0]
-        data = finished_list[1:]
+    def show_log(self):
+        print('show_log launch')
+        self.read_csv()
+        self.list_to_ui()
+
+    def read_csv(self):
+        self.finished_list = []
+        with open(self.csv_path, 'r') as f:
+            csv_reader = csv.reader(f, delimiter=',')
+            for row in csv_reader:
+                self.finished_list.append(row)
+
+    def list_to_ui(self):
+        self.table_journal.clear()
+        header = self.finished_list[0]
+        data = self.finished_list[1:]
         column_count = len(header)
         row_count = len(data)
         self.table_journal.setColumnCount(column_count)
@@ -40,39 +55,15 @@ class HistoryView(QWidget, Ui_widget_journal):
         self.table_journal.horizontalHeader().setSectionResizeMode(QHeaderView.ResizeToContents)
 
     def closeEvent(self, event):
-        self.viewer_closed.emit()
-        self.log_show.stop()
-
-
-class CsvReader(QThread):
-    """ create timer thread"""
-    content_list = pyqtSignal(list)
-
-    def __init__(self, csv_path):
-        super(CsvReader, self).__init__()
-        self.csv_path = csv_path
-        self.runnable = True
-
-    def run(self):
-        while self.runnable:
-            finished_list = list()
-            with open(self.csv_path, 'r') as f:
-                csv_reader = csv.reader(f, delimiter=',')
-                for row in csv_reader:
-                    finished_list.append(row)
-            self.content_list.emit(finished_list)
-            time.sleep(25)
-
-    def stop(self):
-        self.runnable = False
-        self.quit()
+        self.signal_viewer_closed.emit()
+        self.close()
 
 
 if __name__ == "__main__":
     cgitb.enable(format='text')
     csv_path = r"S:\PE\Engineering database\CFD\03_Tools\queue_backup\history_list.csv"
     app = QApplication(sys.argv)
-    myWin = HistoryView(csv_path)
-    myWin.show()
+    # myWin = HistoryView(csv_path)
+    # myWin.show()
     sys.exit(app.exec_())
 

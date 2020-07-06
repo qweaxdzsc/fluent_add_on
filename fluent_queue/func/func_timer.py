@@ -4,61 +4,67 @@ from ui_py.ui_plan_timer import Ui_set_timer_Form
 import time
 
 
-class timer(QThread):
+class LoopTimer(QThread):
     """ create timer thread"""
-    time_count = pyqtSignal(int)
+    signal_sleep_timer = pyqtSignal()
+    signal_journal_timer = pyqtSignal()
+    signal_schedule_timer = pyqtSignal()
 
-    def __init__(self, interval):
-        super(timer, self).__init__()
+    def __init__(self):
+        super(LoopTimer, self).__init__()
+        self.start()
         self.step = 0
         self.timer = QTimer()
-        self.timer.setInterval(interval)
-        self.timer.timeout.connect(self.show_time)
+        self.timer.setInterval(1000)                    # emit for every second
+        self.timer.timeout.connect(self.register_time_emitter)
+        self.timer.start()
 
     def run(self):
         pass
 
-    def show_time(self):
+    def register_time_emitter(self):
         self.step += 1
-        self.time_count.emit(self.step)
+        print("timer's seconds:", self.step)
+        self.signal_emit(self.signal_sleep_timer, 60)
+        self.signal_emit(self.signal_journal_timer, 20)
+        self.signal_emit(self.signal_schedule_timer, 60)
 
-    def start_timer(self):
-        self.timer.start()
-        self.time_count.emit(0)
+    def signal_emit(self, signal, seconds):
+        if self.step % seconds == 0:
+            signal.emit()
 
     def stop(self):
         self.timer.stop()
 
 
-class SleepOut(QMainWindow, QThread):
-    time_exceed = pyqtSignal()
+class SleepOut(QMainWindow):
+    signal_time_exceed = pyqtSignal()
     """
     This object is mean to calculate the time without operation
     1. create a timer
     2. rewrite Ui's eventFilter, every move in this application will reset the timer
     3. when time exceed time out, logout the account
     """
-    def __init__(self, ui, time_out_minutes):
+    def __init__(self, ui, signal_timer, time_out_minutes):
         super().__init__()
         self.ui = ui
         self.time_out_minutes = time_out_minutes
-        self.sleep_time = timer(60000)                                      # 60000 means one minutes
-        self.sleep_time.time_count.connect(self.time_out)                   # create sleep timer
+        self.sleep_time = 0
+        signal_timer.connect(self.time_add)                                 # create sleep timer
         ui.eventFilter = self.eventFilter                                   # rewrite ui's eventFilter function
 
     def eventFilter(self, watched_obj, event):
         if (event.type() == QEvent.MouseButtonPress) or (event.type() == QEvent.KeyPress) \
                 or (event.type() == QEvent.MouseMove):
-            self.sleep_time.step = 0
+            self.sleep_time = 0
         return QMainWindow.eventFilter(self.ui, watched_obj, event)
 
-    def start_count(self):
-        self.sleep_time.start_timer()
-
-    def time_out(self, time):
-        if time > self.time_out_minutes:
-            self.time_exceed.emit()
-            self.sleep_time.stop()
+    def time_add(self):
+        self.sleep_time += 1
+        print('no movement detected: %s minutes' % self.sleep_time)
+        if self.sleep_time >= self.time_out_minutes:
+            self.signal_time_exceed.emit()
+            self.sleep_time = 0
 
 
 class Scheduler(QWidget, Ui_set_timer_Form):
@@ -66,19 +72,21 @@ class Scheduler(QWidget, Ui_set_timer_Form):
     signal_waiting_min = pyqtSignal(int)
     signal_cancel_plan = pyqtSignal(str)
 
-    def __init__(self, have_schedule, waiting_min):
+    def __init__(self, signal_timer):
         super().__init__()
         self.setupUi(self)
         # ------------init variable--------------
-        self.time_waiting = int()
-        self.waiting_min = waiting_min
-        self.have_schedule = have_schedule
+        self.waiting_min = 0
+        self.have_schedule = False
         # ------------init function--------------
-        self.ui_setting()
         self.btn()
-        self.show()
+        signal_timer.connect(self.left_time)
 
-    def ui_setting(self):
+    def btn(self):
+        self.btn_plan_start.clicked.connect(self.plan_start)
+        self.btn_cancel_plan.clicked.connect(self.cancel_plan)
+
+    def show_ui(self):
         if self.have_schedule:
             self.frame_launch.hide()
             self.frame_cancel.show()
@@ -101,19 +109,15 @@ class Scheduler(QWidget, Ui_set_timer_Form):
             self.edit_plan_datetime.setCalendarPopup(True)
 
         self.setMaximumSize(260, 100)
-
-    def btn(self):
-        self.btn_plan_start.clicked.connect(self.plan_start)
-        self.btn_cancel_plan.clicked.connect(self.cancel_plan)
+        self.show()
 
     def plan_start(self):
         curr_time = self.get_current_time()
         schedule_time = self.get_schedule_time()
-        self.time_waiting = int(schedule_time - curr_time)
+        self.waiting_min = int((schedule_time - curr_time) / 60)
+        print(self.waiting_min)
         self.signal_control_cal.emit(True)
-        self.launch_thread = timer(60000)
-        self.launch_thread.time_count.connect(self.thread_time)
-        self.launch_thread.start_timer()
+        self.have_schedule = True
         self.close()
 
     def get_current_time(self):
@@ -122,19 +126,19 @@ class Scheduler(QWidget, Ui_set_timer_Form):
     def get_schedule_time(self):
         return self.edit_plan_datetime.dateTime().toSecsSinceEpoch()
 
-    def thread_time(self, min):
-        print('delay minutes:', min)
-        seconds = min*60
-        rest_min = int(self.time_waiting/60 - min)
-        self.signal_waiting_min.emit(rest_min)
+    def left_time(self):
+        self.waiting_min -= 1
+        print('等待时间:', self.waiting_min)
+        if self.have_schedule:
+            self.signal_waiting_min.emit(self.waiting_min)
 
-        if seconds >= self.time_waiting:
-            self.launch_thread.stop()
-            self.signal_control_cal.emit(False)
+            if self.waiting_min <= 0:
+                self.signal_control_cal.emit(False)
+                self.have_schedule = False
 
     def cancel_plan(self):
-        self.launch_thread.stop()           # TODO move launch_thread to main UI
         self.signal_cancel_plan.emit('')
+        self.have_schedule = False
         self.close()
 
 

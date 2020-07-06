@@ -26,6 +26,7 @@ class Calculate(QThread):
         self.use_time = float()
         self.cores = 24
         self.complete_status = 'complete'
+        self.start()
 
     def run(self):
         """
@@ -40,7 +41,7 @@ class Calculate(QThread):
         if not self.ui.pause:
             if ansys_license.is_enough(self.cores):
                 if self.running_project:
-                        self.calculation()
+                    self.calculation()
         while True:
             time.sleep(1)
             if not self.ui.pause:
@@ -95,7 +96,7 @@ class Calculate(QThread):
                              stderr=subprocess.PIPE, universal_newlines=True)
         # while p.poll() == None:                                     # block calculation thread until finished
         #     time.sleep(5)
-            # line = p.stdout.readline()
+        #      line = p.stdout.readline()
         transcript_name = '%s_transcript' % self.running_project[0]['project_name']
         self.calguard = CalGuard(project_address, transcript_name)
         self.calguard.start()

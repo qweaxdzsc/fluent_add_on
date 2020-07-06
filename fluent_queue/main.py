@@ -7,7 +7,7 @@ from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox
 from ui_py.ui_queue_main import Ui_fluent_queue
 from func.func_ui_set import UiSet
 from func.func_account import AccVerify
-from func.func_timer import SleepOut, current_time, Scheduler
+from func.func_timer import LoopTimer, SleepOut, current_time, Scheduler
 from func.func_list_manage import AddPj
 from func.func_short_key import ShortKey
 from func.func_run_calculation import Calculate
@@ -15,36 +15,41 @@ from func.func_journal import HistoryView
 
 
 class MyMainWindow(QMainWindow, Ui_fluent_queue):
-    def __init__(self, parent=None):
-        super(MyMainWindow, self).__init__(parent)
+    def __init__(self):
+        super().__init__()
         self.setupUi(self)
         self.ui_alter = UiSet(self)                             # UiSet is the collection of Ui change object
         self.ui_alter.set_all_icon()
         self.ui_alter.ui_user_logoff()                          # change Ui to user logoff status
         self.btn()                                              # enable button function
-        self.sleep_time = SleepOut(self, 15)                    # create timer to logout if not operate for a long time
-        self.sleep_time.time_exceed.connect(self.user_logout)
-        self.short_key = ShortKey(self)                         # create shortcut key
         # --------- initial_variable--------
         self.acc_name = str()
         self.new_pj = dict()
-        self.have_schedule = False
         self.waiting_min = int()
+        self.have_schedule = False
         self.pause = True
         self.csv_path = r"S:\PE\Engineering database\CFD\03_Tools\queue_backup"
         self.mission_list = self.read_csv('waiting_list.csv')
         self.running_project = self.read_csv('running_list.csv')
-        # ------------------------------------
-        self.init_queue_showing()                               # show running and waiting list
-        self.calculation = Calculate(self, self.mission_list, self.running_project)       # start calculation thread
+        # ----------initial function-----------------
+        self.init_queue_showing()                                                      # show running and waiting list
+        self.timer = LoopTimer()
+        self.sleep_time = SleepOut(self, self.timer.signal_sleep_timer, 15) # create timer to logout if not operate for a long time
+        self.short_key = ShortKey(self)                                                # create shortcut key
+        self.calculation = Calculate(self, self.mission_list, self.running_project)    # start calculation thread
+        self.schedule = Scheduler(self.timer.signal_schedule_timer)
+        self.manager_authority(False)
+        print('whether have manager authority?: ', self.listWidget_queue.drag_permission)
+        # ---------signal connection-------------------------
+        self.sleep_time.signal_time_exceed.connect(self.user_logout)
         self.calculation.signal_update_finished_log.connect(self.update_finished_list_log)
         self.calculation.signal_update_running_log.connect(self.update_running_list_log)
         self.calculation.signal_license_error.connect(self.show_status_message)
-        self.calculation.start()
-        self.manager_authority(False)
-        self.listWidget_queue.file_receive.connect(self.receive_drop_file)
-        self.listWidget_queue.project_exchange.connect(self.exchange_project)
-        print('whether have manager authority?: ', self.listWidget_queue.drag_permission)
+        self.schedule.signal_control_cal.connect(self.set_pause_cal)
+        self.schedule.signal_waiting_min.connect(self.waiting_msg)
+        self.schedule.signal_cancel_plan.connect(self.show_status_message)
+        self.listWidget_queue.signal_file_receive.connect(self.receive_drop_file)
+        self.listWidget_queue.signal_project_exchange.connect(self.exchange_project)
 
     def btn(self):
         self.action_login.triggered.connect(self.account_verification)
@@ -104,7 +109,6 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.acc_name = acc_name
         window_title = '欢迎用户' + acc_name
         self.setWindowTitle(window_title)
-        self.sleep_time.start_count()
         self.ui_alter.ui_user_logoff(False)
         # self.action_login.setEnabled()
 
@@ -252,18 +256,15 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
     def view_history_log(self):
         file_name = 'history_list.csv'
         csv_file = '%s/%s' % (self.csv_path, file_name)
-        self.Hist_viewer = HistoryView(csv_file)
-        self.Hist_viewer.viewer_closed.connect(self.reboot_journal_func)
+        self.Hist_viewer = HistoryView(csv_file, self.timer.signal_journal_timer)
+        self.Hist_viewer.signal_viewer_closed.connect(self.reboot_journal_func)
         self.action_journal.setDisabled(True)
 
     def reboot_journal_func(self):
         self.action_journal.setEnabled(True)
 
     def set_schedule(self):
-        self.schedule = Scheduler(self.have_schedule, self.waiting_min)
-        self.schedule.signal_control_cal.connect(self.set_pause_cal)
-        self.schedule.signal_waiting_min.connect(self.waiting_msg)
-        self.schedule.signal_cancel_plan.connect(self.show_status_message)
+        self.schedule.show_ui()
 
     def waiting_msg(self, min):
         self.waiting_min = min

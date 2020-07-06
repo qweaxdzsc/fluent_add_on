@@ -5,7 +5,7 @@ import cgitb
 
 
 # designate path
-root = r"G:\_HAVC_Project\D2U-2\D2U-2_vent\D2U-2_vent_V37\result_D2U-2_V37_vent"
+root = r"G:\_HAVC_Project\D2U-2\D2U-2_trl\D2U-2_V38_trl\result_D2U-2_V38_trl_distrib"
 path = root + '\\'
 
 # Txt input path
@@ -13,7 +13,7 @@ txt_name = path + 'D2U-2.txt'
 
 
 # Excel output info
-excel_name = 'D2U-2_V37_vent'         # Output excel name
+excel_name = 'D2U-2_V38_trl_distrib'         # Output excel name
 sheet_name = excel_name                  # The sheet in excel
 data_name = excel_name                   # get a title for your data
 

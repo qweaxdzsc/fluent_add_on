@@ -50,9 +50,10 @@ class DelayLauncher(QThread):
 
 
 if __name__ == "__main__":
-    cgitb.enable(format='text')
-    app = QApplication(sys.argv)
-    myWin = Scheduler()
-    app.installEventFilter(myWin)
-    myWin.show()
-    sys.exit(app.exec_())
+    # cgitb.enable(format='text')
+    # app = QApplication(sys.argv)
+    # myWin = Scheduler()
+    # app.installEventFilter(myWin)
+    # myWin.show()
+    # sys.exit(app.exec_())
+    print(2 % 3)
