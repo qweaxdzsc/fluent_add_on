@@ -9,7 +9,6 @@ msg = ''
 
 
 def read_line(p):
-
     nl = 0
     finish_count = 0
     global msg

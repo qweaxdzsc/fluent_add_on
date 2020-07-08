@@ -10,7 +10,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from func.func_dragable_list import DragListWidget
 
-
 class Ui_fluent_queue(object):
     def setupUi(self, fluent_queue):
         fluent_queue.setObjectName("fluent_queue")
@@ -32,6 +31,9 @@ class Ui_fluent_queue(object):
         self.listWidget_running.setStyleSheet("border-top: 0px;\n"
 "background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1,\n"
 "                                      stop: 0 #9ACD32, stop: 1 #FFFFF0);")
+        self.listWidget_running.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.listWidget_running.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarAlwaysOff)
+        self.listWidget_running.setAutoScroll(True)
         self.listWidget_running.setObjectName("listWidget_running")
         self.verticalLayout.addWidget(self.listWidget_running)
         self.listWidget_queue = DragListWidget(self.centralwidget)

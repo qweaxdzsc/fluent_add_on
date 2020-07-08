@@ -1,6 +1,7 @@
 import sys
 import cgitb
 import csv
+import os
 
 from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5.QtCore import pyqtSignal, Qt
@@ -14,16 +15,27 @@ class AccVerify(QWidget, Ui_Frame_account):
     """
     verify_success = pyqtSignal(str)
 
-    def __init__(self, parent=None):
-        super(AccVerify, self).__init__(parent)
+    def __init__(self, account_file_path):
+        super().__init__()
         self.setupUi(self)
+        # ----------init variable--------------
+        self.account_csv_path = account_file_path
+        # ----------init function--------------
         self.btn()
+        self.verify_path()
         self.show()                                 # show window
 
     def btn(self):
-        self.btn_login.clicked.connect(self.verify)
+        self.btn_login.clicked.connect(self.verify_account)
 
-    def verify(self):
+    def verify_path(self):
+        if not os.path.exists(self.account_csv_path):
+            with open(self.account_csv_path, 'w', newline='') as csvfile:
+                header = ['Account', 'Password']
+                writer = csv.DictWriter(csvfile, fieldnames=header)
+                writer.writeheader()
+
+    def verify_account(self):
         """
         1. get account name and password from LineEdit
         2. get exist account dict from database, a csv file
@@ -48,14 +60,13 @@ class AccVerify(QWidget, Ui_Frame_account):
         2. read it as a dict
         :return: account dict
         """
-        account_csv_path = r'S:\PE\Engineering database\CFD\01_Standard\.account.csv'
-        with open(account_csv_path, 'r') as csvfile:
+        with open(self.account_csv_path, 'r') as csvfile:
             reader = csv.DictReader(csvfile)                # read csv by Dict method, it will using csv header
-            account = dict()
+            account_dict = dict()
             for row in reader:
-                account[row['Account']] = row['Password']   # relate account name and password to account dict
+                account_dict[row['Account']] = row['Password']   # relate account name and password to account dict
 
-        return account
+        return account_dict
 
     def keyPressEvent(self, e):
         """ Event from QT, can be rewrite
@@ -69,7 +80,7 @@ class AccVerify(QWidget, Ui_Frame_account):
 if __name__ == "__main__":
     cgitb.enable(format='text')
     app = QApplication(sys.argv)
-    myWin = AccVerify()
+    myWin = AccVerify('./account.csv')
     myWin.show()
     sys.exit(app.exec_())
 

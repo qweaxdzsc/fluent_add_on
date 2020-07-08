@@ -431,11 +431,3 @@
 #     sys.exit(app.exec_())
 
 # printer是嵌套函数
-a = {'valve1': 0, 'valve2': 0, 'valve3': 0}
-b = {}
-a.update(b)
-print(a)
-
-# for i in b.sort():
-#     if 'valve' in i:
-#         print(i)

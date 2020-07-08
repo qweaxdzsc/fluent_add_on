@@ -1,6 +1,8 @@
 import sys
 import cgitb
 import csv
+import subprocess as sp
+import os
 
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox
 # from PyQt5.QtCore import pyqtSignal
@@ -15,23 +17,32 @@ from func.func_journal import HistoryView
 
 
 class MyMainWindow(QMainWindow, Ui_fluent_queue):
-    def __init__(self):
+    def __init__(self, app):
         super().__init__()
         self.setupUi(self)
+        # -------- prevent multi application----------
+        self.app = app
+        self.prevent_multiapp()
         self.ui_alter = UiSet(self)                             # UiSet is the collection of Ui change object
         self.ui_alter.set_all_icon()
         self.ui_alter.ui_user_logoff()                          # change Ui to user logoff status
         self.btn()                                              # enable button function
-        # --------- initial_variable--------
+        # --------- initial variable--------
         self.acc_name = str()
         self.new_pj = dict()
         self.waiting_min = int()
         self.have_schedule = False
         self.pause = True
-        self.csv_path = r"S:\PE\Engineering database\CFD\03_Tools\queue_backup"
-        self.mission_list = self.read_csv('waiting_list.csv')
-        self.running_project = self.read_csv('running_list.csv')
+        self.database_path = r".\database"
+        self.waiting_list_file = 'waiting_list.csv'
+        self.running_list_file = 'running_list.csv'
+        self.history_list_file = 'history_list.csv'
+        self.account_file = 'account.csv'
+        self.mission_list = list()
+        self.running_project = list()
         # ----------initial function-----------------
+        self.database_path = self.get_abs_path(self.database_path)
+        self.init_data_loading()
         self.init_queue_showing()                                                      # show running and waiting list
         self.timer = LoopTimer()
         self.sleep_time = SleepOut(self, self.timer.signal_sleep_timer, 15) # create timer to logout if not operate for a long time
@@ -50,6 +61,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.schedule.signal_cancel_plan.connect(self.show_status_message)
         self.listWidget_queue.signal_file_receive.connect(self.receive_drop_file)
         self.listWidget_queue.signal_project_exchange.connect(self.exchange_project)
+        self.show()
 
     def btn(self):
         self.action_login.triggered.connect(self.account_verification)
@@ -59,6 +71,35 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.action_journal.triggered.connect(self.view_history_log)
         self.action_setting.triggered.connect(self.set_schedule)
 
+    def prevent_multiapp(self):
+        file_name = os.path.basename(sys.argv[0])
+        rindex = file_name.rindex('.')
+        application_name = file_name[:rindex]
+        print('application_name:', application_name)
+        count = sp.run("powershell -command $(get-process -Name %s | Group -Property name).count" % application_name,
+                   stdout=sp.PIPE, stderr=sp.PIPE).stdout
+        count = int(count)
+        print('application_count:', count)
+        if count > 1:
+            QMessageBox.warning(self, '警告', '进程已经打开，请勿重复开启')
+            sys.exit()
+
+    def get_abs_path(self, relative_path):
+        """
+        through relative path to create abs path,
+        and verify if it exist. If not, make one
+        :param relative_path:
+        :return: abs_path
+        """
+        abs_path = os.path.abspath(relative_path)
+        if not os.path.exists(abs_path):
+            os.makedirs(abs_path)
+        return abs_path
+
+    def init_data_loading(self):
+        self.mission_list = self.read_csv(self.waiting_list_file)
+        self.running_project = self.read_csv(self.running_list_file)
+
     def read_csv(self, csv_name):
         """
         check if have unfinished project
@@ -67,11 +108,12 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         :return: read_list
         """
         read_list = list()
-        csv_path = self.csv_path + "\\" + csv_name
-        with open(csv_path, 'r') as f:
-            csv_reader = csv.DictReader(f)
-            for row in csv_reader:
-                read_list.append(row)
+        csv_path = self.database_path + "\\" + csv_name
+        if os.path.exists(csv_path):
+            with open(csv_path, 'r') as f:
+                csv_reader = csv.DictReader(f)
+                for row in csv_reader:
+                    read_list.append(row)
 
         return read_list
 
@@ -95,7 +137,8 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         if correct, it will return.
         :return: a pyqtsignal(verify_success)
         """
-        self.acc_ui = AccVerify()
+        account_file_path = '%s/%s' % (self.database_path, self.account_file)
+        self.acc_ui = AccVerify(account_file_path)
         self.acc_ui.verify_success.connect(self.user_login)
 
     def user_login(self, acc_name):
@@ -200,7 +243,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         This func overwrite csv every time when mission list is updated.
         :return:
         """
-        waiting_list_csv = r'%s\waiting_list.csv' % self.csv_path
+        waiting_list_csv = r'%s\%s' % (self.database_path, self.waiting_list_file)
         header = ["account_name", "project_name", "project_address", "journal", "register_time"]
         with open(waiting_list_csv, 'w', newline='') as f:
             csv_writer = csv.DictWriter(f, fieldnames=header)
@@ -215,7 +258,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         append new finished project to log csv
         :return:
         """
-        log_csv = r'%s\history_list.csv' % self.csv_path
+        log_csv = r'%s\%s' % (self.database_path, self.history_list_file)
         header = ["account_name", "project_name", "project_address", "journal", "register_time",
                   "start_time", "using_time", "complete_status"]
         with open(log_csv, 'a+', newline='') as f:
@@ -232,7 +275,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         update running project to log csv
         :return:
         """
-        running_list_csv = r'%s\running_list.csv' % self.csv_path
+        running_list_csv = r'%s\%s' % (self.database_path, self.running_list_file)
         header = ["account_name", "project_name", "project_address", "journal", "register_time"]
         with open(running_list_csv, 'w', newline='') as f:
             csv_writer = csv.DictWriter(f, fieldnames=header)
@@ -254,8 +297,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         print("management authority: %s" % switch)
 
     def view_history_log(self):
-        file_name = 'history_list.csv'
-        csv_file = '%s/%s' % (self.csv_path, file_name)
+        csv_file = '%s/%s' % (self.database_path, self.history_list_file)
         self.Hist_viewer = HistoryView(csv_file, self.timer.signal_journal_timer)
         self.Hist_viewer.signal_viewer_closed.connect(self.reboot_journal_func)
         self.action_journal.setDisabled(True)
@@ -300,8 +342,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
 if __name__ == "__main__":
     cgitb.enable(format='text')
     app = QApplication(sys.argv)
-    myWin = MyMainWindow()
+    myWin = MyMainWindow(app)
     app.installEventFilter(myWin)
-    myWin.show()
     sys.exit(app.exec_())
 

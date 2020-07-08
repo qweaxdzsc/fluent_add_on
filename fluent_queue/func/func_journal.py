@@ -1,8 +1,9 @@
 import sys
 import cgitb
 import csv
+import os
 
-from PyQt5.QtWidgets import QApplication, QWidget, QHeaderView, QTableWidgetItem
+from PyQt5.QtWidgets import QApplication, QWidget, QHeaderView, QTableWidgetItem, QAbstractItemView
 from PyQt5.QtCore import pyqtSignal
 
 from ui_py.ui_journal import Ui_widget_journal
@@ -19,16 +20,25 @@ class HistoryView(QWidget, Ui_widget_journal):
         # -----------init variable-------------
         self.csv_path = csv_path
         self.finished_list = list()
+        self.csv_exist = self.verify_csv()
         # -----------init function-------------
         self.setupUi(self)
+        self.table_journal.setEditTriggers(QAbstractItemView.NoEditTriggers)
         signal_timer.connect(self.show_log)
         self.show_log()
         self.show()                                                             # show window
 
+    def verify_csv(self):
+        if os.path.exists(self.csv_path):
+            return True
+        else:
+            return False
+
     def show_log(self):
-        print('show_log launch')
-        self.read_csv()
-        self.list_to_ui()
+        if self.csv_exist:
+            print('show_log launch')
+            self.read_csv()
+            self.list_to_ui()
 
     def read_csv(self):
         self.finished_list = []

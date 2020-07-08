@@ -2,7 +2,7 @@ import cgitb
 import sys
 from ui_py.ui_plan_timer import Ui_set_timer_Form
 from PyQt5.QtWidgets import QApplication, QWidget
-from PyQt5.QtCore import QDateTime, QThread, pyqtSignal, QEvent
+from PyQt5.QtCore import QDateTime, QThread, pyqtSignal, QEvent, QMutex, QMutexLocker
 
 
 class Scheduler(QWidget, Ui_set_timer_Form):
@@ -51,9 +51,10 @@ class DelayLauncher(QThread):
 
 if __name__ == "__main__":
     # cgitb.enable(format='text')
-    # app = QApplication(sys.argv)
-    # myWin = Scheduler()
-    # app.installEventFilter(myWin)
-    # myWin.show()
-    # sys.exit(app.exec_())
-    print(2 % 3)
+    app = QApplication(sys.argv)
+
+    myWin = Scheduler()
+    app.installEventFilter(myWin)
+    myWin.show()
+    sys.exit(app.exec_())
+
