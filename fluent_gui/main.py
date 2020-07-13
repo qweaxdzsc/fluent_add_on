@@ -196,7 +196,8 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     def import_info(self):
         path = QFileDialog.getOpenFileName(self, '选择要输入的参数模板',
                                            r'C:\Users\BZMBN4\Desktop', 'CSV Files (*.csv)')
-        self.outlet_list, self.outlet_dict, self.K_dict = self.IEport.import_pamt(path)
+        self.outlet_list, self.outlet_dict, self.K_dict, self.valve_dict\
+            = self.IEport.import_pamt(path)
 
     def cad_address(self):
         get_file = QFileDialog.getOpenFileName(self, '选择模型文件', 'C:/Users/BZMBN4/Desktop/'

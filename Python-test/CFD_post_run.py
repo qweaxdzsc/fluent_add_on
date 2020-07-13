@@ -1,9 +1,9 @@
 import os
 from CFD_post_command import CfdPost
 
-case_dir = r"G:\_HAVC_Project\D2U-2\D2U-2_lin_vent"
-case_name = r"D2U-2_V29_lin_vent"
-result_path = r"G:\_HAVC_Project\D2U-2\D2U-2_lin_vent"
+case_dir = r"G:\_HAVC_Project\D2U-2\D2U-2_lin_vent\D2U-2_V40_lin_vent"
+case_name = r"D2U-2_V40_lin_vent"
+result_path = r"G:\_HAVC_Project\D2U-2\D2U-2_lin_vent\D2U-2_V40_lin_vent"
 cse_file = ''
 
 cfp = CfdPost(case_dir, case_name, result_path, cse_file)

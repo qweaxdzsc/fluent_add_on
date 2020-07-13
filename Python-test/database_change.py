@@ -48,6 +48,20 @@ def update_whole_data(conn, update_field):
     cursor.close()
 
 
+def delete_project(conn, id):
+    cursor = conn.cursor()  # return Dictionary_like key_valve
+    sql = """
+DELETE FROM `cfd-result`.`cfd_tp` WHERE (`Project_id` = '{id}');
+DELETE FROM `cfd-result`.`cfd_sp` WHERE (`Project_id` = '{id}');
+DELETE FROM `cfd-result`.`cfd_uni` WHERE (`Project_id` = '{id}');
+DELETE FROM `cfd-result`.`cfd_volume` WHERE (`Project_id` = '{id}');
+DELETE FROM `cfd-result`.`cfd_project` WHERE (`ID` = '{id}');
+""".format(id=id)
+    cursor.execute(sql)
+    conn.commit()
+    cursor.close()
+
+
 if __name__ == "__main__":
     start_time = time.time()
     update_whole_data(conn, 'ID')

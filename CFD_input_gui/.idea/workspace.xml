@@ -2,10 +2,79 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="63e04c59-1c04-4b86-8106-908e7ed4bd46" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../fluent_queue/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/build/func_ansys_license/Analysis-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/build/func_ansys_license/COLLECT-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/build/func_ansys_license/EXE-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/build/func_ansys_license/PKG-00.pkg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/build/func_ansys_license/PKG-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/build/func_ansys_license/PYZ-00.pyz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/build/func_ansys_license/PYZ-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/build/func_ansys_license/base_library.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/build/func_ansys_license/func_ansys_license.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/build/func_ansys_license/func_ansys_license.exe.manifest" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/build/func_ansys_license/warn-func_ansys_license.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/build/func_ansys_license/xref-func_ansys_license.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/func_ansys_license.spec" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/app/func_ansys_license.exe" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/config/config.ini" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/config/host.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/database/history_list.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/database/running_list.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/database/waiting_list.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/func/func_ansys_license.spec" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/icon/journal2.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/CFD_input_gui.spec" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/CFD_post_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/CFD_post_run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/EHCT_V3.1.spec" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/ansys_license_info.spec" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/build/ansys_license_info/Analysis-00.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/build/ansys_license_info/EXE-00.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/build/ansys_license_info/PKG-00.pkg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/build/ansys_license_info/PKG-00.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/build/ansys_license_info/PYZ-00.pyz" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/build/ansys_license_info/PYZ-00.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/build/ansys_license_info/Tree-00.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/build/ansys_license_info/Tree-01.toc" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/build/ansys_license_info/ansys_license_info.exe.manifest" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/build/ansys_license_info/base_library.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/build/ansys_license_info/warn-ansys_license_info.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/build/ansys_license_info/xref-ansys_license_info.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/build/main/Analysis-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/build/main/Analysis-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/build/main/COLLECT-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/build/main/COLLECT-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/build/main/EXE-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/build/main/EXE-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/build/main/PKG-00.pkg" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/build/main/PKG-00.pkg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/build/main/PYZ-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/build/main/PYZ-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/build/main/base_library.zip" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/build/main/base_library.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/build/main/main.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/build/main/main.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/build/main/warn-main.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/build/main/warn-main.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/build/main/xref-main.html" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/build/main/xref-main.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/database.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/database_change.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/database_change.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/fluent_tui.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/fluent_tui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/linearity_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/linearity_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/mail_win32.spec" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/main.spec" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/python_packer.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/python_packer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/python_to_pptx.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/python_to_pptx.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/web_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/web_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_func.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/func/func_IEport.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/func/func_IEport.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_ansys_license.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_ansys_license.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_run_calculation.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_run_calculation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_timer.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_timer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/icon/add.png" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/icon/add.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/icon/delete.png" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/icon/delete.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/ui_py/ui_add_project.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/ui_py/ui_add_project.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/ui_py/ui_queue_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/ui_py/ui_queue_main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/ui_qt/ui_add_project.ui" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/ui_qt/ui_add_project.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/ui_qt/ui_queue_main.ui" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/ui_qt/ui_queue_main.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -175,21 +244,21 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1892" height="290" key="GridCell.Tab.0.bottom" timestamp="1593580155428">
+    <state width="1892" height="290" key="GridCell.Tab.0.bottom" timestamp="1594195039104">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1892" height="290" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1593580155428" />
-    <state width="1892" height="290" key="GridCell.Tab.0.center" timestamp="1593580155428">
+    <state width="1892" height="290" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1594195039104" />
+    <state width="1892" height="290" key="GridCell.Tab.0.center" timestamp="1594195039104">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1892" height="290" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1593580155428" />
-    <state width="1892" height="290" key="GridCell.Tab.0.left" timestamp="1593580155428">
+    <state width="1892" height="290" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1594195039104" />
+    <state width="1892" height="290" key="GridCell.Tab.0.left" timestamp="1594195039104">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1892" height="290" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1593580155428" />
-    <state width="1892" height="290" key="GridCell.Tab.0.right" timestamp="1593580155428">
+    <state width="1892" height="290" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1594195039104" />
+    <state width="1892" height="290" key="GridCell.Tab.0.right" timestamp="1594195039104">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1892" height="290" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1593580155428" />
+    <state width="1892" height="290" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1594195039104" />
   </component>
 </project>

@@ -19,6 +19,7 @@ class IEport(object):
         outlet_dict = {}
         K_dict = {}
         outlet_list = []
+        valve_dict = {}
         
         if path[0] != '':
             csv_path = path[0]
@@ -32,6 +33,8 @@ class IEport(object):
                 if 'outlet' in i:
                     outlet_list.append(i)
                     outlet_dict[i] = eval(info[i])
+                if 'valve' in i:
+                    valve_dict[i] = info[i]
 
             for i in outlet_dict.keys():
                 K_dict[i] = outlet_dict[i][-1]
@@ -42,7 +45,7 @@ class IEport(object):
     
             self.ui.append_text('参数模板:%s导入成功' % path[0])
         
-        return outlet_list, outlet_dict, K_dict
+        return outlet_list, outlet_dict, K_dict, valve_dict
     
     def csv_import(self, excel_path):
         """import csv as a dict(info)"""

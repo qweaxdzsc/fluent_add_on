@@ -32,7 +32,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.new_pj = dict()
         self.waiting_min = int()
         self.have_schedule = False
-        self.pause = True
+        self.main_path = sys.path[0]
         self.database_path = r".\database"
         self.waiting_list_file = 'waiting_list.csv'
         self.running_list_file = 'running_list.csv'
@@ -41,6 +41,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.mission_list = list()
         self.running_project = list()
         # ----------initial function-----------------
+        self.main_path = self.get_abs_path(sys.path[0])
         self.database_path = self.get_abs_path(self.database_path)
         self.init_data_loading()
         self.init_queue_showing()                                                      # show running and waiting list
@@ -55,7 +56,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.sleep_time.signal_time_exceed.connect(self.user_logout)
         self.calculation.signal_update_finished_log.connect(self.update_finished_list_log)
         self.calculation.signal_update_running_log.connect(self.update_running_list_log)
-        self.calculation.signal_license_error.connect(self.show_status_message)
+        self.calculation.signal_license_info.connect(self.show_status_message)
         self.schedule.signal_control_cal.connect(self.set_pause_cal)
         self.schedule.signal_waiting_min.connect(self.waiting_msg)
         self.schedule.signal_cancel_plan.connect(self.show_status_message)
@@ -84,14 +85,14 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
             QMessageBox.warning(self, '警告', '进程已经打开，请勿重复开启')
             sys.exit()
 
-    def get_abs_path(self, relative_path):
+    def get_abs_path(self, path):
         """
         through relative path to create abs path,
         and verify if it exist. If not, make one
-        :param relative_path:
+        :param path:
         :return: abs_path
         """
-        abs_path = os.path.abspath(relative_path)
+        abs_path = os.path.abspath(path)
         if not os.path.exists(abs_path):
             os.makedirs(abs_path)
         return abs_path
@@ -324,19 +325,19 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
                 self.add_pj_ui.edit_project_address.setText(file)
 
     def toggle_pause_cal(self):
-        if self.pause:
-            self.pause = False
+        if self.calculation.pause:
+            self.calculation.pause = False
         else:
-            self.pause = True
+            self.calculation.pause = True
 
-        self.show_status_message('后续计算任务停止：%s' % self.pause)
-        print('calculation queue paused:', self.pause)
+        self.show_status_message('后续计算任务停止：%s' % self.calculation.pause)
+        print('calculation queue paused:', self.calculation.pause)
 
     def set_pause_cal(self, status):
-        self.pause = status
+        self.calculation.pause = status
         self.have_schedule = status
-        self.show_status_message('后续计算任务停止：%s' % self.pause)
-        print('calculation queue paused:', self.pause)
+        self.show_status_message('后续计算任务停止：%s' % self.calculation.pause)
+        print('calculation queue paused:', self.calculation.pause)
 
 
 if __name__ == "__main__":

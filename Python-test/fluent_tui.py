@@ -636,7 +636,7 @@ color-map format %0.1f size {line_size} q step {line_step} skip {line_skip} surf
     def create_scene(self, graphic_object):
         text = """
 /display/objects/create scene %s_scene graphics-objects 
-add "view_model" transparency 80 q
+add "view_model" transparency 75 q
 add "%s" 
 q q q
 """ % (graphic_object, graphic_object)

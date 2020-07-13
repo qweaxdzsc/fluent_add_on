@@ -1,8 +1,10 @@
 import subprocess
 import time
+import configparser
+import os
 
 from PyQt5.QtCore import pyqtSignal, QThread, QFileInfo, QDir
-from func.func_ansys_license import LicenseUsage
+from func.func_ansys_license import LicenseAnsys
 from func.func_timer import current_time
 
 
@@ -11,7 +13,7 @@ class Calculate(QThread):
     signal_time_count = pyqtSignal(int)
     signal_update_finished_log = pyqtSignal(dict)
     signal_update_running_log = pyqtSignal(list)
-    signal_license_error = pyqtSignal(str)
+    signal_license_info = pyqtSignal(str)
 
     def __init__(self, ui, mission_list, running_project):
         super(Calculate, self).__init__()
@@ -26,6 +28,8 @@ class Calculate(QThread):
         self.use_time = float()
         self.cores = 24
         self.complete_status = 'complete'
+        self.pause = True
+        # --------------------------------------
         self.start()
 
     def run(self):
@@ -37,30 +41,41 @@ class Calculate(QThread):
         :return:
         """
         time.sleep(2)
-        ansys_license = LicenseUsage()
-        if not self.ui.pause:
-            if ansys_license.is_enough(self.cores):
+        self.enough_license(self.cores)
+        if not self.pause:
+            if self.enough_license(self.cores):
                 if self.running_project:
-                    self.calculation()
+                    self.do_task()
+                    self.finish_cal()
         while True:
             time.sleep(1)
-            if not self.ui.pause:
+            if not self.pause:
                 if self.mission_list:
-                    ansys_license = LicenseUsage()
-                    if ansys_license.is_enough(self.cores):
-                        self.signal_license_error.emit('')
+                    # MISSION
+                    if self.enough_license(self.cores):
+                        self.signal_license_info.emit('')
                         self.running_show()
                         del self.mission_list[0]
                         self.ui.update_waiting_list_log()
                         self.ui.listWidget_queue.takeItem(0)
-                        self.calculation()
+                        self.pre_cal()
+                        # -------do task---------
+                        self.do_task()
+                        # ------------
+                        self.finish_cal()
                     else:
-                        self.signal_license_error.emit('not enough license')
+                        self.signal_license_info.emit('not enough license')
                         time.sleep(3)
                 else:
                     time.sleep(2)
             else:
                 time.sleep(2)
+
+    def enough_license(self, cores, app='func_ansys_license', command='-c'):
+        path = r'cd app'
+        p = subprocess.getoutput('cd app&%s %s %s' % (app, command, cores))
+        print(p)
+        return eval(p)
 
     def running_show(self):
         """
@@ -73,7 +88,11 @@ class Calculate(QThread):
         self.signal_update_running_log.emit(self.running_project)
         self.ui.listWidget_running.addItem("用户：%s   项目： %s" % (user, project))
 
-    def calculation(self):
+    def pre_cal(self):
+        self.start_time = time.time()
+        self.start_time_str = current_time()
+
+    def do_task(self):
         """
         used for fluent calculation
         1. open a pipe to run fluent with journal script
@@ -81,33 +100,33 @@ class Calculate(QThread):
         3. when loop done, check result and call finish function
         :return:
         """
-        self.start_time = time.time()
-        self.start_time_str = current_time()
-        running_journal = self.running_project[0]["journal"]
         project_address = self.running_project[0]['project_address']
         disk = project_address[:2]
+        # used in eval(command)
+        script = self.running_project[0]["journal"]
+        cores = self.cores
+        main_path = self.ui.main_path
+        # parser command from config file
+        config = configparser.ConfigParser()
+        config.read(r'.\config\config.ini')   # TODO path might change when pack exe
+        software_path = config['Software']['Software_path']
+        exe_name = config['Software']['exe_name']
+        command = eval(config['Software']['command'])
         # go to disk first, then go to directory, then launch fluent and its launching options
         p = subprocess.Popen(r'%s &&'
                              r'cd %s &&'
-                             r'"C:\Program Files\ANSYS Inc\v191\fluent\ntbin\win64\fluent" 3d -t%s -i %s -mpi=ibmmpi'
-                             r' -cnf=C:\Users\BZMBN4\Desktop\host_BZMBN4.txt' %
-                             (disk, project_address, self.cores, running_journal),
+                             r'"%s\%s" %s' %
+                             (disk, project_address, software_path, exe_name, command),
                              shell=True, stdout=subprocess.PIPE, stdin=subprocess.PIPE,
                              stderr=subprocess.PIPE, universal_newlines=True)
-        # while p.poll() == None:                                     # block calculation thread until finished
+        # while p.poll() == None:
         #     time.sleep(5)
         #      line = p.stdout.readline()
         transcript_name = '%s_transcript' % self.running_project[0]['project_name']
         self.calguard = CalGuard(project_address, transcript_name)
         self.calguard.start()
-        out, err = p.communicate()
+        out, err = p.communicate()                           # block calculation thread until finished
         self.calguard.quit()
-
-        print('finish')
-        self.complete_status = self.check_result()
-        print(self.complete_status)
-        self.finish_time = time.time()
-        self.finish_cal()
 
     def finish_cal(self):
         """
@@ -115,6 +134,10 @@ class Calculate(QThread):
         append finished_list_log
         :return:
         """
+        print('finish')
+        self.complete_status = self.check_result()
+        print(self.complete_status)
+        self.finish_time = time.time()
         self.ui.listWidget_running.takeItem(0)
         self.form_finish_project_info()
         self.signal_update_finished_log.emit(self.finished_project)

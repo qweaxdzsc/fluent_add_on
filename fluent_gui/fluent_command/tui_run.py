@@ -285,6 +285,7 @@ class GetTui(object):
             setup.write_lin_case_data(i)
             post.simple_lin_post(i)
 
+        self.CFD.close_fluent()
         jou_solve.write(self.CFD.whole_jou)
         jou_solve.close()
 

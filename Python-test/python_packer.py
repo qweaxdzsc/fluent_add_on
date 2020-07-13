@@ -12,6 +12,7 @@ class PythonPacker(object):
     def pack_python(self, command="-D -w"):
         # command = "-F"               # create one file
         package = self.project_path + "\\" + self.project_name
+        print(package)
         os.system("pyinstaller %s %s --distpath %s" % (command, package, self.out_path))
 
     def copy_directory(self, file_list):
@@ -42,12 +43,12 @@ class PythonPacker(object):
 
 
 if __name__ == "__main__":
-    python_path = r"C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_queue"
-    python_name = "main.py"
+    python_path = r"C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_queue\func"
+    python_name = "func_ansys_license.py"
     copy_file_list = [
         r'C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_queue\icon',
         # r'Z:\EHCT\path',
     ]
     packer = PythonPacker(python_path, python_name)
-    packer.simple_packer(copy_file_list, "-D -w")
-    # packer.pack_python("-D")
+    # packer.simple_packer(copy_file_list, "-D -w")
+    packer.pack_python("-F -w")

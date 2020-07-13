@@ -13,7 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_Widget_add(object):
     def setupUi(self, Widget_add):
         Widget_add.setObjectName("Widget_add")
-        Widget_add.resize(529, 208)
+        Widget_add.resize(492, 203)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Maximum)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -23,7 +23,7 @@ class Ui_Widget_add(object):
         Widget_add.setLayoutDirection(QtCore.Qt.LeftToRight)
         self.verticalLayout = QtWidgets.QVBoxLayout(Widget_add)
         self.verticalLayout.setSizeConstraint(QtWidgets.QLayout.SetFixedSize)
-        self.verticalLayout.setContentsMargins(20, 20, 20, 20)
+        self.verticalLayout.setContentsMargins(10, 20, 10, 20)
         self.verticalLayout.setSpacing(10)
         self.verticalLayout.setObjectName("verticalLayout")
         self.frame_simple = QtWidgets.QFrame(Widget_add)

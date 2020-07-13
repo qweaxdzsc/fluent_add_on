@@ -1,0 +1,15 @@
+account_name,project_name,project_address,journal,register_time,start_time,using_time,complete_status
+BZMBN4,D2U-2-V40_bil_distrib-solve-TUI,G:/_HAVC_Project/D2U-2/D2U-2_bil/D2U-2_V40_bil,G:/_HAVC_Project/D2U-2/D2U-2_bil/D2U-2_V40_bil/D2U-2-V40_bil_distrib-solve-TUI.jou,2020-07-08 13:23:59,2020-07-08 13:24:08,0小时1分钟42秒,no result
+BZMBN4,D2U-2_V40_lin_vent_10_mesh,G:/_HAVC_Project/D2U-2/D2U-2_lin_vent/D2U-2_V40_lin_vent/lin_mesh,G:/_HAVC_Project/D2U-2/D2U-2_lin_vent/D2U-2_V40_lin_vent/lin_mesh\D2U-2_V40_lin_vent_10_mesh.jou,2020-07-08 21:01:06,2020-07-08 21:02:06,2小时9分钟36秒,no result
+BZMBN4,D2U-2_V40_lin_foot_30_mesh,G:/_HAVC_Project/D2U-2/D2U-2_lin_foot/D2U-2_V40_lin_foot/lin_mesh,G:/_HAVC_Project/D2U-2/D2U-2_lin_foot/D2U-2_V40_lin_foot/lin_mesh\D2U-2_V40_lin_foot_30_mesh.jou,2020-07-08 21:30:09,2020-07-08 23:11:46,3小时23分钟50秒,no result
+BZMBN4,D2U-2-V40_lin_bil-mesh-TUI,G:/_HAVC_Project/D2U-2/D2U-2_lin_bil/D2U-2_V40_lin_bil,G:/_HAVC_Project/D2U-2/D2U-2_lin_bil/D2U-2_V40_lin_bil/D2U-2-V40_lin_bil-mesh-TUI.jou,2020-07-08 21:34:43,2020-07-09 02:35:41,6小时1分钟15秒,no result
+BZMBN4,test2,G:/test,G:/test\test2.jou,2020-07-10 13:59:56,2020-07-10 14:00:24,0小时0分钟24秒,no result
+BZMBN4,test2,G:/test,G:/test\test2.jou,2020-07-10 14:03:44,2020-07-10 14:03:51,0小时0分钟24秒,no result
+BZMBN4,test2,G:/test,G:/test\test2.jou,2020-07-10 14:05:35,2020-07-10 14:05:41,0小时0分钟24秒,no result
+BZMBN4,test2,G:/test,G:/test/test2.jou,2020-07-10 14:06:34,2020-07-10 14:06:51,0小时0分钟0秒,no result
+BZMBN4,test2 - Copy (2),G:/test,G:/test/test2 - Copy (2).jou,2020-07-10 14:39:10,2020-07-10 14:39:43,0小时0分钟24秒,no result
+BZMBN4,test2 - Copy (4),G:/test,G:/test/test2 - Copy (4).jou,2020-07-10 14:39:12,2020-07-10 14:40:36,0小时0分钟24秒,no result
+BZMBN4,test2 - Copy (3),G:/test,G:/test/test2 - Copy (3).jou,2020-07-11 22:05:25,2020-07-12 22:29:37,0小时0分钟3秒,no result
+BZMBN4,test2 - Copy (2),G:/test,G:/test/test2 - Copy (2).jou,2020-07-11 22:05:32,2020-07-12 22:29:44,0小时0分钟1秒,no result
+BZMBN4,test2 - Copy (2),G:/test,G:/test/test2 - Copy (2).jou,2020-07-12 22:34:24,2020-07-12 22:34:35,0小时0分钟2秒,no result
+BZMBN4,test2 - Copy (3),G:/test,G:/test/test2 - Copy (3).jou,2020-07-12 23:12:59,2020-07-12 23:13:05,0小时0分钟22秒,no result

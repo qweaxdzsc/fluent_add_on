@@ -24,7 +24,7 @@ class LoopTimer(QThread):
 
     def register_time_emitter(self):
         self.step += 1
-        print("timer's seconds:", self.step)
+        # print("timer's seconds:", self.step)
         self.signal_emit(self.signal_sleep_timer, 60)
         self.signal_emit(self.signal_journal_timer, 20)
         self.signal_emit(self.signal_schedule_timer, 60)

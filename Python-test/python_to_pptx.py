@@ -1,7 +1,7 @@
 
 project_name = 'D2U-2'
-version = 'V20.2_vent'
-Rotation_speed = 3600
+version = 'V5_defrost'
+Rotation_speed = 3900
 
 
 def get_ppt(project_name, version, RPM):

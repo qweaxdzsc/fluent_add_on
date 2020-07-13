@@ -6,13 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>471</width>
+    <width>470</width>
     <height>642</height>
    </rect>
   </property>
   <property name="minimumSize">
    <size>
-    <width>400</width>
+    <width>470</width>
     <height>550</height>
    </size>
   </property>
@@ -21,6 +21,9 @@
     <width>550</width>
     <height>900</height>
    </size>
+  </property>
+  <property name="contextMenuPolicy">
+   <enum>Qt::NoContextMenu</enum>
   </property>
   <property name="windowTitle">
    <string>未登陆-请登陆后使用更多功能</string>
@@ -144,6 +147,9 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1,
      <width>0</width>
      <height>0</height>
     </size>
+   </property>
+   <property name="contextMenuPolicy">
+    <enum>Qt::NoContextMenu</enum>
    </property>
    <property name="windowTitle">
     <string>未登陆-请登陆后使用更多功能</string>

@@ -1,28 +1,43 @@
-import os
+import subprocess
+import argparse
+import configparser
 
 
-class LicenseUsage(object):
+class LicenseAnsys(object):
     def __init__(self):
         # -------------init variable-------------------------
-        self.server_list = ["10.243.75.38", "10.243.75.40", "10.243.75.67"]
-        self.application = r'C:\Program Files\ANSYS Inc\Shared Files\Licensing\winx64\lmutil'
-        self.license_command = r'lmstat -a -c 1055@'
-        self.module_dict = {'spaceclaim': ["Users of a_spaceclaim_dirmod", 'Users of acfd_preppost'],
-                            'hpc': ['Users of anshpc_pack'],
-                            'pre_post': ['Users of acfd_preppost', 'Users of acfdsol2', 'Users of cfd_base'],
-                            'solver': ['Users of cfd_base', 'Users of acfdsol2']
-                            }
+        self.config_file = r'..\config\config.ini'
+        self.server_list = list()
+        self.application = str()
+        self.license_command = str()
+        self.module_dict = dict()
         self.license_dict = dict()              # record total number of license and how many left
         self.license_info = str()               # record the original license info from cmd
+        self.return_value = bool()
         # -------------init function-------------------------
+        self.parse_config()
         self.license_info = self.get_license_info()
         self.license_usage_dict(self.module_dict)
+        self.arg_parser()
+
+    def parse_config(self):
+        config = configparser.ConfigParser()
+        config.read(self.config_file)
+
+        self.server_list = eval(config['license']['server_list'])
+        self.application = eval(config['license']['application'])
+        self.license_command = eval(config['license']['license_command'])
+        self.module_dict = eval(config['license']['module_dict'])
 
     def get_license_info(self):
         info = ''
         for i in self.server_list:
             command = self.license_command + i
-            info += os.popen('"%s" %s' % (self.application, command)).read()
+            p = subprocess.Popen('"%s" %s' % (self.application, command), shell=True, stdout=subprocess.PIPE,
+                                 stdin=subprocess.PIPE, stderr=subprocess.PIPE, universal_newlines=True)
+            out = p.stdout.read()
+            info += out
+
         info = info.split("\n")
 
         return info
@@ -56,17 +71,22 @@ class LicenseUsage(object):
             reserv_list[1] += total_lic - used_lic
 
     def is_license(self, license_name):
-        usable_license = self.license_dict[license_name][1]
-        print('license "%s" left:' % (license_name), usable_license)
-        if usable_license:
-            return True
+        try:
+            usable_license = self.license_dict[license_name][1]
+            # print('license "%s" left:' % (license_name), usable_license)
+        except Exception as e:
+            print(e)
+            print('the license you type is not exist')
         else:
-            return False
+            if usable_license:
+                return True
+            else:
+                return False
 
     def is_enough(self, required_cores):
         solver_left = self.license_dict['solver'][1]
         if not solver_left:
-            print('not enough solver')
+            # print('not enough solver')
             return False
         hpc_left = self.license_dict['hpc'][1]
         if hpc_left:
@@ -75,12 +95,27 @@ class LicenseUsage(object):
             core_left = 4
 
         if required_cores > core_left:
-            print('not enough HPC')
+            # print('not enough HPC')
             return False
         else:
             return True
 
+    def arg_parser(self):
+        parser = argparse.ArgumentParser()
+        parser.add_argument("-c", "--cores", help="show if have enough cores compare with -c XX; "
+                                                  "Use Example: -c 4")
+        parser.add_argument("-l", "--license", help="show if have enough license compare with -l XX; "
+                                                    "Use Example: -l pre_post; here only have 4 kinds of license:"
+                                                    "'spaceclaim', 'hpc', 'pre_post', 'solver'")
+        args = parser.parse_args()
+        if args.cores:
+            cores = int(args.cores)
+            self.return_value = self.is_enough(cores)
+        if args.license:
+            self.return_value = self.is_license(args.license)
+
 
 if __name__ == '__main__':
-    ansys_license = LicenseUsage()
-    ansys_license.is_license('hpc')
+    return_value = bool()
+    ansys_license = LicenseAnsys()
+    print(ansys_license.return_value)

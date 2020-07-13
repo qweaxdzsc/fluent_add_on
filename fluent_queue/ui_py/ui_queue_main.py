@@ -10,12 +10,14 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from func.func_dragable_list import DragListWidget
 
+
 class Ui_fluent_queue(object):
     def setupUi(self, fluent_queue):
         fluent_queue.setObjectName("fluent_queue")
-        fluent_queue.resize(471, 642)
-        fluent_queue.setMinimumSize(QtCore.QSize(400, 550))
+        fluent_queue.resize(470, 642)
+        fluent_queue.setMinimumSize(QtCore.QSize(470, 550))
         fluent_queue.setMaximumSize(QtCore.QSize(550, 900))
+        fluent_queue.setContextMenuPolicy(QtCore.Qt.NoContextMenu)
         fluent_queue.setIconSize(QtCore.QSize(30, 30))
         self.centralwidget = QtWidgets.QWidget(fluent_queue)
         self.centralwidget.setObjectName("centralwidget")
@@ -59,6 +61,7 @@ class Ui_fluent_queue(object):
         fluent_queue.setStatusBar(self.statusbar)
         self.toolBar = QtWidgets.QToolBar(fluent_queue)
         self.toolBar.setMinimumSize(QtCore.QSize(0, 0))
+        self.toolBar.setContextMenuPolicy(QtCore.Qt.NoContextMenu)
         self.toolBar.setStyleSheet("QToolBar {\n"
 "    spacing:5px;\n"
 "    \n"
