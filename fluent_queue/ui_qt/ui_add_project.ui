@@ -28,6 +28,12 @@
   <property name="layoutDirection">
    <enum>Qt::LeftToRight</enum>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QLineEdit{
+	border:1px solid #778899;
+	border-radius:6px;
+	padding:2px 2px}</string>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <property name="spacing">
     <number>10</number>
@@ -137,7 +143,7 @@
         </property>
         <property name="icon">
          <iconset>
-          <normaloff>../icon/openfile.png</normaloff>../icon/openfile.png</iconset>
+          <normaloff>../../../../.designer/icon/openfile.png</normaloff>../../../../.designer/icon/openfile.png</iconset>
         </property>
         <property name="iconSize">
          <size>
@@ -295,7 +301,7 @@
           </property>
           <property name="icon">
            <iconset>
-            <normaloff>../icon/openfile.png</normaloff>../icon/openfile.png</iconset>
+            <normaloff>../../../../.designer/icon/openfile.png</normaloff>../../../../.designer/icon/openfile.png</iconset>
           </property>
           <property name="iconSize">
            <size>
@@ -334,7 +340,7 @@
        </property>
        <property name="icon">
         <iconset>
-         <normaloff>../icon/extend.png</normaloff>../icon/extend.png</iconset>
+         <normaloff>../../../../.designer/icon/extend.png</normaloff>../../../../.designer/icon/extend.png</iconset>
        </property>
        <property name="iconSize">
         <size>

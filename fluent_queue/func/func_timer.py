@@ -1,6 +1,5 @@
-from PyQt5.QtCore import pyqtSignal, QThread, QTimer, QDateTime, QEvent, QTime
+from PyQt5.QtCore import pyqtSignal, QThread, QTimer, QDateTime, QEvent
 from PyQt5.QtWidgets import QMainWindow, QWidget
-from ui_py.ui_plan_timer import Ui_set_timer_Form
 import time
 
 
@@ -67,64 +66,17 @@ class SleepOut(QMainWindow):
             self.sleep_time = 0
 
 
-class Scheduler(QWidget, Ui_set_timer_Form):
+class Scheduler(QWidget):
     signal_control_cal = pyqtSignal(bool)
     signal_waiting_min = pyqtSignal(int)
-    signal_cancel_plan = pyqtSignal(str)
 
     def __init__(self, signal_timer):
         super().__init__()
-        self.setupUi(self)
         # ------------init variable--------------
         self.waiting_min = 0
         self.have_schedule = False
         # ------------init function--------------
-        self.btn()
         signal_timer.connect(self.left_time)
-
-    def btn(self):
-        self.btn_plan_start.clicked.connect(self.plan_start)
-        self.btn_cancel_plan.clicked.connect(self.cancel_plan)
-
-    def show_ui(self):
-        if self.have_schedule:
-            self.frame_launch.hide()
-            self.frame_cancel.show()
-
-            days = int(self.waiting_min/24/60)
-            hours = int(self.waiting_min/60 - days*24)
-            minutes = int(self.waiting_min % 60)
-            if days > 0:
-                self.edit_rest_time.setDisplayFormat("dd天HH:mm")
-                self.edit_rest_time.setDateTime(QDateTime(2020, 5, days, hours, minutes))
-            else:
-                self.edit_rest_time.setDisplayFormat("HH小时mm分钟")
-                self.edit_rest_time.setDateTime(QDateTime(2020, 5, 1, hours, minutes))
-        else:
-            self.frame_launch.show()
-            self.frame_cancel.hide()
-            self.edit_plan_datetime.setDateTime(QDateTime.currentDateTime())
-            self.edit_plan_datetime.setMinimumDateTime(QDateTime.currentDateTime())
-            self.edit_plan_datetime.setMaximumDateTime(QDateTime.currentDateTime().addDays(5))
-            self.edit_plan_datetime.setCalendarPopup(True)
-
-        self.setMaximumSize(260, 100)
-        self.show()
-
-    def plan_start(self):
-        curr_time = self.get_current_time()
-        schedule_time = self.get_schedule_time()
-        self.waiting_min = int((schedule_time - curr_time) / 60)
-        print(self.waiting_min)
-        self.signal_control_cal.emit(True)
-        self.have_schedule = True
-        self.close()
-
-    def get_current_time(self):
-        return QDateTime.currentSecsSinceEpoch()
-
-    def get_schedule_time(self):
-        return self.edit_plan_datetime.dateTime().toSecsSinceEpoch()
 
     def left_time(self):
         self.waiting_min -= 1
@@ -136,10 +88,13 @@ class Scheduler(QWidget, Ui_set_timer_Form):
                 self.signal_control_cal.emit(False)
                 self.have_schedule = False
 
-    def cancel_plan(self):
-        self.signal_cancel_plan.emit('')
-        self.have_schedule = False
-        self.close()
+    def enable_schedule(self, status):
+        self.have_schedule = status
+        print('have schedule:', self.have_schedule)
+
+    def receive_waiting_min(self, waiting_min):
+        self.waiting_min = waiting_min
+        print('received waiting minutes:', waiting_min)
 
 
 def current_time():

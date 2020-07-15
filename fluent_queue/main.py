@@ -14,6 +14,7 @@ from func.func_list_manage import AddPj
 from func.func_short_key import ShortKey
 from func.func_run_calculation import Calculate
 from func.func_journal import HistoryView
+from func.func_setting import Setting
 
 
 class MyMainWindow(QMainWindow, Ui_fluent_queue):
@@ -31,7 +32,6 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.acc_name = str()
         self.new_pj = dict()
         self.waiting_min = int()
-        self.have_schedule = False
         self.main_path = sys.path[0]
         self.database_path = r".\database"
         self.waiting_list_file = 'waiting_list.csv'
@@ -59,7 +59,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.calculation.signal_license_info.connect(self.show_status_message)
         self.schedule.signal_control_cal.connect(self.set_pause_cal)
         self.schedule.signal_waiting_min.connect(self.waiting_msg)
-        self.schedule.signal_cancel_plan.connect(self.show_status_message)
+
         self.listWidget_queue.signal_file_receive.connect(self.receive_drop_file)
         self.listWidget_queue.signal_project_exchange.connect(self.exchange_project)
         self.show()
@@ -70,7 +70,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.action_add.triggered.connect(self.add_project)
         self.action_delete.triggered.connect(self.delete_project)
         self.action_journal.triggered.connect(self.view_history_log)
-        self.action_setting.triggered.connect(self.set_schedule)
+        self.action_setting.triggered.connect(self.show_setting)
 
     def prevent_multiapp(self):
         file_name = os.path.basename(sys.argv[0])
@@ -306,8 +306,14 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
     def reboot_journal_func(self):
         self.action_journal.setEnabled(True)
 
-    def set_schedule(self):
-        self.schedule.show_ui()
+    def show_setting(self):
+        self.setting_ui = Setting(self.calculation.pause, self.calculation.cores,
+                                  self.schedule.have_schedule, self.schedule.waiting_min)
+        self.setting_ui.signal_suspend_status.connect(self.set_pause_cal)
+        self.setting_ui.signal_core_number.connect(self.define_cores)
+        self.setting_ui.signal_schedule_status.connect(self.schedule.enable_schedule)
+        self.setting_ui.signal_waiting_min.connect(self.schedule.receive_waiting_min)
+        self.setting_ui.signal_cancel_plan.connect(self.show_status_message)
 
     def waiting_msg(self, min):
         self.waiting_min = min
@@ -335,9 +341,12 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
 
     def set_pause_cal(self, status):
         self.calculation.pause = status
-        self.have_schedule = status
         self.show_status_message('后续计算任务停止：%s' % self.calculation.pause)
         print('calculation queue paused:', self.calculation.pause)
+
+    def define_cores(self, cores):
+        self.calculation.cores = cores
+        print(self.calculation.cores)
 
 
 if __name__ == "__main__":

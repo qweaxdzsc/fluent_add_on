@@ -21,6 +21,10 @@ class Ui_Widget_add(object):
         Widget_add.setSizePolicy(sizePolicy)
         Widget_add.setMinimumSize(QtCore.QSize(0, 0))
         Widget_add.setLayoutDirection(QtCore.Qt.LeftToRight)
+        Widget_add.setStyleSheet("QLineEdit{\n"
+"    border:1px solid #778899;\n"
+"    border-radius:6px;\n"
+"    padding:2px 2px}")
         self.verticalLayout = QtWidgets.QVBoxLayout(Widget_add)
         self.verticalLayout.setSizeConstraint(QtWidgets.QLayout.SetFixedSize)
         self.verticalLayout.setContentsMargins(10, 20, 10, 20)
@@ -54,7 +58,7 @@ class Ui_Widget_add(object):
         self.btn_project_address.setMinimumSize(QtCore.QSize(35, 30))
         self.btn_project_address.setMaximumSize(QtCore.QSize(40, 30))
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../icon/openfile.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("../../../../.designer/icon/openfile.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btn_project_address.setIcon(icon)
         self.btn_project_address.setIconSize(QtCore.QSize(30, 30))
         self.btn_project_address.setObjectName("btn_project_address")
@@ -116,7 +120,7 @@ class Ui_Widget_add(object):
         self.btn_extend.setMinimumSize(QtCore.QSize(30, 30))
         self.btn_extend.setLayoutDirection(QtCore.Qt.LeftToRight)
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("../icon/extend.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("../../../../.designer/icon/extend.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.btn_extend.setIcon(icon1)
         self.btn_extend.setIconSize(QtCore.QSize(20, 20))
         self.btn_extend.setCheckable(True)

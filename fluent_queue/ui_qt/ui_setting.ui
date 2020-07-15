@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>384</width>
+    <width>414</width>
     <height>486</height>
    </rect>
   </property>
@@ -30,10 +30,28 @@
     <number>25</number>
    </property>
    <item>
-    <widget class="QTreeWidget" name="treeWidget">
+    <widget class="QTreeWidget" name="tree_setting">
+     <property name="styleSheet">
+      <string notr="true">QTreeWidget::Item{height: 30px}</string>
+     </property>
+     <property name="horizontalScrollBarPolicy">
+      <enum>Qt::ScrollBarAsNeeded</enum>
+     </property>
      <property name="headerHidden">
       <bool>true</bool>
      </property>
+     <property name="expandsOnDoubleClick">
+      <bool>false</bool>
+     </property>
+     <attribute name="headerVisible">
+      <bool>false</bool>
+     </attribute>
+     <attribute name="headerDefaultSectionSize">
+      <number>220</number>
+     </attribute>
+     <attribute name="headerMinimumSectionSize">
+      <number>60</number>
+     </attribute>
      <column>
       <property name="text">
        <string>label</string>

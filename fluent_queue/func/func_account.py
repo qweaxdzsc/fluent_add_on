@@ -6,10 +6,10 @@ import os
 from PyQt5.QtWidgets import QApplication, QWidget
 from PyQt5.QtCore import pyqtSignal, Qt
 
-from ui_py.ui_login import Ui_Frame_account
+from ui_py.ui_login import Ui_Widget_account
 
 
-class AccVerify(QWidget, Ui_Frame_account):
+class AccVerify(QWidget, Ui_Widget_account):
     """
     SubUi object to verify account
     """
@@ -20,7 +20,7 @@ class AccVerify(QWidget, Ui_Frame_account):
         self.setupUi(self)
         # ----------init variable--------------
         self.account_csv_path = account_file_path
-        # ----------init function--------------
+        # ----------init
         self.btn()
         self.verify_path()
         self.show()                                 # show window

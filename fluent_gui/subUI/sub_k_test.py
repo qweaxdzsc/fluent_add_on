@@ -97,12 +97,12 @@ class subUI_outlet_assign(Ui_k_form, QWidget):
 
     def check_parent_influence(self, parent):
         child_number = parent.childCount()
-        allcheck_indicator = 0
+        check_all = 0
         for i in range(child_number):
-            allcheck_indicator += parent.child(i).checkState(0)
-        if allcheck_indicator == 0:
+            check_all += parent.child(i).checkState(0)
+        if check_all == 0:
             parent.setCheckState(0, 0)
-        elif allcheck_indicator == 2 * child_number:
+        elif check_all == 2 * child_number:
             parent.setCheckState(0, 2)
 
     def cal_method_choose(self):

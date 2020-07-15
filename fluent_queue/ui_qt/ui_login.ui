@@ -25,6 +25,12 @@
   <property name="windowTitle">
    <string>登陆</string>
   </property>
+  <property name="styleSheet">
+   <string notr="true">QLineEdit{
+	border:1px solid #778899;
+	border-radius:6px;
+	padding:2px 2px}</string>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="leftMargin">
     <number>15</number>

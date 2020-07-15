@@ -3,7 +3,7 @@ import shutil
 
 ui_path = r'C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_queue\ui_qt'
 py_folder = r'C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_queue\ui_py'
-gui_name = 'ui_queue_main.ui'
+gui_name = 'ui_login.ui'
 
 
 def convert(py_name, gui_name):
