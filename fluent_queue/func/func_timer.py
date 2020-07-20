@@ -97,6 +97,6 @@ class Scheduler(QWidget):
         print('received waiting minutes:', waiting_min)
 
 
-def current_time():
-    ct = time.strftime("%Y-%m-%d %H:%M:%S")
+def current_time(format="%Y-%m-%d %H:%M:%S"):
+    ct = time.strftime(format)
     return ct

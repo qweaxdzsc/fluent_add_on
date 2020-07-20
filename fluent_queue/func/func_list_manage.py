@@ -24,7 +24,7 @@ class AddPj(QWidget, Ui_Widget_add):
         self.setupUi(self)
         self.show()
         self.btn()
-        self.show_ui()
+        self.init_ui()
         self.set_all_icon()
         # -------------init variable--------------
         self.pj_dict = dict()
@@ -37,6 +37,14 @@ class AddPj(QWidget, Ui_Widget_add):
         self.btn_journal_address.clicked.connect(self.open_jou_file)
         self.btn_add.clicked.connect(self.generate_pj_info)
 
+    def init_ui(self):
+        self.resize(510, 80)
+        self._set_icon('extend.png', self.btn_extend)
+        self.frame_advanced.hide()
+        self.label_journal_address.hide()             # hide journal functions, because it controls by checkbox
+        self.edit_journal_address.hide()
+        self.btn_journal_address.hide()
+
     def show_ui(self):
         """
         when toggle extend button, the window will be expanded
@@ -47,9 +55,6 @@ class AddPj(QWidget, Ui_Widget_add):
         """
         if self.btn_extend.isChecked():
             self.resize(510, 200)
-            self.label_journal_address.hide()             # hide journal functions, because it controls by checkbox
-            self.edit_journal_address.hide()
-            self.btn_journal_address.hide()
             self._set_icon('shrink.png', self.btn_extend)
             self.frame_advanced.show()
         else:
@@ -74,7 +79,6 @@ class AddPj(QWidget, Ui_Widget_add):
         use _set_icon to set all icon
         :return:
         """
-        print(os.getcwd())
         self._set_icon('openfile.png', self.btn_project_address)
         self._set_icon('openfile.png', self.btn_journal_address)
         self._set_icon('extend.png', self.btn_extend)
@@ -103,6 +107,7 @@ class AddPj(QWidget, Ui_Widget_add):
             self.edit_project_address.setDisabled(True)
             self.edit_iteration.setDisabled(True)
             self.label_iteration.setDisabled(True)
+            self.label_project_address.setDisabled(True)
         else:
             self.label_journal_address.hide()
             self.edit_journal_address.hide()
@@ -110,6 +115,7 @@ class AddPj(QWidget, Ui_Widget_add):
             self.edit_project_address.setDisabled(False)
             self.edit_iteration.setDisabled(False)
             self.label_iteration.setDisabled(False)
+            self.label_project_address.setDisabled(False)
 
     def open_jou_file(self):
         """
@@ -142,7 +148,7 @@ class AddPj(QWidget, Ui_Widget_add):
             self.pj_dict['journal'] = self.get_journal(case_path, case_path.fileName())
             self.signal_add_pj.emit(self.pj_dict)
             self.close()
-            print(self.pj_dict)
+            print('generate new project:', self.pj_dict)
         else:
             QMessageBox.warning(self, '警告', 'case或者mesh不存在', QMessageBox.Yes, QMessageBox.Yes)
             print('file not exists')
@@ -175,7 +181,7 @@ class AddPj(QWidget, Ui_Widget_add):
         else:
             read_type = 'read'
         jou_file = case_path.absolutePath() + '\\' + case_path.baseName() + '.jou'
-        transcript = case_path.absolutePath() + '\\%s_transcript' % case_path.baseName()
+        transcript = case_path.absolutePath() + '\\%s_transcript.txt' % case_path.baseName()
         time_out_min = 1
         content = """
 /file/start-transcript {transcript}

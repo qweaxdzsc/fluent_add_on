@@ -7,7 +7,7 @@ class tui(object):
         self.version_name = version_name
         self.case_out_path = case_path
         self.cad_path = case_path + '\\' + cad_name
-        txt_out = result_path + '\\' + project_title + '.txt'
+        txt_out = result_path + '\\' + 'total_result.txt'
         self.txt_out = txt_out
         self.result_path = result_path
         self.size_field = self.case_out_path + '\\' + self.version_name + '.sf'

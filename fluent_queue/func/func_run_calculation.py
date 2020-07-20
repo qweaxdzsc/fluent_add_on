@@ -1,10 +1,10 @@
 import subprocess
 import time
 import configparser
-import os
+# import os
 
 from PyQt5.QtCore import pyqtSignal, QThread, QFileInfo, QDir
-from func.func_ansys_license import LicenseAnsys
+# from func.func_ansys_license import LicenseAnsys
 from func.func_timer import current_time
 
 
@@ -40,13 +40,13 @@ class Calculate(QThread):
         3. in while loop do calculation
         :return:
         """
-        time.sleep(2)
-        self.enough_license(self.cores)
-        if not self.pause:
-            if self.enough_license(self.cores):
-                if self.running_project:
-                    self.do_task()
-                    self.finish_cal()
+        if self.running_project:
+            self.calguard = CalGuard(self.running_project[0]['project_address'],
+                                     self.running_project[0]['project_name'])
+            self.calguard.start()
+            while self.calguard.isRunning():
+                time.sleep(4)
+            self.finish_cal()
         while True:
             time.sleep(1)
             if not self.pause:
@@ -58,7 +58,6 @@ class Calculate(QThread):
                         del self.mission_list[0]
                         self.ui.update_waiting_list_log()
                         self.ui.listWidget_queue.takeItem(0)
-                        self.pre_cal()
                         # -------do task---------
                         self.do_task()
                         # ------------
@@ -71,10 +70,12 @@ class Calculate(QThread):
             else:
                 time.sleep(2)
 
-    def enough_license(self, cores, app='func_ansys_license', command='-c'):
+    def enough_license(self, cores, command='-c'):
         path = r'cd app'
+        config = configparser.ConfigParser()
+        config.read(r'.\config\config.ini')
+        app = config['license']['exe']
         p = subprocess.getoutput('cd app&%s %s %s' % (app, command, cores))
-        print(p)
         return eval(p)
 
     def running_show(self):
@@ -82,15 +83,14 @@ class Calculate(QThread):
         show project which is running right now
         :return:
         """
+        self.start_time = time.time()
+        self.start_time_str = current_time("%Y-%m-%d %H:%M:%S")
         user = self.mission_list[0]["account_name"]
         project = self.mission_list[0]["project_name"]
         self.running_project.append(self.mission_list[0])
+        self.running_project[0]['start_time'] = self.start_time_str
         self.signal_update_running_log.emit(self.running_project)
         self.ui.listWidget_running.addItem("用户：%s   项目： %s" % (user, project))
-
-    def pre_cal(self):
-        self.start_time = time.time()
-        self.start_time_str = current_time()
 
     def do_task(self):
         """
@@ -108,7 +108,7 @@ class Calculate(QThread):
         main_path = self.ui.main_path
         # parser command from config file
         config = configparser.ConfigParser()
-        config.read(r'.\config\config.ini')   # TODO path might change when pack exe
+        config.read(r'.\config\config.ini')
         software_path = config['Software']['Software_path']
         exe_name = config['Software']['exe_name']
         command = eval(config['Software']['command'])
@@ -122,8 +122,7 @@ class Calculate(QThread):
         # while p.poll() == None:
         #     time.sleep(5)
         #      line = p.stdout.readline()
-        transcript_name = '%s_transcript' % self.running_project[0]['project_name']
-        self.calguard = CalGuard(project_address, transcript_name)
+        self.calguard = CalGuard(project_address,  self.running_project[0]['project_name'])
         self.calguard.start()
         out, err = p.communicate()                           # block calculation thread until finished
         self.calguard.quit()
@@ -134,9 +133,8 @@ class Calculate(QThread):
         append finished_list_log
         :return:
         """
-        print('finish')
         self.complete_status = self.check_result()
-        print(self.complete_status)
+        print('finish status:', self.complete_status)
         self.finish_time = time.time()
         self.ui.listWidget_running.takeItem(0)
         self.form_finish_project_info()
@@ -152,14 +150,16 @@ class Calculate(QThread):
         3. record complete status
         :return:
         """
-        self.finished_project = self.running_project[0]
-        use_time = self.finish_time - self.start_time
-        print(use_time)
+        start_time_str = self.running_project[0]['start_time']
+        start_time_tuple = time.strptime(start_time_str, "%Y-%m-%d %H:%M:%S")
+        start_time = time.mktime(start_time_tuple)
+        use_time = self.finish_time - start_time
+        print('used time:', use_time)
         using_hour = int(use_time / 3600)
         using_min = int((use_time % 3600) / 60)
         using_seconds = int(use_time % 60)
         self.use_time = "%s小时%s分钟%s秒" % (using_hour, using_min, using_seconds)
-
+        self.finished_project = self.running_project[0]
         self.finished_project["start_time"] = self.start_time_str
         self.finished_project["using_time"] = self.use_time
         self.finished_project["complete_status"] = self.complete_status
@@ -181,12 +181,14 @@ class Calculate(QThread):
 
 class CalGuard(QThread):
     """thread ensures calculation normally"""
-    def __init__(self, directory, transcript_name):
+    def __init__(self, directory, project_name):
         super().__init__()
         self.dir = directory
-        self.transcript = '%s\%s' % (directory, transcript_name)
-        self.wait_time = 60
-        self.check_interval = 200
+        transcript_name = '%s_transcript.txt' % project_name
+        self.transcript = '%s\\%s' % (directory, transcript_name)
+        print('transcript:', self.transcript)
+        self.wait_time = 50
+        self.check_interval = 150
 
     def run(self):
         print('start Guard')
@@ -201,24 +203,38 @@ class CalGuard(QThread):
 
     def check_transcript(self, check_interval):
         line_count = 0
-        line_count_new = 1
+        line_count_new = self.get_line_count()
+
         while line_count_new > line_count:
             time.sleep(check_interval)
             line_count = line_count_new
-            with open(self.transcript, 'r') as f:
-                content = f.readlines()
-                line_count_new = len(content)
-                print(line_count_new)
+            line_count_new = self.get_line_count()
 
-        print('transcript finish')
+    def get_line_count(self):
+        with open(self.transcript, 'r') as f:
+            content = f.readlines()
+            line_count_new = len(content)
+            print('Line Count:', line_count_new)
+
+        return line_count_new
 
     def ensure_finish(self, dir):
         folder = QDir(dir)
         file_list = folder.entryInfoList(QDir.Files | QDir.CaseSensitive)
+        bat_file_name = ''
+        with open(self.transcript, 'r') as f:
+            content = f.readlines()
+            for line in content:
+                if 'host' in line:
+                    line = line.split()
+                    host_name = line[1]
+                    pid = line[3]
+                    bat_file_name = 'cleanup-fluent-%s-%s.bat' % (host_name, pid)
+
         for i in file_list:
-            if i.suffix() == 'bat':
-                print(i.absoluteFilePath())
+            if i.fileName() == bat_file_name:
+                print('.bat address', i.absoluteFilePath())
                 subprocess.call(i.absoluteFilePath(), shell=True)
-        print('no bat file now')
         print('\nall finished')
+        self.quit()
 

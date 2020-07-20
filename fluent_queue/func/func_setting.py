@@ -38,7 +38,7 @@ class Setting(QWidget, Ui_widget_setting):
     def btn(self):
         self.tree_setting.itemClicked.connect(self.effect_expand)
         self.tree_setting.itemChanged.connect(self.enable_schedule)
-        self.checkbox_suspend.stateChanged.connect(self.change_suspend_status)
+        # self.checkbox_suspend.stateChanged.connect(self.change_suspend_status)
 
     def ui_set(self):
         # style
@@ -108,11 +108,13 @@ class Setting(QWidget, Ui_widget_setting):
     def plan_start(self):
         curr_time = QDateTime.currentSecsSinceEpoch()
         schedule_time = self.edit_plan_datetime.dateTime().toSecsSinceEpoch()
-        self.waiting_min = int((schedule_time - curr_time) / 60)
+        self.waiting_min = int(round((schedule_time - curr_time) / 60, 0))
+        print('waiting min', self.waiting_min)
         self.signal_waiting_min.emit(self.waiting_min)
 
     def closeEvent(self, event):
         self.cores = self.edit_cores.value()
+        suspend_status = self.checkbox_suspend.checkState()
         self.signal_core_number.emit(self.cores)
         self.signal_schedule_status.emit(self.schedule_status)
         if self.schedule_status:
@@ -120,6 +122,7 @@ class Setting(QWidget, Ui_widget_setting):
             self.signal_suspend_status.emit(True)
         else:
             self.signal_cancel_plan.emit(' ')
+        self.signal_suspend_status.emit(bool(suspend_status))
         self.close()
 
 

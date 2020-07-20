@@ -7,7 +7,7 @@ class tui(object):
         self.version_name = version_name
         self.case_out_path = case_path
         self.cad_path = case_path + '\\' + cad_name
-        txt_out = result_path + '\\' + project_title + '.txt'
+        txt_out = result_path + '\\' + 'total_result.txt'
         self.txt_out = txt_out
         self.result_path = result_path
         self.size_field = self.case_out_path + '\\' + self.version_name + '.sf'
@@ -18,7 +18,7 @@ class tui(object):
 
     def read_journal(self, jou_path):
         text = """
-/file/read-journal %s yes""" % (jou_path)
+/file/read-journal %s yes""" % jou_path
         self.whole_jou += text
         return self.whole_jou
 
@@ -285,10 +285,10 @@ class setup(object):
         self.tui = tui
         print('create_object_setup')
 
-    def start_transcript(self):
+    def start_transcript(self, mode='solve'):
         text = """
-/file/start-transcript %s\\%s_%s_transcript
-""" % (self.tui.case_out_path, self.tui.project_title, self.tui.version_name)
+/file/start-transcript %s\\%s_%s_%s_transcript.txt
+""" % (self.tui.case_out_path, self.tui.project_title, self.tui.version_name, mode)
         self.tui.whole_jou += text
         return self.tui.whole_jou
 

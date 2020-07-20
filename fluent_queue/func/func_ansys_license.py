@@ -43,7 +43,7 @@ class LicenseAnsys(object):
         return info
 
     def print_license_info(self):
-        print(self.license_info)
+        print('license info: ', self.license_info)
 
     def license_usage_dict(self, module_dict):
         self.license_dict = {}                                # clear self.license_dict
@@ -53,7 +53,7 @@ class LicenseAnsys(object):
             for k, v in module_dict.items():                  # loop module_dict
                 for i in v:                                   # loop the list inside module_dict
                     self.check_usage(row, i, self.license_dict[k])
-        print(self.license_dict)
+        print('license dict:', self.license_dict)
 
     def check_usage(self, info, flag, reserv_list):
         """
@@ -75,7 +75,7 @@ class LicenseAnsys(object):
             usable_license = self.license_dict[license_name][1]
             # print('license "%s" left:' % (license_name), usable_license)
         except Exception as e:
-            print(e)
+            print('error:', e)
             print('the license you type is not exist')
         else:
             if usable_license:

@@ -32,7 +32,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.acc_name = str()
         self.new_pj = dict()
         self.waiting_min = int()
-        self.main_path = sys.path[0]
+        self.main_path = os.getcwd()
         self.database_path = r".\database"
         self.waiting_list_file = 'waiting_list.csv'
         self.running_list_file = 'running_list.csv'
@@ -41,7 +41,8 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.mission_list = list()
         self.running_project = list()
         # ----------initial function-----------------
-        self.main_path = self.get_abs_path(sys.path[0])
+        self.main_path = self.get_abs_path(os.getcwd())
+        print("main_path: ", self.main_path)
         self.database_path = self.get_abs_path(self.database_path)
         self.init_data_loading()
         self.init_queue_showing()                                                      # show running and waiting list
@@ -125,8 +126,9 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         """
         if self.running_project:
             project = self.running_project[0]
-            self.listWidget_running.addItem("用户：%s   项目： %s" % (project["account_name"],
-                                                                project["project_name"]))
+            # self.listWidget_running.addItem('test1')
+            self.listWidget_running.addItem("用户：%s   项目： %s" % (project["account_name"], project["project_name"]))
+            print(self.listWidget_running.item(0).text())
         if self.mission_list:
             for i in self.mission_list:
                 self.listWidget_queue.addItem("用户：%s   项目： %s" % (i["account_name"], i["project_name"]))
@@ -188,7 +190,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
                        "register_time": ''}
         self.new_pj.update(new_pj_dict)
         self.new_pj["account_name"] = self.acc_name
-        self.new_pj["register_time"] = current_time()
+        self.new_pj["register_time"] = current_time("%Y-%m-%d %H:%M:%S")
         self.mission_list.append(self.new_pj)
         self.update_waiting_list_log()
         self.listWidget_queue.addItem("用户：%s   项目： %s" % (self.acc_name, self.new_pj["project_name"]))
@@ -203,7 +205,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         :return:
         """
         cur_index = self.listWidget_queue.currentIndex().row()
-        print(cur_index)
+        print('delete project', cur_index)
         if cur_index == -1:
             pass
         else:
@@ -234,7 +236,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
                                         QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
             if reply == QMessageBox.Yes:
                 del self.mission_list[item_index]
-                print(self.mission_list)
+                print('delete mission: ', self.mission_list)
                 self.update_waiting_list_log()
                 self.listWidget_queue.takeItem(item_index)
 
@@ -249,7 +251,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         with open(waiting_list_csv, 'w', newline='') as f:
             csv_writer = csv.DictWriter(f, fieldnames=header)
             csv_writer.writeheader()
-            print(self.mission_list)
+            print('update waiting list csv:', self.mission_list)
             if self.mission_list:
                 for i in self.mission_list:
                     csv_writer.writerow(i)
@@ -277,7 +279,8 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         :return:
         """
         running_list_csv = r'%s\%s' % (self.database_path, self.running_list_file)
-        header = ["account_name", "project_name", "project_address", "journal", "register_time"]
+        header = ["account_name", "project_name", "project_address", "journal", "register_time",
+                  "start_time"]
         with open(running_list_csv, 'w', newline='') as f:
             csv_writer = csv.DictWriter(f, fieldnames=header)
             csv_writer.writeheader()
@@ -346,7 +349,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
 
     def define_cores(self, cores):
         self.calculation.cores = cores
-        print(self.calculation.cores)
+        print('calculation cores:', self.calculation.cores)
 
 
 if __name__ == "__main__":

@@ -40,8 +40,8 @@ class GetTui(object):
         case_out = self.d['file_path']
 
         self.CFD = tui_func.tui(whole_jou, project_title, version_name, case_out, cad_name)
-        self.jou_mesh_path = case_out + '/' + whole_name + '-mesh-TUI.jou'
-        self.jou_solve_path = case_out + '/' + whole_name + '-solve-TUI.jou'
+        self.jou_mesh_path = case_out + '/' + whole_name + '_mesh.jou'
+        self.jou_solve_path = case_out + '/' + whole_name + '_solve.jou'
         self.uni_face_list = self.porous_list.copy()
 
         for i in self.porous_list:
@@ -132,7 +132,7 @@ class GetTui(object):
 
         setup.hyb_initialize()
         if 'fan' in self.body_list:
-            setup.start_calculate(800)
+            setup.start_calculate(1000)
         else:
             setup.start_calculate(260)
         setup.write_case_data()

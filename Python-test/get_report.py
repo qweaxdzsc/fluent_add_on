@@ -5,17 +5,17 @@ import cgitb
 
 
 # designate path
-root = r"G:\_HAVC_Project\D2U-2\D2U-2_hil\D2U-2_V40_hil\result_D2U-2_V40_hil_distrib"
+root = r"G:\_HAVC_Project\D2U-2\D2U-2_Steven\D2U-2-S_bil\result_D2U-2-S_V1_bil"
 path = root + '\\'
 
 # Txt input path
-txt_name = path + 'D2U-2.txt'
-
+txt_name = path + 'total_result.txt'
 
 # Excel output info
-excel_name = 'D2U-2_V40_hil_distrib'         # Output excel name
-sheet_name = excel_name                  # The sheet in excel
-data_name = excel_name                   # get a title for your data
+split_list = root.split('\\')
+excel_name = split_list[-1].replace('result_', '')          # Output excel name
+sheet_name = excel_name                                     # The sheet in excel
+data_name = excel_name                                      # get a title for your data
 
 # Html output info
 html_output_path = path

@@ -42,9 +42,7 @@ class DragListWidget(QListWidget):
             self.signal_file_receive.emit(file)
         else:
             if self.drag_permission:
-                print('yes')
                 items = self.selectedItems()
-                print(items)
                 for i in items:
                     # "exchange_dict" used as an reference for self.mission list to exchange
                     exchange_dict = dict()
@@ -52,7 +50,7 @@ class DragListWidget(QListWidget):
                     self.takeItem(self.indexFromItem(i).row())              # 先删除再加回来，不能存在两个指向同一内存的对象
                     pts = self.mapFromGlobal(QCursor.pos())
                     last_pos_item = self.indexAt(pts).row()
-                    print(last_pos_item)
+                    print('drop index:', last_pos_item)
                     if last_pos_item == -1:
                         self.addItem(i)
                         exchange_dict['after_index'] = -1

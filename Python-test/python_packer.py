@@ -51,5 +51,5 @@ if __name__ == "__main__":
         r'C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_queue\config',
     ]
     packer = PythonPacker(python_path, python_name)
-    packer.simple_packer(copy_file_list, "-D -w")
+    packer.simple_packer(copy_file_list, "-D")
     # packer.pack_python("-F -w")
