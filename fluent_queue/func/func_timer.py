@@ -1,4 +1,4 @@
-from PyQt5.QtCore import pyqtSignal, QThread, QTimer, QDateTime, QEvent
+from PyQt5.QtCore import pyqtSignal, QThread, QTimer, QEvent
 from PyQt5.QtWidgets import QMainWindow, QWidget
 import time
 
@@ -60,7 +60,7 @@ class SleepOut(QMainWindow):
 
     def time_add(self):
         self.sleep_time += 1
-        print('no movement detected: %s minutes' % self.sleep_time)
+        print('no operation detected: %s minutes' % self.sleep_time)
         if self.sleep_time >= self.time_out_minutes:
             self.signal_time_exceed.emit()
             self.sleep_time = 0
@@ -80,7 +80,7 @@ class Scheduler(QWidget):
 
     def left_time(self):
         self.waiting_min -= 1
-        print('等待时间:', self.waiting_min)
+        print('waiting time:', self.waiting_min)
         if self.have_schedule:
             self.signal_waiting_min.emit(self.waiting_min)
 

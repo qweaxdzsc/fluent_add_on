@@ -1,6 +1,5 @@
 import sys
 import cgitb
-import os
 
 from PyQt5.QtWidgets import QApplication, QWidget, QFileDialog, QMessageBox
 from PyQt5.QtCore import pyqtSignal, QFileInfo
@@ -19,16 +18,19 @@ class AddPj(QWidget, Ui_Widget_add):
     signal_add_pj = pyqtSignal(dict)
     signal_enable_action_add = pyqtSignal()
 
-    def __init__(self, parent=None):
-        super(AddPj, self).__init__(parent)
+    def __init__(self, msg_translator):
+        super().__init__()
         self.setupUi(self)
-        self.show()
         self.btn()
         self.init_ui()
         self.set_all_icon()
+        # self._translate()
+        self.show()
         # -------------init variable--------------
         self.pj_dict = dict()
         self.edit_iteration.setText('1000')
+        self.msg_translator = msg_translator
+        self.make_trans = self.msg_translator.make_trans
 
     def btn(self):
         self.btn_extend.clicked.connect(self.show_ui)
@@ -89,8 +91,8 @@ class AddPj(QWidget, Ui_Widget_add):
         Only filter .cas and .msh file
         :return:
         """
-        path = QFileDialog.getOpenFileName(self, '选择要计算文件',
-                                           r'C:\Users\BZMBN4\Desktop',
+        path = QFileDialog.getOpenFileName(self, self.make_trans('choose_project'),
+                                           r'C:',
                                            'Fluent Case(*.cas*);;Fluent Mesh(*.msh)',
                                            'Fluent Case(*.cas*)')
         self.edit_project_address.setText(path[0])
@@ -122,8 +124,8 @@ class AddPj(QWidget, Ui_Widget_add):
         easy GUI way to choose journal file function provided by QFileDialog
         :return:
         """
-        path = QFileDialog.getOpenFileName(self, '选择要journal文件',
-                                           r'C:\Users\BZMBN4\Desktop',
+        path = QFileDialog.getOpenFileName(self, self.make_trans('choose_journal'),
+                                           r'C:',
                                            'Fluent journal(*.jou)')
         self.edit_journal_address.setText(path[0])
 
@@ -150,7 +152,8 @@ class AddPj(QWidget, Ui_Widget_add):
             self.close()
             print('generate new project:', self.pj_dict)
         else:
-            QMessageBox.warning(self, '警告', 'case或者mesh不存在', QMessageBox.Yes, QMessageBox.Yes)
+            QMessageBox.warning(self, self.make_trans('warning'), self.make_trans('no_case_mesh'),
+                                QMessageBox.Yes, QMessageBox.Yes)
             print('file not exists')
 
     def get_journal(self, case_path, file_type):
@@ -165,7 +168,8 @@ class AddPj(QWidget, Ui_Widget_add):
             if (jou_path.exists()) and (jou_path.suffix() == "jou"):
                 return jou_path.filePath()
             else:
-                QMessageBox.warning(self, '警告', 'journal不存在', QMessageBox.Yes, QMessageBox.Yes)
+                QMessageBox.warning(self, self.make_trans('warning'), self.make_trans('no_journal'),
+                                    QMessageBox.Yes, QMessageBox.Yes)
         else:
             jou_file = self.default_journal(case_path, file_type)
             return jou_file

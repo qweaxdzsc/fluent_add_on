@@ -504,6 +504,13 @@ solve/monitors/residual/criterion-type %s
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
+    def input_summary(self):
+        text = """
+/report/summary yes %s/input.txt yes
+""" % self.tui.case_out_path
+        self.tui.whole_jou += text
+        return self.tui.whole_jou
+
     def hyb_initialize(self):
         text = """
 /solve/initialize/hyb-initialization yes

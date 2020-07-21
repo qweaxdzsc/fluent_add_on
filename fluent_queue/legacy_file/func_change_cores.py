@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtCore import pyqtSignal
-from ui_py.ui_cores import Ui_widget_cores
+from legacy_file.ui_cores import Ui_widget_cores
 
 
 class ChangeCore(QWidget, Ui_widget_cores):

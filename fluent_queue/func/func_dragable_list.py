@@ -58,5 +58,3 @@ class DragListWidget(QListWidget):
                         self.insertItem(last_pos_item, i)
                         exchange_dict['after_index'] = last_pos_item
                     self.signal_project_exchange.emit(exchange_dict)
-
-                print('有东西拖入')

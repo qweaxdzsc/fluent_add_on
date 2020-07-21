@@ -5,7 +5,7 @@ import subprocess as sp
 import os
 
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox
-# from PyQt5.QtCore import pyqtSignal
+from PyQt5.QtCore import QTranslator
 from ui_py.ui_queue_main import Ui_fluent_queue
 from func.func_ui_set import UiSet
 from func.func_account import AccVerify
@@ -15,6 +15,7 @@ from func.func_short_key import ShortKey
 from func.func_run_calculation import Calculate
 from func.func_journal import HistoryView
 from func.func_setting import Setting
+from ui_translate.msg_translator import MsgTranslator
 
 
 class MyMainWindow(QMainWindow, Ui_fluent_queue):
@@ -40,10 +41,14 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.account_file = 'account.csv'
         self.mission_list = list()
         self.running_project = list()
+        self.language = 'English'
+        self.language_dict = {'English': 'EN', 'Chinese': 'CN'}
         # ----------initial function-----------------
         self.main_path = self.get_abs_path(os.getcwd())
         print("main_path: ", self.main_path)
         self.database_path = self.get_abs_path(self.database_path)
+        self.msg_trans = MsgTranslator(self.language)
+        self.make_trans = self.msg_trans.make_trans
         self.init_data_loading()
         self.init_queue_showing()                                                      # show running and waiting list
         self.timer = LoopTimer()
@@ -52,7 +57,8 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.calculation = Calculate(self, self.mission_list, self.running_project)    # start calculation thread
         self.schedule = Scheduler(self.timer.signal_schedule_timer)
         self.manager_authority(False)
-        print('whether have manager authority?: ', self.listWidget_queue.drag_permission)
+
+        self._translator()
         # ---------signal connection-------------------------
         self.sleep_time.signal_time_exceed.connect(self.user_logout)
         self.calculation.signal_update_finished_log.connect(self.update_finished_list_log)
@@ -66,12 +72,45 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.show()
 
     def btn(self):
-        self.action_login.triggered.connect(self.account_verification)
+        self.action_login.triggered.connect(self._account_verification)
         self.action_logout.triggered.connect(self.user_logout)
         self.action_add.triggered.connect(self.add_project)
         self.action_delete.triggered.connect(self.delete_project)
         self.action_journal.triggered.connect(self.view_history_log)
         self.action_setting.triggered.connect(self.show_setting)
+
+    def _translator(self):
+        self.file_basename_list = []
+        self.translator_list = []
+        file_list = os.listdir('./ui_py')
+        for file in file_list:
+            if file.endswith('.py'):
+                file_basename = file.replace('.py', '')
+                self.file_basename_list.append(file_basename)
+                exec('self.trans_%s = QTranslator()' % file_basename)
+                exec('self.translator_list.append(self.trans_%s)' % file_basename)
+
+        for index, item in enumerate(self.translator_list):
+            language = self.language_dict[self.language]
+            item.load("./ui_translate/%s_%s.qm" % (self.file_basename_list[index], language))
+
+        self.enable_translate('English')
+
+    def enable_translate(self, language):
+        self.language = language
+        self.msg_trans.language = language
+        if self.acc_name:
+            # show translated title when login
+            window_title = self.make_trans('welcome') + self.acc_name
+            self.setWindowTitle(window_title)
+        _app = QApplication.instance()
+        if language == 'English':
+            for item in self.translator_list:
+                _app.installTranslator(item)
+        else:
+            for item in self.translator_list:
+                _app.removeTranslator(item)
+        self.retranslateUi(self)
 
     def prevent_multiapp(self):
         file_name = os.path.basename(sys.argv[0])
@@ -83,7 +122,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         count = int(count)
         print('application_count:', count)
         if count > 1:
-            QMessageBox.warning(self, '警告', '进程已经打开，请勿重复开启')
+            QMessageBox.warning(self, self.make_trans('Warning'), self.make_trans('already_open'))
             sys.exit()
 
     def get_abs_path(self, path):
@@ -126,14 +165,12 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         """
         if self.running_project:
             project = self.running_project[0]
-            # self.listWidget_running.addItem('test1')
-            self.listWidget_running.addItem("用户：%s   项目： %s" % (project["account_name"], project["project_name"]))
-            print(self.listWidget_running.item(0).text())
+            self.listWidget_running.addItem("User：%s   Project： %s" % (project["account_name"], project["project_name"]))
         if self.mission_list:
             for i in self.mission_list:
-                self.listWidget_queue.addItem("用户：%s   项目： %s" % (i["account_name"], i["project_name"]))
+                self.listWidget_queue.addItem("User：%s   Project： %s" % (i["account_name"], i["project_name"]))
 
-    def account_verification(self):
+    def _account_verification(self):
         """
         AccVerify is a sub Ui for user to login
         it will verify if account and password are correct
@@ -153,7 +190,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         :return: none
         """
         self.acc_name = acc_name
-        window_title = '欢迎用户' + acc_name
+        window_title = self.make_trans('welcome') + acc_name
         self.setWindowTitle(window_title)
         self.ui_alter.ui_user_logoff(False)
         # self.action_login.setEnabled()
@@ -165,7 +202,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         :return: none
         """
         self.ui_alter.ui_user_logoff()
-        self.setWindowTitle('未登录-请登陆后使用添加删除功能')
+        self.setWindowTitle(self.make_trans('login_unlock'))
         self.manager_authority(False)
 
     def add_project(self):
@@ -174,7 +211,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         connect new project info signal to new project func
         :return:
         """
-        self.add_pj_ui = AddPj()
+        self.add_pj_ui = AddPj(self.msg_trans)
         self.add_pj_ui.signal_add_pj.connect(self.new_project)
         self.add_pj_ui.signal_enable_action_add.connect(self.enable_action_add)
         self.action_add.setDisabled(True)
@@ -193,7 +230,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.new_pj["register_time"] = current_time("%Y-%m-%d %H:%M:%S")
         self.mission_list.append(self.new_pj)
         self.update_waiting_list_log()
-        self.listWidget_queue.addItem("用户：%s   项目： %s" % (self.acc_name, self.new_pj["project_name"]))
+        self.listWidget_queue.addItem("User：%s   Project： %s" % (self.acc_name, self.new_pj["project_name"]))
 
     def enable_action_add(self):
         self.action_add.setEnabled(True)
@@ -205,7 +242,6 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         :return:
         """
         cur_index = self.listWidget_queue.currentIndex().row()
-        print('delete project', cur_index)
         if cur_index == -1:
             pass
         else:
@@ -232,7 +268,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         """
         item_belongs = self.mission_list[item_index]['account_name']
         if self.acc_name == item_belongs:
-            reply = QMessageBox.warning(self, '删除警告', '删除后无法恢复，是否确认删除',
+            reply = QMessageBox.warning(self, self.make_trans('delete_warning'), self.make_trans('confirm_delete'),
                                         QMessageBox.Yes | QMessageBox.No, QMessageBox.No)
             if reply == QMessageBox.Yes:
                 del self.mission_list[item_index]
@@ -311,16 +347,17 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
 
     def show_setting(self):
         self.setting_ui = Setting(self.calculation.pause, self.calculation.cores,
-                                  self.schedule.have_schedule, self.schedule.waiting_min)
+                                  self.schedule.have_schedule, self.schedule.waiting_min, self.language)
         self.setting_ui.signal_suspend_status.connect(self.set_pause_cal)
         self.setting_ui.signal_core_number.connect(self.define_cores)
         self.setting_ui.signal_schedule_status.connect(self.schedule.enable_schedule)
         self.setting_ui.signal_waiting_min.connect(self.schedule.receive_waiting_min)
         self.setting_ui.signal_cancel_plan.connect(self.show_status_message)
+        self.setting_ui.signal_change_language.connect(self.enable_translate)
 
     def waiting_msg(self, min):
         self.waiting_min = min
-        waiting_msg = '计划任务将在%s分钟后启动' % min
+        waiting_msg = self.make_trans('plan_launch') + ' %s ' % min + self.make_trans('minutes')
         self.show_status_message(waiting_msg)
 
     def receive_drop_file(self, file):
@@ -339,12 +376,12 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         else:
             self.calculation.pause = True
 
-        self.show_status_message('后续计算任务停止：%s' % self.calculation.pause)
+        self.show_status_message(self.make_trans('suspend_next') + '%s' % self.calculation.pause)
         print('calculation queue paused:', self.calculation.pause)
 
     def set_pause_cal(self, status):
         self.calculation.pause = status
-        self.show_status_message('后续计算任务停止：%s' % self.calculation.pause)
+        self.show_status_message(self.make_trans('suspend_next') + '%s' % self.calculation.pause)
         print('calculation queue paused:', self.calculation.pause)
 
     def define_cores(self, cores):

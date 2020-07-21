@@ -10,7 +10,6 @@
 from PyQt5 import QtCore, QtGui, QtWidgets
 from func.func_dragable_list import DragListWidget
 
-
 class Ui_fluent_queue(object):
     def setupUi(self, fluent_queue):
         fluent_queue.setObjectName("fluent_queue")
@@ -18,6 +17,7 @@ class Ui_fluent_queue(object):
         fluent_queue.setMinimumSize(QtCore.QSize(470, 550))
         fluent_queue.setMaximumSize(QtCore.QSize(550, 900))
         fluent_queue.setContextMenuPolicy(QtCore.Qt.NoContextMenu)
+        fluent_queue.setWindowTitle("")
         fluent_queue.setIconSize(QtCore.QSize(30, 30))
         self.centralwidget = QtWidgets.QWidget(fluent_queue)
         self.centralwidget.setObjectName("centralwidget")
@@ -74,32 +74,32 @@ class Ui_fluent_queue(object):
         fluent_queue.addToolBar(QtCore.Qt.TopToolBarArea, self.toolBar)
         self.action_login = QtWidgets.QAction(fluent_queue)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("../icon/login.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon.addPixmap(QtGui.QPixmap("../../../../.designer/icon/login.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.action_login.setIcon(icon)
         self.action_login.setObjectName("action_login")
         self.action_logout = QtWidgets.QAction(fluent_queue)
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("../icon/logoff.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("../../../../.designer/icon/logoff.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.action_logout.setIcon(icon1)
         self.action_logout.setObjectName("action_logout")
         self.action_add = QtWidgets.QAction(fluent_queue)
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("../icon/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap("../../../../.designer/icon/add.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.action_add.setIcon(icon2)
         self.action_add.setObjectName("action_add")
         self.action_journal = QtWidgets.QAction(fluent_queue)
         icon3 = QtGui.QIcon()
-        icon3.addPixmap(QtGui.QPixmap("../icon/dialog.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon3.addPixmap(QtGui.QPixmap("../../../../.designer/icon/dialog.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.action_journal.setIcon(icon3)
         self.action_journal.setObjectName("action_journal")
         self.action_delete = QtWidgets.QAction(fluent_queue)
         icon4 = QtGui.QIcon()
-        icon4.addPixmap(QtGui.QPixmap("../icon/delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon4.addPixmap(QtGui.QPixmap("../../../../.designer/icon/delete.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.action_delete.setIcon(icon4)
         self.action_delete.setObjectName("action_delete")
         self.action_setting = QtWidgets.QAction(fluent_queue)
         icon5 = QtGui.QIcon()
-        icon5.addPixmap(QtGui.QPixmap("../icon/setting.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon5.addPixmap(QtGui.QPixmap("../../../../.designer/icon/setting.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.action_setting.setIcon(icon5)
         self.action_setting.setObjectName("action_setting")
         self.toolBar.addAction(self.action_login)
@@ -120,7 +120,6 @@ class Ui_fluent_queue(object):
 
     def retranslateUi(self, fluent_queue):
         _translate = QtCore.QCoreApplication.translate
-        fluent_queue.setWindowTitle(_translate("fluent_queue", "未登陆-请登陆后使用更多功能"))
         self.progressBar.setFormat(_translate("fluent_queue", "%p%"))
         self.toolBar.setWindowTitle(_translate("fluent_queue", "未登陆-请登陆后使用更多功能"))
         self.action_login.setText(_translate("fluent_queue", "登陆"))

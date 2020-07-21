@@ -2,6 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e475a0b-2241-43fa-a10d-e22986a3349c" name="Default Changelist" comment="add K calculator. pop up when right click in the cal_K column at rename_table">
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/other_tool/translator_file_creator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_py/ui_setting.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_translate/msg_translator.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_translate/ui_add_project_CN.qm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_translate/ui_add_project_CN.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_translate/ui_add_project_EN.qm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_translate/ui_journal_CN.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_translate/ui_journal_EN.qm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_translate/ui_login_CN.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_translate/ui_login_EN.qm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_translate/ui_queue_main_CN.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_translate/ui_queue_main_EN.qm" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_translate/ui_setting_CN.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_translate/ui_setting_EN.qm" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/build/main/Analysis-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/build/main/Analysis-00.toc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/build/main/COLLECT-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/build/main/COLLECT-00.toc" afterDir="false" />
@@ -15,148 +30,24 @@
       <change beforePath="$PROJECT_DIR$/../Python-test/fluent_tui.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/fluent_tui.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/get_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/get_report.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/linearity_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/linearity_report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/main.spec" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/main.spec" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/python_packer.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/python_packer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/tui_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/tui_run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/config/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/config/config.ini" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/config/host.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/config/host.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/database/history_list.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/database/history_list.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/database/running_list.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/database/running_list.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_ansys_license.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_ansys_license.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_account.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_account.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_change_cores.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/legacy_file/func_change_cores.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_dragable_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_dragable_list.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_list_manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_list_manage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_run_calculation.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_run_calculation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_setting.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_setting.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_short_key.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_short_key.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_timer.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_timer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_ui_set.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_ui_set.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_queue/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/MSVCP140.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/bin" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/plugins/iconengines/qsvgicon.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/plugins/imageformats/qgif.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/plugins/imageformats/qicns.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/plugins/imageformats/qico.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/plugins/imageformats/qjpeg.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/plugins/imageformats/qsvg.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/plugins/imageformats/qtga.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/plugins/imageformats/qtiff.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/plugins/imageformats/qwbmp.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/plugins/imageformats/qwebp.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/plugins/platforms/qminimal.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/plugins/platforms/qoffscreen.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/plugins/platforms/qwebgl.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/plugins/platforms/qwindows.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/plugins/platformthemes/qxdgdesktopportal.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/plugins/styles/qwindowsvistastyle.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/translations/qtbase_ar.qm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/translations/qtbase_bg.qm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/translations/qtbase_ca.qm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/translations/qtbase_cs.qm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/translations/qtbase_da.qm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/translations/qtbase_de.qm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/translations/qtbase_en.qm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/translations/qtbase_es.qm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/translations/qtbase_fi.qm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/translations/qtbase_fr.qm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/translations/qtbase_gd.qm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/translations/qtbase_he.qm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/translations/qtbase_hu.qm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/translations/qtbase_it.qm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/translations/qtbase_ja.qm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/translations/qtbase_ko.qm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/translations/qtbase_lv.qm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/translations/qtbase_pl.qm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/translations/qtbase_ru.qm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/translations/qtbase_sk.qm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/translations/qtbase_uk.qm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/Qt/translations/qtbase_zh_TW.qm" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/QtCore.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/QtGui.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/QtWidgets.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/PyQt5/sip.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/Qt5Core.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/Qt5DBus.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/Qt5Gui.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/Qt5Network.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/Qt5Qml.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/Qt5Quick.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/Qt5Svg.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/Qt5WebSockets.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/Qt5Widgets.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/VCRUNTIME140.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/_bz2.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/_hashlib.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/_lzma.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/_socket.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/_ssl.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-core-console-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-core-datetime-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-core-debug-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-core-errorhandling-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-core-file-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-core-file-l1-2-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-core-file-l2-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-core-handle-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-core-heap-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-core-interlocked-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-core-libraryloader-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-core-localization-l1-2-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-core-memory-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-core-namedpipe-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-core-processenvironment-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-core-processthreads-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-core-processthreads-l1-1-1.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-core-profile-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-core-rtlsupport-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-core-string-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-core-synch-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-core-synch-l1-2-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-core-sysinfo-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-core-timezone-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-core-util-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-crt-conio-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-crt-convert-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-crt-environment-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-crt-filesystem-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-crt-heap-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-crt-locale-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-crt-math-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-crt-multibyte-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-crt-process-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-crt-runtime-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-crt-stdio-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-crt-string-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-crt-time-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/api-ms-win-crt-utility-l1-1-0.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/app/func_ansys_license.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/base_library.zip" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/config/config.ini" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/config/host.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/d3dcompiler_47.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/icon/add.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/icon/delete.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/icon/extend.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/icon/help.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/icon/journal.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/icon/journal2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/icon/login.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/icon/logout.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/icon/openfile.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/icon/setting.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/icon/shrink.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/libEGL.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/libGLESv2.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/libcrypto-1_1-x64.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/libssl-1_1-x64.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/main.exe" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/main.exe.manifest" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/opengl32sw.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/pyexpat.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/python3.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/python37.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/select.pyd" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/ucrtbase.dll" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/pack/main/unicodedata.pyd" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/other_tool/GUI_convertor.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/other_tool/GUI_convertor.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_queue/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/ui_py/ui_cores.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/legacy_file/ui_cores.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/ui_py/ui_plan_timer.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/legacy_file/ui_plan_timer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/ui_py/ui_queue_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/ui_py/ui_queue_main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/ui_qt/ui_cores.ui" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/legacy_file/ui_cores.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/ui_qt/ui_plan_timer.ui" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/legacy_file/ui_plan_timer.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/ui_qt/ui_queue_main.ui" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/ui_qt/ui_queue_main.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -371,33 +262,33 @@
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state x="623" y="259" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1591934953200" />
-    <state width="1882" height="231" key="GridCell.Tab.0.bottom" timestamp="1595205302640">
-      <screen x="0" y="0" width="1920" height="1160" />
+    <state width="1892" height="246" key="GridCell.Tab.0.bottom" timestamp="1595231570716">
+      <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1892" height="247" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1594647721152" />
     <state width="1892" height="187" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1590127296374" />
-    <state width="1892" height="247" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1594793573921" />
+    <state width="1892" height="246" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1595231570716" />
     <state width="1882" height="231" key="GridCell.Tab.0.bottom/0.0.1920.1160/1920.0.1920.1200@0.0.1920.1160" timestamp="1595205302640" />
-    <state width="1882" height="231" key="GridCell.Tab.0.center" timestamp="1595205302640">
-      <screen x="0" y="0" width="1920" height="1160" />
+    <state width="1892" height="246" key="GridCell.Tab.0.center" timestamp="1595231570716">
+      <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1892" height="247" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1594647721152" />
     <state width="1892" height="187" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1590127296374" />
-    <state width="1892" height="247" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1594793573921" />
+    <state width="1892" height="246" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1595231570716" />
     <state width="1882" height="231" key="GridCell.Tab.0.center/0.0.1920.1160/1920.0.1920.1200@0.0.1920.1160" timestamp="1595205302640" />
-    <state width="1882" height="231" key="GridCell.Tab.0.left" timestamp="1595205302640">
-      <screen x="0" y="0" width="1920" height="1160" />
+    <state width="1892" height="246" key="GridCell.Tab.0.left" timestamp="1595231570716">
+      <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1892" height="247" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1594647721152" />
     <state width="1892" height="187" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1590127296374" />
-    <state width="1892" height="247" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1594793573921" />
+    <state width="1892" height="246" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1595231570716" />
     <state width="1882" height="231" key="GridCell.Tab.0.left/0.0.1920.1160/1920.0.1920.1200@0.0.1920.1160" timestamp="1595205302640" />
-    <state width="1882" height="231" key="GridCell.Tab.0.right" timestamp="1595205302640">
-      <screen x="0" y="0" width="1920" height="1160" />
+    <state width="1892" height="246" key="GridCell.Tab.0.right" timestamp="1595231570716">
+      <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1892" height="247" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1594647721152" />
     <state width="1892" height="187" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1590127296374" />
-    <state width="1892" height="247" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1594793573921" />
+    <state width="1892" height="246" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1595231570716" />
     <state width="1882" height="231" key="GridCell.Tab.0.right/0.0.1920.1160/1920.0.1920.1200@0.0.1920.1160" timestamp="1595205302640" />
     <state x="471" y="163" key="SettingsEditor" timestamp="1593650586391">
       <screen x="0" y="0" width="1920" height="1152" />

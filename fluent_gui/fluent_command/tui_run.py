@@ -130,6 +130,7 @@ class GetTui(object):
         else:
             setup.convergence_criterion('volume')
 
+        setup.input_summary()
         setup.hyb_initialize()
         if 'fan' in self.body_list:
             setup.start_calculate(1000)
@@ -271,6 +272,7 @@ class GetTui(object):
         for i in self.K_dict:
             setup.BC_outlet_vent(self.K_dict[i], i)
         setup.report_definition('mass-flux', 'surface-massflowrate', mass_flux_list, 'no')
+        setup.input_summary()
         setup.hyb_initialize()
         setup.start_calculate(350)
         setup.write_lin_case_data(self.lin_array[0])
@@ -280,6 +282,7 @@ class GetTui(object):
             setup.replace_lin_mesh(i)
             setup.rescale()
             setup.BC_mass_flow_inlet('inlet', d['mass_inlet'])
+            setup.input_summary()
             setup.hyb_initialize()
             setup.start_calculate(350)
             setup.write_lin_case_data(i)

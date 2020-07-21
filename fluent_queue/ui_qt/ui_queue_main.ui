@@ -26,7 +26,7 @@
    <enum>Qt::NoContextMenu</enum>
   </property>
   <property name="windowTitle">
-   <string>未登陆-请登陆后使用更多功能</string>
+   <string/>
   </property>
   <property name="iconSize">
    <size>
@@ -191,7 +191,7 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1,
   <action name="action_login">
    <property name="icon">
     <iconset>
-     <normaloff>../icon/login.png</normaloff>../icon/login.png</iconset>
+     <normaloff>../../../../.designer/icon/login.png</normaloff>../../../../.designer/icon/login.png</iconset>
    </property>
    <property name="text">
     <string>登陆</string>
@@ -200,7 +200,7 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1,
   <action name="action_logout">
    <property name="icon">
     <iconset>
-     <normaloff>../icon/logoff.png</normaloff>../icon/logoff.png</iconset>
+     <normaloff>../../../../.designer/icon/logoff.png</normaloff>../../../../.designer/icon/logoff.png</iconset>
    </property>
    <property name="text">
     <string>注销</string>
@@ -209,7 +209,7 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1,
   <action name="action_add">
    <property name="icon">
     <iconset>
-     <normaloff>../icon/add.png</normaloff>../icon/add.png</iconset>
+     <normaloff>../../../../.designer/icon/add.png</normaloff>../../../../.designer/icon/add.png</iconset>
    </property>
    <property name="text">
     <string>添加项目</string>
@@ -218,7 +218,7 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1,
   <action name="action_journal">
    <property name="icon">
     <iconset>
-     <normaloff>../icon/dialog.png</normaloff>../icon/dialog.png</iconset>
+     <normaloff>../../../../.designer/icon/dialog.png</normaloff>../../../../.designer/icon/dialog.png</iconset>
    </property>
    <property name="text">
     <string>项目日志</string>
@@ -230,7 +230,7 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1,
   <action name="action_delete">
    <property name="icon">
     <iconset>
-     <normaloff>../icon/delete.png</normaloff>../icon/delete.png</iconset>
+     <normaloff>../../../../.designer/icon/delete.png</normaloff>../../../../.designer/icon/delete.png</iconset>
    </property>
    <property name="text">
     <string>删除项目</string>
@@ -242,7 +242,7 @@ background-color: qlineargradient(x1: 0, y1: 0, x2: 1, y2: 1,
   <action name="action_setting">
    <property name="icon">
     <iconset>
-     <normaloff>../icon/setting.png</normaloff>../icon/setting.png</iconset>
+     <normaloff>../../../../.designer/icon/setting.png</normaloff>../../../../.designer/icon/setting.png</iconset>
    </property>
    <property name="text">
     <string>帮助</string>

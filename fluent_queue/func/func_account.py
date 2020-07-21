@@ -15,11 +15,13 @@ class AccVerify(QWidget, Ui_Widget_account):
     """
     verify_success = pyqtSignal(str)
 
-    def __init__(self, account_file_path):
+    def __init__(self, account_file_path, msg_translator):
         super().__init__()
         self.setupUi(self)
         # ----------init variable--------------
         self.account_csv_path = account_file_path
+        self.msg_trans = msg_translator
+        self.make_trans = self.msg_trans.make_trans
         # ----------init
         self.btn()
         self.verify_path()
@@ -50,9 +52,9 @@ class AccVerify(QWidget, Ui_Widget_account):
                 self.verify_success.emit(acc)               # emit account name
                 self.close()                                # close this window itself
             else:
-                self.label_tip.setText('密码错误')
+                self.label_tip.setText(self.make_trans('pwd_error'))
         else:
-            self.label_tip.setText('账号错误')
+            self.label_tip.setText(self.make_trans('acc_error'))
 
     def account_info(self):
         """

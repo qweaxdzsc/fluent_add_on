@@ -1,7 +1,7 @@
 import sys
 import cgitb
 
-from PyQt5.QtWidgets import QWidget, QApplication, QTreeWidgetItem, QCheckBox, QSpinBox, QDateTimeEdit
+from PyQt5.QtWidgets import QWidget, QApplication, QTreeWidgetItem, QCheckBox, QSpinBox, QDateTimeEdit, QComboBox
 from PyQt5.QtCore import pyqtSignal, QDateTime
 from ui_py.ui_setting import Ui_widget_setting
 
@@ -12,8 +12,9 @@ class Setting(QWidget, Ui_widget_setting):
     signal_waiting_min = pyqtSignal(int)
     signal_schedule_status = pyqtSignal(bool)
     signal_cancel_plan = pyqtSignal(str)
+    signal_change_language = pyqtSignal(str)
 
-    def __init__(self, suspend, cores, schedule_status, waiting_min):
+    def __init__(self, suspend, cores, schedule_status, waiting_min, language):
         super().__init__()
         self.setupUi(self)
         # ----------init variable------------
@@ -21,6 +22,8 @@ class Setting(QWidget, Ui_widget_setting):
         self.cores = cores
         self.schedule_status = schedule_status
         self.waiting_min = waiting_min
+        self.language = language
+        self.language_list = ['English', 'Chinese']
         # ----------init widget--------------
         self.label_suspend = QTreeWidgetItem()
         self.checkbox_suspend = QCheckBox()
@@ -29,16 +32,20 @@ class Setting(QWidget, Ui_widget_setting):
         self.label_plan = QTreeWidgetItem()
         self.edit_plan_datetime = QDateTimeEdit()
         self.label_about = QTreeWidgetItem()
+        self.label_language = QTreeWidgetItem()
+        self.combobox_lauguage = QComboBox()
         # -----------init function----------------
         self.ui_set()
         self.btn()
         self.init_data_show()
+        self.self_translate(language)
         self.show()
 
     def btn(self):
         self.tree_setting.itemClicked.connect(self.effect_expand)
         self.tree_setting.itemChanged.connect(self.enable_schedule)
-        # self.checkbox_suspend.stateChanged.connect(self.change_suspend_status)
+        self.combobox_lauguage.activated.connect(self.choose_language)
+        self.checkbox_suspend.stateChanged.connect(self.change_suspend_status)
 
     def ui_set(self):
         # style
@@ -53,10 +60,15 @@ class Setting(QWidget, Ui_widget_setting):
         self.label_plan.setDisabled(True)
         self.edit_plan_datetime.setMaximumSize(135, 28)
         self.edit_plan_datetime.setDisabled(True)
+        self.combobox_lauguage.setMaximumSize(135, 28)
+        self.combobox_lauguage.addItems(self.language_list)
+        self.combobox_lauguage.setCurrentText(self.language)
+
         # function
         self.add_tree_item(0, self.label_suspend, "暂停队列", self.checkbox_suspend)
         self.add_tree_item(0, self.label_cores, "使用核数", self.edit_cores)
         self.add_tree_item(1, self.label_plan, "计划启动于", self.edit_plan_datetime)
+        self.add_tree_item(2, self.label_language, "语言选择", self.combobox_lauguage)
 
     def add_tree_item(self, top_level_index, label, label_name, input_edit):
         label.setText(0, label_name)
@@ -80,6 +92,7 @@ class Setting(QWidget, Ui_widget_setting):
             self.edit_plan_datetime.setEnabled(check_state)
             item.setExpanded(2 - check_state)
             self.reset_date_edit()
+            self.checkbox_suspend.setCheckState((self.suspend + check_state)*2)
 
     def init_data_show(self):
         self.edit_cores.setValue(self.cores)
@@ -103,7 +116,7 @@ class Setting(QWidget, Ui_widget_setting):
         self.edit_plan_datetime.setCalendarPopup(True)
 
     def change_suspend_status(self, status):
-        self.signal_suspend_status.emit(bool(status))
+        self.suspend = bool(status)
 
     def plan_start(self):
         curr_time = QDateTime.currentSecsSinceEpoch()
@@ -112,6 +125,24 @@ class Setting(QWidget, Ui_widget_setting):
         print('waiting min', self.waiting_min)
         self.signal_waiting_min.emit(self.waiting_min)
 
+    def choose_language(self):
+        language = self.combobox_lauguage.currentText()
+        self.signal_change_language.emit(language)
+        self.self_translate(language)
+
+    def self_translate(self, language):
+        if language == 'English':
+            self.label_suspend.setText(0, 'Suspend next')
+            self.label_cores.setText(0, 'Threads number')
+            self.label_plan.setText(0, 'Scheduled in')
+            self.label_language.setText(0, 'Language')
+        else:
+            self.label_suspend.setText(0, "暂停队列")
+            self.label_cores.setText(0, "使用核数")
+            self.label_plan.setText(0, "计划启动于")
+            self.label_language.setText(0, "语言选择")
+        self.retranslateUi(self)
+
     def closeEvent(self, event):
         self.cores = self.edit_cores.value()
         suspend_status = self.checkbox_suspend.checkState()
@@ -119,7 +150,6 @@ class Setting(QWidget, Ui_widget_setting):
         self.signal_schedule_status.emit(self.schedule_status)
         if self.schedule_status:
             self.plan_start()
-            self.signal_suspend_status.emit(True)
         else:
             self.signal_cancel_plan.emit(' ')
         self.signal_suspend_status.emit(bool(suspend_status))
@@ -133,7 +163,8 @@ if __name__ == '__main__':
     cores = 24
     schedule_status = True
     waiting_min = 60
-    myWin = Setting(suspend, cores, schedule_status, waiting_min)
+    language = 'English'
+    myWin = Setting(suspend, cores, schedule_status, waiting_min, language)
     app.installEventFilter(myWin)
     sys.exit(app.exec_())
 

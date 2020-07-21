@@ -4,7 +4,6 @@ import configparser
 # import os
 
 from PyQt5.QtCore import pyqtSignal, QThread, QFileInfo, QDir
-# from func.func_ansys_license import LicenseAnsys
 from func.func_timer import current_time
 
 
@@ -63,7 +62,7 @@ class Calculate(QThread):
                         # ------------
                         self.finish_cal()
                     else:
-                        self.signal_license_info.emit('not enough license')
+                        self.signal_license_info.emit(self.ui.make_trans('no_license'))
                         time.sleep(3)
                 else:
                     time.sleep(2)
@@ -90,7 +89,7 @@ class Calculate(QThread):
         self.running_project.append(self.mission_list[0])
         self.running_project[0]['start_time'] = self.start_time_str
         self.signal_update_running_log.emit(self.running_project)
-        self.ui.listWidget_running.addItem("用户：%s   项目： %s" % (user, project))
+        self.ui.listWidget_running.addItem("User：%s   Project： %s" % (user, project))
 
     def do_task(self):
         """
@@ -134,7 +133,7 @@ class Calculate(QThread):
         :return:
         """
         self.complete_status = self.check_result()
-        print('finish status:', self.complete_status)
+        print('result status:', self.complete_status)
         self.finish_time = time.time()
         self.ui.listWidget_running.takeItem(0)
         self.form_finish_project_info()
@@ -154,11 +153,10 @@ class Calculate(QThread):
         start_time_tuple = time.strptime(start_time_str, "%Y-%m-%d %H:%M:%S")
         start_time = time.mktime(start_time_tuple)
         use_time = self.finish_time - start_time
-        print('used time:', use_time)
         using_hour = int(use_time / 3600)
         using_min = int((use_time % 3600) / 60)
         using_seconds = int(use_time % 60)
-        self.use_time = "%s小时%s分钟%s秒" % (using_hour, using_min, using_seconds)
+        self.use_time = "%sH%sM%sS" % (using_hour, using_min, using_seconds)
         self.finished_project = self.running_project[0]
         self.finished_project["start_time"] = self.start_time_str
         self.finished_project["using_time"] = self.use_time
@@ -186,7 +184,7 @@ class CalGuard(QThread):
         self.dir = directory
         transcript_name = '%s_transcript.txt' % project_name
         self.transcript = '%s\\%s' % (directory, transcript_name)
-        print('transcript:', self.transcript)
+        print('transcript path:', self.transcript)
         self.wait_time = 50
         self.check_interval = 150
 
@@ -214,7 +212,7 @@ class CalGuard(QThread):
         with open(self.transcript, 'r') as f:
             content = f.readlines()
             line_count_new = len(content)
-            print('Line Count:', line_count_new)
+            print('transcript line Count:', line_count_new)
 
         return line_count_new
 

@@ -11,6 +11,7 @@ class UiSet(object):
         """
         self.ui = ui
         self.ui.action_delete.setDisabled(True)
+        self.ui.setWindowTitle('Please Login to Unlock More Functions')
         # self.ui.progressBar.hide()
 
     def set_all_icon(self):
@@ -47,8 +48,9 @@ class UiSet(object):
         self.ui.action_logout.setDisabled(logoff)
         self.ui.action_login.setEnabled(logoff)
         self.ui.action_setting.setDisabled(logoff)
-        # self.ui.action_add.setStatusTip('请先登陆后使用添加功能')
+        # self.ui.action_add.setWin('请先登陆后使用添加功能')
         # self.ui.action_delete.setStatusTip('请先登陆后使用删除功能')
         self.ui.listWidget_queue.setDisabled(logoff)
+
 
 
