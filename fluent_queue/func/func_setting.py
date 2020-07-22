@@ -57,6 +57,7 @@ class Setting(QWidget, Ui_widget_setting):
         self.edit_cores.setMaximumSize(50, 25)
         self.edit_cores.setContentsMargins(0, 4, 0, 0)
         self.edit_cores.setMinimum(1)
+        self.edit_cores.setMaximum(132)
         self.label_plan.setDisabled(True)
         self.edit_plan_datetime.setMaximumSize(135, 28)
         self.edit_plan_datetime.setDisabled(True)
@@ -92,7 +93,8 @@ class Setting(QWidget, Ui_widget_setting):
             self.edit_plan_datetime.setEnabled(check_state)
             item.setExpanded(2 - check_state)
             self.reset_date_edit()
-            self.checkbox_suspend.setCheckState((self.suspend + check_state)*2)
+            self.suspend = self.checkbox_suspend.checkState()
+            self.checkbox_suspend.setCheckState(self.suspend + check_state)
 
     def init_data_show(self):
         self.edit_cores.setValue(self.cores)

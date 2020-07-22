@@ -18,7 +18,8 @@
   <a target="code" href="///C:/Users/BZMBN4/Desktop/fluent_add_on/fluent_queue/main.py" type="text/plain"><tt>main.py</tt></a>
 <span class="moduletype">Script</span>  <div class="import">
 imports:
-    <a href="#PyQt5.QtWidgets">PyQt5.QtWidgets</a>
+    <a href="#PyQt5.QtCore">PyQt5.QtCore</a>
+ &#8226;   <a href="#PyQt5.QtWidgets">PyQt5.QtWidgets</a>
  &#8226;   <a href="#_bootlocale">_bootlocale</a>
  &#8226;   <a href="#_collections_abc">_collections_abc</a>
  &#8226;   <a href="#_weakrefset">_weakrefset</a>
@@ -27,6 +28,7 @@ imports:
  &#8226;   <a href="#codecs">codecs</a>
  &#8226;   <a href="#collections">collections</a>
  &#8226;   <a href="#collections.abc">collections.abc</a>
+ &#8226;   <a href="#configparser">configparser</a>
  &#8226;   <a href="#copyreg">copyreg</a>
  &#8226;   <a href="#csv">csv</a>
  &#8226;   <a href="#encodings">encodings</a>
@@ -182,6 +184,7 @@ imports:
  &#8226;   <a href="#traceback">traceback</a>
  &#8226;   <a href="#types">types</a>
  &#8226;   <a href="#ui_py.ui_queue_main">ui_py.ui_queue_main</a>
+ &#8226;   <a href="#ui_translate.msg_translator">ui_translate.msg_translator</a>
  &#8226;   <a href="#warnings">warnings</a>
  &#8226;   <a href="#weakref">weakref</a>
 
@@ -223,7 +226,7 @@ imported by:
   <a target="code" href="" type="text/plain"><tt>'org.python'</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
-    <a href="#pickle">pickle</a>
+    <a href="#copy">copy</a>
  &#8226;   <a href="#xml.sax">xml.sax</a>
 
   </div>
@@ -235,8 +238,7 @@ imported by:
   <a target="code" href="///C:/users/bzmbn4/appdata/local/programs/python/python37/lib/site-packages/PyQt5/__init__.py" type="text/plain"><tt>PyQt5</tt></a>
 <span class="moduletype">Package</span>  <div class="import">
 imports:
-    <a href="#PyQt5.QtCore">PyQt5.QtCore</a>
- &#8226;   <a href="#PyQt5.QtGui">PyQt5.QtGui</a>
+    <a href="#PyQt5.QtGui">PyQt5.QtGui</a>
  &#8226;   <a href="#PyQt5.sip">PyQt5.sip</a>
  &#8226;   <a href="#os">os</a>
 
@@ -248,7 +250,6 @@ imported by:
  &#8226;   <a href="#PyQt5.QtWidgets">PyQt5.QtWidgets</a>
  &#8226;   <a href="#PyQt5.sip">PyQt5.sip</a>
  &#8226;   <a href="#ui_py.ui_add_project">ui_py.ui_add_project</a>
- &#8226;   <a href="#ui_py.ui_cores">ui_py.ui_cores</a>
  &#8226;   <a href="#ui_py.ui_journal">ui_py.ui_journal</a>
  &#8226;   <a href="#ui_py.ui_login">ui_py.ui_login</a>
  &#8226;   <a href="#ui_py.ui_queue_main">ui_py.ui_queue_main</a>
@@ -268,12 +269,10 @@ imports:
   </div>
   <div class="import">
 imported by:
-    <a href="#PyQt5">PyQt5</a>
- &#8226;   <a href="#PyQt5.QtCore">PyQt5.QtCore</a>
+    <a href="#PyQt5.QtCore">PyQt5.QtCore</a>
  &#8226;   <a href="#PyQt5.QtGui">PyQt5.QtGui</a>
  &#8226;   <a href="#PyQt5.QtWidgets">PyQt5.QtWidgets</a>
  &#8226;   <a href="#func.func_account">func.func_account</a>
- &#8226;   <a href="#func.func_change_cores">func.func_change_cores</a>
  &#8226;   <a href="#func.func_dragable_list">func.func_dragable_list</a>
  &#8226;   <a href="#func.func_journal">func.func_journal</a>
  &#8226;   <a href="#func.func_list_manage">func.func_list_manage</a>
@@ -281,8 +280,8 @@ imported by:
  &#8226;   <a href="#func.func_setting">func.func_setting</a>
  &#8226;   <a href="#func.func_short_key">func.func_short_key</a>
  &#8226;   <a href="#func.func_timer">func.func_timer</a>
+ &#8226;   <a href="#main.py">main.py</a>
  &#8226;   <a href="#ui_py.ui_add_project">ui_py.ui_add_project</a>
- &#8226;   <a href="#ui_py.ui_cores">ui_py.ui_cores</a>
  &#8226;   <a href="#ui_py.ui_journal">ui_py.ui_journal</a>
  &#8226;   <a href="#ui_py.ui_login">ui_py.ui_login</a>
  &#8226;   <a href="#ui_py.ui_queue_main">ui_py.ui_queue_main</a>
@@ -310,7 +309,6 @@ imported by:
  &#8226;   <a href="#func.func_list_manage">func.func_list_manage</a>
  &#8226;   <a href="#func.func_ui_set">func.func_ui_set</a>
  &#8226;   <a href="#ui_py.ui_add_project">ui_py.ui_add_project</a>
- &#8226;   <a href="#ui_py.ui_cores">ui_py.ui_cores</a>
  &#8226;   <a href="#ui_py.ui_journal">ui_py.ui_journal</a>
  &#8226;   <a href="#ui_py.ui_login">ui_py.ui_login</a>
  &#8226;   <a href="#ui_py.ui_queue_main">ui_py.ui_queue_main</a>
@@ -334,7 +332,6 @@ imports:
 imported by:
     <a href="#PyQt5.QtWidgets">PyQt5.QtWidgets</a>
  &#8226;   <a href="#func.func_account">func.func_account</a>
- &#8226;   <a href="#func.func_change_cores">func.func_change_cores</a>
  &#8226;   <a href="#func.func_dragable_list">func.func_dragable_list</a>
  &#8226;   <a href="#func.func_journal">func.func_journal</a>
  &#8226;   <a href="#func.func_list_manage">func.func_list_manage</a>
@@ -343,7 +340,6 @@ imported by:
  &#8226;   <a href="#func.func_timer">func.func_timer</a>
  &#8226;   <a href="#main.py">main.py</a>
  &#8226;   <a href="#ui_py.ui_add_project">ui_py.ui_add_project</a>
- &#8226;   <a href="#ui_py.ui_cores">ui_py.ui_cores</a>
  &#8226;   <a href="#ui_py.ui_journal">ui_py.ui_journal</a>
  &#8226;   <a href="#ui_py.ui_login">ui_py.ui_login</a>
  &#8226;   <a href="#ui_py.ui_queue_main">ui_py.ui_queue_main</a>
@@ -1687,6 +1683,7 @@ imports:
   <div class="import">
 imported by:
     <a href="#func.func_run_calculation">func.func_run_calculation</a>
+ &#8226;   <a href="#main.py">main.py</a>
 
   </div>
 
@@ -1723,8 +1720,8 @@ imported by:
   <a target="code" href="///C:/users/bzmbn4/appdata/local/programs/python/python37/lib/copy.py" type="text/plain"><tt>copy</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#copyreg">copyreg</a>
- &#8226;   <a href="#org">org</a>
+    <a href="#'org.python'">'org.python'</a>
+ &#8226;   <a href="#copyreg">copyreg</a>
  &#8226;   <a href="#types">types</a>
  &#8226;   <a href="#weakref">weakref</a>
 
@@ -5010,7 +5007,6 @@ imported by:
 <span class="moduletype">NamespacePackage</span>  <div class="import">
 imported by:
     <a href="#func.func_account">func.func_account</a>
- &#8226;   <a href="#func.func_change_cores">func.func_change_cores</a>
  &#8226;   <a href="#func.func_dragable_list">func.func_dragable_list</a>
  &#8226;   <a href="#func.func_journal">func.func_journal</a>
  &#8226;   <a href="#func.func_list_manage">func.func_list_manage</a>
@@ -5042,25 +5038,6 @@ imports:
   <div class="import">
 imported by:
     <a href="#main.py">main.py</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="func.func_change_cores"></a>
-  <a target="code" href="///C:/Users/BZMBN4/Desktop/fluent_add_on/fluent_queue/func/func_change_cores.py" type="text/plain"><tt>func.func_change_cores</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#PyQt5.QtCore">PyQt5.QtCore</a>
- &#8226;   <a href="#PyQt5.QtWidgets">PyQt5.QtWidgets</a>
- &#8226;   <a href="#func">func</a>
- &#8226;   <a href="#ui_py.ui_cores">ui_py.ui_cores</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#func.func_short_key">func.func_short_key</a>
 
   </div>
 
@@ -5118,7 +5095,6 @@ imports:
  &#8226;   <a href="#PyQt5.QtWidgets">PyQt5.QtWidgets</a>
  &#8226;   <a href="#cgitb">cgitb</a>
  &#8226;   <a href="#func">func</a>
- &#8226;   <a href="#os">os</a>
  &#8226;   <a href="#sys">sys</a>
  &#8226;   <a href="#ui_py.ui_add_project">ui_py.ui_add_project</a>
 
@@ -5181,7 +5157,6 @@ imports:
     <a href="#PyQt5.QtCore">PyQt5.QtCore</a>
  &#8226;   <a href="#PyQt5.QtWidgets">PyQt5.QtWidgets</a>
  &#8226;   <a href="#func">func</a>
- &#8226;   <a href="#func.func_change_cores">func.func_change_cores</a>
 
   </div>
   <div class="import">
@@ -6244,7 +6219,7 @@ imported by:
   <a target="code" href="" type="text/plain"><tt>org</tt></a>
 <span class="moduletype">MissingModule</span>  <div class="import">
 imported by:
-    <a href="#copy">copy</a>
+    <a href="#pickle">pickle</a>
 
   </div>
 
@@ -6282,7 +6257,6 @@ imported by:
  &#8226;   <a href="#fnmatch">fnmatch</a>
  &#8226;   <a href="#func.func_account">func.func_account</a>
  &#8226;   <a href="#func.func_journal">func.func_journal</a>
- &#8226;   <a href="#func.func_list_manage">func.func_list_manage</a>
  &#8226;   <a href="#genericpath">genericpath</a>
  &#8226;   <a href="#getopt">getopt</a>
  &#8226;   <a href="#getpass">getpass</a>
@@ -6372,8 +6346,7 @@ imported by:
   <a target="code" href="///C:/users/bzmbn4/appdata/local/programs/python/python37/lib/pickle.py" type="text/plain"><tt>pickle</tt></a>
 <span class="moduletype">SourceModule</span>  <div class="import">
 imports:
-    <a href="#'org.python'">'org.python'</a>
- &#8226;   <a href="#_compat_pickle">_compat_pickle</a>
+    <a href="#_compat_pickle">_compat_pickle</a>
  &#8226;   <a href="#_pickle">_pickle</a>
  &#8226;   <a href="#argparse">argparse</a>
  &#8226;   <a href="#codecs">codecs</a>
@@ -6382,6 +6355,7 @@ imports:
  &#8226;   <a href="#functools">functools</a>
  &#8226;   <a href="#io">io</a>
  &#8226;   <a href="#itertools">itertools</a>
+ &#8226;   <a href="#org">org</a>
  &#8226;   <a href="#pprint">pprint</a>
  &#8226;   <a href="#re">re</a>
  &#8226;   <a href="#struct">struct</a>
@@ -7669,7 +7643,6 @@ imported by:
 <span class="moduletype">NamespacePackage</span>  <div class="import">
 imported by:
     <a href="#ui_py.ui_add_project">ui_py.ui_add_project</a>
- &#8226;   <a href="#ui_py.ui_cores">ui_py.ui_cores</a>
  &#8226;   <a href="#ui_py.ui_journal">ui_py.ui_journal</a>
  &#8226;   <a href="#ui_py.ui_login">ui_py.ui_login</a>
  &#8226;   <a href="#ui_py.ui_queue_main">ui_py.ui_queue_main</a>
@@ -7694,26 +7667,6 @@ imports:
   <div class="import">
 imported by:
     <a href="#func.func_list_manage">func.func_list_manage</a>
-
-  </div>
-
-</div>
-
-<div class="node">
-  <a name="ui_py.ui_cores"></a>
-  <a target="code" href="///C:/Users/BZMBN4/Desktop/fluent_add_on/fluent_queue/ui_py/ui_cores.py" type="text/plain"><tt>ui_py.ui_cores</tt></a>
-<span class="moduletype">SourceModule</span>  <div class="import">
-imports:
-    <a href="#PyQt5">PyQt5</a>
- &#8226;   <a href="#PyQt5.QtCore">PyQt5.QtCore</a>
- &#8226;   <a href="#PyQt5.QtGui">PyQt5.QtGui</a>
- &#8226;   <a href="#PyQt5.QtWidgets">PyQt5.QtWidgets</a>
- &#8226;   <a href="#ui_py">ui_py</a>
-
-  </div>
-  <div class="import">
-imported by:
-    <a href="#func.func_change_cores">func.func_change_cores</a>
 
   </div>
 
@@ -7795,6 +7748,33 @@ imports:
   <div class="import">
 imported by:
     <a href="#func.func_setting">func.func_setting</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="ui_translate"></a>
+  <a target="code" href="-" type="text/plain"><tt>ui_translate</tt></a>
+<span class="moduletype">NamespacePackage</span>  <div class="import">
+imported by:
+    <a href="#ui_translate.msg_translator">ui_translate.msg_translator</a>
+
+  </div>
+
+</div>
+
+<div class="node">
+  <a name="ui_translate.msg_translator"></a>
+  <a target="code" href="///C:/Users/BZMBN4/Desktop/fluent_add_on/fluent_queue/ui_translate/msg_translator.py" type="text/plain"><tt>ui_translate.msg_translator</tt></a>
+<span class="moduletype">SourceModule</span>  <div class="import">
+imports:
+    <a href="#ui_translate">ui_translate</a>
+
+  </div>
+  <div class="import">
+imported by:
+    <a href="#main.py">main.py</a>
 
   </div>
 

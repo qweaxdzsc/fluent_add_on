@@ -3,6 +3,7 @@ import cgitb
 import csv
 import subprocess as sp
 import os
+import configparser
 
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox
 from PyQt5.QtCore import QTranslator
@@ -19,12 +20,16 @@ from ui_translate.msg_translator import MsgTranslator
 
 
 class MyMainWindow(QMainWindow, Ui_fluent_queue):
-    def __init__(self, app):
+    def __init__(self):
         super().__init__()
-        self.setupUi(self)
+        # ---------language set----------------------
+        self._parse_config()
+        self.msg_trans = MsgTranslator(self.language)
+        self.make_trans = self.msg_trans.make_trans
         # -------- prevent multi application----------
-        self.app = app
         self.prevent_multiapp()
+        # ---------init UI set---------------------------
+        self.setupUi(self)
         self.ui_alter = UiSet(self)                             # UiSet is the collection of Ui change object
         self.ui_alter.set_all_icon()
         self.ui_alter.ui_user_logoff()                          # change Ui to user logoff status
@@ -41,14 +46,10 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.account_file = 'account.csv'
         self.mission_list = list()
         self.running_project = list()
-        self.language = 'English'
-        self.language_dict = {'English': 'EN', 'Chinese': 'CN'}
         # ----------initial function-----------------
         self.main_path = self.get_abs_path(os.getcwd())
         print("main_path: ", self.main_path)
         self.database_path = self.get_abs_path(self.database_path)
-        self.msg_trans = MsgTranslator(self.language)
-        self.make_trans = self.msg_trans.make_trans
         self.init_data_loading()
         self.init_queue_showing()                                                      # show running and waiting list
         self.timer = LoopTimer()
@@ -57,7 +58,6 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.calculation = Calculate(self, self.mission_list, self.running_project)    # start calculation thread
         self.schedule = Scheduler(self.timer.signal_schedule_timer)
         self.manager_authority(False)
-
         self._translator()
         # ---------signal connection-------------------------
         self.sleep_time.signal_time_exceed.connect(self.user_logout)
@@ -69,6 +69,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
 
         self.listWidget_queue.signal_file_receive.connect(self.receive_drop_file)
         self.listWidget_queue.signal_project_exchange.connect(self.exchange_project)
+        self.listWidget_queue.signal_drop_reject.connect(self.show_status_msg_trans)
         self.show()
 
     def btn(self):
@@ -79,22 +80,26 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.action_journal.triggered.connect(self.view_history_log)
         self.action_setting.triggered.connect(self.show_setting)
 
+    def _parse_config(self):
+        config = configparser.ConfigParser()
+        config.read(r'.\config\config.ini')
+        self.language = config['Language']['language']
+
     def _translator(self):
         self.file_basename_list = []
         self.translator_list = []
-        file_list = os.listdir('./ui_py')
+        file_list = os.listdir('./ui_translate')
         for file in file_list:
-            if file.endswith('.py'):
-                file_basename = file.replace('.py', '')
+            if file.endswith('.qm'):
+                file_basename = file.replace('.qm', '')
                 self.file_basename_list.append(file_basename)
                 exec('self.trans_%s = QTranslator()' % file_basename)
                 exec('self.translator_list.append(self.trans_%s)' % file_basename)
 
         for index, item in enumerate(self.translator_list):
-            language = self.language_dict[self.language]
-            item.load("./ui_translate/%s_%s.qm" % (self.file_basename_list[index], language))
+            item.load("./ui_translate/%s.qm" % (self.file_basename_list[index]))
 
-        self.enable_translate('English')
+        self.enable_translate(self.language)
 
     def enable_translate(self, language):
         self.language = language
@@ -122,7 +127,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         count = int(count)
         print('application_count:', count)
         if count > 1:
-            QMessageBox.warning(self, self.make_trans('Warning'), self.make_trans('already_open'))
+            QMessageBox.warning(self, self.make_trans('warning'), self.make_trans('already_open'))
             sys.exit()
 
     def get_abs_path(self, path):
@@ -178,7 +183,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         :return: a pyqtsignal(verify_success)
         """
         account_file_path = '%s/%s' % (self.database_path, self.account_file)
-        self.acc_ui = AccVerify(account_file_path)
+        self.acc_ui = AccVerify(account_file_path, self.msg_trans)
         self.acc_ui.verify_success.connect(self.user_login)
 
     def user_login(self, acc_name):
@@ -326,6 +331,9 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
     def show_status_message(self, msg):
         self.statusbar.showMessage(msg)
 
+    def show_status_msg_trans(self, msg):
+        self.statusbar.showMessage(self.trans(msg))
+
     def manager_authority(self, switch):
         """
         set manager authority:
@@ -392,7 +400,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
 if __name__ == "__main__":
     cgitb.enable(format='text')
     app = QApplication(sys.argv)
-    myWin = MyMainWindow(app)
+    myWin = MyMainWindow()
     app.installEventFilter(myWin)
     sys.exit(app.exec_())
 

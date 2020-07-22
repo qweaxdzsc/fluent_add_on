@@ -11,7 +11,7 @@ class UiSet(object):
         """
         self.ui = ui
         self.ui.action_delete.setDisabled(True)
-        self.ui.setWindowTitle('Please Login to Unlock More Functions')
+        self.ui.setWindowTitle(self.ui.make_trans('login_unlock'))
         # self.ui.progressBar.hide()
 
     def set_all_icon(self):

@@ -12,6 +12,7 @@ class DragListWidget(QListWidget):
     """
     signal_file_receive = pyqtSignal(str)
     signal_project_exchange = pyqtSignal(dict)
+    signal_drop_reject = pyqtSignal(str)
 
     def __init__(self, central_widget):
         super(DragListWidget, self).__init__(central_widget)
@@ -39,7 +40,12 @@ class DragListWidget(QListWidget):
             file = str(received_data.urls()[0].toLocalFile())
             file_info = QFileInfo(file)
             accept_file_type = ['msh', 'cas', 'h5', 'jou']
-            self.signal_file_receive.emit(file)
+            if file_info.suffix() in accept_file_type:
+                self.signal_file_receive.emit(file)
+            else:
+                self.signal_drop_reject.emit('drop_reject')
+                print('File type do not accept, only accept:\n'
+                      '.msh, .cas, .h5, .jou')
         else:
             if self.drag_permission:
                 items = self.selectedItems()

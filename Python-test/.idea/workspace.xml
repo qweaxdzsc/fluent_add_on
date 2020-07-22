@@ -2,22 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8d44180-0242-4157-8c6d-4f3b75ca3fd9" name="Default Changelist" comment="第二次修改">
-      <change afterPath="$PROJECT_DIR$/../fluent_queue/other_tool/translator_file_creator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_py/ui_setting.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_translate/msg_translator.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_translate/ui_add_project_CN.qm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_translate/ui_add_project_CN.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_translate/ui_add_project_EN.qm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_translate/ui_journal_CN.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_translate/ui_journal_EN.qm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_translate/ui_login_CN.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_translate/ui_login_EN.qm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_translate/ui_queue_main_CN.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_translate/ui_queue_main_EN.qm" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_translate/ui_setting_CN.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../fluent_queue/ui_translate/ui_setting_EN.qm" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CFD_input_gui/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CFD_input_gui/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/func_ansys_license/Analysis-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/func_ansys_license/Analysis-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/func_ansys_license/EXE-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/func_ansys_license/EXE-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/func_ansys_license/PKG-00.pkg" beforeDir="false" afterPath="$PROJECT_DIR$/build/func_ansys_license/PKG-00.pkg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/func_ansys_license/PKG-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/func_ansys_license/PKG-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/func_ansys_license/PYZ-00.pyz" beforeDir="false" afterPath="$PROJECT_DIR$/build/func_ansys_license/PYZ-00.pyz" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/func_ansys_license/PYZ-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/func_ansys_license/PYZ-00.toc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/func_ansys_license/base_library.zip" beforeDir="false" afterPath="$PROJECT_DIR$/build/func_ansys_license/base_library.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/func_ansys_license/warn-func_ansys_license.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/func_ansys_license/warn-func_ansys_license.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/main/Analysis-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/Analysis-00.toc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/main/COLLECT-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/COLLECT-00.toc" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/main/EXE-00.toc" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/EXE-00.toc" afterDir="false" />
@@ -27,30 +20,19 @@
       <change beforePath="$PROJECT_DIR$/build/main/main.exe" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/main.exe" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/main/warn-main.txt" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/warn-main.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/main/xref-main.html" beforeDir="false" afterPath="$PROJECT_DIR$/build/main/xref-main.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fluent_tui.py" beforeDir="false" afterPath="$PROJECT_DIR$/fluent_tui.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/get_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/get_report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/linearity_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/linearity_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/python_packer.py" beforeDir="false" afterPath="$PROJECT_DIR$/python_packer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_func.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_account.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_account.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_change_cores.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/legacy_file/func_change_cores.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/config/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/config/config.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_ansys_license.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_ansys_license.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_dragable_list.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_dragable_list.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_list_manage.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_list_manage.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_run_calculation.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_run_calculation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_setting.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_setting.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_short_key.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_short_key.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_timer.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_timer.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_ui_set.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_ui_set.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_queue/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/other_tool/GUI_convertor.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/other_tool/GUI_convertor.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/test.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/ui_py/ui_cores.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/legacy_file/ui_cores.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/ui_py/ui_plan_timer.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/legacy_file/ui_plan_timer.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/ui_py/ui_queue_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/ui_py/ui_queue_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/ui_qt/ui_cores.ui" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/legacy_file/ui_cores.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/ui_qt/ui_plan_timer.ui" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/legacy_file/ui_plan_timer.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/ui_qt/ui_queue_main.ui" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/ui_qt/ui_queue_main.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/ui_translate/msg_translator.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/ui_translate/msg_translator.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/ui_translate/ui_add_project_CN.qm" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +81,7 @@
       <recent name="C:\Users\BZMBN4\Desktop\Python-test" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.get_report">
+  <component name="RunManager" selected="Python.python_packer">
     <configuration name="get_report" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Python-test" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -236,8 +218,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.get_report" />
         <item itemvalue="Python.python_packer" />
+        <item itemvalue="Python.get_report" />
         <item itemvalue="Python.linearity_report" />
         <item itemvalue="Python.test3" />
         <item itemvalue="Python.tui_run" />
@@ -306,37 +288,37 @@
     <option name="LAST_COMMIT_MESSAGE" value="第二次修改" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1397" height="240" key="GridCell.Tab.0.bottom" timestamp="1595300940728">
+    <state width="1397" height="240" key="GridCell.Tab.0.bottom" timestamp="1595395015110">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1399" height="298" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1594813484003" />
     <state width="1402" height="326" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1595169706144" />
     <state width="1892" height="327" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1590385277182" />
-    <state width="1397" height="240" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1595300940728" />
+    <state width="1397" height="240" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1595395015110" />
     <state width="1402" height="326" key="GridCell.Tab.0.bottom/0.0.1920.1160/1920.0.1920.1200@0.0.1920.1160" timestamp="1595205300612" />
-    <state width="1397" height="240" key="GridCell.Tab.0.center" timestamp="1595300940728">
+    <state width="1397" height="240" key="GridCell.Tab.0.center" timestamp="1595395015110">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1399" height="298" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1594813484003" />
     <state width="1402" height="326" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1595169706144" />
     <state width="1892" height="327" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1590385277182" />
-    <state width="1397" height="240" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1595300940728" />
+    <state width="1397" height="240" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1595395015110" />
     <state width="1402" height="326" key="GridCell.Tab.0.center/0.0.1920.1160/1920.0.1920.1200@0.0.1920.1160" timestamp="1595205300612" />
-    <state width="1397" height="240" key="GridCell.Tab.0.left" timestamp="1595300940728">
+    <state width="1397" height="240" key="GridCell.Tab.0.left" timestamp="1595395015110">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1399" height="298" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1594813484003" />
     <state width="1402" height="326" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1595169706144" />
     <state width="1892" height="327" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1590385277182" />
-    <state width="1397" height="240" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1595300940728" />
+    <state width="1397" height="240" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1595395015110" />
     <state width="1402" height="326" key="GridCell.Tab.0.left/0.0.1920.1160/1920.0.1920.1200@0.0.1920.1160" timestamp="1595205300612" />
-    <state width="1397" height="240" key="GridCell.Tab.0.right" timestamp="1595300940728">
+    <state width="1397" height="240" key="GridCell.Tab.0.right" timestamp="1595395015110">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1399" height="298" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1594813484003" />
     <state width="1402" height="326" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1595169706144" />
     <state width="1892" height="327" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1590385277182" />
-    <state width="1397" height="240" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1595300940728" />
+    <state width="1397" height="240" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1595395015110" />
     <state width="1402" height="326" key="GridCell.Tab.0.right/0.0.1920.1160/1920.0.1920.1200@0.0.1920.1160" timestamp="1595205300612" />
     <state x="448" y="224" key="SettingsEditor" timestamp="1594799902388">
       <screen x="0" y="0" width="1920" height="1152" />

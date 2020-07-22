@@ -73,7 +73,7 @@ class Calculate(QThread):
         path = r'cd app'
         config = configparser.ConfigParser()
         config.read(r'.\config\config.ini')
-        app = config['license']['exe']
+        app = config['License']['exe']
         p = subprocess.getoutput('cd app&%s %s %s' % (app, command, cores))
         return eval(p)
 

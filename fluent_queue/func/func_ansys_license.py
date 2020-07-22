@@ -24,10 +24,10 @@ class LicenseAnsys(object):
         config = configparser.ConfigParser()
         config.read(self.config_file)
 
-        self.server_list = eval(config['license']['server_list'])
-        self.application = eval(config['license']['application'])
-        self.license_command = eval(config['license']['license_command'])
-        self.module_dict = eval(config['license']['module_dict'])
+        self.server_list = eval(config['License']['server_list'])
+        self.application = eval(config['License']['application'])
+        self.license_command = eval(config['License']['license_command'])
+        self.module_dict = eval(config['License']['module_dict'])
 
     def get_license_info(self):
         info = ''
@@ -53,7 +53,7 @@ class LicenseAnsys(object):
             for k, v in module_dict.items():                  # loop module_dict
                 for i in v:                                   # loop the list inside module_dict
                     self.check_usage(row, i, self.license_dict[k])
-        print('license dict:', self.license_dict)
+        # print('license dict:', self.license_dict)
 
     def check_usage(self, info, flag, reserv_list):
         """

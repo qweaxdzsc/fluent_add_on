@@ -41,6 +41,7 @@ class MsgTranslator(object):
             'no_case_mesh': ['Case or Mesh do not exist', 'Case或者Mesh不存在'],
             'no_journal': ['Journal do not exist', 'Journal不存在'],
             'no_license': ['Not enough license', '没有足够的license'],
+            'drop_reject': ['File type do not accept', '文件类型不支持']
 
         }
 
