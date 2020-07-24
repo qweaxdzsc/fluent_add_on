@@ -1,15 +1,29 @@
-import win32com.client
-outlook = win32com.client.Dispatch("Outlook.Application")
+import time
+import threading
 
-# 创建一个邮件对象
-mail = outlook.CreateItem(0)
-# 对邮件的各个属性进行赋值
-mail.To = "zonghui.jin@estra-automotive.com"
-mail.Subject = "pythonwin32测试邮件"
-mail.Body = "邮件正文"
-# mail.Attachments.Add(r"C:\Users\BZMBN4\Desktop\host_mesh.txt")
-# 添加多个附件
-# mail.Attachments.Add("附件1绝对路径")
-# mail.Attachments.Add("附件2绝对路径")...
-# 邮件发送
-mail.Send()
+
+queue_list = [i for i in range(10)]
+
+
+def execute_mission(queue_list):
+    while True:
+        if queue_list:
+            queue_list.pop(0)
+
+        print(queue_list)
+        time.sleep(3)
+
+
+def queue_add(queue_list):
+    while True:
+        item = input('Please input item:')
+        queue_list.append(item)
+        print(queue_list)
+        time.sleep(1)
+
+
+thread1 = threading.Thread(target=execute_mission, args=(queue_list,))
+thread1.start()
+
+thread2 = threading.Thread(target=queue_add, args=(queue_list,))
+thread2.start()

@@ -1,3 +1,5 @@
-import numpy as np
+import sys
 
-a1 = [12, 1]
+with open('arg_test.txt', 'w') as f:
+    f.write(str(sys.argv))
+

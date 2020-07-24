@@ -228,7 +228,7 @@ def insert_data(conn, data_matrix, project_name, version, file_path, producer, r
     cursor.close()
 
 
-insert_data(conn, data_matrix, project_name, version, new_path, producer, rpm)
+# insert_data(conn, data_matrix, project_name, version, new_path, producer, rpm)
 
 #
 # def extract_data(conn, project_name, version):

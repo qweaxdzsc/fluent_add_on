@@ -65,7 +65,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         include all button and action signal
         :return:
         """
-        # ------------menu action btn-----------------
+        # ---------------menu action btn----------------------
         self.actionimport.triggered.connect(self.import_info)
         self.actionexport.triggered.connect(self.export_pamt)
         self.actionsolve.triggered.connect(self.advFunc.direct_solve)
@@ -74,13 +74,13 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.action_mesh_poly.triggered.connect(lambda: self.choose_mesh_type('poly'))
         self.action_mesh_tet.triggered.connect(lambda: self.choose_mesh_type('tet'))
         self.cad_address_explore.clicked.connect(self.cad_address)
-        # ------------quick mode radio btn------------
+        # ---------------quick mode radio btn---------------------
         self.quick_distribfc_btn.toggled.connect(self.short_key.quick_distrib_judge)
         self.quick_distribfh_btn.toggled.connect(self.short_key.quick_distrib_judge)
         self.quick_distribbil_btn.toggled.connect(self.short_key.quick_distrib_judge)
         self.quick_distriblin_btn.toggled.connect(self.short_key.quick_distrib_judge)
         self.finish_mode_info_btn.clicked.connect(self.into_CAD)
-        # ------------parameter or launch related btn-------------------
+        # --------------parameter or launch related btn-------------------
         self.unit_btn.clicked.connect(self.unit_convert)
         self.choose_evap_btn.clicked.connect(lambda: self.porous_choose('evap'))
         self.choose_hc_btn.clicked.connect(lambda: self.porous_choose('hc'))
@@ -88,7 +88,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.start_btn.clicked.connect(self.begin)
         self.return_btn.clicked.connect(self.default_ui.mode_ui_default)
         self.solver_btn.clicked.connect(self.solver)
-        # ------------ unavailable test btn------------------
+        # ------------- unavailable test btn------------------
         self.show_workflow_btn.clicked.connect(self.test)
         self.actionalter_default_parameter.triggered.connect(lambda: self.append_text('功能未开放,敬请期待'))
 

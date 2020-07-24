@@ -41,10 +41,15 @@ class PythonPacker(object):
         self.copy_directory(file_list)
         # self.copy_qt5core()
 
+    def get_command(self, command="-D -w"):
+        # command = "-F"               # create one file
+        package = self.project_path + "\\" + self.project_name
+        print("pyinstaller %s %s --distpath %s" % (command, package, self.out_path))
+
 
 if __name__ == "__main__":
-    python_path = r"C:\Users\BZMBN4\Desktop\fluent_add_on\Python-test"
-    python_name = "test.py"
+    python_path = r"C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_queue"
+    python_name = "main.py"
     copy_file_list = [
         r'C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_queue\icon',
         r'C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_queue\app',
@@ -52,5 +57,6 @@ if __name__ == "__main__":
         r'C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_queue\ui_translate',
     ]
     packer = PythonPacker(python_path, python_name)
+    packer.get_command("-D")
     # packer.simple_packer(copy_file_list, "-D")
-    packer.pack_python("-F")
+    # packer.pack_python("-F -w")
