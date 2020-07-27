@@ -57,6 +57,6 @@ if __name__ == "__main__":
         r'C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_queue\ui_translate',
     ]
     packer = PythonPacker(python_path, python_name)
-    packer.get_command("-D")
-    # packer.simple_packer(copy_file_list, "-D")
+    # packer.get_command("-D")
+    packer.simple_packer(copy_file_list, "-D")
     # packer.pack_python("-F -w")

@@ -6,7 +6,7 @@ import os
 import configparser
 
 from PyQt5.QtWidgets import QMainWindow, QApplication, QMessageBox
-from PyQt5.QtCore import QTranslator
+from PyQt5.QtCore import QTranslator                                 # used by exec()
 from ui_py.ui_queue_main import Ui_fluent_queue
 from func.func_ui_set import UiSet
 from func.func_account import AccVerify

@@ -95,6 +95,7 @@ class Setting(QWidget, Ui_widget_setting):
             self.reset_date_edit()
             self.suspend = self.checkbox_suspend.checkState()
             self.checkbox_suspend.setCheckState(self.suspend + check_state)
+            self.checkbox_suspend.setDisabled(check_state)
 
     def init_data_show(self):
         self.edit_cores.setValue(self.cores)
