@@ -15,11 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from login.urls import app_name
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     # second branch url
-    path('', include(('login.urls', app_name), namespace='login')),
+    path('', include('app_login.urls', namespace='app_login')),
+    path('', include('app_queue.urls', namespace='app_queue')),
 ]

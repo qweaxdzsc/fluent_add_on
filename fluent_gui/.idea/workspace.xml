@@ -752,10 +752,10 @@
     </configuration>
     <list>
       <item itemvalue="Python.main" />
-      <item itemvalue="Python.sub_k_test" />
-      <item itemvalue="Python.ui_k_cal" />
-      <item itemvalue="Python.test" />
       <item itemvalue="Python.python_packer" />
+      <item itemvalue="Python.sub_k_test" />
+      <item itemvalue="Python.test" />
+      <item itemvalue="Python.ui_k_cal" />
     </list>
     <recent_temporary>
       <list>

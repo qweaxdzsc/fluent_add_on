@@ -12,7 +12,7 @@ cgitb.enable(format='text')
 
 # 发信方的信息：发信邮箱，QQ 邮箱授权码
 from_addr = 'zonghui.jin@estra-automotive.com'
-password = 'abc=202003'
+password = 'abc=202006'
 
 # 收信方邮箱
 to_addr = 'zonghui.jin@estra-automotive.com'
