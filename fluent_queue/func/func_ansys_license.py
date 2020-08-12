@@ -53,7 +53,7 @@ class LicenseAnsys(object):
             for k, v in module_dict.items():                  # loop module_dict
                 for i in v:                                   # loop the list inside module_dict
                     self.check_usage(row, i, self.license_dict[k])
-        print('license dict:', self.license_dict)
+        # print('license dict:', self.license_dict)
 
     def check_usage(self, info, flag, reserv_list):
         """
@@ -65,10 +65,15 @@ class LicenseAnsys(object):
         :return:
         """
         if flag in info:
-            total_lic = int(info.split("of")[2][1])
-            used_lic = int(info.split("of")[3][1])
-            reserv_list[0] += total_lic
-            reserv_list[1] += total_lic - used_lic
+            try:
+                total_lic = int(info.split("of")[2][1])             # TODO might have bug here
+                used_lic = int(info.split("of")[3][1])
+            except Exception as e:
+                reserv_list[0] += 0
+                reserv_list[1] += 0
+            else:
+                reserv_list[0] += total_lic
+                reserv_list[1] += total_lic - used_lic
 
     def is_license(self, license_name):
         try:
@@ -118,4 +123,5 @@ class LicenseAnsys(object):
 if __name__ == '__main__':
     return_value = bool()
     ansys_license = LicenseAnsys()
+    # print(ansys_license.license_info)
     print(ansys_license.return_value)

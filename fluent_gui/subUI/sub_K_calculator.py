@@ -1,7 +1,10 @@
 from ui_py.ui_k_cal import Ui_K_calculator
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtCore import pyqtSignal
-
+from ui_py.ui_outlet_assign import Ui_outlet_assign
+from PyQt5.QtWidgets import QWidget, QApplication
+import cgitb
+import sys
 
 class subUI_cal_K(Ui_K_calculator, QWidget):
     K_result = pyqtSignal(str)
@@ -46,3 +49,11 @@ class subUI_cal_K(Ui_K_calculator, QWidget):
         m2 = mm2 / 1000 / 1000
         K = 1000*2*r*m2**2/rho
         self.K_result.emit("%.3f" % K)
+
+
+if __name__ == "__main__":
+    cgitb.enable(format='text')
+    app = QApplication(sys.argv)
+    myWin = subUI_cal_K()
+    myWin.show()
+    sys.exit(app.exec_())

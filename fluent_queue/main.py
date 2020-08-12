@@ -16,6 +16,7 @@ from func.func_short_key import ShortKey
 from func.func_run_calculation import Calculate
 from func.func_journal import HistoryView
 from func.func_setting import Setting
+from func.func_trayicon import TrayIcon
 from ui_translate.msg_translator import MsgTranslator
 
 
@@ -395,6 +396,17 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
     def define_cores(self, cores):
         self.calculation.cores = cores
         print('calculation cores:', self.calculation.cores)
+
+    def closeEvent(self, e):
+        """
+        rewrite close event to tray icon
+        :param e:
+        :return:
+        """
+        e.ignore()
+        self.hide()
+        self.trayicon = TrayIcon(self.msg_trans)
+        self.trayicon.signal_show_main.connect(self.show)
 
 
 if __name__ == "__main__":

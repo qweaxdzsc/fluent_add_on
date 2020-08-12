@@ -35,7 +35,7 @@ class GetTui(object):
         whole_jou = ''
         project_title = self.d['project_name']
         version_name = self.d['version']
-        whole_name = project_title + '-' + version_name
+        whole_name = project_title + '_' + version_name
         cad_name = self.d['cad_name']
         case_out = self.d['file_path']
 
