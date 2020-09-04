@@ -397,16 +397,23 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.calculation.cores = cores
         print('calculation cores:', self.calculation.cores)
 
-    def closeEvent(self, e):
+    def closeEvent(self, event, close_signal=True):
         """
         rewrite close event to tray icon
-        :param e:
+        :param event:
         :return:
         """
-        e.ignore()
-        self.hide()
-        self.trayicon = TrayIcon(self.msg_trans)
-        self.trayicon.signal_show_main.connect(self.show)
+        print(close_signal)
+        if close_signal:
+            print('here signal: %s' % close_signal)
+            event.accept()
+        else:
+            event.ignore()
+            self.hide()
+            self.trayicon = TrayIcon(self.msg_trans)
+            self.trayicon.signal_show_main.connect(self.show)
+            self.trayicon.signal_exit_main.connect(self.close)
+            # self.trayicon
 
 
 if __name__ == "__main__":

@@ -188,7 +188,7 @@ class AddPj(QWidget, Ui_Widget_add):
         transcript = case_path.absolutePath() + '\\%s_transcript.txt' % case_path.baseName()
         time_out_min = 1
         content = """
-/file/start-transcript {transcript}
+/file/start-transcript {transcript} ok
 /file/set-idle-timeout yes {time_out} no
 /file/{read_type} {case_path} yes
 /solve/initialize/hyb-initialization yes

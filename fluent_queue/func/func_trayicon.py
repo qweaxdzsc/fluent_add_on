@@ -6,6 +6,7 @@ import sys
 
 class TrayIcon(QSystemTrayIcon):
     signal_show_main = pyqtSignal()
+    signal_exit_main = pyqtSignal(bool)
 
     def __init__(self, msg_translator):
         super().__init__()
@@ -34,8 +35,9 @@ class TrayIcon(QSystemTrayIcon):
         self.signal_show_main.emit()
 
     def application_exit(self):
-        app = QApplication(sys.argv)
-        sys.exit(app.exec_())
+        self.signal_exit_main.emit(True)
+        # app = QApplication(sys.argv)
+        # sys.exit(app.exec_())
 
     # 鼠标点击icon传递的信号会带有一个整形的值，1是表示单击右键，2是双击，3是单击左键，4是用鼠标中键点击
     def onIconClicked(self, reason):

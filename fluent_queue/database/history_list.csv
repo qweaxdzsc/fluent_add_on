@@ -33,3 +33,7 @@ BZMBN4,test2,G:/test/queue_test1,G:/test/queue_test1/test2.jou,2020-07-20 09:37:
 BZMBN4,test2,G:/test/queue_test1,G:/test/queue_test1/test2.jou,2020-07-20 09:37:06,,0小时2分钟30秒,no result
 BZMBN4,test2,G:/test/queue_test1,G:/test/queue_test1/test2.jou,2020-07-20 09:47:19,,0小时1分钟15秒,no result
 BZMBN4,test2,G:/test/queue_test1,G:/test/queue_test1/test2.jou,2020-07-20 09:53:08,,0小时0分钟59秒,no result
+BZMBN4,GEM_V1_vent_solve,G:/_HAVC_Project/GEM/GEM_01_vent/GEM_V1_vent,G:/_HAVC_Project/GEM/GEM_01_vent/GEM_V1_vent/GEM_V1_vent_solve.jou,2020-08-22 22:57:23,2020-08-22 22:57:43,3H43M23S,no result
+BZMBN4,GEM_V1_foot_solve,G:/_HAVC_Project/GEM/GEM_02_foot/GEM_V1_foot,G:/_HAVC_Project/GEM/GEM_02_foot/GEM_V1_foot/GEM_V1_foot_solve.jou,2020-08-22 22:57:27,2020-08-23 02:41:10,3H58M23S,no result
+BZMBN4,GEM_V1_defrost_solve,G:/_HAVC_Project/GEM/GEM_04_defrost/GEM_V1_defrost,G:/_HAVC_Project/GEM/GEM_04_defrost/GEM_V1_defrost/GEM_V1_defrost_solve.jou,2020-08-22 22:57:31,2020-08-23 06:39:37,3H23M26S,no result
+BZMBN4,PQ_9BUX_P0_solve,G:/_volute_PQ/9BUX/PQ_9BUX_P0,G:/_volute_PQ/9BUX/PQ_9BUX_P0/PQ_9BUX_P0_solve.jou,2020-09-03 22:02:56,2020-09-04 00:11:59,8H17M44S,no result

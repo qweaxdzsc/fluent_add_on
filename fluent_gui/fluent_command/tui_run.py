@@ -149,12 +149,12 @@ class GetTui(object):
         post.create_view(porous_dir)
         if self.energy_check is True:
             post.txt_surface_integrals('area-weighted-avg', ['outlet*'], 'temperature')
-            post.create_streamline('temp_pathline', 'inlet', '', 'temperature', skip=2)
+            post.create_streamline('temp_pathline', 'inlet*', '', 'temperature', skip=2)
             post.create_scene('temp_pathline')
             post.snip_avz('temp_pathline_scene')
         else:
             post.read_view()
-            post.create_streamline('whole_pathline', 'inlet', skip='2')
+            post.create_streamline('whole_pathline', 'inlet*', skip='2')
             post.create_streamline('distrib_pathline', 'evap_in', [0, 15], skip='2')
             post.create_scene('whole_pathline')
             post.create_scene('distrib_pathline')
@@ -276,7 +276,10 @@ class GetTui(object):
         setup.hyb_initialize()
         setup.start_calculate(350)
         setup.write_lin_case_data(self.lin_array[0])
-        post.simple_lin_post(self.lin_array[0])
+        if self.energy_check:
+            post.simple_lin_post(self.lin_array[0])
+        else:
+            post.simple_lin_post(self.lin_array[0], field='velocity-magnitude')
 
         for i in self.lin_array[1:]:
             setup.replace_lin_mesh(i)
@@ -286,7 +289,10 @@ class GetTui(object):
             setup.hyb_initialize()
             setup.start_calculate(350)
             setup.write_lin_case_data(i)
-            post.simple_lin_post(i)
+            if self.energy_check:
+                post.simple_lin_post(self.lin_array[0])
+            else:
+                post.simple_lin_post(self.lin_array[0], field='velocity-magnitude')
 
         self.CFD.close_fluent()
         jou_solve.write(self.CFD.whole_jou)

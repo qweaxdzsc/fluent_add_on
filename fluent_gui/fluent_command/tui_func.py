@@ -12,9 +12,9 @@ class tui(object):
         self.result_path = result_path
         self.size_field = self.case_out_path + '\\' + self.version_name + '.sf'
 
-        self.mesh = mesh(self)
-        self.setup = setup(self)
-        self.post = post(self)
+        self.mesh = Mesh(self)
+        self.setup = Setup(self)
+        self.post = Post(self)
 
     def read_journal(self, jou_path):
         text = """
@@ -29,7 +29,7 @@ class tui(object):
         return self.whole_jou
 
 
-class mesh(object):
+class Mesh(object):
     def __init__(self, tui):
         self.tui = tui
         print('create_object_mesh')
@@ -64,12 +64,11 @@ class mesh(object):
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
-    def size_scope_global(self):
+    def size_scope_global(self, min=0.3, max=14):
         text = """
-/size-functions/set-global-controls 0.3 14 1.2
-"""
-        self.tui.whole_jou+=text
-        return self.tui.whole_jou
+/size-functions/set-global-controls {min} {max} 1.2
+""".format(min=min, max=max)
+        self.tui.whole_jou += text
 
     def size_scope_curv(self, scope_name, scope_zone, min_size, max_size, grow_rate, normal_angle):
         text = """
@@ -130,8 +129,9 @@ class mesh(object):
 /file/import/cad-geometry yes {cad_path}.scdoc no 
 mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes 
 {normal_angle} {gap_cell} edges yes no yes
+/objects/merge *() {project_title}
 """.format(cad_path=cad_path, min_size=min_size, max_size=max_size, grow_rate=grow_rate,
-           normal_angle=normal_angle, gap_cell=gap_cell)
+           normal_angle=normal_angle, gap_cell=gap_cell, project_title=self.tui.project_title)
 
         self.tui.whole_jou += text
         return self.tui.whole_jou
@@ -280,14 +280,14 @@ boundary/manage/rotate valve*()
         return self.tui.whole_jou
 
 
-class setup(object):
+class Setup(object):
     def __init__(self, tui):
         self.tui = tui
         print('create_object_setup')
 
     def start_transcript(self, mode='solve'):
         text = """
-/file/start-transcript %s\\%s_%s_%s_transcript.txt
+/file/start-transcript %s\\%s_%s_%s_transcript.txt ok
 """ % (self.tui.case_out_path, self.tui.project_title, self.tui.version_name, mode)
         self.tui.whole_jou += text
         return self.tui.whole_jou
@@ -570,7 +570,7 @@ solve/monitors/residual/criterion-type %s
         return self.tui.whole_jou
 
 
-class post(object):
+class Post(object):
     def __init__(self, tui):
         self.tui = tui
         print('create_object_post')
@@ -582,7 +582,7 @@ class post(object):
         else:
             os.makedirs(self.tui.result_path)
 
-    def simple_lin_post(self, valve_angle):
+    def simple_lin_post(self, valve_angle, field='temperature'):
         self.tui.result_path = self.tui.case_out_path + \
                            '\\lin_case\\{project_name}_{version}_{valve_angle}\\result'.format(
                                project_name=self.tui.project_title, version=self.tui.version_name, valve_angle=valve_angle)
@@ -599,7 +599,7 @@ class post(object):
         self.delete_display_object('view_model')
         self.delete_display_object('whole_pathline_scene')
         self.create_viewing_model()
-        self.create_streamline('whole_pathline', 'inlet', field_type='temperature', skip='2')
+        self.create_streamline('whole_pathline', 'inlet*', field_type=field, skip='2')
         self.create_scene('whole_pathline')
         self.snip_avz('whole_pathline_scene')
 
@@ -621,7 +621,7 @@ class post(object):
         text = """
 /report/fluxes/mass-flow no inlet* outlet*()
 yes %s yes q
-""" % (self.tui.txt_out)
+""" % self.tui.txt_out
         self.tui.whole_jou += text
         return self.tui.whole_jou
 

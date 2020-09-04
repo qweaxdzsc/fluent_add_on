@@ -12,9 +12,9 @@ class tui(object):
         self.result_path = result_path
         self.size_field = self.case_out_path + '\\' + self.version_name + '.sf'
 
-        self.mesh = mesh(self)
-        self.setup = setup(self)
-        self.post = post(self)
+        self.mesh = Mesh(self)
+        self.setup = Setup(self)
+        self.post = Post(self)
 
     def read_journal(self, jou_path):
         text = """
@@ -27,7 +27,7 @@ class tui(object):
         self.whole_jou += text
 
 
-class mesh(object):
+class Mesh(object):
     def __init__(self, tui):
         self.tui = tui
         print('create_object_mesh')
@@ -61,11 +61,11 @@ class mesh(object):
 """ % (self.tui.cad_path, tolerance, maxsize)
         self.tui.whole_jou += text
 
-    def size_scope_global(self):
+    def size_scope_global(self, min=0.3, max=14):
         text = """
-/size-functions/set-global-controls 0.3 14 1.2
-"""
-        self.tui.whole_jou+=text
+/size-functions/set-global-controls {min} {max} 1.2
+""".format(min=min, max=max)
+        self.tui.whole_jou += text
 
     def size_scope_curv(self, scope_name, scope_zone, min_size, max_size, grow_rate, normal_angle):
         text = """
@@ -105,7 +105,8 @@ class mesh(object):
 /file/import/cad-options/save-PMDB no
 /file/import/cad-options/extract-features yes 10
 /file/import/cad-geometry yes %s.scdoc.pmdb no mm cfd-surface-mesh yes %s yes
-""" % (self.tui.cad_path, self.tui.size_field)
+/objects/merge *() %s
+""" % (self.tui.cad_path, self.tui.size_field, self.tui.project_title)
 
         self.tui.whole_jou += text
 
@@ -271,14 +272,14 @@ pyramids tet no yes
         self.tui.whole_jou += text
 
 
-class setup(object):
+class Setup(object):
     def __init__(self, tui):
         self.tui = tui
         print('create_object_setup')
 
     def start_transcript(self):
         text = """
-/file/start-transcript %s\\%s_%s
+/file/start-transcript %s\\%s_%s.txt yes
 """ % (self.tui.case_out_path, self.tui.project_title, self.tui.version_name)
         self.tui.whole_jou += text
         return self.tui.whole_jou
@@ -537,7 +538,7 @@ solve/monitors/residual/criterion-type %s
         self.tui.whole_jou += text
 
 
-class post(object):
+class Post(object):
     def __init__(self, tui):
         self.tui = tui
         print('create_object_post')
@@ -549,7 +550,7 @@ class post(object):
         else:
             os.makedirs(self.tui.result_path)
 
-    def simple_lin_post(self, valve_angle):
+    def simple_lin_post(self, valve_angle, field='temperature'):
         self.tui.result_path = self.tui.case_out_path + \
                            '\\lin_case\\{project_name}_{version}_{valve_angle}\\result'.format(
                                project_name=self.tui.project_title, version=self.tui.version_name, valve_angle=valve_angle)
@@ -563,9 +564,10 @@ class post(object):
         self.txt_surface_integrals('area-weighted-avg', pressure_face_list, 'pressure')
 
         self.set_background()
-        self.delete_display_object()
+        self.delete_display_object('view_model')
+        self.delete_display_object('whole_pathline_scene')
         self.create_viewing_model()
-        self.create_streamline('whole_pathline', 'inlet', field_type='temperature')
+        self.create_streamline('whole_pathline', 'inlet*', field_type=field, skip='2')
         self.create_scene('whole_pathline')
         self.snip_avz('whole_pathline_scene')
 

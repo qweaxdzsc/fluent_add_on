@@ -3,7 +3,7 @@
 block_cipher = None
 
 
-a = Analysis(['C:\\Users\\BZMBN4\\Desktop\\fluent_add_on\\fluent_queue\\func\\func_ansys_license.py'],
+a = Analysis(['C:\\Users\\BZMBN4\\Desktop\\web_queue\\queue_web\\app_local_server\\flask_server.py'],
              pathex=['C:\\Users\\BZMBN4\\Desktop\\fluent_add_on\\Python-test'],
              binaries=[],
              datas=[],
@@ -23,11 +23,11 @@ exe = EXE(pyz,
           a.zipfiles,
           a.datas,
           [],
-          name='func_ansys_license',
+          name='flask_server',
           debug=False,
           bootloader_ignore_signals=False,
           strip=False,
           upx=True,
           upx_exclude=[],
           runtime_tmpdir=None,
-          console=False )
+          console=True )
