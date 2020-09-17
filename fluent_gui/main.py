@@ -200,8 +200,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
             = self.IEport.import_pamt(path)
 
     def cad_address(self):
-        get_file = QFileDialog.getOpenFileName(self, '选择模型文件', 'C:/Users/BZMBN4/Desktop/'
-                                               )
+        get_file = QFileDialog.getOpenFileName(self, '选择模型文件', 'C:/Users/BZMBN4/Desktop/')
         cad_path = get_file[0]
         self.cad_address_edit.setText(cad_path)
 

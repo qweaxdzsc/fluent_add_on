@@ -151,9 +151,27 @@ mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes
 /diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness}
 /diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness}
 /diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness}
+/diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness}
+/diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness}
+/diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness}
+/diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness}
 /diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness} q
 """.format(skewness=skewness)
         self.tui.whole_jou += text
+
+    def fix_steps(self, angle=30, step_width=0.05):
+        text = """
+/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width}
+/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width}
+/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width}
+/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width}
+/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width}
+/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width}
+/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width}
+/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width} q
+""".format(critical_angle=angle, step_width=step_width)
+        self.tui.whole_jou += text
+        return self.tui.whole_jou
 
     def face_zone_delete(self, face_zone_name):
         text = """
@@ -279,7 +297,7 @@ class Setup(object):
 
     def start_transcript(self):
         text = """
-/file/start-transcript %s\\%s_%s.txt yes
+/file/start-transcript %s\\%s_%s_solve_transcript.txt yes
 """ % (self.tui.case_out_path, self.tui.project_title, self.tui.version_name)
         self.tui.whole_jou += text
         return self.tui.whole_jou
@@ -404,7 +422,7 @@ ke-spec no yes turb-intensity %s turb-length-scale %s q
         for i in face_list:
             face_name += ' ' + i
         text = """
-/define/boundary-conditions/set/pressure-outlet%s() 
+/define/boundary-conditions/set/pressure-outlet%s()
 gauge-pressure no %s
 ke-spec no yes turb-intensity %s turb-length-scale %s q
 """ % (face_name, pressure, turb_intensity, turb_length_scale)

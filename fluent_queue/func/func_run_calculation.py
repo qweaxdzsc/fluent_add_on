@@ -203,7 +203,7 @@ class CalGuard(QThread):
         line_count = 0
         line_count_new = self.get_line_count()
 
-        while line_count_new > line_count:
+        while line_count_new != line_count:
             time.sleep(check_interval)
             line_count = line_count_new
             line_count_new = self.get_line_count()
@@ -217,6 +217,7 @@ class CalGuard(QThread):
         return line_count_new
 
     def ensure_finish(self, dir):
+        print('no new line in transcript')
         folder = QDir(dir)
         file_list = folder.entryInfoList(QDir.Files | QDir.CaseSensitive)
         bat_file_name = ''
@@ -228,6 +229,8 @@ class CalGuard(QThread):
                     host_name = line[1]
                     pid = line[3]
                     bat_file_name = 'cleanup-fluent-%s-%s.bat' % (host_name, pid)
+                    print(f'find .bat file: {bat_file_name}')
+                    break
 
         for i in file_list:
             if i.fileName() == bat_file_name:

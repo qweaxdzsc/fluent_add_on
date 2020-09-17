@@ -141,11 +141,11 @@ class AddPj(QWidget, Ui_Widget_add):
         if self.checkbox_journal.isChecked():
             case_path = QFileInfo(self.edit_journal_address.text())
         else:
-            case_path = QFileInfo(self.edit_project_address.text())               # QFileInfo can deeply analyze path info
+            case_path = QFileInfo(self.edit_project_address.text())          # QFileInfo can deeply analyze path info
         accepted_file_type = ['cas', 'msh', 'h5', 'jou']
 
         if (case_path.exists()) and (case_path.suffix() in accepted_file_type):
-            self.pj_dict["project_name"] = case_path.baseName()
+            self.pj_dict["project_name"] = case_path.fileName().rsplit('.', 1)[0]
             self.pj_dict["project_address"] = case_path.absolutePath()
             self.pj_dict['journal'] = self.get_journal(case_path, case_path.fileName())
             self.signal_add_pj.emit(self.pj_dict)

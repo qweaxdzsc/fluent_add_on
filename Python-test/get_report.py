@@ -5,7 +5,7 @@ import cgitb
 
 
 # designate path
-root = r"G:\_HAVC_Project\GEM\GEM_04_defrost\GEM_V5_defrost\result_GEM_9BQX_V5_defrost"
+root = r"G:\_HAVC_Project\GEM\GEM_01_vent\GEM_V8_vent\result_GEM_V8_vent"
 path = root + '\\'
 
 # Txt input path

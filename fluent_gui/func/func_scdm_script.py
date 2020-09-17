@@ -40,7 +40,7 @@ for i in range(len(face_list)):
     primarySelection = Selection.Create(GetRootPart())
     secondarySelection = Selection()
     result = NamedSelection.Create(primarySelection, secondarySelection)
-     result.CreatedNamedSelection.SetName(face_list[i])
+    result.CreatedNamedSelection.SetName(face_list[i])
 
 # for i in range(len(face_list)):
 #     result = NamedSelection.Rename("Group%%s"%%(i+1), face_list[i])

@@ -380,6 +380,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
                 self.add_pj_ui.edit_project_address.setText(file)
 
     def toggle_pause_cal(self):
+
         if self.calculation.pause:
             self.calculation.pause = False
         else:
@@ -397,7 +398,7 @@ class MyMainWindow(QMainWindow, Ui_fluent_queue):
         self.calculation.cores = cores
         print('calculation cores:', self.calculation.cores)
 
-    def closeEvent(self, event, close_signal=True):
+    def closeEvent(self, event, close_signal=False):
         """
         rewrite close event to tray icon
         :param event:

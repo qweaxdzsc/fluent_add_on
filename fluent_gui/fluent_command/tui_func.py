@@ -162,6 +162,20 @@ mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
+    def fix_steps(self, angle=30, step_width=0.05):
+        text = """
+/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width}
+/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width}
+/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width}
+/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width}
+/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width}
+/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width}
+/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width}
+/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width} q
+""".format(critical_angle=angle, step_width=step_width)
+        self.tui.whole_jou += text
+        return self.tui.whole_jou
+
     def valve_rotate(self, rotate_angle, valve_dir, valve_origin):
         text = """
 boundary/manage/rotate valve*()
