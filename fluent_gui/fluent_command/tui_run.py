@@ -61,6 +61,8 @@ class GetTui(object):
         mesh.stitch_free_face()
         mesh.general_improve()
         mesh.fix_slivers()
+        mesh.fix_steps(20, 0.1)
+        mesh.fix_slivers()
         mesh.compute_volume_region()
         mesh.volume_mesh_change_type(self.dead_zone_list)
         mesh.retype_face(face_list=['inlet*'], face_type='pressure-inlet')

@@ -164,14 +164,14 @@ mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes
 
     def fix_steps(self, angle=30, step_width=0.05):
         text = """
-/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width}
-/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width}
-/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width}
-/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width}
-/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width}
-/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width}
-/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width}
-/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width} q
+/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width} smooth q
+/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width} smooth q
+/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width} smooth q
+/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width} smooth q
+/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width} smooth q
+/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width} smooth q
+/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width} smooth q
+/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width} smooth q
 """.format(critical_angle=angle, step_width=step_width)
         self.tui.whole_jou += text
         return self.tui.whole_jou
@@ -380,6 +380,12 @@ class Setup(object):
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
+    def expression(self, name, definition):
+        text = """
+/define/named-expressions/add %s definition "%s" q q q
+""" % (name, definition)
+        self.tui.whole_jou += text
+
     def rotation_volume(self, rpm, origin_xyz, axis_xyz, rotating_part='fan'):
         text = """
 /define/units angular-velocity rpm
@@ -561,10 +567,16 @@ solve/monitors/residual/criterion-type %s
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
+    def std_initialize(self):
+        text = """
+/solve/initialize/initialize-flow yes
+"""
+        self.tui.whole_jou += text
+
     def start_calculate(self, iterations=1000):
         text = """
 /solve/iterate/%s yes
-""" % (iterations)
+""" % iterations
         self.tui.whole_jou += text
         return self.tui.whole_jou
 

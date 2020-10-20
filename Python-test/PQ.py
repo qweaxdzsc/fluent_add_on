@@ -3,9 +3,9 @@ import fluent_tui
 import numpy as np
 
 project_title = 'PQ_9BUX'
-version_name = 'V5_2800RPM'
-cad_name = 'PQ_9BUX_V5'
-project_path = r"G:\_volute_PQ\9BUX\9BUX_V5\9BUX_2800RPM"
+version_name = 'V3_2800RPM'
+cad_name = 'PQ_9BUX_V3'
+project_path = r"G:\_volute_PQ\9BUX\9BUX_V3\9BUX_2800RPM"
 
 RPM_list = [2800]
 print('used RPM list', RPM_list)
@@ -77,18 +77,35 @@ CFD.setup.start_transcript()
 CFD.setup.read_mesh()
 CFD.setup.rescale()
 CFD.setup.turb_models()
+CFD.setup.wall_treatment('scalable-wall-functions')
 CFD.setup.rotation_volume(RPM_list[0], fan_origin, fan_axis, 'fan')
 CFD.setup.BC_pressure_inlet('inlet')
 CFD.setup.BC_type('outlet', 'pressure-outlet')
-CFD.setup.BC_pressure_outlet(['outlet'], P_list[0])
+
+
+def set_outlet_expression(pressure):
+    CFD.setup.expression('Pstat', '%s[Pa]' % pressure)
+    CFD.setup.expression('Pcurrent', "Average(StaticPressure, ['outlet'], Weight='Area')")
+    CFD.setup.expression('Pmeasure', "Average(StaticPressure, ['pressure_points'], Weight='Area')")
+    CFD.setup.expression('Ptarget', '%s[Pa]' % pressure)
+    CFD.setup.expression('Padjust', 'IF(abs(Ptarget - Pmeasure)/Pmeasure<0.005, '
+                                    'Pcurrent, Pcurrent+(Ptarget - Pmeasure)*0.5)')
+    CFD.setup.expression('outlet_pressure', 'IF(iter<1000, Pstat, IF(mod(iter, 20)==0, Padjust, Pcurrent))')
+
+    CFD.setup.BC_pressure_outlet(['outlet'], '"outlet_pressure"')
+
+
+set_outlet_expression(P_list[0])
 # CFD.setup.BC_outlet_vent(P_list[0], 'outlet')
 CFD.setup.solution_method()
 CFD.setup.report_definition('volume', 'surface-volumeflowrate', ['outlet*'])
 CFD.setup.report_definition('mass-flux', 'surface-massflowrate', ['inlet*', 'outlet*'], 'no')
-CFD.setup.report_definition('pressure', 'surface-areaavg', ['pressure_points'])
+CFD.setup.report_definition('pressure', 'surface-areaavg', ['pressure_points', 'outlet'])
 CFD.setup.convergence_criterion('volume')
-CFD.setup.hyb_initialize()
-CFD.setup.start_calculate(1500)
+
+# CFD.setup.std_initialize()
+# CFD.setup.hyb_initialize()
+CFD.setup.start_calculate(1800)
 CFD.setup.write_case_data()
 
 CFD.post.create_result_file()
@@ -112,10 +129,11 @@ for RPM in RPM_list:
 print(combox_list)
 for i in combox_list[1:]:
     CFD.setup.rotation_volume(i[0], fan_origin, fan_axis, 'fan')
-    CFD.setup.BC_pressure_outlet(['outlet'], i[1])
+    set_outlet_expression(i[1])
     # CFD.setup.BC_outlet_vent(i[1], 'outlet')
-    CFD.setup.hyb_initialize()
-    CFD.setup.start_calculate(1500)
+    # CFD.setup.std_initialize()
+    # CFD.setup.hyb_initialize()
+    CFD.setup.start_calculate(1800)
     CFD.version_name = '%s-%s' % (i[0], i[1])
     CFD.setup.write_case_data()
 

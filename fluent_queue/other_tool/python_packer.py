@@ -48,8 +48,8 @@ class PythonPacker(object):
 
 
 if __name__ == "__main__":
-    python_path = r"C:\Users\BZMBN4\Desktop\web_queue\queue_web\app_local_server"
-    python_name = "flask_server.py"
+    python_path = r"C:\Users\BZMBN4\Desktop\web_queue\queue_web"
+    python_name = "downloader.py"
     copy_file_list = [
         r'C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_queue\icon',
         r'C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_queue\app',

@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route('/download')
 def download():
-    return send_from_directory(r"C:\Users\BZMBN4\Desktop", filename="ParaView-5.8.1-Windows-Python3.7-msvc2015-64bit.zip", as_attachment=True)
+    return send_from_directory(r"C:\Users\BZMBN4\Desktop", filename="MQBA0_new_V9.2_VENT_201016.x_t", as_attachment=True)
 
 
 @app.route('/file')
@@ -33,6 +33,6 @@ def local_file():
 
 if __name__ == '__main__':
     print('test web:  http://localhost:80/file')
-    app.run(debug=True, host='0.0.0.0', port='80')
+    app.run(debug=True, host='0.0.0.0', port='8080')
 
 
