@@ -33,18 +33,19 @@ class IEport(object):
                 if 'outlet' in i:
                     outlet_list.append(i)
                     outlet_dict[i] = eval(info[i])
-                if 'valve' in i:
+                elif ('inlet' in i) and (i != 'mass_inlet'):
+                    outlet_list.append(i)
+                    outlet_dict[i] = eval(info[i])
+                elif 'valve' in i:
                     valve_dict[i] = info[i]
-
             for i in outlet_dict.keys():
                 K_dict[i] = outlet_dict[i][-1]
                 # outlet_dict[i].remove(outlet_dict[i][-1])
-
             self.ui.project_name_edit.setText(info['project_name'])
             self.ui.version_name_edit.setText('V')
     
             self.ui.append_text('参数模板:%s导入成功' % path[0])
-        
+        print('here', K_dict)
         return outlet_list, outlet_dict, K_dict, valve_dict
     
     def csv_import(self, excel_path):

@@ -29,24 +29,27 @@ class subUI_outlet_assign(Ui_k_form, QWidget):
         self.R_btn.toggled.connect(self.cal_method_choose)
 
     def outlet_list_create(self):
+        self.inlet_list = []
         self.outlet_list = []
         self.vent_list = []
         self.foot_list = []
         self.defrost_list = []
         self.other_list = []
-        self.mode_list_dict = {'vent': self.vent_list, 'foot': self.foot_list, 'defrost': self.defrost_list,
-                               'other': self.other_list}
+        self.mode_list_dict = {'Inlets': self.inlet_list, 'vent': self.vent_list, 'foot': self.foot_list,
+                               'defrost': self.defrost_list, 'other': self.other_list}
 
     def outlet_number(self):
-        vent_number = len(self.vent_list)
-        foot_number = len(self.foot_list)
-        defrost_number = len(self.defrost_list)
-        other_number = len(self.other_list)
+        inlet_number = len(self.inlet_list)
+        vent_number = len(self.vent_list) + inlet_number
+        foot_number = len(self.foot_list) + vent_number
+        defrost_number = len(self.defrost_list) + foot_number
+        other_number = len(self.other_list) + defrost_number
 
-        number_dict = {'vent': vent_number,
-                       'foot': foot_number + vent_number,
-                       'defrost': vent_number + foot_number + defrost_number,
-                       'other': vent_number + foot_number + defrost_number + other_number
+        number_dict = {'Inlets': inlet_number,
+                       'vent': vent_number,
+                       'foot': foot_number,
+                       'defrost': defrost_number,
+                       'other': other_number,
                        }
         return number_dict
 
@@ -56,7 +59,7 @@ class subUI_outlet_assign(Ui_k_form, QWidget):
         self.auto_cal_thread.k_list_signal.connect(self.set_K)
 
     def check_change(self, item):
-        father_node = ['vent', 'foot', 'defrost', 'other']
+        father_node = ['Inlets', 'vent', 'foot', 'defrost', 'other']
         if item.text(0) in father_node:
             self.check_child_influence(item)
         else:
@@ -126,6 +129,7 @@ class subUI_outlet_assign(Ui_k_form, QWidget):
     def receive_outlet_info(self):
         # self.outlet_list = list(self.k_dict.keys())
         # self.outlet_K = list(self.k_dict.values())
+        self.outlet_tree.topLevelItem(0).child(0).setCheckState(0, 2)
         for i in self.k_dict.keys():
             item = self.outlet_tree.findItems(i, Qt.MatchExactly | Qt.MatchRecursive)
 
@@ -219,7 +223,8 @@ class Auto_cal(QThread):
 if __name__ == "__main__":
     cgitb.enable(format='text')
     app = QApplication(sys.argv)
-    init_k_dict = {'outlet_test2': ['0.0001', '0.0001', '0.0001', '0.0001']}
+    init_k_dict = {}
+    # init_k_dict = {'inlet': ['1', '0.0001', '0.0001', '0.0001']}
     myWin = subUI_outlet_assign(init_k_dict, R_method=False)
     myWin.show()
     sys.exit(app.exec_())

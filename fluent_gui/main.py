@@ -44,7 +44,6 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.up_list = list()
         self.dead_zone_list = list()
         self.internal_face = list()
-        self.body_list = list()
         self.script_address = str()
         self.confirm_info = bool()
         self.need_launch_CAD = bool()
@@ -115,14 +114,15 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 
     def check_part(self):
         self.body_list = []
-        self.face_list = ['inlet']
+        self.face_list = []
         self.porous_list = []
         self.up_list = []
         self.dead_zone_list = []
 
         self.face_list, self.body_list, self.porous_list, \
         self.up_list, self.dead_zone_list, self.internal_face = \
-            self.check_func.part_check(self.body_list,
+            self.check_func.part_check(
+                                       self.body_list,
                                        self.face_list,
                                        self.porous_list,
                                        self.up_list,
@@ -130,6 +130,9 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
                                        )
 
     def show_outlet_name(self):
+        # if not self.inlet_list:
+        #     for i in self.inlet_list:
+        #         self.inlet_dict[i] = ['0.0001', '0.0001', '0.0001', '0.0001']
         self.outlet_assign = subUI_outlet_assign(self.outlet_dict)
         self.outlet_assign.show()
         self.outlet_assign.signal_outlet_K.connect(self.receive_outlet_info)
@@ -137,7 +140,17 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     def receive_outlet_info(self, outlet_dict):
         print('outlet_dict', outlet_dict)
         self.outlet_list = list(outlet_dict.keys())
-        self.face_list.extend(self.outlet_list)
+        # separate inlet and outlet into front and back of the face list
+        inlet_list = []
+        outlet_list = []
+        for i in self.outlet_list:
+            if 'inlet' in i:
+                inlet_list.append(i)
+            else:
+                outlet_list.append(i)
+        inlet_list.extend(self.face_list)
+        inlet_list.extend(outlet_list)
+        self.face_list = inlet_list
         self.K_dict = {}
         for i in outlet_dict.keys():
             self.K_dict[i] = outlet_dict[i][-1]

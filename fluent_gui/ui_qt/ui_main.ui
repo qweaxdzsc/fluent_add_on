@@ -64,7 +64,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>-11</y>
+       <y>0</y>
        <width>688</width>
        <height>1221</height>
       </rect>
@@ -235,27 +235,10 @@
           </widget>
          </item>
          <item row="0" column="0" colspan="2">
-          <layout class="QHBoxLayout" name="part_number_hlayout">
+          <layout class="QHBoxLayout" name="part_number_hlayout" stretch="1,1,2,1,1">
            <property name="spacing">
-            <number>15</number>
+            <number>25</number>
            </property>
-           <item>
-            <widget class="QLabel" name="label_inlet_number">
-             <property name="text">
-              <string>进口数量</string>
-             </property>
-             <property name="buddy">
-              <cstring>inlet_number</cstring>
-             </property>
-            </widget>
-           </item>
-           <item>
-            <widget class="QSpinBox" name="inlet_number">
-             <property name="minimum">
-              <number>1</number>
-             </property>
-            </widget>
-           </item>
            <item>
             <widget class="QLabel" name="label_valve_number">
              <property name="text">
@@ -275,6 +258,19 @@
               <number>0</number>
              </property>
             </widget>
+           </item>
+           <item>
+            <spacer name="horizontalSpacer_4">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
            </item>
            <item>
             <widget class="QLabel" name="label_distrib_number">
@@ -2164,7 +2160,6 @@
   <tabstop>version_date_edit</tabstop>
   <tabstop>cad_address_edit</tabstop>
   <tabstop>cad_address_explore</tabstop>
-  <tabstop>inlet_number</tabstop>
   <tabstop>valve_number</tabstop>
   <tabstop>distrib_number</tabstop>
   <tabstop>energy_checkbox</tabstop>

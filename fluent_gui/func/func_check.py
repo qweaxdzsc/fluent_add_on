@@ -35,9 +35,6 @@ class check_func(object):
     
     def part_check(self, body_list, face_list, porous_list, up_list, dead_zone_list):
         ui = self.ui
-        if ui.inlet_number.value() > 1:
-            for i in range(ui.inlet_number.value() - 1):
-                face_list.append('inlet%s' % (i + 2))
         if ui.part_tree.topLevelItem(0).checkState(0) == 2:
             body_list.append('inlet_sphere')
         if ui.part_tree.topLevelItem(1).checkState(0) == 2:

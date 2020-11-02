@@ -120,9 +120,33 @@
      </property>
      <column>
       <property name="text">
-       <string>Outlet</string>
+       <string>Ducts</string>
       </property>
      </column>
+     <item>
+      <property name="text">
+       <string>Inlets</string>
+      </property>
+      <property name="checkState">
+       <enum>Unchecked</enum>
+      </property>
+      <item>
+       <property name="text">
+        <string>inlet</string>
+       </property>
+       <property name="checkState">
+        <enum>Unchecked</enum>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>inlet2</string>
+       </property>
+       <property name="checkState">
+        <enum>Unchecked</enum>
+       </property>
+      </item>
+     </item>
      <item>
       <property name="text">
        <string>vent</string>

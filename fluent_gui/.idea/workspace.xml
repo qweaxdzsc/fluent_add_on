@@ -2,21 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e475a0b-2241-43fa-a10d-e22986a3349c" name="Default Changelist" comment="add K calculator. pop up when right click in the cal_K column at rename_table">
-      <change afterPath="$PROJECT_DIR$/../fluent_queue/downloader.spec" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/PQ.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/PQ.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/fluent_tui.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/fluent_tui.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/get_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/get_report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/new_project_folder.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/new_project_folder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/web_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/web_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fluent_command/tui_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/fluent_command/tui_func.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fluent_command/tui_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/fluent_command/tui_run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/config/host.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/config/host.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/database/history_list.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/database/history_list.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/database/running_list.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/database/running_list.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/database/waiting_list.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/database/waiting_list.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_queue/other_tool/python_packer.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/other_tool/python_packer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/func/func_IEport.py" beforeDir="false" afterPath="$PROJECT_DIR$/func/func_IEport.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/func/func_check.py" beforeDir="false" afterPath="$PROJECT_DIR$/func/func_check.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subUI/sub_k_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/subUI/sub_k_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_py/ui_k_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui_py/ui_k_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_py/ui_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui_py/ui_main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_qt/ui_k_test.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui_qt/ui_k_test.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui_qt/ui_main.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui_qt/ui_main.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,6 +86,48 @@
     </key>
   </component>
   <component name="RunManager" selected="Python.main">
+    <configuration name="GUI_convertor" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="fluent_gui" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/other_tool" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/other_tool/GUI_convertor.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="func_IEport" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="fluent_gui" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/func" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/func/func_IEport.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="fluent_gui" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -150,62 +191,20 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="sub_outlet_assign" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="fluent_gui" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/subUI" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/subUI/sub_outlet_assign.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="sub_porous_model" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="fluent_gui" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/subUI" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/subUI/sub_porous_model.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <list>
       <item itemvalue="Python.main" />
       <item itemvalue="Python.sub_K_calculator" />
       <item itemvalue="Python.sub_k_test" />
-      <item itemvalue="Python.sub_outlet_assign" />
-      <item itemvalue="Python.sub_porous_model" />
+      <item itemvalue="Python.GUI_convertor" />
+      <item itemvalue="Python.func_IEport" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.func_IEport" />
+        <item itemvalue="Python.GUI_convertor" />
         <item itemvalue="Python.sub_k_test" />
         <item itemvalue="Python.sub_K_calculator" />
-        <item itemvalue="Python.sub_outlet_assign" />
-        <item itemvalue="Python.sub_porous_model" />
       </list>
     </recent_temporary>
   </component>
@@ -250,38 +249,38 @@
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state x="710" y="371" key="FileChooserDialogImpl/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1595555994530" />
-    <state width="1892" height="244" key="GridCell.Tab.0.bottom" timestamp="1602728847955">
+    <state width="1298" height="379" key="GridCell.Tab.0.bottom" timestamp="1604302132589">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1892" height="211" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1599403961329" />
-    <state width="1892" height="244" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1602728847955" />
+    <state width="1298" height="379" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1604302132589" />
     <state width="1882" height="231" key="GridCell.Tab.0.bottom/0.0.1920.1160/1920.0.1920.1200@0.0.1920.1160" timestamp="1595205302640" />
-    <state width="1892" height="244" key="GridCell.Tab.0.center" timestamp="1602728847955">
+    <state width="1298" height="379" key="GridCell.Tab.0.center" timestamp="1604302132589">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1892" height="211" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1599403961329" />
-    <state width="1892" height="244" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1602728847955" />
+    <state width="1298" height="379" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1604302132589" />
     <state width="1882" height="231" key="GridCell.Tab.0.center/0.0.1920.1160/1920.0.1920.1200@0.0.1920.1160" timestamp="1595205302640" />
-    <state width="1892" height="244" key="GridCell.Tab.0.left" timestamp="1602728847955">
+    <state width="1298" height="379" key="GridCell.Tab.0.left" timestamp="1604302132589">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1892" height="211" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1599403961329" />
-    <state width="1892" height="244" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1602728847955" />
+    <state width="1298" height="379" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1604302132589" />
     <state width="1882" height="231" key="GridCell.Tab.0.left/0.0.1920.1160/1920.0.1920.1200@0.0.1920.1160" timestamp="1595205302640" />
-    <state width="1892" height="244" key="GridCell.Tab.0.right" timestamp="1602728847955">
+    <state width="1298" height="379" key="GridCell.Tab.0.right" timestamp="1604302132589">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1892" height="211" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1599403961329" />
-    <state width="1892" height="244" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1602728847955" />
+    <state width="1298" height="379" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1604302132589" />
     <state width="1882" height="231" key="GridCell.Tab.0.right/0.0.1920.1160/1920.0.1920.1200@0.0.1920.1160" timestamp="1595205302640" />
     <state x="396" y="206" key="SettingsEditor" timestamp="1597625424213">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state x="396" y="206" key="SettingsEditor/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1597625424213" />
-    <state x="602" y="71" width="716" height="838" key="find.popup" timestamp="1595396850741">
+    <state x="602" y="71" width="716" height="838" key="find.popup" timestamp="1604295405166">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state x="602" y="71" width="716" height="838" key="find.popup/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1595396850741" />
+    <state x="602" y="71" width="716" height="838" key="find.popup/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1604295405166" />
     <state x="539" y="117" width="840" height="1034" key="search.everywhere.popup" timestamp="1595400595133">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>

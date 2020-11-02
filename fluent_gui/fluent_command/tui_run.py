@@ -17,6 +17,10 @@ class GetTui(object):
         self.dead_zone_list = dead_zone_list
         self.internal_list = internal_list
         self.mesh_type = mesh_type
+        # ---------------------init variable--------------------
+        self.inlet_dict = {}
+        self.inlet_type = 'pressure-inlet'
+        self.pressure_face_list = list()
         # ---------------------Form TUI-------------------------
         self.prepare_info()
         self.assemble_tui()
@@ -49,6 +53,13 @@ class GetTui(object):
 
         self.pressure_face_list = ['inlet*', 'outlet*'] + self.internal_list.copy()
 
+        for i in list(self.K_dict.keys()):
+            if 'inlet' in i:
+                self.inlet_dict[i] = self.K_dict[i]
+                self.K_dict.pop(i)
+                if float(self.inlet_dict[i]) > 0:
+                    self.inlet_type = 'inlet-vent'
+
     def meshing(self):
         mesh = self.CFD.mesh
         jou_mesh = open(self.jou_mesh_path, 'w')
@@ -65,7 +76,7 @@ class GetTui(object):
         mesh.fix_slivers()
         mesh.compute_volume_region()
         mesh.volume_mesh_change_type(self.dead_zone_list)
-        mesh.retype_face(face_list=['inlet*'], face_type='pressure-inlet')
+        mesh.retype_face(face_list=['inlet*'], face_type=self.inlet_type)
         mesh.retype_face(face_list=self.internal_list, face_type='internal')
         mesh.retype_face(face_list=['outlet*'], face_type='outlet-vent')
         if self.energy_check is True:
@@ -104,7 +115,11 @@ class GetTui(object):
             setup.porous_zone(i, d1, d2, d[i+'_c1'], d[i+'_c2'])
 
         if 'fan' in self.body_list:
-            setup.BC_pressure_inlet('inlet')
+            if self.inlet_type == 'pressure-inlet':
+                setup.BC_pressure_inlet('inlet')
+            else:
+                for i in self.inlet_dict:
+                    setup.BC_inlet_vent(i, self.inlet_dict[i])
             origin_xyz = [d['fan_ox'], d['fan_oy'], d['fan_oz']]
             axis_xyz = [d['fan_dx'], d['fan_dy'], d['fan_dz']]
             setup.rotation_volume(d['RPM'], origin_xyz, axis_xyz)
