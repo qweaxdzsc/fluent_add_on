@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 import sys
 import cgitb
+import os
 
 from PyQt5.QtWidgets import QMainWindow, QApplication, QFileDialog, QLineEdit
 from PyQt5.QtCore import pyqtSignal, QFileInfo
@@ -209,8 +210,11 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     def import_info(self):
         path = QFileDialog.getOpenFileName(self, '选择要输入的参数模板',
                                            r'C:\Users\BZMBN4\Desktop', 'CSV Files (*.csv)')
-        self.outlet_list, self.outlet_dict, self.K_dict, self.valve_dict\
-            = self.IEport.import_pamt(path)
+        if os.path.exists(path[0]):
+            self.outlet_list, self.outlet_dict, self.K_dict, self.valve_dict\
+                = self.IEport.import_pamt(path)
+        else:
+            print('import path empty')
 
     def cad_address(self):
         get_file = QFileDialog.getOpenFileName(self, '选择模型文件', 'C:/Users/BZMBN4/Desktop/')

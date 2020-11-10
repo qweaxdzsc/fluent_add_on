@@ -93,7 +93,7 @@ class fluent_solver(QThread):
 
     def run(self):
         self.p = subprocess.Popen(r'cd C:\\Program Files\\ANSYS Inc\\v191\\fluent\\ntbin\\win64 && '
-                           r'fluent 3d -t12 -gu -i %s' % (self.tui), shell=True, stdout=subprocess.PIPE)
+                           r'fluent 3d -t12 -i %s' % (self.tui), shell=True, stdout=subprocess.PIPE)
 
         nl = 0
         finish_count = 0

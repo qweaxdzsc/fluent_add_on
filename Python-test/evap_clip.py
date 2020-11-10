@@ -49,13 +49,17 @@ print('4X4 Grid velocity\nPlease follow instruction enter y_min, y_max, z_min, z
       '(you could use fluent iso-clip to read these parametr)'
       '\nIt will generate a script, which you could copy to fluent console to run\n'
       'After done, fluent will create a velocity file under same output address')
-y_min = input('Please enter y_min of Evaporater:')
-y_max = input('Please enter y_max of Evaporater:')
-z_min = input('Please enter z_min of Evaporater:')
-z_max = input('Please enter z_max of Evaporater:')
+# y_min = input('Please enter y_min of Evaporater:')
+# y_max = input('Please enter y_max of Evaporater:')
+# z_min = input('Please enter z_min of Evaporater:')
+# z_max = input('Please enter z_max of Evaporater:')
+y_min = -0.0874
+y_max = 0.1746
+z_min = 0.2724
+z_max = 0.4824
 # clip_path = r'C:\Users\BZMBN4\Desktop'
 clip_path = input('Please give file output address:')
-clip(clip_path, y_min, y_max, z_min, z_max)
+clip(clip_path, y_min, y_max, z_min, z_max, 21, 2)
 print('Output file in:%s\n Please copy whole file to fluent console to run' % clip_path)
 
 

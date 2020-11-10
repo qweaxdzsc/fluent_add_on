@@ -119,7 +119,7 @@ class GetTui(object):
                 setup.BC_pressure_inlet('inlet')
             else:
                 for i in self.inlet_dict:
-                    setup.BC_inlet_vent(i, self.inlet_dict[i])
+                    setup.BC_inlet_vent(i, float(self.inlet_dict[i])-1)
             origin_xyz = [d['fan_ox'], d['fan_oy'], d['fan_oz']]
             axis_xyz = [d['fan_dx'], d['fan_dy'], d['fan_dz']]
             setup.rotation_volume(d['RPM'], origin_xyz, axis_xyz)
@@ -172,12 +172,13 @@ class GetTui(object):
         else:
             post.read_view()
             post.create_streamline('whole_pathline', 'inlet*', skip='2')
-            post.create_streamline('distrib_pathline', 'evap_in', [0, 15], skip='2')
+            if 'evap_in' in self.pressure_face_list:
+                post.create_streamline('distrib_pathline', 'evap_in', [0, 15], skip='2')
+                post.create_scene('distrib_pathline')
+                post.snip_picture('distrib_pathline_scene', 'yes')
             post.create_scene('whole_pathline')
-            post.create_scene('distrib_pathline')
             post.snip_residual()
             post.snip_avz('whole_pathline_scene')
-            post.snip_picture('distrib_pathline_scene', 'yes')
             # post.snip_avz('distrib_pathline')
             post.snip_model('model')
             for i in self.porous_list:
