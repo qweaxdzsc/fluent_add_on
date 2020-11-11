@@ -5,7 +5,7 @@ import cgitb
 
 
 # designate path
-root = r"G:\_HAVC_Project\MQBA0_new\MQBA0_NEW_DEFROST\MQBA0_NEW_V16_defrost\result_MQBA0_new_V16_defrost"
+root = r"G:\_HAVC_Project\MQBA0_new\MQBA0_NEW_DEFROST\MQBA0_NEW_V17_defrost\result_MQBA0_new_V17_defrost"
 path = root + '\\'
 
 # Txt input path

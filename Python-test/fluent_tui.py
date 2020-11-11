@@ -146,6 +146,14 @@ mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes
 """ % (quality, feature_angle, iterations)
         self.tui.whole_jou += text
 
+    def collapse_area(self, area_size=0.0277, relative_max=0.1, iterations=5, preserve_boundary='yes'):
+        text = """
+/diagnostics/quality/collapse objects *() area %s %s %s %s q
+""" % (area_size, relative_max, iterations, preserve_boundary)
+        self.tui.whole_jou += text
+
+        return self.tui.whole_jou
+
     def fix_slivers(self, skewness=0.8):
         text = """
 /diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness}

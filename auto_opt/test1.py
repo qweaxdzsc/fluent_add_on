@@ -46,6 +46,28 @@ class ShapeLine(object):
         x_list = np.ones(number) * self.evap_shape.ox - thickness_list
         return x_list
 
+    def get_points_dict(self, thickness_list, number=21):
+        points_dict = {}
+        place_ratio = [0, 0.15, 0.85]
+        part_ratio = [0.15, 0.7, 0.15]
+        for i, element in enumerate(thickness_list):
+            x_list = np.ones(number) * self.evap_shape.ox - element
+            y_list = np.linspace(self.evap_shape.oy, self.evap_shape.oy + self.evap_shape.ly, number, endpoint=True)
+            z_list = np.ones(number) * self.evap_shape.oz + self.evap_shape.lz * place_ratio[i]
+            points = np.column_stack((x_list, y_list, z_list))
+            points = np.row_stack((self.start_point, points, self.end_point))
+            points = [list(i) for i in points]  # change array to list
+            # form dict
+            new_dict = {
+                'place_ratio': place_ratio[i],
+                'part_ratio': part_ratio[i],
+                'point_list': points,
+            }
+            points_dict[i+1] = new_dict
+
+        print('generate points', points_dict)
+        return points_dict
+
 
 def write_script(base_file, origin_z, z_length, points_dict, script_path, save_path):
     text = """
@@ -120,9 +142,7 @@ result = ShareTopology.FindAndFix(options)
 options = ExportOptions.Create()
 DocumentSave.Execute(r"{save_path}.scdoc", options)
 print('script finished')
-""" .format(e_point1_x=points[1][0], e_point1_y=points[1][1],
-            s_point2_x=points[-1][0], s_point2_y=points[-1][1], e_point2_x=points[-2][0], e_point2_y=points[-2][1],
-            spline_points=points[1:-1], origin_z=origin_z, z_length=z_length, points_dict=points_dict,
+""" .format(origin_z=origin_z, z_length=z_length, points_dict=points_dict,
             save_path=save_path, base_file=base_file)
     with open(script_path, 'w') as f:
         f.write(text)
@@ -165,7 +185,7 @@ original_point = (262, -87.4, 272.4)   # unit mm
 evap_shape = (40, 262, 210)
 target_airflow = 0.15                  # m3/s
 
-opt_iter = 6
+opt_iter = 1
 for i in range(1, opt_iter+1):
     print('==========================================')
     print('The %s optimized iteration start' % i)
@@ -177,7 +197,7 @@ for i in range(1, opt_iter+1):
     boundary_list = np.ones(line_number) * 54
 
     # file, path info based on inputs
-    base_cad_name = '%s_base' % project_title
+    base_cad_name = '%s_base_whole' % project_title                 # whole module as base
     new_cad_name = '%s_%s' % (project_title, version_name)
     new_script_name = 'script_%s.py' % version_name
     base_file_path = f'{project_address}\\ad_base\\{base_cad_name}'
@@ -195,49 +215,51 @@ for i in range(1, opt_iter+1):
 
     # calculate X_list
     if i == 1:
-        # x_list = shape_line.get_default_x(54, line_number)
-        last_file = r'G:\test\auto_diffuser\ad_v2\ad_base\ad_V5_thickness.npy'
-        original_thickness_list = np.load(last_file)
+        csv_path = r'G:\test\auto_diffuser\return_test\result_MQBA0_new_V10.2_VENT\MQBA0_new_V10.2_VENT_data.csv'
+        number = 21
+        file_name = r'G:\test\auto_diffuser\return_test\MQBA0_new_V10.2_VENT_thickness_3.npy'
+        thickness_list = np.load(file_name)
+        boundary_list = np.ones(number) * 54
         np_file = f'{cwd}\\{project_title}_{version_name}_thickness'
-        # original_thickness_list = np.ones(line_number) * 54
-        np.save(np_file, original_thickness_list)
-        print('new thickness list', original_thickness_list)
-        x_list = shape_line.get_x(original_thickness_list)
-        points = shape_line.get_points(x_list, line_number)
+        process = PostProcess(csv_path, number)
+        target_velocity = process.get_target_velocity(0.15, 0.05502)
+        new_thickness = process.three_thickness(boundary_list, thickness_list, target_velocity, np_file)
+        points_dict = shape_line.get_points_dict(new_thickness)
     else:
-        last_version = 'V%s' % (i - 1)
-        last_dir = f'{project_address}\\{project_title}_{last_version}'
-        last_file = f'{last_dir}\\{project_title}_{last_version}_thickness.npy'
-        original_thickness_list = np.load(last_file)
-        np_file = f'{cwd}\\{project_title}_{version_name}_thickness'
-        csv_path = f'{last_dir}\\result_{project_title}_{last_version}\\{project_title}_{last_version}_data.csv'
-        process = PostProcess(csv_path)
-        target_velocity = process.get_target_velocity(target_airflow, evap.effective_area)
-        new_thickness = process.calculate_thickness(boundary_list, original_thickness_list, target_velocity, np_file)
-        x_list = shape_line.get_x(new_thickness)
-        points = shape_line.get_points(x_list, line_number)
+        pass
+        # last_version = 'V%s' % (i - 1)
+        # last_dir = f'{project_address}\\{project_title}_{last_version}'
+        # last_file = f'{last_dir}\\{project_title}_{last_version}_thickness.npy'
+        # original_thickness_list = np.load(last_file)
+        # np_file = f'{cwd}\\{project_title}_{version_name}_thickness'
+        # csv_path = f'{last_dir}\\result_{project_title}_{last_version}\\{project_title}_{last_version}_data.csv'
+        # process = PostProcess(csv_path)
+        # target_velocity = process.get_target_velocity(target_airflow, evap.effective_area)
+        # new_thickness = process.calculate_thickness(boundary_list, original_thickness_list, target_velocity, np_file)
+        # x_list = shape_line.get_x(new_thickness)
+        # points = shape_line.get_points(x_list, line_number)
 
     # write SCDM script
-    write_script(base_file_path, points, shape_line.evap_shape.lz, script_path, save_path)
+    write_script(base_file_path, evap.oz, shape_line.evap_shape.lz, points_dict, script_path, save_path)
 
-    # make new journal
+    # # make new journal
     journal = CreateTUI(cwd, project_title, version_name, new_cad_name)
     mesh_jou_path = journal.get_mesh_jou()
     solve_jou_path = journal.get_solve_jou()
 
     # launch scdm to do the CAD modify
-    call_SCDM(script_path)
-
-    # launch fluent meshing to do mesh
-    call_mesh(mesh_jou_path)
-
-    # launch fluent solver to do calculation
-    call_solver(cwd, solve_jou_path, 12)
-
-    # get report
-    report = GetReport(result_path)
-    report.get_html()
-    report.get_excel()
+    # call_SCDM(script_path)
+    #
+    # # launch fluent meshing to do mesh
+    # call_mesh(mesh_jou_path)
+    #
+    # # launch fluent solver to do calculation
+    # call_solver(cwd, solve_jou_path, 12)
+    #
+    # # get report
+    # report = GetReport(result_path)
+    # report.get_html()
+    # report.get_excel()
     end_time = time.time()
     print('==========================================')
     print('The %s optimized iteration finished' % i)

@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-from matplotlib import pyplot as plt
 
 
 class PostProcess(object):
@@ -94,8 +93,12 @@ class PostProcess(object):
         # define boundary
         up_boundary = np.ones(self.number) * 3  # thickness no less than 3mm
         lower_boundary = boundary_list
+        thickness_copy = np.append(new_thickness[1:], (new_thickness[-1]))
         # make sure new thickness did not exceed boundary
         for i, element in enumerate(new_thickness):
+            # front thickness should not be smaller than later one
+            if new_thickness[i] > thickness_copy[i]:
+                new_thickness[i] = thickness_copy[i]
             if element < up_boundary[i]:
                 new_thickness[i] = up_boundary[i]
             elif element > lower_boundary[i]:
@@ -122,7 +125,7 @@ class PostProcess(object):
         :param np_file: .npy file path
         :return: new thickness list
         """
-        mesh_grid = self.sort_by(self.df[[2], [3], [4]], [2])
+        mesh_grid = self.sort_by(self.df[[2, 3, 4]], [2])
         section_number, section_length = self.divide_sections(mesh_grid)
         avg_velocity_list = self.section_avg_velocity(mesh_grid, section_number, section_length)
         new_thickness = self.calculate_thickness(avg_velocity_list, boundary_list, thickness_list, target_velocity)
@@ -139,7 +142,7 @@ class PostProcess(object):
         :param np_file:
         :return: new_thickness: a list of three thickness lists
         """
-        mesh_grid = self.sort_by(self.df[[2], [3], [4]], [3])
+        mesh_grid = self.sort_by(self.df[[2, 3, 4]], [3])   # from small to large
         # divide it into three sections 0.15: 0.7: 0.15
         part_ratio = [0.15, 0.7, 0.15]
         new_thickness = []
@@ -149,22 +152,27 @@ class PostProcess(object):
             new_mesh_grid = mesh_grid[int(place_ratio[i]*rows): int(place_ratio[i+1]*rows)]
             new_mesh_grid = self.sort_by(new_mesh_grid, [2])
             section_number, section_length = self.divide_sections(new_mesh_grid)
-            avg_velocity_list = self.section_avg_velocity(mesh_grid, section_number, section_length)
-            new_thickness.append(self.calculate_thickness(avg_velocity_list, boundary_list, thickness_list,
+            avg_velocity_list = self.section_avg_velocity(new_mesh_grid, section_number, section_length)
+            new_thickness.append(self.calculate_thickness(avg_velocity_list, boundary_list, thickness_list[i],
                                                       target_velocity))
-
+        # the outside must not larger than inside
+        new_thickness[0] = np.where(new_thickness[0] > new_thickness[1], new_thickness[1], new_thickness[0])
+        new_thickness[2] = np.where(new_thickness[2] > new_thickness[1], new_thickness[1], new_thickness[2])
+        # save
+        np.save(np_file, new_thickness)
         return new_thickness
 
 
 if __name__ == '__main__':
-    csv_path = r'G:\test\auto_diffuser\return_test\result_MQBA0_new_V10.2_VENT\MQBA0_new_V10.2_VENT_data.csv'
+    csv_path = r'G:\test\auto_diffuser\ad_v2\ad_V6\result_ad_V6\ad_V6_data.csv'
     number = 21
     # thickness_list = np.ones(number) * 54
-    file_name = r'G:\test\auto_diffuser\ad_v1\ad_v11_thickness.npy'
+    file_name = r'G:\test\auto_diffuser\ad_v2\ad_V6\ad_V6_thickness_3.npy'
     thickness_list = np.load(file_name)
     boundary_list = np.ones(number) * 54
-    np_file = r'G:\test\auto_diffuser\ad_v1\ad_v12_thickness'
+    np_file = r'G:\test\auto_diffuser\ad_v2\ad_V6\test1.npy'
     process = PostProcess(csv_path, number)
     target_velocity = process.get_target_velocity(0.15, 0.05502)
     # process.section_avg_velocity()
-    process.single_thickness(boundary_list, thickness_list, target_velocity, np_file)
+    # process.single_thickness(boundary_list, thickness_list, target_velocity, np_file)
+    process.three_thickness(boundary_list, thickness_list, target_velocity, np_file)

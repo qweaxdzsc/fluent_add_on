@@ -2,34 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e475a0b-2241-43fa-a10d-e22986a3349c" name="Default Changelist" comment="add K calculator. pop up when right click in the cal_K column at rename_table">
-      <change afterPath="$PROJECT_DIR$/../Python-test/test2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/test4.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../auto_opt/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../auto_opt/.idea/auto_opt.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../auto_opt/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../auto_opt/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../auto_opt/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../auto_opt/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../auto_opt/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../auto_opt/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../auto_opt/fluent_tui_V2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../auto_opt/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../auto_opt/post_algorithm.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../auto_opt/report/data_to_excel.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../auto_opt/report/get_report.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../auto_opt/report/python_to_html.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../auto_opt/report/txt_to_python.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../auto_opt/test1.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../auto_opt/test2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../auto_opt/tui_run.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../auto_opt/test3.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/evap_clip.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/evap_clip.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/fluent_tui.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/fluent_tui.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/get_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/get_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auto_opt/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../auto_opt/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auto_opt/post_algorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/../auto_opt/post_algorithm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../auto_opt/test1.py" beforeDir="false" afterPath="$PROJECT_DIR$/../auto_opt/test1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/call_api/call_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/call_api/call_func.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fluent_command/tui_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/fluent_command/tui_func.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fluent_command/tui_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/fluent_command/tui_run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -259,28 +242,32 @@
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state x="377" y="61" key="CommitChangelistDialog2/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1604302286003" />
-    <state width="1299" height="89" key="GridCell.Tab.0.bottom" timestamp="1604882705105">
-      <screen x="0" y="0" width="1920" height="1160" />
+    <state width="1294" height="254" key="GridCell.Tab.0.bottom" timestamp="1604994708719">
+      <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1892" height="211" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1599403961329" />
+    <state width="1294" height="254" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1604994708719" />
     <state width="1296" height="78" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1604653532457" />
     <state width="1299" height="89" key="GridCell.Tab.0.bottom/0.0.1920.1160/1920.0.1920.1080@0.0.1920.1160" timestamp="1604882705105" />
-    <state width="1299" height="89" key="GridCell.Tab.0.center" timestamp="1604882705105">
-      <screen x="0" y="0" width="1920" height="1160" />
+    <state width="1294" height="254" key="GridCell.Tab.0.center" timestamp="1604994708719">
+      <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1892" height="211" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1599403961329" />
+    <state width="1294" height="254" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1604994708719" />
     <state width="1296" height="78" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1604653532457" />
     <state width="1299" height="89" key="GridCell.Tab.0.center/0.0.1920.1160/1920.0.1920.1080@0.0.1920.1160" timestamp="1604882705105" />
-    <state width="1299" height="89" key="GridCell.Tab.0.left" timestamp="1604882705104">
-      <screen x="0" y="0" width="1920" height="1160" />
+    <state width="1294" height="254" key="GridCell.Tab.0.left" timestamp="1604994708719">
+      <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1892" height="211" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1599403961329" />
+    <state width="1294" height="254" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1604994708719" />
     <state width="1296" height="78" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1604653532457" />
     <state width="1299" height="89" key="GridCell.Tab.0.left/0.0.1920.1160/1920.0.1920.1080@0.0.1920.1160" timestamp="1604882705104" />
-    <state width="1299" height="89" key="GridCell.Tab.0.right" timestamp="1604882705105">
-      <screen x="0" y="0" width="1920" height="1160" />
+    <state width="1294" height="254" key="GridCell.Tab.0.right" timestamp="1604994708719">
+      <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1892" height="211" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1599403961329" />
+    <state width="1294" height="254" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1604994708719" />
     <state width="1296" height="78" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1604653532457" />
     <state width="1299" height="89" key="GridCell.Tab.0.right/0.0.1920.1160/1920.0.1920.1080@0.0.1920.1160" timestamp="1604882705105" />
     <state x="396" y="206" key="SettingsEditor" timestamp="1597625424213">

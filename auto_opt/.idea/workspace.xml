@@ -2,34 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2a49d45f-d3c4-4f28-b967-8fbdaf599233" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Python-test/test2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/test4.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/auto_opt.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fluent_tui_V2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/post_algorithm.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/report/data_to_excel.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/report/get_report.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/report/python_to_html.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/report/txt_to_python.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test1.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/test2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tui_run.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test3.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/evap_clip.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/evap_clip.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/fluent_tui.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/fluent_tui.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/get_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/get_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/post_algorithm.py" beforeDir="false" afterPath="$PROJECT_DIR$/post_algorithm.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test1.py" beforeDir="false" afterPath="$PROJECT_DIR$/test1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/call_api/call_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/call_api/call_func.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_func.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fluent_gui/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -67,28 +50,7 @@
       <recent name="C:\Users\BZMBN4\Desktop\fluent_add_on\auto_opt" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.test2">
-    <configuration name="get_report" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="auto_opt" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/report" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/report/get_report.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.test1">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="auto_opt" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -173,13 +135,34 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="test3" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="auto_opt" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test3.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.test1" />
+        <item itemvalue="Python.test3" />
+        <item itemvalue="Python.post_algorithm" />
         <item itemvalue="Python.test2" />
         <item itemvalue="Python.main" />
-        <item itemvalue="Python.test1" />
-        <item itemvalue="Python.get_report" />
-        <item itemvalue="Python.post_algorithm" />
       </list>
     </recent_temporary>
   </component>
@@ -197,33 +180,33 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1892" height="258" key="GridCell.Tab.0.bottom" timestamp="1604935724188">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state width="1892" height="361" key="GridCell.Tab.0.bottom" timestamp="1605073887680">
+      <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1892" height="258" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1604935724188" />
     <state width="1898" height="327" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1604849723698" />
-    <state width="1892" height="157" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1604909715938" />
+    <state width="1892" height="361" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1605073887680" />
     <state width="1898" height="327" key="GridCell.Tab.0.bottom/0.0.1920.1160/1920.0.1920.1080@0.0.1920.1160" timestamp="1604882707982" />
-    <state width="1892" height="258" key="GridCell.Tab.0.center" timestamp="1604935724188">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state width="1892" height="361" key="GridCell.Tab.0.center" timestamp="1605073887680">
+      <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1892" height="258" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1604935724188" />
     <state width="1898" height="327" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1604849723698" />
-    <state width="1892" height="157" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1604909715938" />
+    <state width="1892" height="361" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1605073887680" />
     <state width="1898" height="327" key="GridCell.Tab.0.center/0.0.1920.1160/1920.0.1920.1080@0.0.1920.1160" timestamp="1604882707982" />
-    <state width="1892" height="258" key="GridCell.Tab.0.left" timestamp="1604935724188">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state width="1892" height="361" key="GridCell.Tab.0.left" timestamp="1605073887680">
+      <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1892" height="258" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1604935724188" />
     <state width="1898" height="327" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1604849723697" />
-    <state width="1892" height="157" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1604909715937" />
+    <state width="1892" height="361" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1605073887680" />
     <state width="1898" height="327" key="GridCell.Tab.0.left/0.0.1920.1160/1920.0.1920.1080@0.0.1920.1160" timestamp="1604882707982" />
-    <state width="1892" height="258" key="GridCell.Tab.0.right" timestamp="1604935724188">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state width="1892" height="361" key="GridCell.Tab.0.right" timestamp="1605073887680">
+      <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1892" height="258" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1604935724188" />
     <state width="1898" height="327" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1604849723698" />
-    <state width="1892" height="157" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1604909715938" />
+    <state width="1892" height="361" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1605073887680" />
     <state width="1898" height="327" key="GridCell.Tab.0.right/0.0.1920.1160/1920.0.1920.1080@0.0.1920.1160" timestamp="1604882707982" />
     <state x="602" y="243" width="716" height="666" key="find.popup" timestamp="1604888761685">
       <screen x="0" y="0" width="1920" height="1152" />

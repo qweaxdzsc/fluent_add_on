@@ -73,6 +73,7 @@ class GetTui(object):
         mesh.general_improve()
         mesh.fix_slivers()
         mesh.fix_steps(20, 0.1)
+        mesh.collapse_area()
         mesh.fix_slivers()
         mesh.compute_volume_region()
         mesh.volume_mesh_change_type(self.dead_zone_list)

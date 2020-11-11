@@ -59,7 +59,7 @@ z_min = 0.2724
 z_max = 0.4824
 # clip_path = r'C:\Users\BZMBN4\Desktop'
 clip_path = input('Please give file output address:')
-clip(clip_path, y_min, y_max, z_min, z_max, 21, 2)
+clip(clip_path, y_min, y_max, z_min, z_max, 41, 21)
 print('Output file in:%s\n Please copy whole file to fluent console to run' % clip_path)
 
 
