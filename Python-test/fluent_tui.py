@@ -227,10 +227,10 @@ pyramids tet no yes
 """.format(regions=regions)
         self.tui.whole_jou += text
 
-    def auto_node_move(self, skewness=0.8, iterations=5):
+    def auto_node_move(self, skewness=0.8, preserve_boundary='yes', iterations=5):
         text = """
-/mesh/modify/auto-node-move *() *() %s 50 120 yes %s
-""" % (skewness, iterations)
+/mesh/modify/auto-node-move *() *() %s 50 120 %s %s
+""" % (skewness, preserve_boundary, iterations)
         self.tui.whole_jou += text
 
     def rename_cell(self, zone_list):

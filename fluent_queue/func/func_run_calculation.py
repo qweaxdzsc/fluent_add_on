@@ -187,6 +187,7 @@ class CalGuard(QThread):
         print('transcript path:', self.transcript)
         self.wait_time = 50
         self.check_interval = 150
+        self.bat_file_name = ''
 
     def run(self):
         print('start Guard')
@@ -194,6 +195,7 @@ class CalGuard(QThread):
         file_transcript = QFileInfo(self.transcript)
         if file_transcript.isFile():
             print('have transcript')
+            self.parse_bat_name()
             self.check_transcript(self.check_interval)
             self.ensure_finish(self.dir)
         else:
@@ -207,6 +209,8 @@ class CalGuard(QThread):
             time.sleep(check_interval)
             line_count = line_count_new
             line_count_new = self.get_line_count()
+            if line_count_new > 500000:
+                break
 
     def get_line_count(self):
         with open(self.transcript, 'r') as f:
@@ -216,11 +220,7 @@ class CalGuard(QThread):
 
         return line_count_new
 
-    def ensure_finish(self, dir):
-        print('no new line in transcript')
-        folder = QDir(dir)
-        file_list = folder.entryInfoList(QDir.Files | QDir.CaseSensitive)
-        bat_file_name = ''
+    def parse_bat_name(self):
         with open(self.transcript, 'r') as f:
             content = f.readlines()
             for line in content:
@@ -228,12 +228,16 @@ class CalGuard(QThread):
                     line = line.split()
                     host_name = line[1]
                     pid = line[3]
-                    bat_file_name = 'cleanup-fluent-%s-%s.bat' % (host_name, pid)
-                    print(f'find .bat file: {bat_file_name}')
+                    self.bat_file_name = 'cleanup-fluent-%s-%s.bat' % (host_name, pid)
                     break
 
+    def ensure_finish(self, dir):
+        print('no new line in transcript')
+        folder = QDir(dir)
+        file_list = folder.entryInfoList(QDir.Files | QDir.CaseSensitive)
+
         for i in file_list:
-            if i.fileName() == bat_file_name:
+            if i.fileName() == self.bat_file_name:
                 print('.bat address', i.absoluteFilePath())
                 subprocess.call(i.absoluteFilePath(), shell=True)
         print('\nall finished')

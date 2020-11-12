@@ -221,12 +221,11 @@ boundary/manage/rotate valve*()
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
-    def auto_node_move(self, skewness=0.8, iterations=5):
+    def auto_node_move(self, skewness=0.8, preserve_boundary='yes', iterations=5):
         text = """
-/mesh/modify/auto-node-move *() *() %s 50 120 yes %s
-""" % (skewness, iterations)
+/mesh/modify/auto-node-move *() *() %s 50 120 %s %s
+""" % (skewness, preserve_boundary, iterations)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def rename_cell(self, zone_list):
         for i in range(len(zone_list)):

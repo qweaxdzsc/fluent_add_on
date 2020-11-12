@@ -126,11 +126,11 @@ for key, value in points_dict.items():
     
     # Make Components
     selection =Selection.CreateByNames("shape%s" % key)
-    component= Selection.CreateByNames("diffuser")
+    component= Selection.CreateByNames("volute")
     result = ComponentHelper.MoveBodiesToComponent(selection, component, False, None)
 
 # Merge Bodies
-targets = Selection.Create(GetRootPart().GetComponents('diffuser')[0].GetAllBodies())
+targets = Selection.Create(GetRootPart().GetComponents('volute')[0].GetAllBodies())
 result = Combine.Merge(targets)
 
 # Share Topology
@@ -227,32 +227,31 @@ for i in range(1, opt_iter+1):
         points_dict = shape_line.get_points_dict(new_thickness)
     else:
         pass
-        # last_version = 'V%s' % (i - 1)
-        # last_dir = f'{project_address}\\{project_title}_{last_version}'
-        # last_file = f'{last_dir}\\{project_title}_{last_version}_thickness.npy'
-        # original_thickness_list = np.load(last_file)
-        # np_file = f'{cwd}\\{project_title}_{version_name}_thickness'
-        # csv_path = f'{last_dir}\\result_{project_title}_{last_version}\\{project_title}_{last_version}_data.csv'
-        # process = PostProcess(csv_path)
-        # target_velocity = process.get_target_velocity(target_airflow, evap.effective_area)
-        # new_thickness = process.calculate_thickness(boundary_list, original_thickness_list, target_velocity, np_file)
-        # x_list = shape_line.get_x(new_thickness)
-        # points = shape_line.get_points(x_list, line_number)
+        last_version = 'V%s' % (i - 1)
+        last_dir = f'{project_address}\\{project_title}_{last_version}'
+        last_file = f'{last_dir}\\{project_title}_{last_version}_thickness.npy'
+        original_thickness_list = np.load(last_file)
+        np_file = f'{cwd}\\{project_title}_{version_name}_thickness'
+        csv_path = f'{last_dir}\\result_{project_title}_{last_version}\\{project_title}_{last_version}_data.csv'
+        process = PostProcess(csv_path)
+        target_velocity = process.get_target_velocity(target_airflow, evap.effective_area)
+        new_thickness = process.three_thickness(boundary_list, original_thickness_list, target_velocity, np_file)
+        points_dict = shape_line.get_points_dict(new_thickness)
 
     # write SCDM script
     write_script(base_file_path, evap.oz, shape_line.evap_shape.lz, points_dict, script_path, save_path)
 
     # # make new journal
     journal = CreateTUI(cwd, project_title, version_name, new_cad_name)
-    mesh_jou_path = journal.get_mesh_jou()
-    solve_jou_path = journal.get_solve_jou()
+    mesh_jou_path = journal.get_mesh_jou(whole_model=True)
+    solve_jou_path = journal.get_solve_jou(whole_model=True)
 
     # launch scdm to do the CAD modify
     # call_SCDM(script_path)
-    #
-    # # launch fluent meshing to do mesh
+
+    # launch fluent meshing to do mesh
     # call_mesh(mesh_jou_path)
-    #
+
     # # launch fluent solver to do calculation
     # call_solver(cwd, solve_jou_path, 12)
     #
