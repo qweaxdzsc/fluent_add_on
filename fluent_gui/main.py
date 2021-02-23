@@ -48,7 +48,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.script_address = str()
         self.confirm_info = bool()
         self.need_launch_CAD = bool()
-        self.mesh_type = 'tet'
+        self.mesh_type = 'poly'
         self.show_c_on = False
         self.snip_on = True
         self.energy_check = bool()

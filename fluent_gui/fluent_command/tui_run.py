@@ -53,11 +53,13 @@ class GetTui(object):
 
         self.pressure_face_list = ['inlet*', 'outlet*'] + self.internal_list.copy()
 
+        print(self.K_dict)
         for i in list(self.K_dict.keys()):
             if 'inlet' in i:
                 self.inlet_dict[i] = self.K_dict[i]
                 self.K_dict.pop(i)
                 if float(self.inlet_dict[i]) > 0:
+                    print('change inlet type to inlet-vent')
                     self.inlet_type = 'inlet-vent'
 
     def meshing(self):
@@ -65,16 +67,12 @@ class GetTui(object):
         jou_mesh = open(self.jou_mesh_path, 'w')
 
         mesh_zone_list = self.body_list.copy()
+        mesh.start_transcript()
         if 'fan' in self.body_list:
             mesh.simple_import(self.up_list, self.porous_list)
         else:
             mesh.import_distrib()
-        mesh.stitch_free_face()
-        mesh.general_improve()
-        mesh.fix_slivers()
-        mesh.fix_steps(20, 0.1)
-        mesh.collapse_area()
-        mesh.fix_slivers()
+        mesh.fix_combo()
         mesh.compute_volume_region()
         mesh.volume_mesh_change_type(self.dead_zone_list)
         mesh.retype_face(face_list=['inlet*'], face_type=self.inlet_type)
@@ -86,6 +84,7 @@ class GetTui(object):
         else:
             mesh.auto_mesh_volume(mesh_type=self.mesh_type)
         mesh.auto_node_move(0.85)
+        mesh.auto_node_move(0.9, preserve_boundary='no', iterations=3)
         mesh.rename_cell(zone_list=mesh_zone_list)
         mesh.check_quality()
         mesh.prepare_for_solve()
@@ -213,19 +212,20 @@ class GetTui(object):
         mesh = self.CFD.mesh
         mesh_zone_list = self.body_list.copy()
         for i in mesh_zone_list:
-            if 'valve1' in i:
+            if 'valve' in i:
                 mesh_zone_list.remove(i)
 
         jou_mesh = open(self.jou_mesh_path, 'w')
+        mesh.start_transcript()
         for i in self.lin_array:
             cad_lin_name = '%s_%s' % (self.d['cad_name'], i)
             mesh.import_distrib(cad_name=cad_lin_name)
-            mesh.general_improve(0.75)
-            mesh.fix_slivers()
+            mesh.fix_combo()
             mesh.compute_volume_region()
             mesh.volume_mesh_change_type(self.dead_zone_list)
             mesh.auto_mesh_volume(mesh_type=self.mesh_type)
-            mesh.auto_node_move(0.85, 6)
+            mesh.auto_node_move(0.85)
+            mesh.auto_node_move(0.9, preserve_boundary='no', iterations=3)
             mesh.rename_cell(zone_list=mesh_zone_list)
             mesh.retype_face(face_list=['inlet'], face_type='mass-flow-inlet')
             mesh.retype_face(face_list=self.internal_list, face_type='internal')
@@ -309,9 +309,9 @@ class GetTui(object):
             setup.start_calculate(350)
             setup.write_lin_case_data(i)
             if self.energy_check:
-                post.simple_lin_post(self.lin_array[0])
+                post.simple_lin_post(i)
             else:
-                post.simple_lin_post(self.lin_array[0], field='velocity-magnitude')
+                post.simple_lin_post(i, field='velocity-magnitude')
 
         self.CFD.close_fluent()
         jou_solve.write(self.CFD.whole_jou)

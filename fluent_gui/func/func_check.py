@@ -50,7 +50,6 @@ class check_func(object):
         if ui.part_tree.topLevelItem(3).checkState(0) == 2:
             body_list.append('cone')
             up_list.append('cone')
-            face_list.append('fan_in')
         if ui.part_tree.topLevelItem(4).checkState(0) == 2:
             if ui.part_tree.topLevelItem(5).checkState(0) == 0:
                 print('volute and fan should be all checked')
@@ -59,6 +58,7 @@ class check_func(object):
                 up_list.append('volute')
                 body_list.append('fan')
                 dead_zone_list.append('fan_blade')
+                face_list.append('fan_in')
                 face_list.append('fan_out')
                 face_list.append('fan_blade')
         if ui.part_tree.topLevelItem(6).checkState(0) == 2:

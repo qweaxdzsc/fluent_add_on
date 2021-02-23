@@ -34,16 +34,23 @@ class Mesh(object):
         self.tui = tui
         print('create_object_mesh')
 
+    def start_transcript(self, mode='mesh'):
+        text = """
+/file/start-transcript %s\\%s_%s_%s_transcript.txt ok
+""" % (self.tui.case_out_path, self.tui.project_title, self.tui.version_name, mode)
+        self.tui.whole_jou += text
+        return self.tui.whole_jou
+
     def simple_import(self, up_zone, porous_list):
         self.import_CAD()
         self.size_scope_global()
         self.size_scope_curv('distrib_curv', 'distrib', 0.7, 5.5, 1.2, 16)
         self.size_scope_prox('distrib_prox', 'distrib', 0.8, 5.5, 1.2, 2)
-        self.size_scope_curv('fan_blade_curv', 'fan_blade', 0.4, 4, 1.2, 16)
+        self.size_scope_curv('fan_blade_curv', 'fan_blade', 0.35, 4, 1.2, 16)
         self.size_scope_prox('fan_blade_prox', 'fan_blade', 0.8, 4, 1.2, 2)
         for i in up_zone:
-            self.size_scope_curv(i + '_curv', i, 0.8, 5.2, 1.2, 16)
-            self.size_scope_prox(i + '_prox', i, 0.8, 5.2, 1.2, 2)
+            self.size_scope_curv(i + '_curv', i, 0.8, 4.5, 1.2, 16)
+            self.size_scope_prox(i + '_prox', i, 0.8, 4.5, 1.2, 2)
         self.size_scope_curv('fan_out_curv', 'fan_out', 1, 4.5, 1.2, 18)
         self.size_scope_prox('global_prox', '', 0.8, 5.5, 1.2, 1)
         self.size_scope_soft('inlet', '*inlet*', 14)
@@ -138,7 +145,7 @@ mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes
 
     def stitch_free_face(self, tolerance=0.2):
         text = """
-/diagnostics/face-connectivity/fix-free-faces objects *() stitch %s 1
+/diagnostics/face-connectivity/fix-free-faces objects *() stitch %s 3
 """ % tolerance
         self.tui.whole_jou += text
 
@@ -148,15 +155,11 @@ mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes
 """ % (quality, feature_angle, iterations)
         self.tui.whole_jou += text
 
-        return self.tui.whole_jou
-
     def collapse_area(self, area_size=0.0277, relative_max=0.1, iterations=5, preserve_boundary='yes'):
         text = """
 /diagnostics/quality/collapse objects *() area %s %s %s %s q
 """ % (area_size, relative_max, iterations, preserve_boundary)
         self.tui.whole_jou += text
-
-        return self.tui.whole_jou
 
     def fix_slivers(self, skewness=0.8):
         text = """
@@ -164,11 +167,8 @@ mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes
 /diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness}
 /diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness}
 /diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness}
-/diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness}
-/diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness} q
 """.format(skewness=skewness)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
 
     def fix_steps(self, angle=30, step_width=0.05):
         text = """
@@ -176,12 +176,18 @@ mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes
 /diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width} smooth q
 /diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width} smooth q
 /diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width} smooth q
-/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width} smooth q
-/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width} smooth q
-/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width} smooth q
-/diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width} smooth q
 """.format(critical_angle=angle, step_width=step_width)
         self.tui.whole_jou += text
+
+    def fix_combo(self):
+        self.stitch_free_face()
+        self.general_improve()
+        self.fix_slivers()
+        self.fix_steps(20, 0.1)
+        self.collapse_area()
+        self.fix_slivers()
+        self.fix_steps(20, 0.1)
+        self.fix_slivers()
         return self.tui.whole_jou
 
     def valve_rotate(self, rotate_angle, valve_dir, valve_origin):
@@ -681,7 +687,8 @@ surfaces-list *%s*() q
 """ % self.tui.project_title
         self.tui.whole_jou += text
 
-    def create_contour(self, contour_name, contour_face, range='auto-range-on', field='velocity-magnitude'):
+    def create_contour(self, contour_name, contour_face, range='auto-range-on', field='velocity-magnitude',
+                       level=10):
         if range == 'auto-range-on':
             pass
         else:
@@ -694,11 +701,36 @@ filled yes
 range-option %s 
 global-range no
 q
-color-map size 8 format %%0.1f
+color-map size %s format %%0.1f
 q q
-""" % (contour_name, contour_face, field, range)
+""" % (contour_name, contour_face, field, range, level)
         self.tui.whole_jou += text
-        return self.tui.whole_jou
+
+    def create_vector(self, vector_name, vector_face, range='auto-range-on', field='velocity', vector_scale=5,
+                      level=25):
+        if range == 'auto-range-on':
+            pass
+        else:
+            range = 'auto-range-off clip-to-range yes maximum %s minimum %s' % (range[-1], range[0])
+        text = """
+/display/objects/creat vector %s
+surfaces-list %s()    
+vector-field %s
+range-option %s 
+global-range no
+q
+scale scale-f %s
+q
+color-map size %s format %%0.1f
+q q
+""" % (vector_name, vector_face, field, range, vector_scale, level)
+        self.tui.whole_jou += text
+
+    def create_iso_surface(self, surface_name, value_type, iso_value, from_surface='', from_zone='*'):
+        text = """
+/surface/iso-surface %s %s %s() %s() %s()
+""" % (value_type, surface_name, from_surface, from_zone, iso_value)
+        self.tui.whole_jou += text
 
     def create_streamline(self, line_name, surface_name, range='', field_type='velocity-magnitude', line_size='10', line_step='2000', skip='5'):
         if range == '':

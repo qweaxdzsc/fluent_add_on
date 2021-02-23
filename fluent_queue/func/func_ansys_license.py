@@ -53,7 +53,9 @@ class LicenseAnsys(object):
             for k, v in module_dict.items():                  # loop module_dict
                 for i in v:                                   # loop the list inside module_dict
                     self.check_usage(row, i, self.license_dict[k])
-        # print('license dict:', self.license_dict)
+
+        limit_license = ['pre_post', 'solver']
+        self.base_limit(limit_license)
 
     def check_usage(self, info, flag, reserv_list):
         """
@@ -74,6 +76,17 @@ class LicenseAnsys(object):
             else:
                 reserv_list[0] += total_lic
                 reserv_list[1] += total_lic - used_lic
+
+    def base_limit(self, limit_license):
+        """
+        the under control license number cannot exceed the base number
+        :param limit_license:
+        :return:
+        """
+        base_limit = self.license_dict['base'][1]
+        for i in limit_license:
+            if self.license_dict[i][1] > base_limit:
+                self.license_dict[i][1] = base_limit
 
     def is_license(self, license_name):
         try:

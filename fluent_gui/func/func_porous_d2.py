@@ -9,7 +9,7 @@ def porous_d2( x, y, z):
             if i == 0:
                 d2[d1.index(i)] = 1
                 return d2
-        d2[1] = -z / y
+        d2[1] = round(-z / y, 4)
         d2[2] = 1
         return d2
     except Exception as e:

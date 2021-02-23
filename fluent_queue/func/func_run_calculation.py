@@ -186,7 +186,7 @@ class CalGuard(QThread):
         self.transcript = '%s\\%s' % (directory, transcript_name)
         print('transcript path:', self.transcript)
         self.wait_time = 50
-        self.check_interval = 150
+        self.check_interval = 180
         self.bat_file_name = ''
 
     def run(self):

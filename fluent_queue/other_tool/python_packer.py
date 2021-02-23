@@ -48,15 +48,15 @@ class PythonPacker(object):
 
 
 if __name__ == "__main__":
-    python_path = r"C:\Users\BZMBN4\Desktop\web_queue\queue_web"
-    python_name = "downloader.py"
-    copy_file_list = [
-        r'C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_queue\icon',
-        r'C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_queue\app',
-        r'C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_queue\config',
-        r'C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_queue\ui_translate',
-    ]
+    python_path = r"C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_queue\func"
+    python_name = "func_ansys_license.py"
+    # copy_file_list = [
+    #     r'C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_queue\icon',
+    #     r'C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_queue\app',
+    #     r'C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_queue\config',
+    #     r'C:\Users\BZMBN4\Desktop\fluent_add_on\fluent_queue\ui_translate',
+    # ]
     packer = PythonPacker(python_path, python_name)
-    packer.get_command("-D")
+    # packer.get_command("-D")
     # packer.simple_packer(copy_file_list, "-D")
-    # packer.pack_python("-F -w")
+    packer.pack_python("-F -w")

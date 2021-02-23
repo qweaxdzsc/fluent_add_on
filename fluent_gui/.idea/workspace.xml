@@ -2,16 +2,43 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e475a0b-2241-43fa-a10d-e22986a3349c" name="Default Changelist" comment="add K calculator. pop up when right click in the cal_K column at rename_table">
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/other_tool/build/func_ansys_license/Analysis-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/other_tool/build/func_ansys_license/EXE-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/other_tool/build/func_ansys_license/PKG-00.pkg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/other_tool/build/func_ansys_license/PKG-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/other_tool/build/func_ansys_license/PYZ-00.pyz" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/other_tool/build/func_ansys_license/PYZ-00.toc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/other_tool/build/func_ansys_license/base_library.zip" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/other_tool/build/func_ansys_license/func_ansys_license.exe.manifest" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/other_tool/build/func_ansys_license/warn-func_ansys_license.txt" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../fluent_queue/other_tool/build/func_ansys_license/xref-func_ansys_license.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/PQ.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/PQ.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/evap_clip.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/evap_clip.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/fan_efficiency.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/fan_efficiency.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/fluent_tui.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/fluent_tui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/python_to_html.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/python_to_html.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/get_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/get_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/lincense_checker.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/license_checker.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/linearity_new.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/linearity_new.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/linearity_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/linearity_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/mesh_info_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/mesh_info_parser.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/new_project_folder.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/new_project_folder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/test2.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/test2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/txt_to_python.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/txt_to_python.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../auto_opt/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../auto_opt/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auto_opt/fluent_tui_V2.py" beforeDir="false" afterPath="$PROJECT_DIR$/../auto_opt/fluent_tui_V2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auto_opt/test1.py" beforeDir="false" afterPath="$PROJECT_DIR$/../auto_opt/test1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../auto_opt/tui_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/../auto_opt/tui_run.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fluent_command/tui_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/fluent_command/tui_func.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/fluent_command/tui_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/fluent_command/tui_run.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/func/func_check.py" beforeDir="false" afterPath="$PROJECT_DIR$/func/func_check.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/func/func_porous_d2.py" beforeDir="false" afterPath="$PROJECT_DIR$/func/func_porous_d2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/app/func_ansys_license.exe" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/app/func_ansys_license.exe" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/config/config.ini" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/config/config.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/config/host.txt" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/config/host.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/database/history_list.csv" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/database/history_list.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_ansys_license.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_ansys_license.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_queue/func/func_run_calculation.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/func/func_run_calculation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_queue/other_tool/python_packer.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_queue/other_tool/python_packer.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -145,27 +172,6 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="sub_K_calculator" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="fluent_gui" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/subUI" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/subUI/sub_K_calculator.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
     <configuration name="sub_k_test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="fluent_gui" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -187,20 +193,41 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="tui_run" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="fluent_gui" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/fluent_command" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/fluent_command/tui_run.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <list>
-      <item itemvalue="Python.main" />
-      <item itemvalue="Python.sub_K_calculator" />
-      <item itemvalue="Python.sub_k_test" />
       <item itemvalue="Python.GUI_convertor" />
       <item itemvalue="Python.func_IEport" />
+      <item itemvalue="Python.main" />
+      <item itemvalue="Python.sub_k_test" />
+      <item itemvalue="Python.tui_run" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
+        <item itemvalue="Python.tui_run" />
         <item itemvalue="Python.func_IEport" />
         <item itemvalue="Python.GUI_convertor" />
         <item itemvalue="Python.sub_k_test" />
-        <item itemvalue="Python.sub_K_calculator" />
       </list>
     </recent_temporary>
   </component>
@@ -233,49 +260,38 @@
     <option name="LAST_COMMIT_MESSAGE" value="add K calculator. pop up when right click in the cal_K column at rename_table" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="446" y="307" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1597309418225">
-      <screen x="0" y="0" width="1920" height="1152" />
-    </state>
-    <state x="446" y="307" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1597309418225" />
     <state x="377" y="61" key="CommitChangelistDialog2" timestamp="1604302286003">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state x="377" y="61" key="CommitChangelistDialog2/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1604302286003" />
-    <state width="1294" height="254" key="GridCell.Tab.0.bottom" timestamp="1604994708719">
+    <state width="1283" height="316" key="GridCell.Tab.0.bottom" timestamp="1612334424166">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1892" height="211" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1599403961329" />
-    <state width="1294" height="254" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1604994708719" />
+    <state width="1283" height="316" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1612334424166" />
     <state width="1296" height="78" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1604653532457" />
-    <state width="1299" height="89" key="GridCell.Tab.0.bottom/0.0.1920.1160/1920.0.1920.1080@0.0.1920.1160" timestamp="1604882705105" />
-    <state width="1294" height="254" key="GridCell.Tab.0.center" timestamp="1604994708719">
+    <state width="1293" height="226" key="GridCell.Tab.0.bottom/0.0.1920.1160/1920.0.1920.1080@0.0.1920.1160" timestamp="1606700609736" />
+    <state width="1283" height="316" key="GridCell.Tab.0.center" timestamp="1612334424166">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1892" height="211" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1599403961329" />
-    <state width="1294" height="254" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1604994708719" />
+    <state width="1283" height="316" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1612334424166" />
     <state width="1296" height="78" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1604653532457" />
-    <state width="1299" height="89" key="GridCell.Tab.0.center/0.0.1920.1160/1920.0.1920.1080@0.0.1920.1160" timestamp="1604882705105" />
-    <state width="1294" height="254" key="GridCell.Tab.0.left" timestamp="1604994708719">
+    <state width="1293" height="226" key="GridCell.Tab.0.center/0.0.1920.1160/1920.0.1920.1080@0.0.1920.1160" timestamp="1606700609736" />
+    <state width="1283" height="316" key="GridCell.Tab.0.left" timestamp="1612334424166">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1892" height="211" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1599403961329" />
-    <state width="1294" height="254" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1604994708719" />
+    <state width="1283" height="316" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1612334424166" />
     <state width="1296" height="78" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1604653532457" />
-    <state width="1299" height="89" key="GridCell.Tab.0.left/0.0.1920.1160/1920.0.1920.1080@0.0.1920.1160" timestamp="1604882705104" />
-    <state width="1294" height="254" key="GridCell.Tab.0.right" timestamp="1604994708719">
+    <state width="1293" height="226" key="GridCell.Tab.0.left/0.0.1920.1160/1920.0.1920.1080@0.0.1920.1160" timestamp="1606700609736" />
+    <state width="1283" height="316" key="GridCell.Tab.0.right" timestamp="1612334424166">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1892" height="211" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1599403961329" />
-    <state width="1294" height="254" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1604994708719" />
+    <state width="1283" height="316" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1612334424166" />
     <state width="1296" height="78" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1604653532457" />
-    <state width="1299" height="89" key="GridCell.Tab.0.right/0.0.1920.1160/1920.0.1920.1080@0.0.1920.1160" timestamp="1604882705105" />
-    <state x="396" y="206" key="SettingsEditor" timestamp="1597625424213">
+    <state width="1293" height="226" key="GridCell.Tab.0.right/0.0.1920.1160/1920.0.1920.1080@0.0.1920.1160" timestamp="1606700609736" />
+    <state x="602" y="71" width="716" height="838" key="find.popup" timestamp="1607999998572">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state x="396" y="206" key="SettingsEditor/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1597625424213" />
-    <state x="602" y="71" width="716" height="838" key="find.popup" timestamp="1604295405166">
-      <screen x="0" y="0" width="1920" height="1152" />
-    </state>
+    <state x="602" y="71" width="716" height="838" key="find.popup/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1607999998572" />
     <state x="602" y="71" width="716" height="838" key="find.popup/0.0.1920.1152/1920.0.1920.1200@0.0.1920.1152" timestamp="1604295405166" />
   </component>
   <component name="XDebuggerManager">
