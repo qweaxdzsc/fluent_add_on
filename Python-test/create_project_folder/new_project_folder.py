@@ -87,7 +87,7 @@ class CFDProject(object):
 
 
 if __name__ == "__main__":
-    project_name = r"37W"
+    project_name = r"HA2HG"
     create_path = r"G:\_HAVC_Project"
     share_drive_path = r"S:\PE\Engineering database\CFD\02_Projects"
     new_project = CFDProject(project_name, create_path, mode_number=7)

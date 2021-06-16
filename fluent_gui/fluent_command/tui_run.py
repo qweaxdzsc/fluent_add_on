@@ -5,15 +5,15 @@ import cgitb
 
 class GetTui(object):
     def __init__(self, pamt, body_list, energy_check, K_dict,
-                 porous_list, up_list, dead_zone_list, internal_list,
+                 porous_list, specified_list, dead_zone_list, internal_list,
                  mesh_type):
-        print(pamt, body_list, energy_check, K_dict, porous_list, up_list, dead_zone_list, internal_list)
+        print(pamt, body_list, energy_check, K_dict, porous_list, specified_list, dead_zone_list, internal_list)
         self.d = pamt
         self.body_list = body_list
         self.energy_check = energy_check
         self.K_dict = K_dict
         self.porous_list = porous_list
-        self.up_list = up_list
+        self.specified_list = specified_list
         self.dead_zone_list = dead_zone_list
         self.internal_list = internal_list
         self.mesh_type = mesh_type
@@ -69,7 +69,7 @@ class GetTui(object):
         mesh_zone_list = self.body_list.copy()
         mesh.start_transcript()
         if 'fan' in self.body_list:
-            mesh.simple_import(self.up_list, self.porous_list)
+            mesh.simple_import(self.specified_list, self.porous_list)
         else:
             mesh.import_distrib()
         mesh.fix_combo()
@@ -85,6 +85,8 @@ class GetTui(object):
             mesh.auto_mesh_volume(mesh_type=self.mesh_type)
         mesh.auto_node_move(0.85)
         mesh.auto_node_move(0.9, preserve_boundary='no', iterations=3)
+        mesh.auto_node_move(50, iterations=3, quality_method="aspect-ratio")
+        mesh.auto_node_move(0.85)
         mesh.rename_cell(zone_list=mesh_zone_list)
         mesh.check_quality()
         mesh.prepare_for_solve()
@@ -211,7 +213,7 @@ class GetTui(object):
     def lin_mesh(self):
         mesh = self.CFD.mesh
         mesh_zone_list = self.body_list.copy()
-        for i in mesh_zone_list:
+        for i in mesh_zone_list[::-1]:
             if 'valve' in i:
                 mesh_zone_list.remove(i)
 
@@ -226,6 +228,8 @@ class GetTui(object):
             mesh.auto_mesh_volume(mesh_type=self.mesh_type)
             mesh.auto_node_move(0.85)
             mesh.auto_node_move(0.9, preserve_boundary='no', iterations=3)
+            mesh.auto_node_move(50, iterations=3, quality_method="aspect-ratio")
+            mesh.auto_node_move(0.85)
             mesh.rename_cell(zone_list=mesh_zone_list)
             mesh.retype_face(face_list=['inlet'], face_type='mass-flow-inlet')
             mesh.retype_face(face_list=self.internal_list, face_type='internal')

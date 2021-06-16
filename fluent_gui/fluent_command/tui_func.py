@@ -41,17 +41,18 @@ class Mesh(object):
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
-    def simple_import(self, up_zone, porous_list):
+    def simple_import(self, specified_zone, porous_list):
         self.import_CAD()
         self.size_scope_global()
         self.size_scope_curv('distrib_curv', 'distrib', 0.7, 5.5, 1.2, 16)
         self.size_scope_prox('distrib_prox', 'distrib', 0.8, 5.5, 1.2, 2)
-        self.size_scope_curv('fan_blade_curv', 'fan_blade', 0.35, 4, 1.2, 16)
+        self.size_scope_curv('fan_blade_curv', 'fan_blade', 0.35, 1.5, 1.2, 16)
         self.size_scope_prox('fan_blade_prox', 'fan_blade', 0.8, 4, 1.2, 2)
-        for i in up_zone:
+        self.size_scope_prox('cutoff_curv', '*cutoff*', 0.5, 1, 1.2, 2)
+        for i in specified_zone:
             self.size_scope_curv(i + '_curv', i, 0.8, 4.5, 1.2, 16)
             self.size_scope_prox(i + '_prox', i, 0.8, 4.5, 1.2, 2)
-        self.size_scope_curv('fan_out_curv', 'fan_out', 1, 4.5, 1.2, 18)
+        self.size_scope_curv('fan_out_curv', 'fan_out', 1, 4, 1.2, 18)
         self.size_scope_prox('global_prox', '', 0.8, 5.5, 1.2, 1)
         self.size_scope_soft('inlet', '*inlet*', 14)
         for i in porous_list:
@@ -155,7 +156,7 @@ mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes
 """ % (quality, feature_angle, iterations)
         self.tui.whole_jou += text
 
-    def collapse_area(self, area_size=0.0277, relative_max=0.1, iterations=5, preserve_boundary='yes'):
+    def collapse_area(self, area_size=0.015, relative_max=0.1, iterations=5, preserve_boundary='yes'):
         text = """
 /diagnostics/quality/collapse objects *() area %s %s %s %s q
 """ % (area_size, relative_max, iterations, preserve_boundary)
@@ -219,18 +220,20 @@ boundary/manage/rotate valve*()
                 self.tui.whole_jou += dead_zone
         return self.tui.whole_jou
 
-    def auto_mesh_volume(self, grow_rate=1.25, mesh_type='tet'):
+    def auto_mesh_volume(self, grow_rate=1.23, mesh_type='tet'):
         text = """
+/parallel/auto-partition yes q q
 /mesh/tet/controls/cell-sizing geometric {rate}
 /mesh/auto-mesh * yes pyramids {mesh_type} no
 """.format(rate=grow_rate, mesh_type=mesh_type)
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
-    def auto_node_move(self, skewness=0.8, preserve_boundary='yes', iterations=5):
+    def auto_node_move(self, skewness=0.8, preserve_boundary='yes', iterations=5, quality_method="inverse-ortho-quality"):
         text = """
+/report/quality-method/%s
 /mesh/modify/auto-node-move *() *() %s 50 120 %s %s
-""" % (skewness, preserve_boundary, iterations)
+""" % (quality_method, skewness, preserve_boundary, iterations)
         self.tui.whole_jou += text
 
     def rename_cell(self, zone_list):
@@ -266,14 +269,14 @@ boundary/manage/rotate valve*()
 
     def write_case(self):
         text = """
-/file/write-case %s\\%s_%s_mesh yes
+/file/write-case %s\\%s_%s_mesh.cas yes
 """ % (self.tui.case_out_path, self.tui.project_title, self.tui.version_name)
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
     def write_mesh(self):
         text = """
-/file/write-mesh %s\\%s_%s_mesh yes
+/file/write-mesh %s\\%s_%s_mesh.msh yes
 """ % (self.tui.case_out_path, self.tui.project_title, self.tui.version_name)
         self.tui.whole_jou += text
         return self.tui.whole_jou
@@ -286,7 +289,7 @@ boundary/manage/rotate valve*()
         else:
             os.makedirs(mesh_path)
         text = """
-/file/write-mesh {mesh_path}\\{project_name}_{version}_{valve_angle}_mesh yes
+/file/write-mesh {mesh_path}\\{project_name}_{version}_{valve_angle}_mesh.msh yes
 """.format(mesh_path=mesh_path, project_name=self.tui.project_title, version=self.tui.version_name,
            valve_angle=valve_angle)
         self.tui.whole_jou += text

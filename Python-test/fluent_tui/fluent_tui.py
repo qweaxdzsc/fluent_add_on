@@ -153,7 +153,7 @@ mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes
 """ % (quality, feature_angle, iterations)
         self.tui.whole_jou += text
 
-    def collapse_area(self, area_size=0.0277, relative_max=0.1, iterations=5, preserve_boundary='yes'):
+    def collapse_area(self, area_size=0.015, relative_max=0.1, iterations=5, preserve_boundary='yes'):
         text = """
 /diagnostics/quality/collapse objects *() area %s %s %s %s q
 """ % (area_size, relative_max, iterations, preserve_boundary)
@@ -225,8 +225,9 @@ boundary/manage/rotate valve*()
                 dead_zone = '/objects/volumetric-regions/change-type * *%s*() dead\n' % (i)
                 self.tui.whole_jou += dead_zone
 
-    def auto_mesh_volume(self, grow_rate=1.25, mesh_type='tet'):
+    def auto_mesh_volume(self, grow_rate=1.23, mesh_type='tet'):
         text = """
+/parallel/auto-partition yes q q
 /mesh/tet/controls/cell-sizing geometric {rate}
 /mesh/auto-mesh * yes pyramids {mesh_type} no
 """.format(rate=grow_rate, mesh_type=mesh_type)
@@ -239,10 +240,12 @@ pyramids tet no yes
 """.format(regions=regions)
         self.tui.whole_jou += text
 
-    def auto_node_move(self, skewness=0.8, preserve_boundary='yes', iterations=5):
+    def auto_node_move(self, skewness=0.8, preserve_boundary='yes', iterations=5,
+                       quality_method="inverse-ortho-quality"):
         text = """
+/report/quality-method/%s
 /mesh/modify/auto-node-move *() *() %s 50 120 %s %s
-""" % (skewness, preserve_boundary, iterations)
+""" % (quality_method, skewness, preserve_boundary, iterations)
         self.tui.whole_jou += text
 
     def rename_cell(self, zone_list):
@@ -274,13 +277,13 @@ pyramids tet no yes
 
     def write_case(self):
         text = """
-/file/write-case %s\\%s_%s_mesh yes
+/file/write-case %s\\%s_%s_mesh.cas yes
 """ % (self.tui.case_out_path, self.tui.project_title, self.tui.version_name)
         self.tui.whole_jou += text
 
     def write_mesh(self):
         text = """
-/file/write-mesh %s\\%s_%s_mesh yes
+/file/write-mesh %s\\%s_%s_mesh.msh yes
 """ % (self.tui.case_out_path, self.tui.project_title, self.tui.version_name)
         self.tui.whole_jou += text
 
@@ -292,7 +295,7 @@ pyramids tet no yes
         else:
             os.makedirs(mesh_path)
         text = """
-/file/write-mesh {mesh_path}\\{project_name}_{version}_{valve_angle}_mesh yes
+/file/write-mesh {mesh_path}\\{project_name}_{version}_{valve_angle}_mesh.msh yes
 """.format(mesh_path=mesh_path, project_name=self.tui.project_title, version=self.tui.version_name,
            valve_angle=valve_angle)
         self.tui.whole_jou += text

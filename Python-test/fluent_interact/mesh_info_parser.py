@@ -148,7 +148,7 @@ class MeshInfoParser(object):
 if __name__ == "__main__":
     start_time = time.time()
     # file_name = r'C:\Users\BZMBN4\Desktop\1234.cas'
-    file_name = r'G:\_volute_PQ\volute_test\volute_shape\shape_V5\shape_V5_3200RPM_mesh.msh'
+    file_name = r'G:\_HAVC_Project\MRH_REAR\MRH_REAR_01_vent\MRH_REAR_V1_VENT\MRH_V1_VENT_mesh.msh'
     mesh_info = MeshInfoParser(file_name)
     mesh_info.get_file_size()
     mesh_info.read_file()

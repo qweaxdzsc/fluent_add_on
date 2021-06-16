@@ -6,6 +6,7 @@ from PyQt5.QtWidgets import QWidget, QApplication
 import cgitb
 import sys
 
+
 class subUI_cal_K(Ui_K_calculator, QWidget):
     K_result = pyqtSignal(str)
 

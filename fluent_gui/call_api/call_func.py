@@ -11,7 +11,7 @@ class SCDM(QThread):
         self.py_script = py_script
 
     def run(self):
-        p = subprocess.Popen(r'cd C:\Program Files\ANSYS Inc\v201\scdm && SpaceClaim.exe /RunScript="%s"' % self.py_script,
+        p = subprocess.Popen(r'cd C:\Program Files\ANSYS Inc\v211\scdm && SpaceClaim.exe /RunScript="%s"' % self.py_script,
                              shell=True, stdout=subprocess.PIPE)
         out, err = p.communicate()
         # out = out.decode()

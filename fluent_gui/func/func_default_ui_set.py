@@ -36,6 +36,7 @@ class default_ui(object):
         self.main_ui.return_btn.hide()
         self.main_ui.evap_c.hide()
         self.main_ui.hc_c.hide()
+        self.main_ui.ptc_c.hide()
         self.main_ui.filter_c.hide()
         self.main_ui.solver_btn.hide()
         self.main_ui.temp_c.hide()

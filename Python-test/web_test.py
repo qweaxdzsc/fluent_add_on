@@ -9,7 +9,7 @@ app = Flask(__name__)
 
 @app.route('/download')
 def download():
-    return send_from_directory(r"F:\zonghui\软件存放", filename="PHengLEIv3.1_x64_20200708_135_6196.exe", as_attachment=True)
+    return send_from_directory(r"F:\zonghui\软件存放\ansys_software", filename="FLUIDS_2020R1_WINX64.zip", as_attachment=True)
 
 
 @app.route('/file')

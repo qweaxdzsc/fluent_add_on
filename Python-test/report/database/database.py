@@ -149,17 +149,17 @@ from report.fan_efficiency import fan
 import time
 
 # decode result data
-path = r'G:\_HAVC_Project\D2U-2\D2U-2_defrost\D2U-2_V5_defrost\result_D2U-2_V5_defrost'
+path = r'G:\_HAVC_Project\37W\37W_04_defrost\37W_V1_defrost\result_37W_V1_defrost'
 new_path = path.replace('\\', '\\\\')
-txt_name = path + '\\' + 'D2U-2.txt'
+txt_name = path + '\\' + 'total_result.txt'
 print(path)
 
 data_matrix = process_data(txt_name)
-project_name = 'D2U-2'
-version = 'V5_defrost'
+project_name = '37W'
+version = 'V2_defrost'
 producer = 'zonghui'
 
-rpm = 3900
+rpm = 3650
 
 print(data_matrix)
 
@@ -228,7 +228,7 @@ def insert_data(conn, data_matrix, project_name, version, file_path, producer, r
     cursor.close()
 
 
-# insert_data(conn, data_matrix, project_name, version, new_path, producer, rpm)
+insert_data(conn, data_matrix, project_name, version, new_path, producer, rpm)
 
 #
 # def extract_data(conn, project_name, version):

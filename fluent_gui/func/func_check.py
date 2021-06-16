@@ -33,13 +33,13 @@ class check_func(object):
     
         return True
     
-    def part_check(self, body_list, face_list, porous_list, up_list, dead_zone_list):
+    def part_check(self, body_list, face_list, porous_list, specified_list, dead_zone_list):
         ui = self.ui
         if ui.part_tree.topLevelItem(0).checkState(0) == 2:
             body_list.append('inlet_sphere')
         if ui.part_tree.topLevelItem(1).checkState(0) == 2:
             body_list.append('ai')
-            up_list.append('ai')
+            specified_list.append('ai')
             if ui.part_tree.topLevelItem(0).checkState(0) == 2:
                 face_list.append('ai_in')
         if ui.part_tree.topLevelItem(2).checkState(0) == 2:
@@ -49,22 +49,24 @@ class check_func(object):
             face_list.append('filter_out')
         if ui.part_tree.topLevelItem(3).checkState(0) == 2:
             body_list.append('cone')
-            up_list.append('cone')
+            specified_list.append('cone')
+
         if ui.part_tree.topLevelItem(4).checkState(0) == 2:
             if ui.part_tree.topLevelItem(5).checkState(0) == 0:
                 print('volute and fan should be all checked')
             else:
                 body_list.append('volute')
-                up_list.append('volute')
+                specified_list.append('volute')
                 body_list.append('fan')
                 dead_zone_list.append('fan_blade')
+                face_list.append('cutoff')
                 face_list.append('fan_in')
                 face_list.append('fan_out')
                 face_list.append('fan_blade')
         if ui.part_tree.topLevelItem(6).checkState(0) == 2:
             body_list.append('diffuser')
-            if ui.part_tree.topLevelItem(4).checkState(0) == 2:
-                face_list.append('volute_out')
+            specified_list.append('diffuser')
+            face_list.append('volute_out')
         if ui.part_tree.topLevelItem(7).checkState(0) == 2:
             body_list.append('evap')
             porous_list.append('evap')
@@ -98,7 +100,7 @@ class check_func(object):
 
         internal_face = face_list.copy()
         for i in face_list:
-            if 'fan_blade' is i or 'inlet' is i:
+            if i in ['fan_blade', 'inlet', 'cutoff']:
                 internal_face.remove(i)
         
-        return face_list, body_list, porous_list, up_list, dead_zone_list, internal_face
+        return face_list, body_list, porous_list, specified_list, dead_zone_list, internal_face

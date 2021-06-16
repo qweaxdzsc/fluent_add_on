@@ -95,6 +95,23 @@ class LicenseUsage(object):
         else:
             return True
 
+    def user_usage(self, license_name, user_list):
+        license_area = False
+
+        user_used = 0
+        for index, line in enumerate(self.license_info):
+            if self.module_dict[license_name][0] in line:
+                license_area = True
+                continue
+            if license_area:
+                for user in user_list:
+                    if user in line:
+                        user_used += 1
+                if 'Users' in line:
+                    license_area = False
+
+        return user_used
+
 
 if __name__ == '__main__':
     LicenseUsage()

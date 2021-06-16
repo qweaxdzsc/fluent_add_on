@@ -1,7 +1,7 @@
 
-project_name = 'D2U-2'
-version = 'V5_defrost'
-Rotation_speed = 3900
+project_name = '37W'
+version = 'V2_defrost'
+Rotation_speed = 3650
 
 
 def get_ppt(project_name, version, RPM):
@@ -93,7 +93,7 @@ def get_ppt(project_name, version, RPM):
     torque = str(main_data['Torque'])
     fan_efficiency = '%.1f %%'% (main_data['Fan_efficiency']*100)
 
-    whole_title = project_name + '-' + version
+    whole_title = project_name + '_' + version
     evap_out_uni = str(uni_data[0])
 
     # start PPT writing

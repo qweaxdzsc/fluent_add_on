@@ -1,26 +1,31 @@
 import os
-from fluent_tui import fluent_tui
 
-project_title = 'd1d2_0.74_theta18'
-version_name = '_3200RPM'
-cad_name = 'd1d2_0.74_theta18'
-project_path = r"G:\_volute_PQ\perfect_fan\D1_D2\d1d2_0.74_theta18"
+import fluent_tui
 
-RPM_list = [3200]
-# RPM_list = [3200]
+project_title = 'PQ_D2UC'
+version_name = 'V1_3000RPM'
+cad_name = 'PQ_D2UC_V1'
+project_path = r"G:\_validation\PQ\PQ_D2UC\V1"
+
+# RPM_list = [2600]
+RPM_list = [3000]
 print('used RPM list', RPM_list)
 
+
 # K_formal = np.linspace(1, 1.02, 20)
-P_list = [650,
+P_list = [482,
+          413,
+          339,
+          260,
+          132,
           # 325,
-          # 350,
           # 360,
           # 380,
-          # 400,
           # 430,
           # 450,
           ]
-K_list = [9.04]
+# K_list = [25, 44]
+K_list = P_list
 print('used K_list', P_list)
 
 mesh_jou_name = f'{project_path}\\{project_title}_{version_name}_mesh.jou'          # txt final path
@@ -32,19 +37,21 @@ CFD = fluent_tui.tui(whole_jou, project_title, version_name, project_path, cad_n
 
 CFD.mesh.start_transcript()
 CFD.mesh.import_CAD()
-CFD.mesh.size_scope_global(0.3, 14)
+CFD.mesh.size_scope_global(0.3, 10)
 CFD.mesh.size_scope_curv('fan_blade_curv', '*fan_blade*', 0.35, 1, 1.2, 16)
 CFD.mesh.size_scope_prox('fan_blade_prox', '*fan_blade*', 0.4, 3, 1.2, 2)
 CFD.mesh.size_scope_curv('fan_out_curv', '*fan_out*', 1, 4, 1.2, 18)
 CFD.mesh.size_scope_curv('volute_curv', '*volute*', 0.5, 4, 1.2, 16)
 CFD.mesh.size_scope_prox('volute_prox', '*volute*', 0.5, 4, 1.2, 2)
 CFD.mesh.size_scope_curv('cutoff_curv', '*cutoff*', 0.5, 1, 1.2, 12)
-# CFD.mesh.size_scope_curv('box_curv', '*box*', 1, 10, 1.25, 16)
-# CFD.mesh.size_scope_prox('box_prox', '*box*', 1, 10, 1.25, 2)
-# CFD.mesh.size_scope_curv('point_curv', '*pressure_points*', 0.5, 1, 1.2, 16)
-# CFD.mesh.size_scope_prox('point_prox', '*pressure_points*', 0.5, 1, 1.2, 2)
-CFD.mesh.size_scope_prox('global_prox', '', 0.8, 6, 1.2, 1)
-CFD.mesh.size_scope_soft('inlet', '*inlet*', 14)
+CFD.mesh.size_scope_curv('box_curv', '*box*', 1, 10, 1.25, 16)
+CFD.mesh.size_scope_prox('box_prox', '*box*', 1, 10, 1.25, 2)
+# CFD.mesh.size_scope_curv('extend_curv', '*extend*', 1, 8, 1.25, 16)
+# CFD.mesh.size_scope_prox('extend_prox', '*extend*', 1, 8, 1.25, 2)
+CFD.mesh.size_scope_curv('point_curv', '*pressure_points*', 0.5, 1, 1.2, 16)
+CFD.mesh.size_scope_prox('point_prox', '*pressure_points*', 0.5, 1, 1.2, 2)
+CFD.mesh.size_scope_prox('global_prox', '', 0.8, 8, 1.2, 1)
+CFD.mesh.size_scope_soft('inlet', '*inlet*', 10)
 
 CFD.mesh.compute_size_field()
 CFD.mesh.write_size_field()
@@ -56,13 +63,13 @@ CFD.mesh.volume_mesh_change_type(dead_zone_list=['fan_blade'])
 CFD.mesh.auto_mesh_volume(1.23, 'poly')
 CFD.mesh.auto_node_move(0.85)
 CFD.mesh.auto_node_move(0.9, 'no')
-# CFD.mesh.rename_cell(zone_list=['ai', 'fan', 'volute', 'box'])
-CFD.mesh.rename_cell(zone_list=['ai', 'fan', 'volute', 'extend'])
+CFD.mesh.rename_cell(zone_list=['ai', 'fan', 'volute', 'box'])
+# CFD.mesh.rename_cell(zone_list=['cone', 'fan', 'volute', 'extend', 'box'])
 CFD.mesh.retype_face(face_list=['inlet'], face_type='pressure-inlet')
-CFD.mesh.retype_face(face_list=['fan_in', 'fan_out', 'volute_out'], face_type='internal')
+CFD.mesh.retype_face(face_list=['filter_out', 'fan_out', 'volute_out'], face_type='internal')
 # CFD.mesh.retype_face(face_list=['fan_in', 'volute_out'], face_type='internal')
 # CFD.mesh.retype_face(face_list=['fan_out*'], face_type='interface')
-CFD.mesh.retype_face(face_list=['outlet*'], face_type='outlet-vent')
+CFD.mesh.retype_face(face_list=['outlet*'], face_type='pressure-outlet')
 CFD.mesh.prepare_for_solve()
 CFD.mesh.write_mesh()
 # CFD.mesh.switch_to_solver()
@@ -77,9 +84,10 @@ solve_jou = open(solve_jou_name, 'w')
 whole_jou = ''
 
 CFD = fluent_tui.tui(whole_jou, project_title, version_name, project_path, cad_name)
-fan_origin = [0, 0, 0]
-# fan_origin = [2.18137, 0.355, 1.22597]
-fan_axis = [0, 0, 1]
+# fan_origin = [0, 0, 0]
+fan_origin = (2.12225, 0.35303, 1.2421)
+# fan_origin = [0.32514, 0.393, 0.4276]
+fan_axis = (0, 0, 1)
 # fan_axis = [0, 0, -1]
 CFD.setup.start_transcript()
 CFD.setup.read_mesh()
@@ -88,7 +96,7 @@ CFD.setup.turb_models()
 # CFD.setup.wall_treatment()
 CFD.setup.rotation_volume(RPM_list[0], fan_origin, fan_axis, 'fan')
 CFD.setup.BC_pressure_inlet('inlet')
-CFD.setup.BC_type('outlet', 'outlet-vent')
+# CFD.setup.BC_type('outlet', 'outlet-vent')
 
 
 def set_outlet_expression(pressure):
@@ -104,8 +112,9 @@ def set_outlet_expression(pressure):
 
 
 # set_outlet_expression(P_list[0])
-CFD.setup.BC_outlet_vent(K_list[0], 'outlet')
-# CFD.setup.BC_pressure_outlet(['outlet'], P_list[0])
+# CFD.setup.BC_outlet_vent(K_list[0], 'outlet')
+# CFD.setup.BC_pressure_inlet('inlet', K_list[0])
+CFD.setup.BC_pressure_outlet(['outlet'], P_list[0])
 CFD.setup.solution_method()
 CFD.setup.report_definition('volume', 'surface-volumeflowrate', ['outlet*'])
 CFD.setup.report_definition('mass-flux', 'surface-massflowrate', ['inlet*', 'outlet*'], 'no')
@@ -201,9 +210,10 @@ for RPM in RPM_list:
 print(combox_list)
 for i in combox_list[1:]:
     CFD.setup.rotation_volume(i[0], fan_origin, fan_axis, 'fan')
-    # CFD.setup.BC_pressure_outlet(['outlet'], i[1])
+    CFD.setup.BC_pressure_outlet(['outlet'], i[1])
     # set_outlet_expression(i[1])
-    CFD.setup.BC_outlet_vent(i[1], 'outlet')
+    # CFD.setup.BC_outlet_vent(i[1], 'outlet')
+    # CFD.setup.BC_pressure_inlet('inlet', i[1])
     # CFD.setup.std_initialize()
     CFD.setup.hyb_initialize()
     CFD.setup.start_calculate(1500)

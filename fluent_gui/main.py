@@ -42,7 +42,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.face_list = list()
         self.body_list = list()
         self.porous_list = list()
-        self.up_list = list()
+        self.specified_list = list()
         self.dead_zone_list = list()
         self.internal_face = list()
         self.script_address = str()
@@ -85,6 +85,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.choose_evap_btn.clicked.connect(lambda: self.porous_choose('evap'))
         self.choose_hc_btn.clicked.connect(lambda: self.porous_choose('hc'))
         self.choose_filter_btn.clicked.connect(lambda: self.porous_choose('filter'))
+        self.choose_ptc_btn.clicked.connect(lambda: self.porous_choose('ptc'))
         self.start_btn.clicked.connect(self.begin)
         self.return_btn.clicked.connect(self.default_ui.mode_ui_default)
         self.solver_btn.clicked.connect(self.solver)
@@ -117,23 +118,20 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.body_list = []
         self.face_list = []
         self.porous_list = []
-        self.up_list = []
+        self.specified_list = []
         self.dead_zone_list = []
 
         self.face_list, self.body_list, self.porous_list, \
-        self.up_list, self.dead_zone_list, self.internal_face = \
+        self.specified_list, self.dead_zone_list, self.internal_face = \
             self.check_func.part_check(
                                        self.body_list,
                                        self.face_list,
                                        self.porous_list,
-                                       self.up_list,
+                                       self.specified_list,
                                        self.dead_zone_list,
                                        )
 
     def show_outlet_name(self):
-        # if not self.inlet_list:
-        #     for i in self.inlet_list:
-        #         self.inlet_dict[i] = ['0.0001', '0.0001', '0.0001', '0.0001']
         self.outlet_assign = subUI_outlet_assign(self.outlet_dict)
         self.outlet_assign.show()
         self.outlet_assign.signal_outlet_K.connect(self.receive_outlet_info)
@@ -173,14 +171,10 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 
     def show_c(self):
         dic = dict()
-        dic['evap'] = self.evap_c
-        dic['hc'] = self.hc_c
-        dic['filter'] = self.filter_c
-        dic['fan'] = self.fan_c
-
+        # show_c_list = ['evap', 'hc', 'ptc', 'filter', 'fan']
         for i in self.body_list:
             try:
-                dic[i].show()
+                self.__dict__[f'{i}_c'].show()
             except Exception as e:
                 pass
         if 'fan' not in self.body_list:
@@ -266,32 +260,16 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.pamt['cad_save_path'] = self.pamt['file_path'] + '/' + self.pamt['cad_name'] + '.scdoc'
         self.pamt['mass_inlet'] = self.mass_inlet_edit.text()
 
-        if 'evap' in self.body_list:
-            self.pamt['evap_c1'] = self.evap_c1_edit.text()
-            self.pamt['evap_c2'] = self.evap_c2_edit.text()
-            self.pamt['evap_x1'] = self.evap_x1_edit.text()
-            self.pamt['evap_y1'] = self.evap_y1_edit.text()
-            self.pamt['evap_z1'] = self.evap_z1_edit.text()
-            self.pamt['evap_x2'], self.pamt['evap_y2'], self.pamt['evap_z2'] = \
-                porous_d2(self.pamt['evap_x1'], self.pamt['evap_y1'], self.pamt['evap_z1'])
-
-        if 'hc' in self.body_list:
-            self.pamt['hc_c1'] = self.hc_c1_edit.text()
-            self.pamt['hc_c2'] = self.hc_c2_edit.text()
-            self.pamt['hc_x1'] = self.hc_x1_edit.text()
-            self.pamt['hc_y1'] = self.hc_y1_edit.text()
-            self.pamt['hc_z1'] = self.hc_z1_edit.text()
-            self.pamt['hc_x2'], self.pamt['hc_y2'], self.pamt['hc_z2'] = \
-                porous_d2(self.pamt['hc_x1'], self.pamt['hc_y1'], self.pamt['hc_z1'])
-
-        if 'filter' in self.body_list:
-            self.pamt['filter_c1'] = self.filter_c1_edit.text()
-            self.pamt['filter_c2'] = self.filter_c2_edit.text()
-            self.pamt['filter_x1'] = self.filter_x1_edit.text()
-            self.pamt['filter_y1'] = self.filter_y1_edit.text()
-            self.pamt['filter_z1'] = self.filter_z1_edit.text()
-            self.pamt['filter_x2'], self.pamt['filter_y2'], self.pamt['filter_z2'] = \
-                porous_d2(self.pamt['filter_x1'], self.pamt['filter_y1'], self.pamt['filter_z1'])
+        porous_check_list = ['evap', 'hc', 'ptc', 'filter']
+        for i in porous_check_list:
+            if i in self.body_list:
+                self.pamt[f'{i}_c1'] = self.__dict__[f'{i}_c1_edit'].text()
+                self.pamt[f'{i}_c2'] = self.__dict__[f'{i}_c2_edit'].text()
+                self.pamt[f'{i}_x1'] = self.__dict__[f'{i}_x1_edit'].text()
+                self.pamt[f'{i}_y1'] = self.__dict__[f'{i}_y1_edit'].text()
+                self.pamt[f'{i}_z1'] = self.__dict__[f'{i}_z1_edit'].text()
+                self.pamt[f'{i}_x2'], self.pamt[f'{i}_y2'], self.pamt[f'{i}_z2'] = \
+                    porous_d2(self.pamt[f'{i}_x1'], self.pamt[f'{i}_y1'], self.pamt[f'{i}_z1'])
 
         if 'fan' in self.body_list:
             self.pamt['fan_ox'] = self.fan_ox_edit.text()
@@ -319,7 +297,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.energy_check = self.energy_checkbox.isChecked()
 
         self.tui = GetTui(self.pamt, self.body_list, self.energy_check, self.K_dict,
-                          self.porous_list, self.up_list, self.dead_zone_list, self.internal_face,
+                          self.porous_list, self.specified_list, self.dead_zone_list, self.internal_face,
                           self.mesh_type)
 
     def begin(self):

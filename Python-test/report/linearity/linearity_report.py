@@ -153,11 +153,11 @@ class LinReport(object):
 
 if __name__ == "__main__":
     start_time = time.time()
-    project_address = r"G:\_HAVC_Project\BAONENG\BAONENG_lin_bil\BN_V1_lin_bil"
-    project_name = 'BN'
-    version_name = 'V1lin_bil'
+    project_address = r"G:\_HAVC_Project\MRH_REAR\MRH_REAR_10_lin_bi_level\MRH_REAR_V11_lin_bil"
+    project_name = 'MRH'
+    version_name = 'V11_lin_bil'
 
     whole_name = project_name + '_' + version_name
-    Linearity_report = LinReport(project_address, project_name, version_name, 7, 70, 10)
+    Linearity_report = LinReport(project_address, project_name, version_name, 20, 90, 8)
     end_time = time.time()
     print('use_time:', end_time - start_time)
