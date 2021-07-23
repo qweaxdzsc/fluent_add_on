@@ -80,7 +80,7 @@ class GetTui(object):
         mesh.retype_face(face_list=['outlet*'], face_type='outlet-vent')
         if self.energy_check is True:
             mesh.retype_face(face_list=['hc*'], face_type='radiator')
-            mesh.auto_mesh_volume(1.25, mesh_type=self.mesh_type)
+            mesh.auto_mesh_volume(1.23, mesh_type=self.mesh_type)
         else:
             mesh.auto_mesh_volume(mesh_type=self.mesh_type)
         mesh.auto_node_move(0.85)

@@ -1,21 +1,33 @@
+
 import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib import animation
 from matplotlib.lines import Line2D
+import math
 
 
 # predefine
-Ta = 100
-Tb = 500
-k = 1000
-L = 0.5
-a = 1
+phi_a = 1
+phi_b = 0
+u = 2.5
+L = 1
+rho = 1
+k = 0.1
+
+F = rho * u
+D = float()
+# n = 25
+# a = 1
 
 # define mesh
-nx = 5
+nx = 35
 dx = L/nx
-x = np.zeros(nx+2)
-x[1:-1] = np.linspace(0+0.5*dx, L-0.5*dx, nx)
+
+D = k/dx
+
+x = np.zeros(nx + 2)
+x[1:-1] = np.linspace(0 + 0.5 * dx, L - 0.5 * dx, nx)
+x[-1] = L
 print('mesh points', x)
 
 
@@ -27,38 +39,50 @@ T = np.zeros(nx)
 # T[-1] = Tb
 # print('', T)
 
+
 # Solver
+# analytical solution
+
+
+
 # construct A matrix
-
-
-def matrix_A(nx, dx, k, a):
+def matrix_A(nx, D, F):
     A = np.zeros((nx, nx))
-    print(A)
-    A[0, :2] = [3 * k * a / dx, -k * a / dx]
-    A[-1, -2:] = [-k * a / dx, 3 * k * a / dx]
+    A[0, :2] = [D - F/2 + (2*D + F), -(D - F/2)]
+    A[-1, -2:] = [-(D + F/2), D + F/2 + 2*D - F]
 
     for i in range(len(A[1:-1, :])):
-        a1 = - k * a / dx
-        a2 = 2 * k * a / dx
-        a3 = - k * a / dx
+        a1 = -(D + F/2)
+        a2 = 2*D
+        a3 = -(D - F/2)
         A[1 + i, i:i+3] = [a1, a2, a3]
 
     print(A)
     return A
 
 
-def matrix_b(nx, k, a, dx, Ta, Tb):
+def matrix_b(nx, D, F):
     b = np.zeros(nx)
-    b[0] = 2*k*a*Ta/dx
-    b[-1] = 2*k*a*Tb/dx
+    b[0] = (2*D + F) * phi_a
+    b[-1] = (2*D - F) * phi_b
 
     print(b)
     return b
 
 
-# A = matrix_A(nx, dx, k, a)
-# b = matrix_b(nx, k, a, dx, Ta, Tb)
-# new_T = np.linalg.solve(A, b)
+A = matrix_A(nx, D, F)
+b = matrix_b(nx, D, F)
+new_phi = np.linalg.solve(A, b)
+new_phi = np.insert(new_phi, 0, phi_a)
+new_phi = np.append(new_phi, phi_b)
+print(new_phi)
+
+fig = plt.figure()
+# plt.plot(a_x, a_T)
+plt.plot(x, new_phi, 'bs')
+# plt.xlabel('Iterations')
+# plt.ylabel('Residual of temperature')
+plt.show()
 
 
 # Iterations
@@ -121,7 +145,7 @@ def update_iter(n):
     return residual_plot,
 
 
-ani = animation.FuncAnimation(fig, update_iter, np.arange(1, 10), interval=100)
-plt.show()
+# ani = animation.FuncAnimation(fig, update_iter, np.arange(1, 10), interval=100)
+# plt.show()
 
-print(T)
+# print(T)

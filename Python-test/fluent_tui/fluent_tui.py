@@ -166,7 +166,6 @@ mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes
 /diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness}
 /diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness}
 /diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness}
-/diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness}
 /diagnostics/face-connectivity/fix-slivers objects *() 0 {skewness} q
 """.format(skewness=skewness)
         self.tui.whole_jou += text
@@ -177,7 +176,6 @@ mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes
 /diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width} smooth q
 /diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width} smooth q
 /diagnostics/face-connectivity/fix-steps objects *() {critical_angle} {step_width} smooth q
-
 """.format(critical_angle=angle, step_width=step_width)
         self.tui.whole_jou += text
         return self.tui.whole_jou

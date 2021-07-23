@@ -2,75 +2,24 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e475a0b-2241-43fa-a10d-e22986a3349c" name="Default Changelist" comment="add K calculator. pop up when right click in the cal_K column at rename_table">
-      <change afterPath="$PROJECT_DIR$/../Python-test/Delaunay.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/FVM_test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/MyBrowser-master/MyBrowser/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/MyBrowser-master/MyBrowser/.idea/MyBrowser.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/MyBrowser-master/MyBrowser/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/MyBrowser-master/MyBrowser/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/MyBrowser-master/MyBrowser/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/MyBrowser-master/MyBrowser/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/MyBrowser-master/MyBrowser/MyBrowser.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/MyBrowser-master/MyBrowser/flask_client.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/MyBrowser-master/MyBrowser/flask_server.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/MyBrowser-master/MyBrowser/icons/add_page.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/MyBrowser-master/MyBrowser/icons/back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/MyBrowser-master/MyBrowser/icons/clipboard.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/MyBrowser-master/MyBrowser/icons/forward.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/MyBrowser-master/MyBrowser/icons/lock.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/MyBrowser-master/MyBrowser/icons/penguin.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/MyBrowser-master/MyBrowser/icons/question.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/MyBrowser-master/MyBrowser/icons/renew.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/MyBrowser-master/MyBrowser/icons/save.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/MyBrowser-master/MyBrowser/icons/stop.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/MyBrowser-master/MyBrowser/test1.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/MyBrowser-master/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/cfd_python/12toNS/1-1D_convection.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/cfd_python/12toNS/10-2D_Poisson.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/cfd_python/12toNS/11-2D_cavity_flow_NS.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/cfd_python/12toNS/12-2D_channel_flow_NS.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/cfd_python/12toNS/2-Nonlinear Convection.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/cfd_python/12toNS/3-1D_Diffusion.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/cfd_python/12toNS/4-1D_Burger.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/cfd_python/12toNS/5-2D_linear_convection.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/cfd_python/12toNS/6-2D_Nonlinear Convection.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/cfd_python/12toNS/7-2D_diffusion.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/cfd_python/12toNS/8-2D_Burger.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/cfd_python/12toNS/9-2D_Laplace.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/cfd_python/12toNS/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/cfd_python/FVM/1D-diffusion.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/fluent_interact/license_holder.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/spline.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/spline2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/test1.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/test2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/test3.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Python-test/web_browser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/.idea/Python-test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/.idea/Python-test.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/cfd_python/FVM/1D-SIMPLE.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/cfd_python/FVM/1D-convection-diffusion.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/cfd_python/FVM/1D-diffusion-2BC.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/cfd_python/FVM/1D-hybrid_differencing.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/cfd_python/FVM/2D_FVM_Cavity.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/cfd_python/FVM/test.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/cfd_python/FVM/test2.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/cfd_python/FVM/test3.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/cfd_python/FVM/1D-diffusion.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/cfd_python/FVM/1D-diffusion.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/create_project_folder/new_project_folder.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/create_project_folder/new_project_folder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/fluent_interact/license_checker.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/fluent_interact/license_checker.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/fluent_interact/mesh_info_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/fluent_interact/mesh_info_parser.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/fluent_tui/PQ.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/fluent_tui/PQ.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/fluent_tui/fluent_tui.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/fluent_tui/fluent_tui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/fluent_tui/linearity_new.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/fluent_tui/linearity_new.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/report/database/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/report/database/database.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/report/database/python_to_pptx.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/report/database/python_to_pptx.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/report/get_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/report/get_report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/report/linearity/linearity_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/report/linearity/linearity_report.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/web_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/web_test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/test1.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/test1.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/call_api/call_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/call_api/call_func.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fluent_command/tui_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/fluent_command/tui_func.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fluent_command/tui_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/fluent_command/tui_run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/func/func_check.py" beforeDir="false" afterPath="$PROJECT_DIR$/func/func_check.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/func/func_default_ui_set.py" beforeDir="false" afterPath="$PROJECT_DIR$/func/func_default_ui_set.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/subUI/sub_K_calculator.py" beforeDir="false" afterPath="$PROJECT_DIR$/subUI/sub_K_calculator.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui_py/ui_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui_py/ui_main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui_qt/ui_main.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui_qt/ui_main.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -292,21 +241,21 @@
     <option name="LAST_COMMIT_MESSAGE" value="add K calculator. pop up when right click in the cal_K column at rename_table" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1278" height="295" key="GridCell.Tab.0.bottom" timestamp="1623302352719">
+    <state width="1277" height="295" key="GridCell.Tab.0.bottom" timestamp="1624871188770">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1278" height="295" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1623302352719" />
-    <state width="1278" height="295" key="GridCell.Tab.0.center" timestamp="1623302352719">
+    <state width="1277" height="295" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1624871188770" />
+    <state width="1277" height="295" key="GridCell.Tab.0.center" timestamp="1624871188769">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1278" height="295" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1623302352719" />
-    <state width="1278" height="295" key="GridCell.Tab.0.left" timestamp="1623302352719">
+    <state width="1277" height="295" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1624871188769" />
+    <state width="1277" height="295" key="GridCell.Tab.0.left" timestamp="1624871188769">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1278" height="295" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1623302352719" />
-    <state width="1278" height="295" key="GridCell.Tab.0.right" timestamp="1623302352719">
+    <state width="1277" height="295" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1624871188769" />
+    <state width="1277" height="295" key="GridCell.Tab.0.right" timestamp="1624871188769">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1278" height="295" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1623302352719" />
+    <state width="1277" height="295" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1624871188769" />
   </component>
 </project>
