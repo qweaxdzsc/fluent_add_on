@@ -95,7 +95,6 @@ class MeshInfoParser(object):
                 self.element_type[cell_result[4]]['number'] += (int(cell_result[2], 16) - int(cell_result[1], 16))
 
     def parse_all(self):
-        self.read_file()
         self.get_file_size()
         self.parse_dimension()
         self.parse_nodes()
@@ -148,7 +147,7 @@ class MeshInfoParser(object):
 if __name__ == "__main__":
     start_time = time.time()
     # file_name = r'C:\Users\BZMBN4\Desktop\1234.cas'
-    file_name = r'C:\Users\BZMBN4\Desktop\APE4_PQ.msh'
+    file_name = r'C:\Users\BZMBN4\Desktop\QL_RG09_V1_vent_210802.msh'
     mesh_info = MeshInfoParser(file_name)
     mesh_info.get_file_size()
     mesh_info.read_file()

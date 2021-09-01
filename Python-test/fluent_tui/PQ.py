@@ -8,17 +8,27 @@ cad_name = 'PQ_APE4_V1'
 project_path = r"G:\_validation\PQ\PQ_APE_4\PQ_APE4_V1"
 
 # RPM_list = [2600]
-RPM_list = [3210]
+RPM_list = [2992.38,
+            3030.52,
+            3075.84,
+            3114.06,
+            3159.52,
+            3210.94,
+            3256.40,
+            3340.00
+            ]
 print('used RPM list', RPM_list)
 
 
 # K_formal = np.linspace(1, 1.02, 20)
-P_list = [-550,
-          # 325,
-          # 360,
-          # 380,
-          # 430,
-          # 450,
+P_list = [-300,
+          -350,
+          -400,
+          -450,
+          -500,
+          -550,
+          -600,
+          -650,
           ]
 # K_list = [25, 44]
 K_list = P_list
@@ -113,16 +123,19 @@ def set_outlet_expression(pressure):
 # CFD.setup.BC_outlet_vent(K_list[0], 'outlet')
 CFD.setup.BC_pressure_inlet('inlet', K_list[0])
 # CFD.setup.BC_pressure_outlet(['outlet'], P_list[0])
+
+
+# CFD.setup.std_initialize()
 CFD.setup.solution_method()
+CFD.setup.input_summary()
+CFD.setup.hyb_initialize()
+CFD.setup.start_calculate(800)
+CFD.setup.write_case_data()
 CFD.setup.report_definition('volume', 'surface-volumeflowrate', ['outlet*'])
 CFD.setup.report_definition('mass-flux', 'surface-massflowrate', ['inlet*', 'outlet*'], 'no')
 CFD.setup.report_definition('pressure', 'surface-areaavg', ['pressure_points', 'outlet'])
 CFD.setup.convergence_criterion('volume')
-
-# CFD.setup.std_initialize()
-CFD.setup.input_summary()
-CFD.setup.hyb_initialize()
-CFD.setup.start_calculate(1500)
+CFD.setup.start_calculate(1200)
 CFD.setup.write_case_data()
 
 CFD.post.create_result_file()
@@ -197,25 +210,28 @@ def post_picture():
 K_reverse_list = K_list[::-1]
 combox_list = []
 
-for RPM in RPM_list:
-    if RPM_list.index(RPM) % 2 == 0:
-        for P in K_list:
-            combox_list.append([RPM, P])
-    else:
-        for P in K_reverse_list:
-            combox_list.append([RPM, P])
+# for RPM in RPM_list:
+#     if RPM_list.index(RPM) % 2 == 0:
+#         for P in K_list:
+#             combox_list.append([RPM, P])
+#     else:
+#         for P in K_reverse_list:
+#             combox_list.append([RPM, P])
+for i in range(len(RPM_list)):
+    combox_list.append([RPM_list[i], K_list[i]])
+
 
 print(combox_list)
 for i in combox_list[1:]:
     CFD.setup.rotation_volume(i[0], fan_origin, fan_axis, 'fan')
-    CFD.setup.BC_pressure_outlet(['outlet'], i[1])
+    # CFD.setup.BC_pressure_outlet(['outlet'], i[1])
     # set_outlet_expression(i[1])
     # CFD.setup.BC_outlet_vent(i[1], 'outlet')
-    # CFD.setup.BC_pressure_inlet('inlet', i[1])
+    CFD.setup.BC_pressure_inlet('inlet', i[1])
     # CFD.setup.std_initialize()
-    CFD.setup.hyb_initialize()
-    CFD.setup.start_calculate(1500)
-    CFD.version_name = '%s-%s' % (i[0], i[1])
+    # CFD.setup.hyb_initialize()
+    CFD.setup.start_calculate(2000)
+    CFD.version_name = '%s_%s' % (i[0], i[1])
     CFD.setup.write_case_data()
 
     CFD.txt_out = CFD.result_path + '\\' + CFD.version_name + '.txt'
@@ -223,9 +239,9 @@ for i in combox_list[1:]:
     CFD.post.txt_surface_integrals('volume-flow-rate', ['inlet', 'outlet'])
     CFD.post.txt_surface_integrals('uniformity-index-area-weighted', ['outlet', 'volute_out'], 'velocity-magnitude')
     CFD.post.txt_mass_flux()
-    CFD.post.txt_surface_integrals('area-weighted-avg', ['inlet*', 'outlet*', 'fan*', 'volute_out', 'pressure_points'],
+    CFD.post.txt_surface_integrals('area-weighted-avg', ['inlet*', 'outlet*', 'fan*', 'volute_out', 'filter_out'],
                                    'pressure')
-    CFD.post.txt_surface_integrals('area-weighted-avg', ['inlet*', 'outlet*', 'fan*', 'volute_out', 'pressure_points'],
+    CFD.post.txt_surface_integrals('area-weighted-avg', ['inlet*', 'outlet*', 'fan*', 'volute_out', 'filter_out'],
                                    'total-pressure')
     CFD.post.txt_moment(fan_origin, fan_axis)
 

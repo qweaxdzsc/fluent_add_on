@@ -15,9 +15,10 @@ Lx = 1
 Ly = 1
 dx = Lx / nx
 dy = Ly / ny
-n_steps = 600
 rho = 1
 
+max_steps = 10000
+converge_criteria = 2e-3
 factor_v = 0.1
 factor_p = 0.05
 # =========Grid define============
@@ -62,13 +63,7 @@ p = np.zeros([ny + 2, nx + 2])  # include 2 ghost cells
 # intermediate coefficient
 ddu = np.zeros_like(u)
 ddv = np.zeros_like(v)
-
-
 p_correction = np.zeros_like(p)
-# p_correction[0, :] = 1
-# p_correction[-1, :] = 1
-# p_correction[:, 0] = 1
-# p_correction[:, -1] = 1
 
 # a bunch of lists for animation purposes
 # usol = list()
@@ -81,8 +76,13 @@ p_correction = np.zeros_like(p)
 
 # ============== Solver =======================
 # @jit(nopython=True)
-def iteration(n_steps, u, v, p):
-    for n in range(n_steps):
+def iteration(max_steps, converge_criteria, u, v, p):
+    n = 0
+    uu_residual = 1
+    P_residual = 1
+    while (n < max_steps) and (uu_residual + P_residual > converge_criteria):
+        n += 1
+        print('The step %s:' % n)
         # ========= Step 1 : define boundary condition =========
         # left wall
         u[1: -1, 1] = 0
@@ -156,7 +156,6 @@ def iteration(n_steps, u, v, p):
         Fw = 0.5 * rho * dy * (Un[ja:jb, ia: ib] + Un[ja - 1:jb - 1, ia:ib])
         Fn = 0.5 * rho * dx * (Vn[ja:jb, ia:ib] + Vn[ja + 1:jb + 1, ia: ib])
         Fs = 0.5 * rho * dx * (Vn[ja - 1:jb - 1, ia:ib] + Vn[ja:jb, ia: ib])
-
         # Diffusion coefficient mu * Area / distance
         De *= 4 * mu / (4 * dx) * dy
         Dw *= 4 * mu / (4 * dx) * dy
@@ -200,10 +199,19 @@ def iteration(n_steps, u, v, p):
         #     print(np.around(p_correction, 2))
         #     p_norm = np.sum(np.abs(p_correction - last_correction))
         #     print('residual of p_correction: ', p_norm)
+
+        p_criteria = 1e-1
         if n < 50:
+            p_criteria = 1e-1
+        elif n < 200:
             p_criteria = 1e-2
-        else:
+        elif n < 500:
+            p_criteria = 1e-3
+        elif n < 2000:
             p_criteria = 1e-4
+        else:
+            p_criteria = 1e-5
+
         while p_norm > p_criteria:
             last_correction = p_correction.copy()
             # print(last_correction)
@@ -215,7 +223,7 @@ def iteration(n_steps, u, v, p):
             b = rho * dy * u[ja:jb, ia: ib] - rho * dy * u[ja:jb, ia + 1: ib + 1] + \
                 rho * dx * v[ja:jb, ia: ib] - rho * dx * v[ja + 1:jb + 1, ia: ib]
             # add relaxation factor
-            p_correction[ja:jb, ia: ib] = p_correction[ja:jb, ia: ib] + 0.7 * ((Ae * p_correction[ja:jb, ia + 1: ib + 1] +
+            p_correction[ja:jb, ia: ib] = p_correction[ja:jb, ia: ib] + 0.8 * ((Ae * p_correction[ja:jb, ia + 1: ib + 1] +
                                            Aw * p_correction[ja:jb, ia - 1: ib - 1] +
                                            An * p_correction[ja + 1:jb + 1, ia: ib] +
                                            As * p_correction[ja - 1:jb - 1, ia: ib] + b) / Ap - p_correction[ja:jb, ia: ib])
@@ -255,17 +263,18 @@ def iteration(n_steps, u, v, p):
         P_residual = np.sum(np.abs(p - Pn))
         print('=============')
         print(uu_residual)
-        print('=============')
         print(P_residual)
+        print('=============')
         # mass_residual = np.abs(mass_flow - mass_flow_old)
         # div_u = (u[:ny, 2:nx + 1] - u[1:ny + 1, 2:nx + 1])/dx
         # div_v = (v[2:ny + 1, :nx] - v[2:ny + 1, 1:nx + 1])/dy
         # print(np.sum(div_u))
         # print(np.sum(div_v))
+
     return u, v, p
 
 
-u, v, p = iteration(n_steps, u, v, p)
+u, v, p = iteration(max_steps, converge_criteria, u, v, p)
 print('=============')
 print('u', np.around(u, 2))
 print('=============')
@@ -278,18 +287,6 @@ print('p', np.around(p, 2))
 # print(np.around(uu_residual, 2))
 # print('=============')
 # print(np.around(P_residual, 2))
-
-# fig = plt.figure(figsize=(11, 7), dpi=100)
-# # plotting the pressure field as a contour
-# plt.contourf(X, Y, p, alpha=0.5, cmap=cm.viridis)
-# plt.colorbar()
-# # plotting the pressure field outlines
-# plt.contour(X, Y, p, cmap=cm.viridis)
-# # plotting velocity field
-# plt.quiver(X[::2, ::2], Y[::2, ::2], u[::2, ::2], v[::2, ::2])
-# plt.xlabel('X')
-# plt.ylabel('Y')
-
 fig = plt.figure(figsize=(7, 7), dpi=100)
 ax = fig.gca()
 plt.xlabel('x', fontsize=16)
@@ -298,8 +295,6 @@ contf = ax.contourf(XC, YC, p, extend='both', cmap='jet', levels=20)
 cont = ax.contour(XC, YC, p, extend='both', colors='black', levels=20, linestyles='solid', linewidths=1.5)
 cbar = plt.colorbar(contf, orientation='horizontal', shrink=0.5, pad=0.1)
 cbar.set_label('Velocity', fontsize=16)
-# plt.xlim(0, 2)
-# plt.ylim(0, 2)
 plt.title('Contour of Pressure field', fontsize=16)
 plt.quiver(XC, YC, u, v)
 plt.xlabel('X')

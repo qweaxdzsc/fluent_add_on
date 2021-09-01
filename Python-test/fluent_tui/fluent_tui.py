@@ -59,14 +59,17 @@ class Mesh(object):
         self.write_size_field()
         self.import_surface_mesh()
 
-    def import_CAD(self, tolerance=0.01, maxsize=8):
+    def import_CAD(self, cad_path='', tolerance=0.01, maxsize=8):
+        if cad_path == '':
+            cad_path = self.tui.cad_path
         text = """
 /file/import/cad-options/save-PMDB yes
 /file/import/cad-options/extract-features yes 0
 /file/import/cad-geometry yes %s.scdoc mm cad-faceting yes
 %s %s
-""" % (self.tui.cad_path, tolerance, maxsize)
+""" % (cad_path, tolerance, maxsize)
         self.tui.whole_jou += text
+        return self.tui.whole_jou
 
     def size_scope_global(self, min=0.3, max=14):
         text = """
@@ -101,10 +104,12 @@ class Mesh(object):
 """
         self.tui.whole_jou += text
 
-    def write_size_field(self):
+    def write_size_field(self, size_field_path=''):
+        if not size_field_path == '':
+            self.tui.size_field = size_field_path
         text = """
 /file/write-size-field %s yes
-""" % (self.tui.size_field)
+""" % self.tui.size_field
         self.tui.whole_jou += text
 
     def import_surface_mesh(self):
@@ -117,20 +122,41 @@ class Mesh(object):
 
         self.tui.whole_jou += text
 
-    def import_distrib(self, cad_name='', min_size=0.8, max_size=5, grow_rate=1.2, normal_angle=16, gap_cell=2, append='no'):
+    def import_distrib(self, cad_name='', min_size=0.7, max_size=5, grow_rate=1.2, normal_angle=16, gap_cell=2):
         if cad_name == '':
             cad_path = self.tui.cad_path
         else:
             cad_path = self.tui.case_out_path + '\\' + cad_name
         text = """
 /file/import/cad-options/extract-features yes 10
-/file/import/cad-geometry yes {cad_path}.scdoc {append} 
+/file/import/cad-geometry yes {cad_path}.scdoc no 
 mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes 
 {normal_angle} {gap_cell} edges yes no yes
+/objects/merge *() {project_title}
 """.format(cad_path=cad_path, min_size=min_size, max_size=max_size, grow_rate=grow_rate,
-           normal_angle=normal_angle, gap_cell=gap_cell, append=append)
+           normal_angle=normal_angle, gap_cell=gap_cell, project_title=self.tui.project_title)
 
         self.tui.whole_jou += text
+        return self.tui.whole_jou
+
+    def import_lin_cad(self, cad_name, specified_zone, porous_list):
+        cad_path = self.tui.case_out_path + '\\' + cad_name
+        self.import_CAD(cad_path)
+        self.size_scope_global()
+        self.size_scope_curv('distrib_curv', 'distrib', 0.7, 5.5, 1.2, 16)
+        self.size_scope_prox('distrib_prox', 'distrib', 0.8, 5.5, 1.2, 2)
+        self.size_scope_curv('valve_curv', 'valve', 0.3, 4, 1.2, 14)
+        self.size_scope_prox('valve_prox', 'valve', 0.4, 4, 1.2, 2)
+        for i in specified_zone:
+            self.size_scope_curv(i + '_curv', i, 0.8, 4.5, 1.2, 16)
+            self.size_scope_prox(i + '_prox', i, 0.8, 4.5, 1.2, 2)
+        self.size_scope_prox('global_prox', '', 0.8, 5.5, 1.2, 1)
+        self.size_scope_soft('inlet', '*inlet*', 12)
+        for i in porous_list:
+            self.size_scope_soft(i, '*' + i + '*', 4)
+        self.compute_size_field()
+        self.write_size_field()
+        self.import_surface_mesh(cad_path)
 
     def object_merge(self, *object_name):
         object = ''

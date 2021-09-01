@@ -221,7 +221,8 @@ class GetTui(object):
         mesh.start_transcript()
         for i in self.lin_array:
             cad_lin_name = '%s_%s' % (self.d['cad_name'], i)
-            mesh.import_distrib(cad_name=cad_lin_name)
+            mesh.import_lin_cad(cad_lin_name, self.specified_list, self.porous_list)
+            # mesh.import_distrib(cad_name=cad_lin_name)
             mesh.fix_combo()
             mesh.compute_volume_region()
             mesh.volume_mesh_change_type(self.dead_zone_list)

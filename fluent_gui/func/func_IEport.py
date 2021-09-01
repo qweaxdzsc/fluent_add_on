@@ -33,13 +33,16 @@ class IEport(object):
                 if 'outlet' in i:
                     outlet_list.append(i)
                     outlet_dict[i] = eval(info[i])
-                elif ('inlet' in i) and (i != 'mass_inlet'):
+                elif ('inlet' in i) and (i != 'mass_inlet') and (i != 'temp_inlet'):
                     outlet_list.append(i)
                     outlet_dict[i] = eval(info[i])
                 elif 'valve' in i:
                     valve_dict[i] = info[i]
+            # print('outlet_dict is :', outlet_dict)
+            # print('k_dict is :', K_dict)
             for i in outlet_dict.keys():
-                K_dict[i] = outlet_dict[i][-1]
+                # print('dict ', outlet_dict[i])
+                K_dict[i] = outlet_dict[i][-1]                  # TODO int object is no subscriptable
                 # outlet_dict[i].remove(outlet_dict[i][-1])
             self.ui.project_name_edit.setText(info['project_name'])
             self.ui.version_name_edit.setText('V')
