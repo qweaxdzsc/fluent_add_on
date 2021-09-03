@@ -2,19 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f8d44180-0242-4157-8c6d-4f3b75ca3fd9" name="Default Changelist" comment="第二次修改">
-      <change afterPath="$PROJECT_DIR$/cfd_python/FVM/1D-GMG.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/cfd_python/FVM/2D_TDMA.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cfd_python/FVM/2D_FVM_Cavity.py" beforeDir="false" afterPath="$PROJECT_DIR$/cfd_python/FVM/2D_FVM_Cavity.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fluent_interact/mesh_info_parser.py" beforeDir="false" afterPath="$PROJECT_DIR$/fluent_interact/mesh_info_parser.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/fluent_tui/PQ.py" beforeDir="false" afterPath="$PROJECT_DIR$/fluent_tui/PQ.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/report/get_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/report/get_report.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/linearity/lin_report_new.py" beforeDir="false" afterPath="$PROJECT_DIR$/report/linearity/lin_report_new.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/report/linearity/linearity_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/report/linearity/linearity_report.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test1.py" beforeDir="false" afterPath="$PROJECT_DIR$/test1.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test2.py" beforeDir="false" afterPath="$PROJECT_DIR$/test2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_func.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/fluent_command/tui_run.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../fluent_gui/func/func_IEport.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/func/func_IEport.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/ui_py/ui_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/ui_py/ui_main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fluent_gui/ui_qt/ui_main.ui" beforeDir="false" afterPath="$PROJECT_DIR$/../fluent_gui/ui_qt/ui_main.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,49 +67,7 @@
       <recent name="C:\Users\BZMBN4\Desktop\fluent_add_on\Python-test\report" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.get_report">
-    <configuration name="1D-GMG" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Python-test" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/cfd_python/FVM" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cfd_python/FVM/1D-GMG.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
-    <configuration name="2D_TDMA" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
-      <module name="Python-test" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/cfd_python/FVM" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cfd_python/FVM/2D_TDMA.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
-      <method v="2" />
-    </configuration>
+  <component name="RunManager" selected="Python.linearity_report">
     <configuration name="get_report" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Python-test" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -125,6 +81,48 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/report/get_report.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="lin_report_new" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Python-test" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/report/linearity" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/report/linearity/lin_report_new.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="linearity_report" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Python-test" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/report/linearity" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/report/linearity/linearity_report.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -197,20 +195,20 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.txt_to_python" />
-      <item itemvalue="Python.2D_TDMA" />
-      <item itemvalue="Python.test1" />
-      <item itemvalue="Python.1D-GMG" />
       <item itemvalue="Python.get_report" />
+      <item itemvalue="Python.lin_report_new" />
+      <item itemvalue="Python.linearity_report" />
+      <item itemvalue="Python.test1" />
       <item itemvalue="Python.test2" />
+      <item itemvalue="Python.txt_to_python" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.linearity_report" />
+        <item itemvalue="Python.lin_report_new" />
         <item itemvalue="Python.get_report" />
         <item itemvalue="Python.test2" />
         <item itemvalue="Python.test1" />
-        <item itemvalue="Python.1D-GMG" />
-        <item itemvalue="Python.2D_TDMA" />
       </list>
     </recent_temporary>
   </component>
@@ -271,33 +269,33 @@
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state x="696" y="300" key="FileChooserDialogImpl/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1630462995692" />
-    <state width="1892" height="271" key="GridCell.Tab.0.bottom" timestamp="1629976491693">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state width="1892" height="271" key="GridCell.Tab.0.bottom" timestamp="1630544230270">
+      <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1892" height="271" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1629976491693" />
     <state width="1898" height="233" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1627277820872" />
-    <state width="1892" height="271" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1629962578002" />
+    <state width="1892" height="271" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1630544230270" />
     <state width="1898" height="233" key="GridCell.Tab.0.bottom/0.0.1920.1160/1920.0.1920.1080@0.0.1920.1160" timestamp="1627349238860" />
-    <state width="1892" height="271" key="GridCell.Tab.0.center" timestamp="1629976491693">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state width="1892" height="271" key="GridCell.Tab.0.center" timestamp="1630544230270">
+      <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1892" height="271" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1629976491693" />
     <state width="1898" height="233" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1627277820872" />
-    <state width="1892" height="271" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1629962578002" />
+    <state width="1892" height="271" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1630544230270" />
     <state width="1898" height="233" key="GridCell.Tab.0.center/0.0.1920.1160/1920.0.1920.1080@0.0.1920.1160" timestamp="1627349238860" />
-    <state width="1892" height="271" key="GridCell.Tab.0.left" timestamp="1629976491693">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state width="1892" height="271" key="GridCell.Tab.0.left" timestamp="1630544230270">
+      <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1892" height="271" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1629976491693" />
     <state width="1898" height="233" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1627277820871" />
-    <state width="1892" height="271" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1629962578001" />
+    <state width="1892" height="271" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1630544230270" />
     <state width="1898" height="233" key="GridCell.Tab.0.left/0.0.1920.1160/1920.0.1920.1080@0.0.1920.1160" timestamp="1627349238860" />
-    <state width="1892" height="271" key="GridCell.Tab.0.right" timestamp="1629976491693">
-      <screen x="0" y="0" width="1920" height="1032" />
+    <state width="1892" height="271" key="GridCell.Tab.0.right" timestamp="1630544230270">
+      <screen x="0" y="0" width="1920" height="1152" />
     </state>
     <state width="1892" height="271" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1629976491693" />
     <state width="1898" height="233" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1627277820872" />
-    <state width="1892" height="271" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1629962578002" />
+    <state width="1892" height="271" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1630544230270" />
     <state width="1898" height="233" key="GridCell.Tab.0.right/0.0.1920.1160/1920.0.1920.1080@0.0.1920.1160" timestamp="1627349238860" />
     <state x="539" y="117" width="840" height="1034" key="search.everywhere.popup" timestamp="1625711264170">
       <screen x="0" y="0" width="1920" height="1152" />

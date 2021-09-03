@@ -153,9 +153,9 @@ class LinReport(object):
 
 if __name__ == "__main__":
     start_time = time.time()
-    project_address = r"G:\_HAVC_Project\MRH_REAR\MRH_REAR_10_lin_bi_level\MRH_REAR_V11_lin_bil"
-    project_name = 'MRH'
-    version_name = 'V11_lin_bil'
+    project_address = r"G:\_HAVC_Project\HA2HG\HA2HG_13_lin_tri_level\HA2HG_V6_lin_trl"
+    project_name = 'HA2HG'
+    version_name = 'V6_lin_trl'
 
     whole_name = project_name + '_' + version_name
     Linearity_report = LinReport(project_address, project_name, version_name, 20, 90, 8)

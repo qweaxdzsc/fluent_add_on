@@ -6,7 +6,7 @@ import cgitb
 class GetTui(object):
     def __init__(self, pamt, body_list, energy_check, K_dict,
                  porous_list, specified_list, dead_zone_list, internal_list,
-                 mesh_type):
+                 mesh_type, refine=False):
         print(pamt, body_list, energy_check, K_dict, porous_list, specified_list, dead_zone_list, internal_list)
         self.d = pamt
         self.body_list = body_list
@@ -17,6 +17,7 @@ class GetTui(object):
         self.dead_zone_list = dead_zone_list
         self.internal_list = internal_list
         self.mesh_type = mesh_type
+        self.refine = refine
         # ---------------------init variable--------------------
         self.inlet_dict = {}
         self.inlet_type = 'pressure-inlet'
@@ -69,9 +70,11 @@ class GetTui(object):
         mesh_zone_list = self.body_list.copy()
         mesh.start_transcript()
         if 'fan' in self.body_list:
-            mesh.simple_import(self.specified_list, self.porous_list)
+            mesh.simple_import(self.specified_list, self.porous_list, self.refine)
         else:
             mesh.import_distrib()
+        if self.refine:
+            mesh.delete_boundary('*boi*')
         mesh.fix_combo()
         mesh.compute_volume_region()
         mesh.volume_mesh_change_type(self.dead_zone_list)
@@ -221,8 +224,10 @@ class GetTui(object):
         mesh.start_transcript()
         for i in self.lin_array:
             cad_lin_name = '%s_%s' % (self.d['cad_name'], i)
-            mesh.import_lin_cad(cad_lin_name, self.specified_list, self.porous_list)
+            mesh.import_lin_cad(cad_lin_name, self.specified_list, self.porous_list, self.refine)
             # mesh.import_distrib(cad_name=cad_lin_name)
+            if self.refine:
+                mesh.delete_boundary('*boi*')
             mesh.fix_combo()
             mesh.compute_volume_region()
             mesh.volume_mesh_change_type(self.dead_zone_list)
@@ -298,7 +303,15 @@ class GetTui(object):
         setup.report_definition('mass-flux', 'surface-massflowrate', mass_flux_list, 'no')
         setup.input_summary()
         setup.hyb_initialize()
-        setup.start_calculate(350)
+        if self.energy_check:
+            setup.switch_equations('temperature', False)
+            setup.start_calculate(250)
+            setup.switch_equations('flow', False)
+            setup.switch_equations('ke', False)
+            setup.switch_equations('temperature', True)
+            setup.start_calculate(100)
+        else:
+            setup.start_calculate(350)
         setup.write_lin_case_data(self.lin_array[0])
         if self.energy_check:
             post.simple_lin_post(self.lin_array[0])
@@ -311,7 +324,15 @@ class GetTui(object):
             setup.BC_mass_flow_inlet('inlet', d['mass_inlet'])
             setup.input_summary()
             setup.hyb_initialize()
-            setup.start_calculate(350)
+            if self.energy_check:
+                setup.switch_equations('temperature', False)
+                setup.start_calculate(250)
+                setup.switch_equations('flow', False)
+                setup.switch_equations('ke', False)
+                setup.switch_equations('temperature', True)
+                setup.start_calculate(100)
+            else:
+                setup.start_calculate(350)
             setup.write_lin_case_data(i)
             if self.energy_check:
                 post.simple_lin_post(i)

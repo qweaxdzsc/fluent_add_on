@@ -41,7 +41,7 @@ class Mesh(object):
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
-    def simple_import(self, specified_zone, porous_list):
+    def simple_import(self, specified_zone, porous_list, boi=False):
         self.import_CAD()
         self.size_scope_global()
         self.size_scope_curv('distrib_curv', 'distrib', 0.7, 5.5, 1.2, 16)
@@ -58,6 +58,8 @@ class Mesh(object):
         for i in porous_list:
             self.size_scope_soft(i, '*'+i+'*', 4)
         # self.size_scope_curv('refine', 'fan_in', 1, 2.5, 1.2, 18)
+        if boi:
+            self.size_scope_boi('boi', '*boi*', 1.5)
         self.compute_size_field()
         self.write_size_field()
         self.import_surface_mesh()
@@ -99,6 +101,14 @@ class Mesh(object):
     def size_scope_soft(self, scope_name, scope_zone, max_size, grow_rate=1.2):
         text = """
 /scoped-sizing/create {scope_name} soft face-zone yes yes "{scope_zone}" {max_size} {grow_rate}
+""".format(scope_name=scope_name, scope_zone=scope_zone, max_size=max_size,
+           grow_rate=grow_rate)
+        self.tui.whole_jou += text
+        return self.tui.whole_jou
+
+    def size_scope_boi(self, scope_name, scope_zone, max_size, grow_rate=1.2):
+        text = """
+/scoped-sizing/create {scope_name} boi face-zone yes yes "{scope_zone}" {max_size} {grow_rate}
 """.format(scope_name=scope_name, scope_zone=scope_zone, max_size=max_size,
            grow_rate=grow_rate)
         self.tui.whole_jou += text
@@ -150,24 +160,32 @@ mm cfd-surface-mesh no {min_size} {max_size} {grow_rate} yes yes
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
-    def import_lin_cad(self, cad_name, specified_zone, porous_list):
+    def import_lin_cad(self, cad_name, specified_zone, porous_list, boi=False):
         cad_path = self.tui.case_out_path + '\\' + cad_name
         self.import_CAD(cad_path)
         self.size_scope_global()
-        self.size_scope_curv('distrib_curv', 'distrib', 0.7, 5.5, 1.2, 16)
-        self.size_scope_prox('distrib_prox', 'distrib', 0.8, 5.5, 1.2, 2)
+        self.size_scope_curv('distrib_curv', 'distrib', 1, 5.5, 1.2, 20)
+        self.size_scope_prox('distrib_prox', 'distrib', 1, 5.5, 1.2, 2)
         self.size_scope_curv('valve_curv', 'valve', 0.3, 4, 1.2, 14)
         self.size_scope_prox('valve_prox', 'valve', 0.4, 4, 1.2, 2)
         for i in specified_zone:
-            self.size_scope_curv(i + '_curv', i, 0.8, 4.5, 1.2, 16)
-            self.size_scope_prox(i + '_prox', i, 0.8, 4.5, 1.2, 2)
-        self.size_scope_prox('global_prox', '', 0.8, 5.5, 1.2, 1)
+            self.size_scope_curv(i + '_curv', i, 1, 4.5, 1.2, 20)
+            self.size_scope_prox(i + '_prox', i, 1, 4.5, 1.2, 2)
+        self.size_scope_prox('global_prox', '', 1, 5.5, 1.2, 1)
         self.size_scope_soft('inlet', '*inlet*', 12)
         for i in porous_list:
-            self.size_scope_soft(i, '*' + i + '*', 4)
+            self.size_scope_soft(i, '*' + i + '*', 3)
+        if boi:
+            self.size_scope_boi('boi', '*boi*', 1.5)
         self.compute_size_field()
         self.write_size_field()
         self.import_surface_mesh(cad_path)
+
+    def delete_boundary(self, boundary_name):
+        text = """
+/boundary/manage/delete %s() yes q q q
+""" % boundary_name
+        self.tui.whole_jou += text
 
     def stitch_free_face(self, tolerance=0.2):
         text = """
@@ -245,10 +263,11 @@ boundary/manage/rotate valve*()
                 self.tui.whole_jou += dead_zone
         return self.tui.whole_jou
 
-    def auto_mesh_volume(self, grow_rate=1.23, mesh_type='tet'):
+    def auto_mesh_volume(self, grow_rate=1.22, mesh_type='tet'):
         text = """
 /parallel/auto-partition yes q q
-/mesh/tet/controls/cell-sizing geometric {rate}
+/mesh/tet/controls/cell-sizing size-field
+/mesh/poly/controls/cell-sizing size-field
 /mesh/auto-mesh * yes pyramids {mesh_type} no
 """.format(rate=grow_rate, mesh_type=mesh_type)
         self.tui.whole_jou += text
@@ -538,6 +557,22 @@ ke-spec no yes turb-intensity %s turb-length-scale %s q
 /solve/set/pseudo-transient yes yes 1 1 0
 /solve/set/warped-face-gradient-correction/enable yes no q
 """
+        self.tui.whole_jou += text
+        return self.tui.whole_jou
+
+    def switch_equations(self, equation_name, switch=True):
+        """
+        :param equation_name: flow, ke, temperature
+        :param switch: True, false
+        :return:
+        """
+        if switch:
+            state = 'yes'
+        else:
+            state = 'no'
+        text = """
+/solve/set/equations/%s %s
+""" % (equation_name, state)
         self.tui.whole_jou += text
         return self.tui.whole_jou
 

@@ -64,7 +64,7 @@
      <property name="geometry">
       <rect>
        <x>0</x>
-       <y>-997</y>
+       <y>0</y>
        <width>688</width>
        <height>1376</height>
       </rect>
@@ -2309,6 +2309,7 @@
     <addaction name="actionstop"/>
     <addaction name="actiondarkstyle"/>
     <addaction name="menu_mesh_type"/>
+    <addaction name="actionrefine"/>
    </widget>
    <widget class="QMenu" name="menu">
     <property name="title">
@@ -2405,6 +2406,17 @@
   <action name="action_mesh_poly">
    <property name="text">
     <string>poly</string>
+   </property>
+  </action>
+  <action name="actionrefine">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>网格区域加密</string>
    </property>
   </action>
  </widget>

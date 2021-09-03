@@ -52,6 +52,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.show_c_on = False
         self.snip_on = True
         self.energy_check = bool()
+        self.refine = False
         self.actionstop.setEnabled(False)
         # --------init function---------
         self.short_key = short_key(self)
@@ -73,6 +74,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.actiondarkstyle.triggered.connect(self.advFunc.darkstyle)
         self.action_mesh_poly.triggered.connect(lambda: self.choose_mesh_type('poly'))
         self.action_mesh_tet.triggered.connect(lambda: self.choose_mesh_type('tet'))
+        self.actionrefine.triggered.connect(self.refine_mesh)
         self.cad_address_explore.clicked.connect(self.cad_address)
         # ---------------quick mode radio btn---------------------
         self.quick_distribfc_btn.toggled.connect(self.short_key.quick_distrib_judge)
@@ -291,6 +293,10 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
     def choose_mesh_type(self, mesh_type):
         self.mesh_type = mesh_type
 
+    def refine_mesh(self, trigger):
+        self.refine = trigger
+        self.append_text('已启用网格区域加密功能，请确认boi区域')
+
     def create_tui(self):
         self.check_part()
         self.pamt_dict()
@@ -298,7 +304,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 
         self.tui = GetTui(self.pamt, self.body_list, self.energy_check, self.K_dict,
                           self.porous_list, self.specified_list, self.dead_zone_list, self.internal_face,
-                          self.mesh_type)
+                          self.mesh_type, self.refine)
 
     def begin(self):
         self.start_btn.setDisabled(True)

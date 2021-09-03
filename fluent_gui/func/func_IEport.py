@@ -42,7 +42,7 @@ class IEport(object):
             # print('k_dict is :', K_dict)
             for i in outlet_dict.keys():
                 # print('dict ', outlet_dict[i])
-                K_dict[i] = outlet_dict[i][-1]                  # TODO int object is no subscriptable
+                K_dict[i] = outlet_dict[i][-1]
                 # outlet_dict[i].remove(outlet_dict[i][-1])
             self.ui.project_name_edit.setText(info['project_name'])
             self.ui.version_name_edit.setText('V')

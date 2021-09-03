@@ -442,12 +442,12 @@ class LinReport(object):
 
 
 if __name__ == "__main__":
-    project_address = r"G:\_HAVC_Project\D2U-2\D2U-2_lin_bil"
-    project_name = 'D2U-2'
-    version_name = 'V12_lin_bil'
+    project_address = r"G:\_HAVC_Project\HA2HG\HA2HG_13_lin_tri_level\HA2HG_V6_lin_trl"
+    project_name = 'HA2HG'
+    version_name = 'V6_lin_trl'
 
     whole_name = project_name + '-' + version_name
-    Linearity_report = LinReport(project_address, project_name, version_name, 10, 100, 10)
+    Linearity_report = LinReport(project_address, project_name, version_name, 10, 90, 9)
     # Linearity_report.plot_temp()
     # Linearity_report.plot_effective_area('foot', (np.where(Linearity_report.avg_dict['foot'] > 25))[0][0]*10, 100)
     # Linearity_report.plot_temp_diff(-10, 10)
