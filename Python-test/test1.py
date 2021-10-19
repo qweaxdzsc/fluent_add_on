@@ -1,4 +1,5 @@
 import numpy as np
+import os
 
 # p1 = np.array([586
 #                ])
@@ -11,4 +12,15 @@ import numpy as np
 #
 # print(p3, p4, p9)
 
+import math
 
+a = list()
+
+r = [72.3, 80.6, 90.3, 100]
+r2 = [93, 104.5, 116.8, 129.6]
+
+
+for i in range(3):
+    a.append(math.log(r[i + 1]/r[i])/90)
+
+print(a)

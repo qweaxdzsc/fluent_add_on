@@ -2,15 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0e475a0b-2241-43fa-a10d-e22986a3349c" name="Default Changelist" comment="add K calculator. pop up when right click in the cal_K column at rename_table">
+      <change afterPath="$PROJECT_DIR$/../Python-test/cfd_python/FVM/jacobi_and_gauss.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../Python-test/report/new_plane_clip.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Python-test/report/linearity/lin_report_new.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/report/linearity/lin_report_new.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/cfd_python/FVM/2D_FVM_Cavity.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/cfd_python/FVM/2D_FVM_Cavity.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/create_project_folder/new_project_folder.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/create_project_folder/new_project_folder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/report/get_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/report/get_report.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/report/linearity/linearity_report.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/report/linearity/linearity_report.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Python-test/test1.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/test1.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../Python-test/test2.py" beforeDir="false" afterPath="$PROJECT_DIR$/../Python-test/test2.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/call_api/call_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/call_api/call_func.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fluent_command/tui_func.py" beforeDir="false" afterPath="$PROJECT_DIR$/fluent_command/tui_func.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/fluent_command/tui_run.py" beforeDir="false" afterPath="$PROJECT_DIR$/fluent_command/tui_run.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/func/func_IEport.py" beforeDir="false" afterPath="$PROJECT_DIR$/func/func_IEport.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/subUI/sub_k_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/subUI/sub_k_test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui_py/ui_main.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui_py/ui_main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui_qt/ui_main.ui" beforeDir="false" afterPath="$PROJECT_DIR$/ui_qt/ui_main.ui" afterDir="false" />
     </list>
@@ -234,22 +240,30 @@
     <option name="LAST_COMMIT_MESSAGE" value="add K calculator. pop up when right click in the cal_K column at rename_table" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1272" height="108" key="GridCell.Tab.0.bottom" timestamp="1630654884405">
+    <state width="1270" height="220" key="GridCell.Tab.0.bottom" timestamp="1634626834323">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1272" height="108" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1630654884405" />
-    <state width="1272" height="108" key="GridCell.Tab.0.center" timestamp="1630654884405">
+    <state width="1271" height="210" key="GridCell.Tab.0.bottom/0.0.1920.1032@0.0.1920.1032" timestamp="1632216793535" />
+    <state width="1270" height="220" key="GridCell.Tab.0.bottom/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1634626834323" />
+    <state width="1270" height="220" key="GridCell.Tab.0.center" timestamp="1634626834323">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1272" height="108" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1630654884405" />
-    <state width="1272" height="108" key="GridCell.Tab.0.left" timestamp="1630654884405">
+    <state width="1271" height="210" key="GridCell.Tab.0.center/0.0.1920.1032@0.0.1920.1032" timestamp="1632216793535" />
+    <state width="1270" height="220" key="GridCell.Tab.0.center/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1634626834323" />
+    <state width="1270" height="220" key="GridCell.Tab.0.left" timestamp="1634626834322">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1272" height="108" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1630654884405" />
-    <state width="1272" height="108" key="GridCell.Tab.0.right" timestamp="1630654884405">
+    <state width="1271" height="210" key="GridCell.Tab.0.left/0.0.1920.1032@0.0.1920.1032" timestamp="1632216793535" />
+    <state width="1270" height="220" key="GridCell.Tab.0.left/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1634626834322" />
+    <state width="1270" height="220" key="GridCell.Tab.0.right" timestamp="1634626834323">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>
-    <state width="1272" height="108" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1630654884405" />
+    <state width="1271" height="210" key="GridCell.Tab.0.right/0.0.1920.1032@0.0.1920.1032" timestamp="1632216793535" />
+    <state width="1270" height="220" key="GridCell.Tab.0.right/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1634626834323" />
+    <state x="602" y="243" width="716" height="666" key="find.popup" timestamp="1634613228838">
+      <screen x="0" y="0" width="1920" height="1152" />
+    </state>
+    <state x="602" y="243" width="716" height="666" key="find.popup/0.0.1920.1152/1920.0.1920.1080@0.0.1920.1152" timestamp="1634613228838" />
     <state x="539" y="117" width="840" height="1034" key="search.everywhere.popup" timestamp="1630653064545">
       <screen x="0" y="0" width="1920" height="1152" />
     </state>

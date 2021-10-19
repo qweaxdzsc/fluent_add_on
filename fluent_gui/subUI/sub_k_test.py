@@ -194,7 +194,7 @@ class Auto_cal(QThread):
             else:
                 rho = 1.225
                 m3s = ls / 1000
-                m2 = mm2/1000/1000
+                m2 = mm2/1000/1000 + 1e-6
                 v = m3s/m2
 
                 K[i] = round(2*p/rho/v**2, 4)

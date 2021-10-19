@@ -53,6 +53,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.snip_on = True
         self.energy_check = bool()
         self.refine = False
+        self.mapping_address = str()
         self.actionstop.setEnabled(False)
         # --------init function---------
         self.short_key = short_key(self)
@@ -75,6 +76,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.action_mesh_poly.triggered.connect(lambda: self.choose_mesh_type('poly'))
         self.action_mesh_tet.triggered.connect(lambda: self.choose_mesh_type('tet'))
         self.actionrefine.triggered.connect(self.refine_mesh)
+        self.actionmapping.triggered.connect(self.mapping_data)
         self.cad_address_explore.clicked.connect(self.cad_address)
         # ---------------quick mode radio btn---------------------
         self.quick_distribfc_btn.toggled.connect(self.short_key.quick_distrib_judge)
@@ -297,6 +299,18 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
         self.refine = trigger
         self.append_text('已启用网格区域加密功能，请确认boi区域')
 
+    def mapping_data(self, trigger):
+        self.append_text('已设置数据映射初始化功能: %s' % trigger)
+        if trigger:
+            get_file = QFileDialog.getOpenFileName(self, '选择数据文件', 'C:/Users/BZMBN4/Desktop/', 'Fluent IP Files (*.ip)')
+            if get_file[0]:
+                self.mapping_address = get_file[0]
+                self.append_text('选择映射数据地址: %s' % self.mapping_address)
+            else:
+                self.append_text('无效地址')
+        else:
+            self.mapping_address = ''
+
     def create_tui(self):
         self.check_part()
         self.pamt_dict()
@@ -304,7 +318,7 @@ class MyMainWindow(QMainWindow, Ui_MainWindow):
 
         self.tui = GetTui(self.pamt, self.body_list, self.energy_check, self.K_dict,
                           self.porous_list, self.specified_list, self.dead_zone_list, self.internal_face,
-                          self.mesh_type, self.refine)
+                          self.mesh_type, self.refine, self.mapping_address)
 
     def begin(self):
         self.start_btn.setDisabled(True)

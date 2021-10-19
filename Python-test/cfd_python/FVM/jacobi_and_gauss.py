@@ -39,20 +39,20 @@ LU = A - D
 # print(phi)
 
 # Gauss-Seidel method
-# DL = np.tril(A, k=0)            # extract lower tri of matrix including diagonal
-# U = np.triu(A, k=1)             # extract upper tri of matrix without diagonal
-# DL_inv = np.linalg.inv(DL)
-#
-# r_norm_init = get_residual(A, phi, b)
-# r = 1 / r_norm_init
-# n = 0
-#
-# while r > converge_criteria:
-#     n += 1
-#     phi_last = phi.copy()
-#     phi = - np.dot(np.dot(DL_inv, U), phi_last) + np.dot(DL_inv, b)
-#     r_norm = get_residual(A, phi, b)
-#     r = r_norm/r_norm_init
-#     print("step %s, relative residual %s" % (n, r))
-#
-# print(phi)
+DL = np.tril(A, k=0)            # extract lower tri of matrix including diagonal
+U = np.triu(A, k=1)             # extract upper tri of matrix without diagonal
+DL_inv = np.linalg.inv(DL)
+
+r_norm_init = get_residual(A, phi, b)
+r = 1 / r_norm_init
+n = 0
+
+while r > converge_criteria:
+    n += 1
+    phi_last = phi.copy()
+    phi = - np.dot(np.dot(DL_inv, U), phi_last) + np.dot(DL_inv, b)
+    r_norm = get_residual(A, phi, b)
+    r = r_norm/r_norm_init
+    print("step %s, relative residual %s" % (n, r))
+
+print(phi)

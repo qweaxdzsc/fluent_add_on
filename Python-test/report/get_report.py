@@ -3,7 +3,7 @@ import cgitb
 
 
 # designate path
-root = r"G:\_HAVC_Project\MRH_FRONT\MRH_FRONT_04_defrost\MRH_V35_defrost_new\result_MRH_V35_defrost"
+root = r"G:\_HAVC_Project\MRH_FRONT\MRH_FRONT_03_bi_level\MRH_V52.2_bil\result_MRH_V52.2_bil"
 path = root + '\\'
 
 # Txt input path

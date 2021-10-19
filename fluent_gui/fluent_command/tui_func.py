@@ -41,22 +41,23 @@ class Mesh(object):
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
-    def simple_import(self, specified_zone, porous_list, boi=False):
+    def simple_import(self, specified_zone, porous_list, body_list, boi=False):
         self.import_CAD()
         self.size_scope_global()
-        self.size_scope_curv('distrib_curv', 'distrib', 0.7, 5.5, 1.2, 16)
-        self.size_scope_prox('distrib_prox', 'distrib', 0.8, 5.5, 1.2, 2)
-        self.size_scope_curv('fan_blade_curv', 'fan_blade', 0.35, 1.5, 1.2, 16)
-        self.size_scope_prox('fan_blade_prox', 'fan_blade', 0.8, 4, 1.2, 2)
-        self.size_scope_prox('cutoff_curv', '*cutoff*', 0.5, 1, 1.2, 2)
+        self.size_scope_curv('distrib_curv', 'distrib', 0.9, 5.5, 1.2, 16)
+        self.size_scope_prox('distrib_prox', 'distrib', 0.9, 5.5, 1.2, 2)
+        if 'fan' in body_list:
+            self.size_scope_curv('fan_blade_curv', 'fan_blade', 0.35, 1.5, 1.2, 16)
+            self.size_scope_prox('fan_blade_prox', 'fan_blade', 0.8, 4, 1.2, 2)
+            self.size_scope_curv('cutoff_curv', '*cutoff*', 0.5, 1, 1.2, 2)
+            self.size_scope_curv('fan_out_curv', 'fan_out', 1, 4, 1.2, 18)
         for i in specified_zone:
             self.size_scope_curv(i + '_curv', i, 0.8, 4.5, 1.2, 16)
             self.size_scope_prox(i + '_prox', i, 0.8, 4.5, 1.2, 2)
-        self.size_scope_curv('fan_out_curv', 'fan_out', 1, 4, 1.2, 18)
         self.size_scope_prox('global_prox', '', 0.8, 5.5, 1.2, 1)
         self.size_scope_soft('inlet', '*inlet*', 14)
         for i in porous_list:
-            self.size_scope_soft(i, '*'+i+'*', 4)
+            self.size_scope_soft(i, '*'+i+'*', 3)
         # self.size_scope_curv('refine', 'fan_in', 1, 2.5, 1.2, 18)
         if boi:
             self.size_scope_boi('boi', '*boi*', 1.5)
@@ -70,8 +71,7 @@ class Mesh(object):
         text = """
 /file/import/cad-options/save-PMDB yes
 /file/import/cad-options/extract-features yes 0
-/file/import/cad-geometry yes %s.scdoc mm cad-faceting yes
-%s %s
+/file/import/cad-geometry yes %s.scdoc mm cad-faceting yes %s %s
 """ % (cad_path, tolerance, maxsize)
         self.tui.whole_jou += text
         return self.tui.whole_jou
@@ -264,8 +264,11 @@ boundary/manage/rotate valve*()
         return self.tui.whole_jou
 
     def auto_mesh_volume(self, grow_rate=1.22, mesh_type='tet'):
-        text = """
-/parallel/auto-partition yes q q
+        text = ""
+        if mesh_type == 'poly':
+            text += """ 
+/parallel/auto-partition yes q q"""
+        text += """
 /mesh/tet/controls/cell-sizing size-field
 /mesh/poly/controls/cell-sizing size-field
 /mesh/auto-mesh * yes pyramids {mesh_type} no
@@ -412,6 +415,21 @@ class Setup(object):
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
+    def read_interpolate(self, data_path):
+        text = """
+/file/interpolate/read-data/ %s yes yes
+""" % data_path
+        self.tui.whole_jou += text
+        return self.tui.whole_jou
+
+    def read_lin_interpolate(self, valve_angle):
+        text = """
+/file/interpolate/read-data/ {case_path}\\lin_case\\{project_name}_{version}_{valve_angle}\\{version}_{valve_angle}.ip yes
+""".format(case_path=self.tui.case_out_path, project_name=self.tui.project_title, version=self.tui.version_name,
+           valve_angle=valve_angle)
+        self.tui.whole_jou += text
+        return self.tui.whole_jou
+
     def convert_polymesh(self):
         text = """
 /mesh/polyhedra/convert q
@@ -419,10 +437,33 @@ class Setup(object):
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
+    def change_materials(self, material_name, density='', cp='', thermal_conductivity='', viscosity=''):
+        if density:
+            density = 'yes %s' % density
+        else:
+            density = 'no'
+        if cp:
+            cp = 'yes %s' % cp
+        else:
+            cp = 'no'
+        if thermal_conductivity:
+            thermal_conductivity = 'yes %s' % thermal_conductivity
+        else:
+            thermal_conductivity = 'no'
+        if viscosity:
+            viscosity = 'yes %s' % viscosity
+        else:
+            viscosity = 'no'
+        text = f"""
+/define/materials/change-create/{material_name} {cp} {thermal_conductivity} {viscosity} no no no q q
+"""
+        self.tui.whole_jou += text
+        return self.tui.whole_jou
+
     def turb_models(self, model='ke-standard'):
         text = """
 /define/models/viscous/%s yes q
-""" % (model)
+""" % model
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
@@ -663,9 +704,28 @@ solve/monitors/residual/criterion-type %s
         self.tui.whole_jou += text
         return self.tui.whole_jou
 
+    def write_interpolate(self, case_out_path='', ip_name=''):
+        if not case_out_path:
+            case_out_path = self.tui.case_out_path
+        if not ip_name:
+            ip_name = f'{self.tui.project_title}_{self.tui.version_name}'
+        text = """
+/file/interpolate/write-data/ %s\\%s.ip yes yes
+""" % (case_out_path, ip_name)
+        self.tui.whole_jou += text
+        return self.tui.whole_jou
+
     def write_lin_case_data(self, valve_angle):
         text = """
 /file/write-case-data/ {case_path}\\lin_case\\{project_name}_{version}_{valve_angle}\\{project_name}_{version}_{valve_angle} yes
+""".format(case_path=self.tui.case_out_path, project_name=self.tui.project_title, version=self.tui.version_name,
+           valve_angle=valve_angle)
+        self.tui.whole_jou += text
+        return self.tui.whole_jou
+
+    def write_lin_interpolate(self, valve_angle):
+        text = """
+/file/interpolate/write-data/ {case_path}\\lin_case\\{project_name}_{version}_{valve_angle}\\{version}_{valve_angle}.ip yes yes
 """.format(case_path=self.tui.case_out_path, project_name=self.tui.project_title, version=self.tui.version_name,
            valve_angle=valve_angle)
         self.tui.whole_jou += text
@@ -690,7 +750,7 @@ class Post(object):
                                project_name=self.tui.project_title, version=self.tui.version_name, valve_angle=valve_angle)
         self.create_result_file()
         self.tui.txt_out = self.tui.result_path + '\\%s_%s.txt' % (self.tui.project_title, valve_angle)
-        self.txt_surface_integrals('area-weighted-avg', ['outlet*'], 'temperature')
+        self.txt_surface_integrals('mass-weighted-avg', ['outlet*'], 'temperature')
         self.txt_surface_integrals('volume-flow-rate', ['inlet*', 'outlet*'])
         self.txt_mass_flux()
         pressure_face_list = ['inlet*', 'evap_in', 'evap_out', 'hc*', 'outlet*']

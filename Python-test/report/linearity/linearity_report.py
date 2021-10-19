@@ -13,7 +13,7 @@ import os
 
 
 class LinReport(object):
-    def __init__(self, project_address, project_name, version_name, start_percent=10, end_percent=90, process_point=9):
+    def __init__(self, project_address, project_name, version_name, start_percent=10, end_percent=90, process_point=9, angle_array=[]):
         self.project_address = project_address
         self.project_name = project_name
         self.version_name = version_name
@@ -21,15 +21,19 @@ class LinReport(object):
         self.end_percent = end_percent
         self.process_point = process_point
         self.whole_name = project_name + version_name
+        self.angle_array = angle_array
+        # self.get_report()
 
-        self.get_report()
-
-    def get_report(self):
+    def get_report(self, txt_file=''):
         self.temp_dict = {}                 # create empty dict
         self.form_angle_array()             # create valve open angle array
         for i in self.angle_array:          # extract data from all result file
-            result_file = r'{project_address}\lin_case\{project_name}_{version_name}_{angle}\result\{project_name}_{angle}.txt' \
-                .format(project_address=self.project_address, project_name=self.project_name,
+            if not txt_file:
+                txt = f'{self.project_name}_{i}.txt'
+            else:
+                txt = txt_file
+            result_file = r'{project_address}\lin_case\{project_name}_{version_name}_{angle}\result\{txt_file}' \
+                .format(project_address=self.project_address, project_name=self.project_name, txt_file=txt,
                         version_name=self.version_name, angle=i)
 
             temp_angle = self.txt_to_dict(result_file)
@@ -43,8 +47,10 @@ class LinReport(object):
         self.save_open_excel(project_address + '\\' + whole_name + '.xlsx')
 
     def form_angle_array(self):
-        angle = linspace(self.start_percent, self.end_percent, self.process_point)
-        self.angle_array = [int(i) for i in angle]
+        if not self.angle_array:
+            angle = linspace(self.start_percent, self.end_percent, self.process_point)
+            self.angle_array = [int(i) for i in angle]
+
 
     def txt_to_dict(self, txt_path):
         with open(txt_path, 'r') as f:
@@ -153,11 +159,13 @@ class LinReport(object):
 
 if __name__ == "__main__":
     start_time = time.time()
-    project_address = r"G:\_HAVC_Project\HA2HG\HA2HG_13_lin_tri_level\HA2HG_V6_lin_trl"
-    project_name = 'HA2HG'
-    version_name = 'V6_lin_trl'
+    project_address = r"G:\_HAVC_Project\MRH_FRONT\MRH_FRONT_12_lin_defog\MRH_V52_lin_defog"
+    project_name = 'MRH'
+    version_name = 'V52_lin_defog'
 
     whole_name = project_name + '_' + version_name
-    Linearity_report = LinReport(project_address, project_name, version_name, 20, 90, 8)
+    Linearity_report = LinReport(project_address, project_name, version_name)
+    Linearity_report.get_report()
+    # Linearity_report.get_report()
     end_time = time.time()
     print('use_time:', end_time - start_time)

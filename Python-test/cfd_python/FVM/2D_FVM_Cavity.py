@@ -17,7 +17,7 @@ dx = Lx / nx
 dy = Ly / ny
 rho = 1
 
-max_steps = 10000
+max_steps = 500
 converge_criteria = 2e-3
 factor_v = 0.1
 factor_p = 0.05

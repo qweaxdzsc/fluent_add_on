@@ -6,7 +6,7 @@ import cgitb
 class GetTui(object):
     def __init__(self, pamt, body_list, energy_check, K_dict,
                  porous_list, specified_list, dead_zone_list, internal_list,
-                 mesh_type, refine=False):
+                 mesh_type, refine=False, mapping_address=''):
         print(pamt, body_list, energy_check, K_dict, porous_list, specified_list, dead_zone_list, internal_list)
         self.d = pamt
         self.body_list = body_list
@@ -18,6 +18,7 @@ class GetTui(object):
         self.internal_list = internal_list
         self.mesh_type = mesh_type
         self.refine = refine
+        self.mapping_address = mapping_address
         # ---------------------init variable--------------------
         self.inlet_dict = {}
         self.inlet_type = 'pressure-inlet'
@@ -69,10 +70,7 @@ class GetTui(object):
 
         mesh_zone_list = self.body_list.copy()
         mesh.start_transcript()
-        if 'fan' in self.body_list:
-            mesh.simple_import(self.specified_list, self.porous_list, self.refine)
-        else:
-            mesh.import_distrib()
+        mesh.simple_import(self.specified_list, self.porous_list, self.body_list, self.refine)
         if self.refine:
             mesh.delete_boundary('*boi*')
         mesh.fix_combo()
@@ -153,14 +151,18 @@ class GetTui(object):
             setup.convergence_criterion('volume')
 
         setup.input_summary()
-        setup.hyb_initialize()
+        if self.mapping_address:
+            setup.read_interpolate(self.mapping_address)
+        else:
+            setup.hyb_initialize()
         if 'fan' in self.body_list:
             setup.start_calculate(1000)
         else:
             setup.start_calculate(260)
         setup.write_case_data()
+        setup.write_interpolate()
 
-        volume_face_list = ['inlet*', 'outlet*']
+        volume_face_list = ['inlet*', 'outlet*', 'dct*']
         post.create_result_file()
         post.set_background()
         post.create_viewing_model()
@@ -245,8 +247,8 @@ class GetTui(object):
             mesh.prepare_for_solve()
             mesh.write_lin_mesh(i)
 
-        mesh.switch_to_solver()
-
+        # mesh.switch_to_solver()
+        self.CFD.close_fluent()
         jou_mesh.write(self.CFD.whole_jou)
         jou_mesh.close()
 
@@ -288,6 +290,7 @@ class GetTui(object):
             inlet_temp = float(d['temp_inlet']) + 273.15
             hc_temp = float(d['temp_hc']) + 273.15
             setup.energy_eqt('yes')
+            # setup.change_materials('air', thermal_conductivity=1)
         # setup.BC_pressure_inlet('inlet')
             if 'fan' in self.body_list:
                 setup.init_temperature('pressure-inlet', 'outlet-vent', inlet_temp)
@@ -302,42 +305,57 @@ class GetTui(object):
             setup.BC_outlet_vent(self.K_dict[i], i)
         setup.report_definition('mass-flux', 'surface-massflowrate', mass_flux_list, 'no')
         setup.input_summary()
-        setup.hyb_initialize()
+        if self.mapping_address:
+            setup.read_interpolate(self.mapping_address)
+        else:
+            setup.hyb_initialize()
         if self.energy_check:
             setup.switch_equations('temperature', False)
-            setup.start_calculate(250)
+            setup.start_calculate(350)
             setup.switch_equations('flow', False)
             setup.switch_equations('ke', False)
             setup.switch_equations('temperature', True)
+            setup.start_calculate(350)
+            setup.switch_equations('flow', True)
+            setup.switch_equations('ke', True)
             setup.start_calculate(100)
         else:
             setup.start_calculate(350)
         setup.write_lin_case_data(self.lin_array[0])
+        setup.write_lin_interpolate(self.lin_array[0])
         if self.energy_check:
             post.simple_lin_post(self.lin_array[0])
         else:
             post.simple_lin_post(self.lin_array[0], field='velocity-magnitude')
 
-        for i in self.lin_array[1:]:
-            setup.replace_lin_mesh(i)
+        # loop start for rest of angles
+        for index, angle in enumerate(self.lin_array[1:]):
+            setup.replace_lin_mesh(angle)
             setup.rescale()
             setup.BC_mass_flow_inlet('inlet', d['mass_inlet'])
             setup.input_summary()
-            setup.hyb_initialize()
+            # setup.hyb_initialize()
+            setup.read_lin_interpolate(self.lin_array[index])
             if self.energy_check:
+                setup.switch_equations('flow', True)
+                setup.switch_equations('ke', True)
                 setup.switch_equations('temperature', False)
-                setup.start_calculate(250)
+                setup.start_calculate(200)
                 setup.switch_equations('flow', False)
                 setup.switch_equations('ke', False)
                 setup.switch_equations('temperature', True)
                 setup.start_calculate(100)
+                setup.switch_equations('flow', True)
+                setup.switch_equations('ke', True)
+                setup.start_calculate(50)
             else:
-                setup.start_calculate(350)
-            setup.write_lin_case_data(i)
+                setup.start_calculate(250)
+            setup.write_lin_case_data(angle)
+            setup.write_lin_interpolate(angle)
             if self.energy_check:
-                post.simple_lin_post(i)
+                post.simple_lin_post(angle)
             else:
-                post.simple_lin_post(i, field='velocity-magnitude')
+                post.simple_lin_post(angle, field='velocity-magnitude')
 
         self.CFD.close_fluent()
         jou_solve.write(self.CFD.whole_jou)

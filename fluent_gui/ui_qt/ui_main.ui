@@ -2310,6 +2310,7 @@
     <addaction name="actiondarkstyle"/>
     <addaction name="menu_mesh_type"/>
     <addaction name="actionrefine"/>
+    <addaction name="actionmapping"/>
    </widget>
    <widget class="QMenu" name="menu">
     <property name="title">
@@ -2417,6 +2418,14 @@
    </property>
    <property name="text">
     <string>网格区域加密</string>
+   </property>
+  </action>
+  <action name="actionmapping">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>映射初始化</string>
    </property>
   </action>
  </widget>
